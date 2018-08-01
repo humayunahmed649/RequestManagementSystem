@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="~/Content/img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="colorlib">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Bangladesh Computer Council</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!--
+    CSS
+    ============================================= -->
+    <link rel="stylesheet" href="~/Content/css/linearicons.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/css/animate.min.css">
+    <link rel="stylesheet" href="~/Content/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    
+</head>
+<body>
+    <header id="header" id="home">
+        <div class="header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
+                        @Html.ActionLink("Home","Index","Home")<img src="~/Content/img/logo.png" alt="" title="" />
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+                        <a class="btns" href="tel:+880-123456789">+880-123456789</a>
+                        <a class="btns" href="mailto:support@bcc.com.bd">support@bcc.com.bd</a>
+                        <a class="icons" href="tel:+880-123456789">
+                            <span class="lnr lnr-phone-handset"></span>
+                        </a>
+                        <a class="icons" href="mailto:support@bcc.com.bd">
+                            <span class="lnr lnr-envelope"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container main-menu">
+            <div class="row align-items-center justify-content-between d-flex">
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li class="menu-has-children">
+                        <a href="#">Organization</a>
+                            <ul>
+                                <li>@Html.ActionLink("Create New", "Create", "Organizations")</li>
+                                <li>@Html.ActionLink("Organization List", "Index", "Organizations")</li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children">
+                            @Html.ActionLink("Department", "Index", "Departments")
+                            <ul>
+                                <li>@Html.ActionLink("Create New", "Create", "Departments")</li>
+                                <li>@Html.ActionLink("List Of Department", "Index", "Departments")</li>
+                                <li class="menu-has-children">
+                                    <a href="">Designation</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "Designations")</li>
+                                        <li>@Html.ActionLink("List Of Designation", "Index", "Designations")</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children">
+                            @Html.ActionLink("Employee", "Index", "Employees")
+                            <ul>
+                                <li>@Html.ActionLink("Create New", "Create", "Employees")</li>
+                                <li>@Html.ActionLink("List Of Employee", "Index", "Employees")</li>   
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Designation", "Index", "Designations")</li>
+                        <li>@Html.ActionLink("Employee", "Index", "Employees")</li>
+                        <li class="menu-active"><a href="index.html">Home</a></li>
+                        
+                        <li class="menu-has-children">
+                            <a href="">Blog</a>
+                            <ul>
+                                <li><a href="blog-home.html">Blog Home</a></li>
+                                <li><a href="blog-single.html">Blog Single</a></li>
+                                <li class="menu-has-children">
+                                    <a href="">Level 2</a>
+                                    <ul>
+                                        <li><a href="#">Item One</a></li>
+                                        <li><a href="#">Item Two</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>	
+                        
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+                <div class="menu-social-icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                </div>
+            </div>
+        </div>
+    </header><!-- #header -->
+    <!-- start banner Area -->
+    <section class="banner-area relative" id="home">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row fullscreen d-flex justify-content-center align-items-center">
+                <div class="banner-content col-lg-9 col-md-12 justify-content-center">
+                    
+                    <h6 class="text-uppercase">Don’t look further, This is your solution</h6>
+                    <h2 class="text-white">
+                        “Say What You Do & Do What You Say”
+                    </h2>
+                    <p class="text-white mx-auto">
+                        If you are looking Vehicle, Simply Send a Request and wait for your Manager Response...
+                    </p>
+                    <a href="#" class="primary-btn header-btn text-uppercase mt-10">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End banner Area -->
+    <!-- Start service Area -->
+    <section class="service-area">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 pb-40 header-text text-center">
+                    @RenderBody()
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service">
+                        <img class="img-fluid" src="~/Content/img/s1.jpg" alt="">
+                        <a href="#"><h4>Popular Use Of The Internet</h4></a>
+                        <p>
+                            inappropriate behavior is oftenlaug hed off as “boys will be boys,” women face higher conduct women face higher conduct.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service">
+                        <img class="img-fluid" src="~/Content/img/s2.jpg" alt="">
+                        <a href="#"><h4>Protective Preventative</h4></a>
+                        <p>
+                            inappropriate behavior is oftenlaug hed off as “boys will be boys,” women face higher conduct women face higher conduct.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service">
+                        <img class="img-fluid" src="~/Content/img/s3.jpg" alt="">
+                        <a href="#"><h4>Download Free Songs</h4></a>
+                        <p>
+                            inappropriate behavior is oftenlaug hed off as “boys will be boys,” women face higher conduct women face higher conduct.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service">
+                        <img class="img-fluid" src="~/Content/img/s4.jpg" alt="">
+                        <a href="#"><h4>A Discount Toner Cartridge</h4></a>
+                        <p>
+                            inappropriate behavior is oftenlaug hed off as “boys will be boys,” women face higher conduct women face higher conduct.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End service Area -->
+    
+    <!-- start footer Area -->
+    <footer class="footer-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2  col-md-6">
+                    <div class="single-footer-widget">
+                        <h6>Top Products</h6>
+                        <ul class="footer-nav">
+                            <li><a href="#">Managed Website</a></li>
+                            <li><a href="#">Manage Reputation</a></li>
+                            <li><a href="#">Power Tools</a></li>
+                            <li><a href="#">Marketing Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4  col-md-6">
+                    <div class="single-footer-widget mail-chimp">
+                        <h6 class="mb-20">Contact Us</h6>
+                        <p>
+                            56/8, bir uttam qazi nuruzzaman road, west panthapath, kalabagan, Dhanmondi, Dhaka - 1205
+                        </p>
+                        <h3>012-6532-568-9746</h3>
+                        <h3>012-6532-568-97468</h3>
+                    </div>
+                </div>
+                <div class="col-lg-6  col-md-12">
+                    <div class="single-footer-widget newsletter">
+                        <h6>Newsletter</h6>
+                        <p>You can trust us. we only send promo offers, not a single spam.</p>
+                        <div id="mc_embed_signup">
+                            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+                                <div class="form-group row" style="width: 100%">
+                                    <div class="col-lg-8 col-md-12">
+                                        <input name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '" required="" type="email">
+                                        <div style="position: absolute; left: -5000px;">
+                                            <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12">
+                                        <button class="nw-btn primary-btn">Subscribe<span class="lnr lnr-arrow-right"></span></button>
+                                    </div>
+                                </div>
+                                <div class="info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer-bottom d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | this product make by <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://facebook.com/parvez.fci" target="_blank">Team C</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer Area -->
+    <script src="~/Content/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/Content/js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+    <script src="~/Content/js/easing.min.js"></script>
+    <script src="~/Content/js/hoverIntent.js"></script>
+    <script src="~/Content/js/superfish.min.js"></script>
+    <script src="~/Content/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.nice-select.min.js"></script>
+    <script src="~/Content/js/mail-script.js"></script>
+<script src="~/Content/js/main.js"></script>
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

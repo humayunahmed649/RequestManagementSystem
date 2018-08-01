@@ -1,0 +1,130 @@
+﻿@model RMS.Models.EntityModels.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Designation.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Designation.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Organization.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organization.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BloodGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BloodGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HouseNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HouseNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoadNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoadNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FloorNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FloorNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostOffice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostOffice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Division)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Division)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
