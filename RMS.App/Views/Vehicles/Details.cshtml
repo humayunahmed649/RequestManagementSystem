@@ -1,0 +1,58 @@
+﻿@model RMS.Models.EntityModels.Vehicle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChassisNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChassisNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -54,6 +54,8 @@
     <Compile Include="EntityModels\Designation.cs" />
     <Compile Include="EntityModels\Employee.cs" />
     <Compile Include="EntityModels\Organization.cs" />
+    <Compile Include="EntityModels\Vehicle.cs" />
+    <Compile Include="EntityModels\VehicleType.cs" />
     <Compile Include="Migrations\201808011237486_InitialCreate.cs" />
     <Compile Include="Migrations\201808011237486_InitialCreate.Designer.cs">
       <DependentUpon>201808011237486_InitialCreate.cs</DependentUpon>
@@ -65,6 +67,10 @@
     <Compile Include="Migrations\201808012154479_EmployeeAndDesignationAdded.cs" />
     <Compile Include="Migrations\201808012154479_EmployeeAndDesignationAdded.Designer.cs">
       <DependentUpon>201808012154479_EmployeeAndDesignationAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808021759329_VehicleTypeAndVehicleAdded.cs" />
+    <Compile Include="Migrations\201808021759329_VehicleTypeAndVehicleAdded.Designer.cs">
+      <DependentUpon>201808021759329_VehicleTypeAndVehicleAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808012154479_EmployeeAndDesignationAdded.resx">
       <DependentUpon>201808012154479_EmployeeAndDesignationAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808021759329_VehicleTypeAndVehicleAdded.resx">
+      <DependentUpon>201808021759329_VehicleTypeAndVehicleAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
