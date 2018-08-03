@@ -20,5 +20,7 @@ namespace RMS.Models.DatabaseContext
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.VehicleType> VehicleTypes { get; set; }
 
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.Vehicle> Vehicles { get; set; }
+
+       
     }
 }
