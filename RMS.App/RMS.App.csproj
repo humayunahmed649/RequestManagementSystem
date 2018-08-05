@@ -179,6 +179,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\RequisitionsController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -340,6 +341,27 @@
     <Content Include="Content\img\ui-icons_444444_256x240.png" />
     <Content Include="Content\img\user.png" />
     <Content Include="Content\img\video-bg.jpg" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\AUTHORS.txt" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\external\jquery\jquery.js" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-bg_dots-small_65_a6a6a6_2x2.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-bg_glass_55_fbf8ee_1x400.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-bg_highlight-hard_100_eeeeee_1x100.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-bg_highlight-hard_100_f6f6f6_1x100.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-bg_highlight-soft_15_cc0000_1x100.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-icons_004276_256x240.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\index.html" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.css" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.js" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.min.js" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.theme.css" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\jquery-ui.theme.min.css" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\LICENSE.txt" />
     <Content Include="Content\js\easing.min.js" />
     <Content Include="Content\js\hoverIntent.js" />
     <Content Include="Content\js\jquery-ui.js" />
@@ -486,6 +508,7 @@
     <Content Include="Content\scss\theme\_mixins.scss" />
     <Content Include="Content\scss\theme\_reset.scss" />
     <Content Include="Content\scss\theme\_variables.scss" />
+    <Content Include="Content\jquery-ui-1.12.1.custom\package.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DepartmentJs\CreateDepartment.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -545,6 +568,11 @@
     <Content Include="Views\Vehicles\Details.cshtml" />
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\Vehicles\Index.cshtml" />
+    <Content Include="Views\Requisitions\Create.cshtml" />
+    <Content Include="Views\Requisitions\Delete.cshtml" />
+    <Content Include="Views\Requisitions\Details.cshtml" />
+    <Content Include="Views\Requisitions\Edit.cshtml" />
+    <Content Include="Views\Requisitions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

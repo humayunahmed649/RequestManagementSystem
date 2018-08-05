@@ -45,6 +45,7 @@
     <Compile Include="IEmployeeRepository.cs" />
     <Compile Include="IOrganizationRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRequisitionRepository.cs" />
     <Compile Include="IVehicleRepository.cs" />
     <Compile Include="IVehicleTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

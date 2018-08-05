@@ -59,6 +59,8 @@ namespace RMS.App
             container.RegisterType<IVehicleTypeRepository, VehicleTypeRepository>();
             container.RegisterType<IVehicleManager, VehicleManager>();
             container.RegisterType<IVehicleRepository, VehicleRepository>();
+            container.RegisterType<IRequisitionManager, RequisitionManager>();
+            container.RegisterType<IRequisitionRepository, RequisitionRepository>();
             container.RegisterType<DbContext, RmsDbContext>();
 
         }

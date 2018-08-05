@@ -46,6 +46,7 @@
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="OrganizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequisitionManager.cs" />
     <Compile Include="VehicleManager.cs" />
     <Compile Include="VehicleTypeManager.cs" />
   </ItemGroup>
