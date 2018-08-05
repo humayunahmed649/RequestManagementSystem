@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create","Departments",FormMethod.Post, new {id="departmentForm"})) 
 {
     @Html.AntiForgeryToken()
     
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="button" value="Save" class="btn btn-default" id="btnSave"/>
             </div>
         </div>
     </div>
@@ -50,7 +50,8 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/DepartmentJs/CreateDepartment.js"></script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
