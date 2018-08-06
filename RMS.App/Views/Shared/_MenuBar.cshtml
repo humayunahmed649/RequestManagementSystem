@@ -1,0 +1,115 @@
+﻿
+<header id="header" id="home">
+    <!-- Start header -->
+    <div class="header-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
+                    @Html.ActionLink("Home", "Index", "Home")<img src="~/Content/img/logo.png" alt="" title="" />
+                </div>
+
+                <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+                    <input type="text" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search () '" />
+                    <button class="nw-btn primary-btn">Search<span class="lnr lnr-arrow-right"></span></button>
+                    <a class="btns" href="mailto:support@bcc.com.bd">support@bcc.com.bd</a>
+                    <a class="icons" href="tel:+880-123456789">
+                        <span class="lnr lnr-phone-handset"></span>
+                    </a>
+                    <a class="icons" href="mailto:support@bcc.com.bd">
+                        <span class="lnr lnr-envelope"></span>
+                    </a>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+                <nav id="nav-menu-container" class="col-md-10">
+                    <ul class="nav-menu">
+                        <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li class="menu-has-children">
+                            <a href="#">Organization</a>
+                            <ul>
+                                <li>@Html.ActionLink("Create New", "Create", "Organizations")</li>
+                                <li>@Html.ActionLink("Organization List", "Index", "Organizations")</li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children">
+                            <a href="#">Department</a>
+                            <ul>
+                                <li>@Html.ActionLink("Create New", "Create", "Departments")</li>
+                                <li>@Html.ActionLink("List Of Department", "Index", "Departments")</li>
+
+                            </ul>
+                        </li>
+                        <li class="menu-has-children">
+                            <a href="#">Designation</a>
+                            <ul>
+                                <li>@Html.ActionLink("Create New", "Create", "Designations")</li>
+                                <li>@Html.ActionLink("List Of Designation", "Index", "Designations")</li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children">
+                            <a href="#">Employee</a>
+                            <ul>
+                                <li>@Html.ActionLink("Create New", "Create", "Employees")</li>
+                                <li>@Html.ActionLink("List Of Employee", "Index", "Employees")</li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children">
+                            <a href="#">Vehicle</a>
+                            <ul>
+                                <li class="menu-has-children">
+                                    <a href="#">Vehicle Types</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "VehicleTypes")</li>
+                                        <li>@Html.ActionLink("List Of Vehile Type", "Index", "VehicleTypes")</li>
+                                    </ul>
+                                </li>
+                                <li class="menu-has-children">
+                                    <a href="#">Vehicle</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "Vehicles")</li>
+                                        <li>@Html.ActionLink("List Of Vehicle", "Index", "Vehicles")</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Employee", "Index", "Employees")</li>
+                        <li>@Html.ActionLink("Send Requisition", "Create", "Requisitions")</li>
+
+                        
+
+
+                        <li class="menu-has-children">
+                            <a href="">Blog</a>
+                            <ul>
+                                <li><a href="blog-home.html">Blog Home</a></li>
+                                <li><a href="blog-single.html">Blog Single</a></li>
+                                <li class="menu-has-children">
+                                    <a href="">Level 2</a>
+                                    <ul>
+                                        <li><a href="#">Item One</a></li>
+                                        <li><a href="#">Item Two</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            
+            <div class="col-md-2 menu-social-icons text-right align-text-top">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+            </div>
+        </div>
+    </div>
+</header><!-- End header -->

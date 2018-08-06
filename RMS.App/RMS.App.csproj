@@ -573,6 +573,8 @@
     <Content Include="Views\Requisitions\Details.cshtml" />
     <Content Include="Views\Requisitions\Edit.cshtml" />
     <Content Include="Views\Requisitions\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutHome.cshtml" />
+    <Content Include="Views\Shared\_MenuBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
