@@ -3,10 +3,22 @@
 @{
     ViewBag.Title = "Create";
 }
-<br />
-<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a>
+<br/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            Use this form to set up and/or modify requisitions. In addition to being added manually in this form, 
+            requisitions can also be added via initialization (PO Requisition Initialization) or PM Material Detail. However, requisitions created via PO Requisition Initialization and PM Material Detail are limited to specific line types. PO Requisition Initialization generates either Inventory or Work Order requisition lines based on low stock or parts needed for work orders, respectively. PM Material Detail will generate only Job requisition lines based on materials set up for a project. 
+            For information about requisitions created using these forms, see Related Topics below.
+        </div>
+        <div class="col-md-6">
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a>
 
-<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="forRequest">
     <div class="modal-dialog">
         <div class="modal-content">

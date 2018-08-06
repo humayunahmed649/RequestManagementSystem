@@ -3,12 +3,23 @@
 @{
     ViewBag.Title = "Index";
 }
+<br/>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        </div>
 
-<h2>Index</h2>
+        <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+            <input type="text" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search () '" />
+            <button class="nw-btn primary-btn">Search<span class="lnr lnr-arrow-right"></span></button>
+        </div>
+    </div>
+</div>
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
