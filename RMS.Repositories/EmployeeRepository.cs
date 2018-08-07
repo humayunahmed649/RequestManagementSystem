@@ -13,13 +13,7 @@ namespace RMS.Repositories
 {
     public class EmployeeRepository:Repository<Employee>,IEmployeeRepository
     {
-        //public RmsDbContext db
-        //{
-        //    get
-        //    {
-        //        return db as RmsDbContext;
-        //    }
-        //}
+        
         public EmployeeRepository(DbContext db) : base(db)
         {
         }
@@ -27,6 +21,17 @@ namespace RMS.Repositories
         public override ICollection<Employee> GetAll()
         {
             return db.Set<Employee>().Include(c => c.Department).Include(c=>c.Organization).Include(c=>c.Designation).ToList();
+        }
+
+        public ICollection<Employee> SearchByName(string searchTextEmpName)
+        {
+            return
+                db.Set<Employee>()
+                    .Include(c => c.Organization)
+                    .Include(c => c.Department)
+                    .Include(c => c.Designation)
+                    .Where(c => c.FullName.StartsWith(searchTextEmpName))
+                    .ToList();
         }
     }
 }

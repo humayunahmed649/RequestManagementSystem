@@ -17,5 +17,10 @@ namespace RMS.BLL
         {
             this._employeeRepository = repository;
         }
+
+        public ICollection<Employee> SearchByName(string searchTextEmpName)
+        {
+            return _employeeRepository.SearchByName(searchTextEmpName);
+        }
     }
 }

@@ -29,10 +29,17 @@ namespace RMS.App.Controllers
         }
 
         // GET: Employees
-        public ActionResult Index()
+        public ActionResult Index(string searchTextEmpName)
         {
-            //var employees = db.Employees.Include(e => e.Department).Include(e => e.Designation).Include(e => e.Organization);
-            return View(_employeeManager.GetAll());
+            if(searchTextEmpName !=null)
+            {
+                return View(_employeeManager.SearchByName(searchTextEmpName));
+            }
+            else
+            {
+
+                return View(_employeeManager.GetAll());
+            }
         }
 
         // GET: Employees/Details/5

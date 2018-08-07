@@ -22,9 +22,16 @@ namespace RMS.App.Controllers
         }
 
         // GET: VehicleTypes
-        public ActionResult Index()
+        public ActionResult Index(string searchTextVehicleTypes)
         {
-            return View(_vehicleTypeManager.GetAll());
+            if(searchTextVehicleTypes != null)
+            {
+                return View(_vehicleTypeManager.SearchByType(searchTextVehicleTypes));
+            }
+            else
+            {
+                return View(_vehicleTypeManager.GetAll());
+            }
         }
 
         // GET: VehicleTypes/Details/5

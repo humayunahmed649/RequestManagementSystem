@@ -22,9 +22,16 @@ namespace RMS.App.Controllers
         }
 
         // GET: Organizations
-        public ActionResult Index()
+        public ActionResult Index(string searchTextOrgName)
         {
-            return View(_organizationManager.GetAll());
+            if (searchTextOrgName != null)
+            {
+                return View(_organizationManager.SearchByName(searchTextOrgName));
+            }
+            else
+            {
+                return View(_organizationManager.GetAll());
+            }
         }
 
         // GET: Organizations/Details/5

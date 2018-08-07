@@ -13,15 +13,14 @@ namespace RMS.Repositories
 {
     public class VehicleTypeRepository:Repository<VehicleType>,IVehicleTypeRepository
     {
-        public RmsDbContext db
-        {
-            get
-            {
-                return db as RmsDbContext;
-            }
-        }
+       
         public VehicleTypeRepository(DbContext db) : base(db)
         {
+        }
+
+        public ICollection<VehicleType> SearchByType(string searchTextVehicleTypes)
+        {
+            return db.Set<VehicleType>().Where(c => c.Name.StartsWith(searchTextVehicleTypes)).ToList();
         }
     }
 }

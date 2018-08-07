@@ -24,10 +24,16 @@ namespace RMS.App.Controllers
         }
 
         // GET: Departments
-        public ActionResult Index()
+        public ActionResult Index(string searchText)
         {
-            //var departments = db.Departments.Include(d => d.Organization);
-            return View(_departmentManager.GetAll());
+            if(searchText != null)
+            {
+                return View(_departmentManager.SearchByName(searchText));
+            }
+            else
+            {
+                return View(_departmentManager.GetAll());
+            }
         }
 
         // GET: Departments/Details/5

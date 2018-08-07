@@ -13,15 +13,25 @@ namespace RMS.Repositories
 {
     public class DepartmentRepository:Repository<Department>,IDepartmentRepository
     {
-        public RmsDbContext db
-        {
-            get
-            {
-                return db as RmsDbContext;
-            }
-        }
+        //public RmsDbContext db
+        //{
+        //    get
+        //    {
+        //        return db as RmsDbContext;
+        //    }
+        //}
         public DepartmentRepository(DbContext db) : base(db)
         {
+        }
+
+        public List<Department> SearchByName(string searchText)
+        {
+            return db.Set<Department>().Include(c=>c.Organization).Where(c => c.Name.StartsWith(searchText)).ToList();
+        }
+
+        public override ICollection<Department> GetAll()
+        {
+            return db.Set<Department>().Include(c => c.Organization).ToList();
         }
     }
 }

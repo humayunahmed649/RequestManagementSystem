@@ -9,5 +9,7 @@ namespace RMS.BLL.Contracts
 {
     public interface IOrganizationManager:IManager<Organization>
     {
+        ICollection<Organization> SearchByName(string searchTextOrgName);
+
     }
 }

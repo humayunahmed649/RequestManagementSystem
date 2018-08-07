@@ -13,15 +13,14 @@ namespace RMS.Repositories
 {
     public class DesignationRepository:Repository<Designation>,IDesignationRepository
     {
-        public RmsDbContext db
-        {
-            get
-            {
-                return db as RmsDbContext;
-            }
-        }
+        
         public DesignationRepository(DbContext db) : base(db)
         {
+        }
+
+        public ICollection<Designation> SearchByTitle(string searchDesignationTitle)
+        {
+            return db.Set<Designation>().Where(c => c.Title.StartsWith(searchDesignationTitle)).ToList();
         }
     }
 }

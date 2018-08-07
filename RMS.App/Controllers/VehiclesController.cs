@@ -25,10 +25,16 @@ namespace RMS.App.Controllers
 
 
         // GET: Vehicles
-        public ActionResult Index()
+        public ActionResult Index(string searchTextVehicleBrand)
         {
-            var vehicles = _vehicleManager.GetAll();
-            return View(vehicles.ToList());
+            if (searchTextVehicleBrand != null)
+            {
+                return View(_vehicleManager.SearchByVehicleBrand(searchTextVehicleBrand));
+            }
+            else
+            {
+                return View(_vehicleManager.GetAll());
+            }
         }
 
         // GET: Vehicles/Details/5
