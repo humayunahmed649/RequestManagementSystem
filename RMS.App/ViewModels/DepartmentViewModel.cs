@@ -9,7 +9,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.ViewModels
 {
-    public class DepartmentViewMode 
+    public class DepartmentViewModel
     {
         public int Id { get; set; }
 

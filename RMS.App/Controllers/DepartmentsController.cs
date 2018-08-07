@@ -30,7 +30,7 @@ namespace RMS.App.Controllers
         {
             //var departments = db.Departments.Include(d => d.Organization);
             ICollection<Department> department = _departmentManager.GetAll();
-            IEnumerable<DepartmentViewMode> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewMode>>(department);
+            IEnumerable<DepartmentViewModel> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewModel>>(department);
             return View(departmentViewModes);
         }
 
@@ -46,7 +46,7 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            DepartmentViewMode departmentViewMode = Mapper.Map<DepartmentViewMode>(department);
+            DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
             return View(departmentViewMode);
         }
 
@@ -62,7 +62,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Code,OrganizationId")] DepartmentViewMode departmentViewMode)
+        public ActionResult Create([Bind(Include = "Id,Name,Code,OrganizationId")] DepartmentViewModel departmentViewMode)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace RMS.App.Controllers
                 return HttpNotFound();
             }
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", department.OrganizationId);
-            DepartmentViewMode departmentViewMode = Mapper.Map<DepartmentViewMode>(department);
+            DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
             return View(departmentViewMode);
         }
 
@@ -98,17 +98,17 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Code,OrganizationId")] DepartmentViewMode departmentViewMode)
+        public ActionResult Edit([Bind(Include = "Id,Name,Code,OrganizationId")] DepartmentViewModel departmentViewModel)
         {
             if (ModelState.IsValid)
             {
-                Department department = Mapper.Map<Department>(departmentViewMode);
+                Department department = Mapper.Map<Department>(departmentViewModel);
                 _departmentManager.Update(department);
                 TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
             }
-            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewMode.OrganizationId);
-            return View(departmentViewMode);
+            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewModel.OrganizationId);
+            return View(departmentViewModel);
         }
 
         // GET: Departments/Delete/5
@@ -123,7 +123,7 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            DepartmentViewMode departmentViewMode = Mapper.Map<DepartmentViewMode>(department);
+            DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
             return View(departmentViewMode);
         }
 

@@ -25,8 +25,11 @@ namespace RMS.App
                 cfg.CreateMap<Organization, OrganizationViewModel>();
                 cfg.CreateMap<OrganizationViewModel, Organization>();
 
-                cfg.CreateMap<Department, DepartmentViewMode>();
-                cfg.CreateMap<DepartmentViewMode, Department>();
+                cfg.CreateMap<Department, DepartmentViewModel>();
+                cfg.CreateMap<DepartmentViewModel, Department>();
+
+                cfg.CreateMap<Designation, DesignationViewModel>();
+                cfg.CreateMap<DesignationViewModel, Designation>();
             });
             
         }

@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMS.Models.EntityModels
+namespace RMS.App.ViewModels
 {
-    public class Designation
+    public class DesignationViewModel   
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required,StringLength(250)]
+        [Required(ErrorMessage = "Please provide a Title!")]
         public string Title { get; set; }
     }
 }
