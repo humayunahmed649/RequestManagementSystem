@@ -1,4 +1,4 @@
-﻿@model RMS.Models.EntityModels.Designation
+﻿@model RMS.App.ViewModels.DesignationViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -19,7 +19,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
@@ -27,15 +27,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Update" class="btn btn-default"/>
+                @Html.ActionLink("Back to List", "Index",null,new {@class="btn btn-info"})
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

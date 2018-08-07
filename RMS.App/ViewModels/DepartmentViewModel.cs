@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.Models.EntityModels;
 
-namespace RMS.Models.EntityModels
+namespace RMS.App.ViewModels
 {
-    public class Department
+    public class DepartmentViewModel
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required,StringLength(250)]
+        [Required(ErrorMessage = "Please provide a name!")]
         public string Name { get; set; }
 
-        [Required, StringLength(50)]
+        [Required(ErrorMessage = "Please provide a code!")]
         public string Code { get; set; }
 
-        [ForeignKey("Organization")]
+        [Display(Name = "Organization")]
+        [Required(ErrorMessage = "Please select a department!")]
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
 

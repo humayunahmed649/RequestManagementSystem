@@ -5,20 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMS.Models.EntityModels
+namespace RMS.App.ViewModels
 {
-    public class Organization
+    public class OrganizationViewModel  
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required,StringLength(250)]
+        [Required(ErrorMessage = "Please provide a name!")]
         public string Name { get; set; }
 
-        [Required, StringLength(50)]
+        [Required(ErrorMessage = "Please provide a code!")]
         public string Code { get; set; }
 
-        [Required, StringLength(50)]
+        [Required(ErrorMessage = "Please provide a registration no!")]
         public string RegNo { get; set; }
 
     }

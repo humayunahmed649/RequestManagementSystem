@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
@@ -24,11 +26,15 @@ namespace RMS.App.Controllers
         // GET: Designations
         public ActionResult Index(string searchDesignationTitle)
         {
-            if(searchDesignationTitle !=null)
-            {
-                return View(_designationManager.SearchByTitle(searchDesignationTitle));
-            }
-            return View(_designationManager.GetAll());
+            //if(searchDesignationTitle !=null)
+            //{
+            //    return View(_designationManager.SearchByTitle(searchDesignationTitle));
+            //}
+            //return View(_designationManager.GetAll());
+
+            ICollection<Designation> designation = _designationManager.GetAll();
+            IEnumerable<DesignationViewModel> designationViewModels = Mapper.Map<IEnumerable<DesignationViewModel>>(designation);
+            return View(designationViewModels);
         }
 
         // GET: Designations/Details/5
@@ -43,7 +49,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(designation);
+            DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
+            return View(designationViewModel);
         }
 
         // GET: Designations/Create
@@ -57,15 +64,17 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title")] Designation designation)
+        public ActionResult Create([Bind(Include = "Id,Title")] DesignationViewModel designationViewModel)
         {
             if (ModelState.IsValid)
             {
+                Designation designation = Mapper.Map<Designation>(designationViewModel);
                 _designationManager.Add(designation);
+                TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
             }
 
-            return View(designation);
+            return View(designationViewModel);
         }
 
         // GET: Designations/Edit/5
@@ -80,7 +89,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(designation);
+            DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
+            return View(designationViewModel);
         }
 
         // POST: Designations/Edit/5
@@ -88,14 +98,16 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title")] Designation designation)
+        public ActionResult Edit([Bind(Include = "Id,Title")] DesignationViewModel designationViewModel)
         {
             if (ModelState.IsValid)
             {
+                Designation designation = Mapper.Map<Designation>(designationViewModel);
                 _designationManager.Update(designation);
+                TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
             }
-            return View(designation);
+            return View(designationViewModel);
         }
 
         // GET: Designations/Delete/5
@@ -110,7 +122,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(designation);
+            DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
+            return View(designationViewModel);
         }
 
         // POST: Designations/Delete/5
@@ -120,6 +133,7 @@ namespace RMS.App.Controllers
         {
             Designation designation = _designationManager.FindById((int)id);
             _designationManager.Remove(designation);
+            TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
 

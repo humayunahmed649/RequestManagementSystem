@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
+using RMS.App.ViewModels;
+using RMS.Models.EntityModels;
 
 namespace RMS.App
 {
@@ -16,6 +19,22 @@ namespace RMS.App
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Organization, OrganizationViewModel>();
+                cfg.CreateMap<OrganizationViewModel, Organization>();
+
+                cfg.CreateMap<Department, DepartmentViewModel>();
+                cfg.CreateMap<DepartmentViewModel, Department>();
+
+                cfg.CreateMap<Designation, DesignationViewModel>();
+                cfg.CreateMap<DesignationViewModel, Designation>();
+
+                cfg.CreateMap<Employee, EmployeeViewModel>();
+                cfg.CreateMap<EmployeeViewModel, Employee>();
+            });
+            
         }
     }
 }

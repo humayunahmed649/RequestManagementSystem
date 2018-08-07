@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
@@ -31,15 +33,19 @@ namespace RMS.App.Controllers
         // GET: Employees
         public ActionResult Index(string searchTextEmpName)
         {
-            if(searchTextEmpName !=null)
-            {
-                return View(_employeeManager.SearchByName(searchTextEmpName));
-            }
-            else
-            {
+            //if(searchTextEmpName !=null)
+            //{
+            //    return View(_employeeManager.SearchByName(searchTextEmpName));
+            //}
+            //else
+            //{
 
-                return View(_employeeManager.GetAll());
-            }
+            //    return View(_employeeManager.GetAll());
+            //}
+            //var employees = db.Employees.Include(e => e.Department).Include(e => e.Designation).Include(e => e.Organization);
+            ICollection<Employee> employee = _employeeManager.GetAll();
+            IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
+            return View(employeeViewModels);
         }
 
         // GET: Employees/Details/5
@@ -54,7 +60,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
+            return View(employeeViewModel);
         }
 
         // GET: Employees/Create
@@ -71,18 +78,20 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,HouseNo,RoadNo,FloorNo,PostOffice,District,Division")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,HouseNo,RoadNo,FloorNo,PostOffice,District,Division")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
+                Employee employee = Mapper.Map<Employee>(employeeViewModel);
                 _employeeManager.Add(employee);
+                TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employee.DepartmentId);
-            ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employee.DesignationId);
-            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employee.OrganizationId);
-            return View(employee);
+            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
+            ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
+            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+            return View(employeeViewModel);
         }
 
         // GET: Employees/Edit/5
@@ -100,7 +109,8 @@ namespace RMS.App.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employee.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employee.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employee.OrganizationId);
-            return View(employee);
+            EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
+            return View(employeeViewModel);
         }
 
         // POST: Employees/Edit/5
@@ -108,17 +118,19 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,HouseNo,RoadNo,FloorNo,PostOffice,District,Division")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,HouseNo,RoadNo,FloorNo,PostOffice,District,Division")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
+                Employee employee = Mapper.Map<Employee>(employeeViewModel);
                 _employeeManager.Update(employee);
+                TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
             }
-            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employee.DepartmentId);
-            ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employee.DesignationId);
-            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employee.OrganizationId);
-            return View(employee);
+            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
+            ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
+            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+            return View(employeeViewModel);
         }
 
         // GET: Employees/Delete/5
@@ -133,7 +145,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
+            return View(employeeViewModel);
         }
 
         // POST: Employees/Delete/5
@@ -143,6 +156,7 @@ namespace RMS.App.Controllers
         {
             Employee employee = _employeeManager.FindById((int)id);
             _employeeManager.Remove(employee);
+            TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
    

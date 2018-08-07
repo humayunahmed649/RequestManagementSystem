@@ -1,51 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.Models.EntityModels;
 
-namespace RMS.Models.EntityModels
+namespace RMS.App.ViewModels
 {
-    public class Employee
+    public class EmployeeViewModel 
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required,StringLength(250)]
+        [Required(ErrorMessage = "Please provide name!")]
+        [Display(Name = "Name")]
         public string FullName { get; set; }
 
-        [Required,StringLength(50)]
+        [Required(ErrorMessage = "Please provide email!")]
         public string Email { get; set; }
 
-        [Required, StringLength(15)]
+        [Required(ErrorMessage = "Please provide contact no!")]
+        [Display(Name = "Contact No")]
         public string ContactNo { get; set; }
 
-        [Required, StringLength(19)]
+        [Required(ErrorMessage = "Please provide NID no!")]
         public string NID { get; set; }
 
+        [Display(Name = "Blood Group")]
         public string BloodGroup { get; set; }
 
-        [ForeignKey("Organization")]
+        [Display(Name = "Organization")]
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
 
-        [ForeignKey("Department")]
+        [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
 
-        [ForeignKey("Designation")]
+        [Display(Name = "Designation")]
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
 
+        [Display(Name = "House No")]
         public string HouseNo { get; set; }
+
+        [Display(Name = "Road No")]
         public string RoadNo { get; set; }
+
+        [Display(Name = "Floor No")]
         public string FloorNo { get; set; }
+
+        [Display(Name = "Post Office")]
         public string PostOffice { get; set; }
 
-        [Required,StringLength(250)]
+        [Required(ErrorMessage = "Please provide district name!")]
         public string District { get; set; }
         public string Division { get; set; }
 

@@ -1,14 +1,20 @@
-﻿@model IEnumerable<RMS.Models.EntityModels.Employee>
+﻿@model IEnumerable<RMS.App.ViewModels.EmployeeViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-info">
+        @Html.Raw(TempData["msg"])
+    </div>
+}
 <div class="container">
     <div class="row align-items-center">
         <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
             <p>
-                @Html.ActionLink("Create New", "Create")
+                @Html.ActionLink("Create New", "Create",null,new {@class="btn btn-default"})
             </p>
         </div>
 
@@ -28,103 +34,123 @@
 </div>
 <br />
 
-<table class="table">
+<table class="table table-bordered table-active table-striped">
     <tr>
         <th>
-            Department Name
+            SL
         </th>
         <th>
-            Designation
+            @Html.DisplayNameFor(model => model.Department)
         </th>
         <th>
-            Organization
+            @Html.DisplayNameFor(model => model.Designation)
         </th>
         <th>
-            Full Name
+            @Html.DisplayNameFor(model => model.Organization)
         </th>
         <th>
-            Email
+            @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
-            Contact No
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            National Identity No
+            @Html.DisplayNameFor(model => model.ContactNo)
         </th>
         <th>
-            Blood Group
+            @Html.DisplayNameFor(model => model.NID)
         </th>
         <th>
-            House No
+            @Html.DisplayNameFor(model => model.BloodGroup)
         </th>
         <th>
-            Road No
+            @Html.DisplayNameFor(model => model.HouseNo)
         </th>
         <th>
-            Floor No
+            @Html.DisplayNameFor(model => model.RoadNo)
         </th>
         <th>
-            Post Office
+            @Html.DisplayNameFor(model => model.FloorNo)
         </th>
         <th>
-            District
+            @Html.DisplayNameFor(model => model.PostOffice)
         </th>
         <th>
-            Division
+            @Html.DisplayNameFor(model => model.District)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Division)
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Designation.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Organization.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BloodGroup)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HouseNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoadNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FloorNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostOffice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.District)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Division)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@{
+    var sl = 0;
+    if (Model.Count()!=0)
+    {
+        foreach (var item in Model)
+        {
+            sl++;
+            <tr>
+                <td>
+                    @sl
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodGroup)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoadNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FloorNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostOffice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.District)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Division)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                    @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td class="text-center text-danger" colspan="16"> Data Not Found!</td>
+        </tr>
+    }
 }
+
 
 </table>
