@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
@@ -24,7 +26,9 @@ namespace RMS.App.Controllers
         // GET: Organizations
         public ActionResult Index()
         {
-            return View(_organizationManager.GetAll());
+            ICollection<Organization> organization = _organizationManager.GetAll();
+            IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
+            return View(organizationViewModels);
         }
 
         // GET: Organizations/Details/5
@@ -39,7 +43,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(organization);
+            OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
+            return View(organizationViewModel);
         }
 
         // GET: Organizations/Create
@@ -53,15 +58,18 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Code,RegNo")] Organization organization)
+        public ActionResult Create([Bind(Include = "Id,Name,Code,RegNo")] OrganizationViewModel organizationViewModel)
         {
             if (ModelState.IsValid)
             {
+                Organization organization = Mapper.Map<Organization>(organizationViewModel);
                 _organizationManager.Add(organization);
+
+                TempData["msg"] = "Information has been save successfully";
                 return RedirectToAction("Index");
             }
-
-            return View(organization);
+            
+            return View(organizationViewModel);
         }
 
         // GET: Organizations/Edit/5
@@ -76,7 +84,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(organization);
+            OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
+            return View(organizationViewModel);
         }
 
         // POST: Organizations/Edit/5
@@ -84,14 +93,17 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Code,RegNo")] Organization organization)
+        public ActionResult Edit([Bind(Include = "Id,Name,Code,RegNo")] OrganizationViewModel organizationViewModel)
         {
             if (ModelState.IsValid)
             {
+                Organization organization = Mapper.Map<Organization>(organizationViewModel);
                 _organizationManager.Update(organization);
+
+                TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
             }
-            return View(organization);
+            return View(organizationViewModel);
         }
 
         // GET: Organizations/Delete/5
@@ -106,7 +118,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(organization);
+            OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
+            return View(organizationViewModel);
         }
 
         // POST: Organizations/Delete/5
@@ -116,6 +129,7 @@ namespace RMS.App.Controllers
         {
             Organization organization = _organizationManager.FindById((int)id);
             _organizationManager.Remove(organization);
+            TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
 
