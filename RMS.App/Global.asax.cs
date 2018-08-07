@@ -30,6 +30,9 @@ namespace RMS.App
 
                 cfg.CreateMap<Designation, DesignationViewModel>();
                 cfg.CreateMap<DesignationViewModel, Designation>();
+
+                cfg.CreateMap<Employee, EmployeeViewModel>();
+                cfg.CreateMap<EmployeeViewModel, Employee>();
             });
             
         }
