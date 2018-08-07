@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201808071536165_Organization_Validation_added.Designer.cs">
       <DependentUpon>201808071536165_Organization_Validation_added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808071928019_Department_Validation_added.cs" />
+    <Compile Include="Migrations\201808071928019_Department_Validation_added.Designer.cs">
+      <DependentUpon>201808071928019_Department_Validation_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808071536165_Organization_Validation_added.resx">
       <DependentUpon>201808071536165_Organization_Validation_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071928019_Department_Validation_added.resx">
+      <DependentUpon>201808071928019_Department_Validation_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
