@@ -13,13 +13,7 @@ namespace RMS.Repositories
 {
     public class VehicleRepository:Repository<Vehicle>,IVehicleRepository
     {
-        //public RmsDbContext db
-        //{
-        //    get
-        //    {
-        //        return db as RmsDbContext;
-        //    }
-        //}
+        
         public VehicleRepository(DbContext db) : base(db)
         {
         }
@@ -27,6 +21,15 @@ namespace RMS.Repositories
         public override ICollection<Vehicle> GetAll()
         {
             return db.Set<Vehicle>().Include(c => c.VehicleType).ToList();
+        }
+
+        public ICollection<Vehicle> SearchByVehicleBrand(string searchTextVehicleBrand)
+        {
+            return
+                db.Set<Vehicle>()
+                    .Include(c => c.VehicleType)
+                    .Where(c => c.BrandName.StartsWith(searchTextVehicleBrand))
+                    .ToList();
         }
     }
 }

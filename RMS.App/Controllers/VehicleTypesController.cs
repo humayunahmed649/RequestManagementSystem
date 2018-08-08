@@ -24,12 +24,24 @@ namespace RMS.App.Controllers
         }
 
         // GET: VehicleTypes
-        public ActionResult Index()
+        public ActionResult Index(string searchTextVehicleTypes)
         {
-            ICollection<VehicleType> vehicleType = _vehicleTypeManager.GetAll();
-            IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
-                Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
-            return View(vehicleTypeViewModels);
+
+            if(searchTextVehicleTypes != null)
+            {
+                ICollection<VehicleType> vehicleType = _vehicleTypeManager.SearchByType(searchTextVehicleTypes);
+                IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
+                    Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
+                return View(vehicleTypeViewModels);
+            }
+            else
+            {
+                ICollection<VehicleType> vehicleType = _vehicleTypeManager.GetAll();
+                IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
+                    Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
+                return View(vehicleTypeViewModels);
+            }
+
         }
 
         // GET: VehicleTypes/Details/5

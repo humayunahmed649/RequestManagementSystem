@@ -9,5 +9,6 @@ namespace RMS.Repositories.Contracts
 {
     public interface IDepartmentRepository:IRepository<Department>
     {
+        List<Department> SearchByName(string searchText);
     }
 }

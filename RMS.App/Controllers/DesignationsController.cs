@@ -24,8 +24,14 @@ namespace RMS.App.Controllers
         }
 
         // GET: Designations
-        public ActionResult Index()
+        public ActionResult Index(string searchDesignationTitle)
         {
+            //if(searchDesignationTitle !=null)
+            //{
+            //    return View(_designationManager.SearchByTitle(searchDesignationTitle));
+            //}
+            //return View(_designationManager.GetAll());
+
             ICollection<Designation> designation = _designationManager.GetAll();
             IEnumerable<DesignationViewModel> designationViewModels = Mapper.Map<IEnumerable<DesignationViewModel>>(designation);
             return View(designationViewModels);

@@ -18,8 +18,16 @@
         </div>
 
         <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
-            <input type="text" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search () '" />
-            <button class="nw-btn primary-btn">Search<span class="lnr lnr-arrow-right"></span></button>
+            <p>
+                @using (Html.BeginForm("Index", "Designations", FormMethod.Get))
+                {
+
+                    <b>Search</b>
+                    @Html.TextBox("searchDesignationTitle")
+                    <input type="submit" value="Search" />
+
+                }
+            </p>
         </div>
     </div>
 </div>

@@ -26,8 +26,17 @@ namespace RMS.App.Controllers
         }
 
         // GET: Departments
-        public ActionResult Index()
+        public ActionResult Index(string searchText)
         {
+            //if(searchText != null)
+            //{
+            //    return View(_departmentManager.SearchByName(searchText));
+            //}
+            //else
+            //{
+            //    return View(_departmentManager.GetAll());
+            //}
+
             //var departments = db.Departments.Include(d => d.Organization);
             ICollection<Department> department = _departmentManager.GetAll();
             IEnumerable<DepartmentViewModel> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewModel>>(department);

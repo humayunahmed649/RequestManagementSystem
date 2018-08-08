@@ -13,15 +13,14 @@ namespace RMS.Repositories
 {
     public class OrganizationRepository:Repository<Organization>,IOrganizationRepository
     {
-        public RmsDbContext db
-        {
-            get
-            {
-                return db as RmsDbContext;
-            }
-        }
+
         public OrganizationRepository(DbContext db) : base(db)
         {
+        }
+
+        public ICollection<Organization> SearchByName(string searchTextOrgName)
+        {
+            return db.Set<Organization>().Where(c => c.Name.StartsWith(searchTextOrgName)).ToList();
         }
     }
 }
