@@ -1,4 +1,4 @@
-﻿@model RMS.Models.EntityModels.Requisition
+﻿@model RMS.App.ViewModels.RequisitionViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -85,9 +85,9 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.EmployeeId, "EmployeeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("EmployeeId", null,"Select", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                 }
             </div>
             <div class="modal-footer"></div>
-            <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+            <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
             <a href="#" class="btn btn-success">Submit</a>
         </div>
     </div>
@@ -174,9 +174,9 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.EmployeeId, "EmployeeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("EmployeeId", null,"Select", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -190,7 +190,7 @@
                 }
             </div>
             <div class="modal-footer"></div>
-            <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+            <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
             <a href="#" class="btn btn-success">Submit</a>
         </div>
     </div>

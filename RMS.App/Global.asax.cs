@@ -39,6 +39,9 @@ namespace RMS.App
 
                 cfg.CreateMap<Vehicle, VehicleViewModel>();
                 cfg.CreateMap<VehicleViewModel, Vehicle>();
+
+                cfg.CreateMap<Requisition, RequisitionViewModel>();
+                cfg.CreateMap<RequisitionViewModel, Requisition>();
             });
             
         }

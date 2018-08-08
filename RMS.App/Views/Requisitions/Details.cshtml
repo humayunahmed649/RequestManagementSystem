@@ -1,4 +1,4 @@
-﻿@model RMS.Models.EntityModels.Requisition
+﻿@model RMS.App.ViewModels.RequisitionViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -69,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class="btn btn-warning"}) 
+    @Html.ActionLink("Back to List", "Index",null,new {@class="btn btn-info"})
 </p>

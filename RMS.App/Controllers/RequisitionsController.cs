@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
@@ -26,8 +28,10 @@ namespace RMS.App.Controllers
         // GET: Requisitions
         public ActionResult Index()
         {
-            var requisitions = _requisitionManager.GetAll();
-            return View(requisitions.ToList());
+            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+            IEnumerable<RequisitionViewModel> requisitionViewModels =
+                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+            return View(requisitionViewModels);
         }
 
         // GET: Requisitions/Details/5
@@ -42,7 +46,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(requisition);
+            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+            return View(requisitionViewModel);
         }
 
         // GET: Requisitions/Create
@@ -57,16 +62,18 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] Requisition requisition)
+        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
+                Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
                 _requisitionManager.Add(requisition);
+                TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
-            return View(requisition);
+            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
+            return View(requisitionViewModel);
         }
 
         // GET: Requisitions/Edit/5
@@ -82,7 +89,8 @@ namespace RMS.App.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
-            return View(requisition);
+            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+            return View(requisitionViewModel);
         }
 
         // POST: Requisitions/Edit/5
@@ -90,15 +98,17 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] Requisition requisition)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
+                Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
                 _requisitionManager.Update(requisition);
+                TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
-            return View(requisition);
+            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
+            return View(requisitionViewModel);
         }
 
         // GET: Requisitions/Delete/5
@@ -113,7 +123,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(requisition);
+            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+            return View(requisitionViewModel);
         }
 
         // POST: Requisitions/Delete/5
@@ -123,6 +134,7 @@ namespace RMS.App.Controllers
         {
             Requisition requisition = _requisitionManager.FindById((int)id);
             _requisitionManager.Remove(requisition);
+            TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
 
