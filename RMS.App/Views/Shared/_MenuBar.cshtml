@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
-                    @Html.ActionLink( "Index", "Home")<img src="~/Content/img/logo.png" alt="" title="" />
+                    @Url.Action("Index", "Home")<img src="~/Content/img/logo.png" alt="" title="" />
                 </div>
 
                 <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
@@ -41,19 +41,20 @@
                                     <ul>
                                         <li>@Html.ActionLink("Create New", "Create", "Departments")</li>
                                         <li>@Html.ActionLink("List Of Department", "Index", "Departments")</li>
-                                        <li class="menu-has-children">
-                                            <a href="#">Designation</a>
-                                            <ul>
-                                                <li>@Html.ActionLink("Create New", "Create", "Designations")</li>
-                                                <li>@Html.ActionLink("List Of Designation", "Index", "Designations")</li>
-                                            </ul>
-                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-has-children">
+                                    <a href="#">Designation</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "Designations")</li>
+                                        <li>@Html.ActionLink("List Of Designation", "Index", "Designations")</li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        
-                        
+
+
                         <li class="menu-has-children">
                             <a href="#">Employee</a>
                             <ul>
@@ -62,10 +63,16 @@
                             </ul>
                         </li>
                         <li class="menu-has-children">
-                            <a href="#">Vehicle</a>
+                            <a href="#">Vehicle SetUp</a>
                             <ul>
-                                <li>@Html.ActionLink("Create New", "Create", "Vehicles")</li>
-                                <li>@Html.ActionLink("List Of Vehicle", "Index", "Vehicles")</li>
+                                <li class="menu-has-children">
+                                    <a href="#">Vehicle</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "Vehicles")</li>
+                                        <li>@Html.ActionLink("List Of Vehicle", "Index", "Vehicles")</li>
+
+                                    </ul>
+                                </li>
                                 <li class="menu-has-children">
                                     <a href="#">Vehicle Types</a>
 
@@ -77,12 +84,9 @@
                                 </li>
                             </ul>
                         </li>
-
+                        
                         <li>@Html.ActionLink("Send Requisition", "Create", "Requisitions")</li>
                     </ul>        
-                        
-                        
-
                     
                 </nav><!-- #nav-menu-container -->
             

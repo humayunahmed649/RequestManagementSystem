@@ -33,6 +33,15 @@ namespace RMS.App
 
                 cfg.CreateMap<Employee, EmployeeViewModel>();
                 cfg.CreateMap<EmployeeViewModel, Employee>();
+
+                cfg.CreateMap<VehicleType, VehicleTypeViewModel>();
+                cfg.CreateMap<VehicleTypeViewModel, VehicleType>();
+
+                cfg.CreateMap<Vehicle, VehicleViewModel>();
+                cfg.CreateMap<VehicleViewModel, Vehicle>();
+
+                cfg.CreateMap<Requisition, RequisitionViewModel>();
+                cfg.CreateMap<RequisitionViewModel, Requisition>();
             });
             
         }

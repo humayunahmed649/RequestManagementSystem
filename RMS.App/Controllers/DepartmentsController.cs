@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -28,19 +29,20 @@ namespace RMS.App.Controllers
         // GET: Departments
         public ActionResult Index(string searchText)
         {
-            //if(searchText != null)
-            //{
-            //    return View(_departmentManager.SearchByName(searchText));
-            //}
-            //else
-            //{
-            //    return View(_departmentManager.GetAll());
-            //}
-
-            //var departments = db.Departments.Include(d => d.Organization);
-            ICollection<Department> department = _departmentManager.GetAll();
-            IEnumerable<DepartmentViewModel> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewModel>>(department);
-            return View(departmentViewModes);
+            if (searchText != null)
+            {
+                ICollection<Department> departments = _departmentManager.SearchByName(searchText);
+                IEnumerable<DepartmentViewModel> departmentViewModels= Mapper.Map<IEnumerable<DepartmentViewModel>>(departments);
+                return View(departmentViewModels);
+            }
+            else
+            {
+                ICollection<Department> department = (ICollection<Department>) _departmentManager.GetAll();
+                IEnumerable<DepartmentViewModel> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewModel>>(department);
+                return View(departmentViewModes);
+            }
+            
+            
         }
 
         // GET: Departments/Details/5

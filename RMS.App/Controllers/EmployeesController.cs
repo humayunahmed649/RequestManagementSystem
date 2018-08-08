@@ -33,19 +33,19 @@ namespace RMS.App.Controllers
         // GET: Employees
         public ActionResult Index(string searchTextEmpName)
         {
-            //if(searchTextEmpName !=null)
-            //{
-            //    return View(_employeeManager.SearchByName(searchTextEmpName));
-            //}
-            //else
-            //{
-
-            //    return View(_employeeManager.GetAll());
-            //}
-            //var employees = db.Employees.Include(e => e.Department).Include(e => e.Designation).Include(e => e.Organization);
-            ICollection<Employee> employee = _employeeManager.GetAll();
-            IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
-            return View(employeeViewModels);
+            if (searchTextEmpName != null)
+            {
+                ICollection<Employee> employees = _employeeManager.SearchByName(searchTextEmpName);
+                IEnumerable<EmployeeViewModel> employeeViewModel = Mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
+                return View(employeeViewModel);
+            }
+            else
+            {
+                ICollection<Employee> employee = _employeeManager.GetAll();
+                IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
+                return View(employeeViewModels);
+            }
+            
         }
 
         // GET: Employees/Details/5
@@ -70,15 +70,18 @@ namespace RMS.App.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
+            EmployeeTypes emp=new EmployeeTypes();
+            ViewBag.EmployeeTypes=new SelectList(emp.SetTypes(),"Id","Name");
             return View();
         }
+        
 
         // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,HouseNo,RoadNo,FloorNo,PostOffice,District,Division")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,PresentAddress,PermanentAddress,EmployeeTypes")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +121,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,HouseNo,RoadNo,FloorNo,PostOffice,District,Division")] EmployeeViewModel employeeViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,PresentAddress,PermanentAddress,EmployeeTypes")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {

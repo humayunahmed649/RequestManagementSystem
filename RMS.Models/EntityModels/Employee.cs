@@ -6,10 +6,11 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.Models.Contracts;
 
 namespace RMS.Models.EntityModels
 {
-    public class Employee
+    public class Employee:IDelatable
     {
         [Key]
         public int Id { get; set; }
@@ -40,14 +41,15 @@ namespace RMS.Models.EntityModels
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
 
-        public string HouseNo { get; set; }
-        public string RoadNo { get; set; }
-        public string FloorNo { get; set; }
-        public string PostOffice { get; set; }
+        public string PermanentAddress { get; set; }
+       
+        public string PresentAddress { get; set; }
 
-        [Required,StringLength(250)]
-        public string District { get; set; }
-        public string Division { get; set; }
+        public string EmployeeTypes { get; set; }
 
+        public bool IsDelete()
+        {
+            return false;
+        }
     }
 }

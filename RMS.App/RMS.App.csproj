@@ -197,8 +197,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeTypes.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
+    <Compile Include="ViewModels\RequisitionViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModel.cs" />
+    <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -609,6 +613,10 @@
     <ProjectReference Include="..\RMS.BLL\RMS.BLL.csproj">
       <Project>{84e385db-6393-4aff-9a9a-f34055eef766}</Project>
       <Name>RMS.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RMS.Models.Contracts\RMS.Models.Contracts.csproj">
+      <Project>{F44B1413-1E46-410B-A35B-A440AE52FBC5}</Project>
+      <Name>RMS.Models.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\RMS.Models\RMS.Models.csproj">
       <Project>{ec92faca-b541-4cbe-8546-767d78b56d5b}</Project>

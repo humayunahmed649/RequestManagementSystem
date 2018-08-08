@@ -64,22 +64,13 @@
             @Html.DisplayNameFor(model => model.BloodGroup)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HouseNo)
+            @Html.DisplayNameFor(model => model.PermanentAddress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RoadNo)
+            @Html.DisplayNameFor(model => model.PresentAddress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FloorNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostOffice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.District)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Division)
+            @Html.DisplayNameFor(model => model.EmployeeTypes)
         </th>
         <th></th>
     </tr>
@@ -119,23 +110,15 @@
                     @Html.DisplayFor(modelItem => item.BloodGroup)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HouseNo)
+                    @Html.DisplayFor(modelItem => item.PermanentAddress)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RoadNo)
+                    @Html.DisplayFor(modelItem => item.PresentAddress)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FloorNo)
+                    @Html.DisplayFor(modelItem => item.EmployeeTypes)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PostOffice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.District)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Division)
-                </td>
+                
                 <td>
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                     @Html.ActionLink("Details", "Details", new {id = item.Id}) |

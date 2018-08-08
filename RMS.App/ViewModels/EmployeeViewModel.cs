@@ -41,22 +41,16 @@ namespace RMS.App.ViewModels
         [Display(Name = "Designation")]
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
-
-        [Display(Name = "House No")]
-        public string HouseNo { get; set; }
-
-        [Display(Name = "Road No")]
-        public string RoadNo { get; set; }
-
-        [Display(Name = "Floor No")]
-        public string FloorNo { get; set; }
-
-        [Display(Name = "Post Office")]
-        public string PostOffice { get; set; }
-
-        [Required(ErrorMessage = "Please provide district name!")]
-        public string District { get; set; }
-        public string Division { get; set; }
-
+        [Required]
+        [Display(Name = "Permanent Address")]
+        public string PermanentAddress { get; set; }
+        [Required]
+        [Display(Name = "Permanent Address")]
+        public string PresentAddress { get; set; }
+        public string EmployeeTypes { get; set; }
+        
     }
+ 
+
+    
 }

@@ -93,6 +93,18 @@
     <Compile Include="Migrations\201808072107457_Employee_validation_added.Designer.cs">
       <DependentUpon>201808072107457_Employee_validation_added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808080708267_VehicleType_and_Vehicle_validation_added.cs" />
+    <Compile Include="Migrations\201808080708267_VehicleType_and_Vehicle_validation_added.Designer.cs">
+      <DependentUpon>201808080708267_VehicleType_and_Vehicle_validation_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808080827186_Requisition_validation_added.cs" />
+    <Compile Include="Migrations\201808080827186_Requisition_validation_added.Designer.cs">
+      <DependentUpon>201808080827186_Requisition_validation_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808082201149_EmployeeModelChanged.cs" />
+    <Compile Include="Migrations\201808082201149_EmployeeModelChanged.Designer.cs">
+      <DependentUpon>201808082201149_EmployeeModelChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -124,10 +136,25 @@
     <EmbeddedResource Include="Migrations\201808072107457_Employee_validation_added.resx">
       <DependentUpon>201808072107457_Employee_validation_added.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808080708267_VehicleType_and_Vehicle_validation_added.resx">
+      <DependentUpon>201808080708267_VehicleType_and_Vehicle_validation_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808080827186_Requisition_validation_added.resx">
+      <DependentUpon>201808080827186_Requisition_validation_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808082201149_EmployeeModelChanged.resx">
+      <DependentUpon>201808082201149_EmployeeModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RMS.Models.Contracts\RMS.Models.Contracts.csproj">
+      <Project>{f44b1413-1e46-410b-a35b-a440ae52fbc5}</Project>
+      <Name>RMS.Models.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
