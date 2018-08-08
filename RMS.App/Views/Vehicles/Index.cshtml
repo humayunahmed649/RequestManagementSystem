@@ -1,14 +1,20 @@
-﻿@model IEnumerable<RMS.Models.EntityModels.Vehicle>
+﻿@model IEnumerable<RMS.App.ViewModels.VehicleViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 <br/>
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-info">
+        @Html.Raw(TempData["msg"])
+    </div>
+}
 <div class="container">
     <div class="row align-items-center">
         <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
             <p>
-                @Html.ActionLink("Create New", "Create")
+                @Html.ActionLink("Create New", "Create",null,new {@class="btn btn-default"})
             </p>
         </div>
 
@@ -20,49 +26,71 @@
 </div>
 <br />
 
-<table class="table">
+<table class="table table-bordered table-active table-striped">
     <tr>
         <th>
-            Vehicle Type
+            SL
         </th>
         <th>
-            Brand Name
+            @Html.DisplayNameFor(model => model.VehicleType)
         </th>
         <th>
-            Model
+            @Html.DisplayNameFor(model => model.BrandName)
         </th>
         <th>
-            Registration No
+            @Html.DisplayNameFor(model => model.ModelName)
         </th>
         <th>
-            Chassis No
+            @Html.DisplayNameFor(model => model.RegNo)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChassisNo)
+        </th>
+        <th>
+            Action
+        </th>
     </tr>
+    @{
+        var sl = 0;
+        if (Model.Count()!=0)
+        {
+            foreach (var item in Model)
+            {
+                sl++;
+                <tr>
+                    <td>
+                        @sl
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BrandName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModelName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChassisNo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                        @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td class="text-center text-danger" colspan="7"> Data Not Found!</td>
+            </tr>
+        }
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModelName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChassisNo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
 </table>

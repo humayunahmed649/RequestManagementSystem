@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
@@ -24,7 +26,10 @@ namespace RMS.App.Controllers
         // GET: VehicleTypes
         public ActionResult Index()
         {
-            return View(_vehicleTypeManager.GetAll());
+            ICollection<VehicleType> vehicleType = _vehicleTypeManager.GetAll();
+            IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
+                Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
+            return View(vehicleTypeViewModels);
         }
 
         // GET: VehicleTypes/Details/5
@@ -39,7 +44,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(vehicleType);
+            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
+            return View(vehicleTypeViewModel);
         }
 
         // GET: VehicleTypes/Create
@@ -53,15 +59,17 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] VehicleType vehicleType)
+        public ActionResult Create([Bind(Include = "Id,Name")] VehicleTypeViewModel vehicleTypeViewModel)
         {
             if (ModelState.IsValid)
             {
+                VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
                 _vehicleTypeManager.Add(vehicleType);
+                TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
             }
 
-            return View(vehicleType);
+            return View(vehicleTypeViewModel);
         }
 
         // GET: VehicleTypes/Edit/5
@@ -76,7 +84,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(vehicleType);
+            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
+            return View(vehicleTypeViewModel);
         }
 
         // POST: VehicleTypes/Edit/5
@@ -84,14 +93,16 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] VehicleType vehicleType)
+        public ActionResult Edit([Bind(Include = "Id,Name")] VehicleTypeViewModel vehicleTypeViewModel)
         {
             if (ModelState.IsValid)
             {
+                VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
                 _vehicleTypeManager.Update(vehicleType);
+                TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
             }
-            return View(vehicleType);
+            return View(vehicleTypeViewModel);
         }
 
         // GET: VehicleTypes/Delete/5
@@ -106,7 +117,8 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(vehicleType);
+            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
+            return View(vehicleTypeViewModel);
         }
 
         // POST: VehicleTypes/Delete/5
@@ -116,6 +128,7 @@ namespace RMS.App.Controllers
         {
             VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
             _vehicleTypeManager.Remove(vehicleType);
+            TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
 

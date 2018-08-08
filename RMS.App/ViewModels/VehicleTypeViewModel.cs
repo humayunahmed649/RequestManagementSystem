@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMS.Models.EntityModels
+namespace RMS.App.ViewModels
 {
-    public class VehicleType
+    public class VehicleTypeViewModel   
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required,StringLength(50)]
+        [Required(ErrorMessage = "Please provide a type name!")]
         public string Name { get; set; }
 
     }

@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201808072107457_Employee_validation_added.Designer.cs">
       <DependentUpon>201808072107457_Employee_validation_added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808080708267_VehicleType_and_Vehicle_validation_added.cs" />
+    <Compile Include="Migrations\201808080708267_VehicleType_and_Vehicle_validation_added.Designer.cs">
+      <DependentUpon>201808080708267_VehicleType_and_Vehicle_validation_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808072107457_Employee_validation_added.resx">
       <DependentUpon>201808072107457_Employee_validation_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808080708267_VehicleType_and_Vehicle_validation_added.resx">
+      <DependentUpon>201808080708267_VehicleType_and_Vehicle_validation_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
