@@ -34,6 +34,15 @@ namespace RMS.App.Controllers
             return View(requisitionViewModels);
         }
 
+        public ActionResult RequisitionList()
+        {
+
+            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+            IEnumerable<RequisitionViewModel> requisitionViewModels =
+                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+            return View(requisitionViewModels);
+        }
+
         // GET: Requisitions/Details/5
         public ActionResult Details(int? id)
         {

@@ -38,6 +38,7 @@ namespace RMS.App.ViewModels
         [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+        public List<RequisitionViewModel> RequisitionViewModels { get; set; } 
 
     }
 }
