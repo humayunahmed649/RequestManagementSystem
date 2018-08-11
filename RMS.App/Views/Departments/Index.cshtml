@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
 }
 <br/>
+<h2>Department List</h2>
+
 @if (TempData["msg"] != null)
 {
     <div class="alert alert-info">
@@ -19,7 +21,7 @@
             </p>
         </div>
 
-        <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+        <div class="col-lg-6 col-sm-6 col-8 text-right no-padding">
             <p>
                 @using (Html.BeginForm("Index", "Departments", FormMethod.Get))
                 {
@@ -42,7 +44,7 @@
             SL
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Organization.Name)
+            @Html.DisplayNameFor(model => model.OrganizationId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -54,7 +56,7 @@
     </tr>
     @{
         var sl = 0;
-        if (Model.Count()!=0)
+        if (Model.Count() != 0)
         {
             foreach (var item in Model)
             {
@@ -89,5 +91,8 @@
     }
 
 </table>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/DepartmentJs/CreateDepartment.js"></script>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/DepartmentJs/CreateDepartment.js"></script>
+}*@

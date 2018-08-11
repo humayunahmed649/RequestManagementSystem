@@ -5,7 +5,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>To Create Organization</h2>
+<h2>Create Organization</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -16,37 +16,43 @@
         <h4>Please Provide your Information</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+
+        <div class="form-group row">
             
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "col-md-4" } })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
 
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
             
-                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "col-md-4" } })
+            @Html.LabelFor(model => model.Code, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+            </div>
 
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RegNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
             
-                @Html.EditorFor(model => model.RegNo, new { htmlAttributes = new { @class = "col-md-4" } })
+            @Html.LabelFor(model => model.RegNo, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.RegNo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RegNo, "", new { @class = "text-danger" })
+            </div>
 
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group row">
+            <div class="control-label col-md-2 "></div>
+            <div class="col-md-6 ">
+                @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new {@class = "btn btn-info"}) &nbsp;
                 <input type="submit" value="Create" class="btn btn-default"/>
-                
-                 @Html.ActionLink("Back to List", "Index",null, htmlAttributes:new {@class="btn btn-info"})
-                
+
             </div>
         </div>
     </div>

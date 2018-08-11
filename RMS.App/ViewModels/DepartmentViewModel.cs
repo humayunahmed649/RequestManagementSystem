@@ -20,7 +20,7 @@ namespace RMS.App.ViewModels
         public string Code { get; set; }
 
         [Display(Name = "Organization")]
-        [Required(ErrorMessage = "Please select a department!")]
+        [Required(ErrorMessage = "Please select a Organization!")]
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
 
