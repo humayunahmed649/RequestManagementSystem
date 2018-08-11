@@ -3,21 +3,15 @@
 @{
     ViewBag.Title = "Create";
 }
-<br/>
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-6">
-            Use this form to set up and/or modify requisitions. In addition to being added manually in this form, 
-            requisitions can also be added via initialization (PO Requisition Initialization) or PM Material Detail. However, requisitions created via PO Requisition Initialization and PM Material Detail are limited to specific line types. PO Requisition Initialization generates either Inventory or Work Order requisition lines based on low stock or parts needed for work orders, respectively. PM Material Detail will generate only Job requisition lines based on materials set up for a project. 
-            For information about requisitions created using these forms, see Related Topics below.
-        </div>
-        <div class="col-md-6">
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a>
+<br />
 
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a>
-        </div>
-    </div>
+<div class="col-md-6">
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a>
+
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a>
 </div>
+
 
 <div class="modal fade" id="forRequest">
     <div class="modal-dialog">
@@ -87,7 +81,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("EmployeeId", null,"Select", htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -176,7 +170,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("EmployeeId", null,"Select", htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -198,20 +192,20 @@
 
 <!-----------end Request for me-->
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Content/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(".datepicker").datepicker({
-                //changeMonth: true,
-                //changeYear: true,
-                yearRange: "-0:+10",
-                buttonText:"<i class='fa fa-calendar'></i>"
-            });
-            
-        })
-    </script>
-}
+<div class="modal fade" id="myRequest">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title">My Requisition</h3>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body" style="width: 100%">
+                <h4>My Request</h4>
+               @Html.Action("RequisitionList","Requisitions")
+            </div>
+            <div class="modal-footer"></div>
+            <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
+        </div>
+    </div>
+</div>
