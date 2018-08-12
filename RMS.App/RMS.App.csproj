@@ -195,12 +195,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AssignRequisitionViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
     <Compile Include="ViewModels\EmployeeTypes.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
     <Compile Include="ViewModels\RequisitionViewModel.cs" />
+    <Compile Include="ViewModels\RequisitonForAnotherViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
   </ItemGroup>
@@ -593,6 +595,9 @@
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
+    <Content Include="Views\Requisitions\CreateRequestForOther.cshtml" />
+    <Content Include="Views\Requisitions\Requests.cshtml" />
+    <Content Include="Views\Requisitions\Assign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

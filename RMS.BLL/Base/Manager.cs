@@ -6,6 +6,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using RMS.BLL.Contracts;
+using RMS.Models.EntityModels;
 using RMS.Repositories.Contracts;
 
 namespace RMS.BLL.Base

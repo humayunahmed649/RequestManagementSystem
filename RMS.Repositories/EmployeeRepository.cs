@@ -33,5 +33,10 @@ namespace RMS.Repositories
                     .Where(c => c.FullName.StartsWith(searchTextEmpName))
                     .ToList();
         }
+
+        public ICollection<Employee> GetAllDriver()
+        {
+            return db.Set<Employee>().Where(c => c.Designation.Title == "Driver").ToList();
+        }
     }
 }

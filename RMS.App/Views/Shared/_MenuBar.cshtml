@@ -84,8 +84,29 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li>@Html.ActionLink("Send Requisition", "Create", "Requisitions")</li>
+
+                        
+                            <li class="menu-has-children">
+                                <a href="#">Requisition Queue</a>
+                                <ul>
+                                    <li>@Html.ActionLink("Requisitions", "Requests", "Requisitions")</li>
+                                    <li>@Html.ActionLink("List Of Vehicle", "Index", "Vehicles")</li>
+
+                                </ul>
+                            </li>
+                            <li class="menu-has-children">
+                                <a href="#">Vehicle Types</a>
+
+                                <ul>
+                                    <li>@Html.ActionLink("Create New", "Create", "VehicleTypes")</li>
+                                    <li>@Html.ActionLink("List Of Vehile Type", "Index", "VehicleTypes")</li>
+                                </ul>
+
+                            </li>
+                        
+
                     </ul>        
                     
                 </nav><!-- #nav-menu-container -->

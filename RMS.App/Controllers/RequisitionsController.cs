@@ -18,11 +18,13 @@ namespace RMS.App.Controllers
     {
         private IRequisitionManager _requisitionManager;
         private IEmployeeManager _employeeManager;
+        private IVehicleManager _vehicleManager;
 
-        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager)
+        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
+            this._vehicleManager = vehicleManager;
         }
 
         // GET: Requisitions
@@ -65,16 +67,18 @@ namespace RMS.App.Controllers
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName");
             return View();
         }
+        
 
         // POST: Requisitions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,EmployeeId")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
+                requisitionViewModel.RequestFor = "Own";
                 Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
                 _requisitionManager.Add(requisition);
                 TempData["msg"] = "Information has been saved successfully";
@@ -83,6 +87,26 @@ namespace RMS.App.Controllers
 
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
             return View(requisitionViewModel);
+        }
+        [HttpGet]
+        public ActionResult CreateRequestForOther()
+        {
+            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] RequisitonForAnotherViewModel requisitonForAnother)
+        {
+            if (ModelState.IsValid)
+            {
+                Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
+                _requisitionManager.Add(requisition);
+                TempData["msg"] = "Information has been saved successfully";
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitonForAnother.EmployeeId);
+            return View(requisitonForAnother);
         }
 
         // GET: Requisitions/Edit/5
@@ -146,6 +170,37 @@ namespace RMS.App.Controllers
             TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Requests()
+        {
+            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+            IEnumerable<RequisitionViewModel> requisitionViewModels =
+                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+            return View(requisitionViewModels);
+        }
+        [HttpGet]
+        public ActionResult Assign(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Requisition requisition = _requisitionManager.FindById((int)id);
+            if (requisition == null)
+            {
+                return HttpNotFound();
+            }
+            AssignRequisitionViewModel assign=new AssignRequisitionViewModel();
+            assign.RequisitionId = (int)id;
+            
+
+            ViewBag.Driver = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
+            ViewBag.Vehicle = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
+            //AssignRequisitionViewModel assignRequisition= Mapper.Map<AssignRequisitionViewModel>(requisition);
+            return View(assign);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

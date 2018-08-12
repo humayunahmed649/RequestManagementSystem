@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 using RMS.Models.EntityModels;
 
 namespace RMS.App.ViewModels
 {
-    public class RequisitionViewModel 
+    public class RequisitonForAnotherViewModel
     {
         public int Id { get; set; }
 
@@ -30,13 +29,16 @@ namespace RMS.App.ViewModels
 
         [Required(ErrorMessage = "Please provide a short journey description!")]
         public string Description { get; set; }
-        
+
+        [Required(ErrorMessage = "Please provide a request for self or others!")]
         [Display(Name = "Request For")]
         public string RequestFor { get; set; }
+
         [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
-        public List<RequisitionViewModel> RequisitionViewModels { get; set; } 
+        public List<RequisitonForAnotherViewModel> RequisitionForAnotherViewModels { get; set; }
+
 
     }
 }

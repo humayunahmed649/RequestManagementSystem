@@ -1,0 +1,118 @@
+﻿
+@model RMS.App.ViewModels.AssignRequisitionViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h4>Requisition</h4>
+    
+    <dl>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Requisition.StartDateTime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Requisition.EndDateTime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Requisition.FromPlace)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Requisition.FromPlace)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Requisition.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Requisition.RequestFor)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Requisition.RequestFor)
+            </dd>
+
+        </dl>
+    
+
+</div>
+@using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>Assign Form</h4>
+            <hr/>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.RequisitionId, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.RequisitionId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Vehicle",null, new { htmlAttributes = new { @class = "dropdown form-control" } })
+                    @Html.ValidationMessageFor(model => model.VehicleId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.DriverId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Driver",null, new { htmlAttributes = new { @class = "dropdown form-control" } })
+                    @Html.ValidationMessageFor(model => model.DriverId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

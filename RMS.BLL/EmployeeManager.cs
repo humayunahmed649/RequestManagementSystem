@@ -22,5 +22,10 @@ namespace RMS.BLL
         {
             return _employeeRepository.SearchByName(searchTextEmpName);
         }
+
+        public ICollection<Employee> GetAllDriver()
+        {
+            return _employeeRepository.GetAllDriver();
+        }
     }
 }
