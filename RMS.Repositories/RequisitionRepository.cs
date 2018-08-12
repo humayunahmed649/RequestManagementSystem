@@ -15,5 +15,7 @@ namespace RMS.Repositories
         public RequisitionRepository(DbContext db) : base(db)
         {
         }
+
+        
     }
 }

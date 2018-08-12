@@ -183,6 +183,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\AssignRequisitionsController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DesignationsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="ViewModels\EmployeeTypes.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
+    <Compile Include="ViewModels\RequisitionAndAssignRequisition.cs" />
     <Compile Include="ViewModels\RequisitionViewModel.cs" />
     <Compile Include="ViewModels\RequisitonForAnotherViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
@@ -598,6 +600,14 @@
     <Content Include="Views\Requisitions\CreateRequestForOther.cshtml" />
     <Content Include="Views\Requisitions\Requests.cshtml" />
     <Content Include="Views\Requisitions\Assign.cshtml" />
+    <Content Include="Views\AssignRequisitions\Delete.cshtml" />
+    <Content Include="Views\AssignRequisitions\RequisitionDetails.cshtml" />
+    <Content Include="Views\AssignRequisitions\Edit.cshtml" />
+    <Content Include="Views\AssignRequisitions\Index.cshtml" />
+    <Content Include="Views\AssignRequisitions\Requests.cshtml" />
+    <Content Include="Views\AssignRequisitions\Details.cshtml" />
+    <Content Include="Views\AssignRequisitions\Create.cshtml" />
+    <Content Include="Views\neksd\create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

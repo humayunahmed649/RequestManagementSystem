@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext\RmsDbContext.cs" />
+    <Compile Include="EntityModels\AssignRequisition.cs" />
     <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Designation.cs" />
     <Compile Include="EntityModels\Employee.cs" />
@@ -109,9 +110,13 @@
     <Compile Include="Migrations\201808120924569_Added_SeatCapacity_in_Vehicle.Designer.cs">
       <DependentUpon>201808120924569_Added_SeatCapacity_in_Vehicle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808121002183_Added_required_in_Employee.cs" />
-    <Compile Include="Migrations\201808121002183_Added_required_in_Employee.Designer.cs">
-      <DependentUpon>201808121002183_Added_required_in_Employee.cs</DependentUpon>
+    <Compile Include="Migrations\201808121954245_Assign Requisition Added.cs" />
+    <Compile Include="Migrations\201808121954245_Assign Requisition Added.Designer.cs">
+      <DependentUpon>201808121954245_Assign Requisition Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808122011552_Assign Model Change [Driver id Delete].cs" />
+    <Compile Include="Migrations\201808122011552_Assign Model Change [Driver id Delete].Designer.cs">
+      <DependentUpon>201808122011552_Assign Model Change [Driver id Delete].cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,8 +161,11 @@
     <EmbeddedResource Include="Migrations\201808120924569_Added_SeatCapacity_in_Vehicle.resx">
       <DependentUpon>201808120924569_Added_SeatCapacity_in_Vehicle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808121002183_Added_required_in_Employee.resx">
-      <DependentUpon>201808121002183_Added_required_in_Employee.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808121954245_Assign Requisition Added.resx">
+      <DependentUpon>201808121954245_Assign Requisition Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808122011552_Assign Model Change [Driver id Delete].resx">
+      <DependentUpon>201808122011552_Assign Model Change [Driver id Delete].cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

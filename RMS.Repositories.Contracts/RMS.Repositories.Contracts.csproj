@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAssignRequisitionRepository.cs" />
     <Compile Include="IDepartmentRepository.cs" />
     <Compile Include="IDesignationRepository.cs" />
     <Compile Include="IEmployeeRepository.cs" />

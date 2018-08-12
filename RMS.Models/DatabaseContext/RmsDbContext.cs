@@ -21,6 +21,7 @@ namespace RMS.Models.DatabaseContext
 
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.Vehicle> Vehicles { get; set; }
         public DbSet<Requisition> Requisitions { get; set; }
+        public DbSet<AssignRequisition> AssignRequisitions { get; set; } 
         
     }
 }

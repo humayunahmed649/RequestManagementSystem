@@ -170,36 +170,8 @@ namespace RMS.App.Controllers
             TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
-
-        [HttpGet]
-        public ActionResult Requests()
-        {
-            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
-            IEnumerable<RequisitionViewModel> requisitionViewModels =
-                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
-            return View(requisitionViewModels);
-        }
-        [HttpGet]
-        public ActionResult Assign(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Requisition requisition = _requisitionManager.FindById((int)id);
-            if (requisition == null)
-            {
-                return HttpNotFound();
-            }
-            AssignRequisitionViewModel assign=new AssignRequisitionViewModel();
-            assign.RequisitionId = (int)id;
-            
-
-            ViewBag.Driver = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-            ViewBag.Vehicle = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
-            //AssignRequisitionViewModel assignRequisition= Mapper.Map<AssignRequisitionViewModel>(requisition);
-            return View(assign);
-        }
+        
+        
 
 
         protected override void Dispose(bool disposing)

@@ -7,13 +7,13 @@ namespace RMS.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Added_required_in_Employee : IMigrationMetadata
+    public sealed partial class AssignModelChangeDriveridDelete : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Added_required_in_Employee));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AssignModelChangeDriveridDelete));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808121002183_Added_required_in_Employee"; }
+            get { return "201808122011552_Assign Model Change [Driver id Delete]"; }
         }
         
         string IMigrationMetadata.Source
