@@ -5,7 +5,7 @@
 }
 <br/>
 
-
+<h2>Organization List</h2>
 
 @if (TempData["msg"] != null)
 {
@@ -21,15 +21,13 @@
             </p>
         </div>
 
-        <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+        <div class="col-lg-6 col-sm-6 col-8 text-right no-padding">
             <p>
                 @using (Html.BeginForm("Index", "Organizations", FormMethod.Get))
                 {
-
                     <b>Search</b>
                     @Html.TextBox("searchTextOrgName")
                     <input type="submit" value="Search" />
-
                 }
             </p>
             
@@ -88,7 +86,7 @@
         else
         {
             <tr>
-                <td class="text-center text-danger" colspan="5"> Data Not Found!</td>
+                <td class="text-center text-danger" colspan="5"><strong>Data Not Found!</strong> </td>
             </tr>
 
         }

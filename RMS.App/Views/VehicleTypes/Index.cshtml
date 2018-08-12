@@ -5,6 +5,7 @@
 }
 
 <br/>
+<h2>Vehicle Type List</h2>
 @if (TempData["msg"] != null)
 {
     <div class="alert alert-info">
@@ -15,19 +16,17 @@
     <div class="row align-items-center">
         <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
             <p>
-                @Html.ActionLink("Create New", "Create",null,new {@class="btn btn-info"})
+                @Html.ActionLink("Create New", "Create",null,new {@class="btn btn-default"})
             </p>
         </div>
 
-        <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+        <div class="col-lg-6 col-sm-6 col-8 text-right no-padding">
             <p>
                 @using (Html.BeginForm("Index", "VehicleTypes", FormMethod.Get))
                 {
-
                     <b>Search</b>
                     @Html.TextBox("searchTextVehicleTypes")
                     <input type="submit" value="Search" />
-
                 }
             </p>
         </div>

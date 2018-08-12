@@ -16,34 +16,36 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.OrganizationId, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-6">
+            <div class="col-md-4">
                 @Html.DropDownList("OrganizationId", null,"Select", htmlAttributes: new {@class = "form-control"})
                 @Html.ValidationMessageFor(model => model.OrganizationId, "", new {@class = "text-danger"})
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Save" class="btn btn-default" id="btnSave"/>
-                @Html.ActionLink("Back to List", "Index",null,new {@class="btn btn-info"})
+        <div class="form-group row">
+            <div class="control-label col-md-2"></div>
+            <div class="col-md-10">
+                @Html.ActionLink("Back to List", "Index","Departments", null, new {@class = "btn btn-info"}) &nbsp;
+                <input type="submit" value="Save" class="btn btn-default" id="btnSave?"/>
+
             </div>
         </div>
     </div>
