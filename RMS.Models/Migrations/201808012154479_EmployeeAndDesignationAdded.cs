@@ -37,8 +37,8 @@ namespace RMS.Models.Migrations
                         Division = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Departments", t => t.DepartmentId, cascadeDelete: true)
-                .ForeignKey("dbo.Designations", t => t.DesignationId, cascadeDelete: true)
+                .ForeignKey("dbo.Departments", t => t.DepartmentId, cascadeDelete: false)
+                .ForeignKey("dbo.Designations", t => t.DesignationId, cascadeDelete: false)
                 .ForeignKey("dbo.Organizations", t => t.OrganizationId, cascadeDelete: false)
                 .Index(t => t.OrganizationId)
                 .Index(t => t.DepartmentId)

@@ -31,22 +31,30 @@ namespace RMS.App.ViewModels
         public string BloodGroup { get; set; }
 
         [Display(Name = "Organization")]
+        [Required(ErrorMessage = "Please select a organization!")]
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
 
         [Display(Name = "Department")]
+        [Required(ErrorMessage = "Please select a department!")]
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
 
         [Display(Name = "Designation")]
+        [Required(ErrorMessage = "Please select a designation!")]
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please provide permanent address!")]
         [Display(Name = "Permanent Address")]
         public string PermanentAddress { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please provide present address!")]
         [Display(Name = "Permanent Address")]
         public string PresentAddress { get; set; }
+
+        [Required(ErrorMessage = "Please provide employee type!")]
+        [Display(Name = "Employee Type")]
         public string EmployeeTypes { get; set; }
         
     }

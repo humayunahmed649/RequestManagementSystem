@@ -28,7 +28,12 @@ namespace RMS.App.ViewModels
         [Display(Name = "Chassis No")]
         public string ChassisNo { get; set; }
 
+        [Required(ErrorMessage = "Please provide seat capacity!")]
+        [Display(Name = "Seat Capacity")]
+        public int SeatCapacity { get; set; }
+
         [Display(Name = "Vehicle Type")]
+        [Required(ErrorMessage = "Please select a vehicle type!")]
         public int VehicleTypeId { get; set; }
         public VehicleType VehicleType { get; set; }
 

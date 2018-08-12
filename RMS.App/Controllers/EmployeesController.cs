@@ -94,6 +94,8 @@ namespace RMS.App.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+            EmployeeTypes emp = new EmployeeTypes();
+            ViewBag.EmployeeTypes = new SelectList(emp.SetTypes(), "Id", "Name",employeeViewModel.EmployeeTypes);
             return View(employeeViewModel);
         }
 

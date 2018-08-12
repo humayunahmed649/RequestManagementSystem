@@ -105,6 +105,14 @@
     <Compile Include="Migrations\201808082201149_EmployeeModelChanged.Designer.cs">
       <DependentUpon>201808082201149_EmployeeModelChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808120924569_Added_SeatCapacity_in_Vehicle.cs" />
+    <Compile Include="Migrations\201808120924569_Added_SeatCapacity_in_Vehicle.Designer.cs">
+      <DependentUpon>201808120924569_Added_SeatCapacity_in_Vehicle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808121002183_Added_required_in_Employee.cs" />
+    <Compile Include="Migrations\201808121002183_Added_required_in_Employee.Designer.cs">
+      <DependentUpon>201808121002183_Added_required_in_Employee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -144,6 +152,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808082201149_EmployeeModelChanged.resx">
       <DependentUpon>201808082201149_EmployeeModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808120924569_Added_SeatCapacity_in_Vehicle.resx">
+      <DependentUpon>201808120924569_Added_SeatCapacity_in_Vehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808121002183_Added_required_in_Employee.resx">
+      <DependentUpon>201808121002183_Added_required_in_Employee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

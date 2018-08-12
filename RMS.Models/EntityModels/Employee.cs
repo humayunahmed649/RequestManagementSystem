@@ -41,10 +41,13 @@ namespace RMS.Models.EntityModels
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
 
+        [Required,StringLength(500)]
         public string PermanentAddress { get; set; }
        
+        [Required,StringLength(500)]
         public string PresentAddress { get; set; }
 
+        [Required,StringLength(50)]
         public string EmployeeTypes { get; set; }
 
         public bool IsDelete()

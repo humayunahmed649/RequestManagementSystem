@@ -53,6 +53,9 @@
             @Html.DisplayNameFor(model => model.ChassisNo)
         </th>
         <th>
+            @Html.DisplayNameFor(model=>model.SeatCapacity)
+        </th>
+        <th>
             Action
         </th>
     </tr>
@@ -83,6 +86,9 @@
                         @Html.DisplayFor(modelItem => item.ChassisNo)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem=>item.SeatCapacity)
+                    </td>
+                    <td>
                         @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                         @Html.ActionLink("Details", "Details", new {id = item.Id}) |
                         @Html.ActionLink("Delete", "Delete", new {id = item.Id})
@@ -93,7 +99,7 @@
         else
         {
             <tr>
-                <td class="text-center text-danger" colspan="7"> Data Not Found!</td>
+                <td class="text-center text-danger" colspan="8"> Data Not Found!</td>
             </tr>
         }
     }

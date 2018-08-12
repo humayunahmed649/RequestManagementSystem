@@ -25,6 +25,9 @@ namespace RMS.Models.EntityModels
         [Required,StringLength(50)]
         public string ChassisNo { get; set; }
 
+        [Required]
+        public int SeatCapacity { get; set; }
+
         [ForeignKey("VehicleType")]
         public int VehicleTypeId { get; set; }
         public VehicleType VehicleType { get; set; }
