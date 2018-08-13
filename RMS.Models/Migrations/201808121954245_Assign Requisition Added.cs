@@ -24,10 +24,19 @@ namespace RMS.Models.Migrations
                 .Index(t => t.RequisitionId)
                 .Index(t => t.VehicleId)
                 .Index(t => t.EmployeeId);
-            
-            AlterColumn("dbo.Employees", "PermanentAddress", c => c.String(nullable: false, maxLength: 500));
-            AlterColumn("dbo.Employees", "PresentAddress", c => c.String(nullable: false, maxLength: 500));
+
+            DropColumn("dbo.Employees", "HouseNo");
+            DropColumn("dbo.Employees", "RoadNo");
+            DropColumn("dbo.Employees", "FloorNo");
+            DropColumn("dbo.Employees", "PostOffice");
+            DropColumn("dbo.Employees", "District");
+            DropColumn("dbo.Employees", "Division");
+
+            AddColumn("dbo.Employees", "PermanentAddress", c => c.String(nullable: false, maxLength: 500));
+            AddColumn("dbo.Employees", "PresentAddress", c => c.String(nullable: false, maxLength: 500));
             AlterColumn("dbo.Employees", "EmployeeTypes", c => c.String(nullable: false, maxLength: 50));
+
+            
         }
         
         public override void Down()
@@ -38,9 +47,17 @@ namespace RMS.Models.Migrations
             DropIndex("dbo.AssignRequisitions", new[] { "EmployeeId" });
             DropIndex("dbo.AssignRequisitions", new[] { "VehicleId" });
             DropIndex("dbo.AssignRequisitions", new[] { "RequisitionId" });
+
             AlterColumn("dbo.Employees", "EmployeeTypes", c => c.String());
-            AlterColumn("dbo.Employees", "PresentAddress", c => c.String());
-            AlterColumn("dbo.Employees", "PermanentAddress", c => c.String());
+            DropColumn("dbo.Employees", "PresentAddress");
+            DropColumn("dbo.Employees", "PermanentAddress");
+            AddColumn("dbo.Employees", "HouseNo", c => c.String());
+            AddColumn("dbo.Employees", "RoadNo", c => c.String());
+            AddColumn("dbo.Employees", "FloorNo", c => c.String());
+            AddColumn("dbo.Employees", "PostOffice", c => c.String());
+            AddColumn("dbo.Employees", "District", c => c.String());
+            AddColumn("dbo.Employees", "Division", c => c.String());
+
             DropTable("dbo.AssignRequisitions");
         }
     }

@@ -118,6 +118,10 @@
     <Compile Include="Migrations\201808122011552_Assign Model Change [Driver id Delete].Designer.cs">
       <DependentUpon>201808122011552_Assign Model Change [Driver id Delete].cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808131957561_Employee_model_change.cs" />
+    <Compile Include="Migrations\201808131957561_Employee_model_change.Designer.cs">
+      <DependentUpon>201808131957561_Employee_model_change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808122011552_Assign Model Change [Driver id Delete].resx">
       <DependentUpon>201808122011552_Assign Model Change [Driver id Delete].cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808131957561_Employee_model_change.resx">
+      <DependentUpon>201808131957561_Employee_model_change.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
