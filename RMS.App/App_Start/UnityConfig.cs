@@ -49,21 +49,38 @@ namespace RMS.App
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IOrganizationManager, OrganizationManager>();
             container.RegisterType<IOrganizationRepository, OrganizationRepository>();
+
             container.RegisterType<IDepartmentManager, DepartmentManager>();
             container.RegisterType<IDepartmentRepository, DepartmentRepository>();
+
             container.RegisterType<IEmployeeManager, EmployeeManager>();
             container.RegisterType<IEmployeeRepository, EmployeeRepository>();
+
             container.RegisterType<IDesignationManager, DesignationManager>();
             container.RegisterType<IDesignationRepository, DesignationRepository>();
+
             container.RegisterType<IVehicleTypeManager, VehicleTypeManager>();
             container.RegisterType<IVehicleTypeRepository, VehicleTypeRepository>();
+
             container.RegisterType<IVehicleManager, VehicleManager>();
             container.RegisterType<IVehicleRepository, VehicleRepository>();
+
             container.RegisterType<IRequisitionManager, RequisitionManager>();
             container.RegisterType<IRequisitionRepository, RequisitionRepository>();
+
             container.RegisterType<IAssignRequisitionManager, AssignRequisitionManager>();
             container.RegisterType<IAssignRequisitionRepository, AssignRequisitionRepository>();
+
             container.RegisterType<DbContext, RmsDbContext>();
+
+            container.RegisterType<IDivisionRepository, DivisionRepository>();
+            container.RegisterType<IDivisionManager, DivisionManager>();
+
+            container.RegisterType<IDistrictRepository, DistrictRepository>();
+            container.RegisterType<IDistrictManager, DistrictManager>();
+
+            container.RegisterType<IUpazilaRepository, UpazilaRepository>();
+            container.RegisterType<IUpazilaManager, UpazilaManager>();
 
         }
     }

@@ -50,12 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext\RmsDbContext.cs" />
+    <Compile Include="EntityModels\Address.cs" />
     <Compile Include="EntityModels\AssignRequisition.cs" />
     <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Designation.cs" />
+    <Compile Include="EntityModels\District.cs" />
+    <Compile Include="EntityModels\Division.cs" />
     <Compile Include="EntityModels\Employee.cs" />
     <Compile Include="EntityModels\Organization.cs" />
     <Compile Include="EntityModels\Requisition.cs" />
+    <Compile Include="EntityModels\Upazila.cs" />
     <Compile Include="EntityModels\Vehicle.cs" />
     <Compile Include="EntityModels\VehicleType.cs" />
     <Compile Include="Migrations\201808011237486_InitialCreate.cs" />
@@ -118,6 +122,30 @@
     <Compile Include="Migrations\201808122011552_Assign Model Change [Driver id Delete].Designer.cs">
       <DependentUpon>201808122011552_Assign Model Change [Driver id Delete].cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808131957561_Employee_model_change.cs" />
+    <Compile Include="Migrations\201808131957561_Employee_model_change.Designer.cs">
+      <DependentUpon>201808131957561_Employee_model_change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808132017018_Division_District_Upazila_Added.cs" />
+    <Compile Include="Migrations\201808132017018_Division_District_Upazila_Added.Designer.cs">
+      <DependentUpon>201808132017018_Division_District_Upazila_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808132018155_Division_Seeds.cs" />
+    <Compile Include="Migrations\201808132018155_Division_Seeds.Designer.cs">
+      <DependentUpon>201808132018155_Division_Seeds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808132020438_District_Seeds.cs" />
+    <Compile Include="Migrations\201808132020438_District_Seeds.Designer.cs">
+      <DependentUpon>201808132020438_District_Seeds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808132023362_Upazila_Seeds.cs" />
+    <Compile Include="Migrations\201808132023362_Upazila_Seeds.Designer.cs">
+      <DependentUpon>201808132023362_Upazila_Seeds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808132058401_Address_added.cs" />
+    <Compile Include="Migrations\201808132058401_Address_added.Designer.cs">
+      <DependentUpon>201808132058401_Address_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,6 +194,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808122011552_Assign Model Change [Driver id Delete].resx">
       <DependentUpon>201808122011552_Assign Model Change [Driver id Delete].cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808131957561_Employee_model_change.resx">
+      <DependentUpon>201808131957561_Employee_model_change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808132017018_Division_District_Upazila_Added.resx">
+      <DependentUpon>201808132017018_Division_District_Upazila_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808132018155_Division_Seeds.resx">
+      <DependentUpon>201808132018155_Division_Seeds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808132020438_District_Seeds.resx">
+      <DependentUpon>201808132020438_District_Seeds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808132023362_Upazila_Seeds.resx">
+      <DependentUpon>201808132023362_Upazila_Seeds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808132058401_Address_added.resx">
+      <DependentUpon>201808132058401_Address_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

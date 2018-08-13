@@ -45,13 +45,8 @@ namespace RMS.App.ViewModels
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
 
-        [Required(ErrorMessage = "Please provide permanent address!")]
-        [Display(Name = "Permanent Address")]
-        public string PermanentAddress { get; set; }
-
-        [Required(ErrorMessage = "Please provide present address!")]
-        [Display(Name = "Permanent Address")]
-        public string PresentAddress { get; set; }
+        [Display(Name = "Driving Licence")]
+        public string DrivingLicence { get; set; }
 
         [Required(ErrorMessage = "Please provide employee type!")]
         [Display(Name = "Employee Type")]
