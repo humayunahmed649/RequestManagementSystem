@@ -101,7 +101,7 @@ namespace RMS.App.Controllers
             {
                 Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
                 _requisitionManager.Add(requisition);
-                TempData["msg"] = "Information has been saved successfully";
+                TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
                 return RedirectToAction("Index");
             }
 

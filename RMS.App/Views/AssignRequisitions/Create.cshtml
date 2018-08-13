@@ -19,8 +19,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RequisitionId, "RequisitionId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("RequisitionId",null, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RequisitionId, "", new { @class = "text-danger" })
+                @Html.TextBox("RequisitionId",null, new { htmlAttributes = new { @class = "text-box single-line readonly" } })
+                @Html.ValidationMessageFor(model => model.RequisitionId, "Requisition Id Not Changed", new { @class = "text-danger" })
             </div>
         </div>
 
