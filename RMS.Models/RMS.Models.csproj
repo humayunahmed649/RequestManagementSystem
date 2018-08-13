@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext\RmsDbContext.cs" />
+    <Compile Include="EntityModels\Address.cs" />
     <Compile Include="EntityModels\AssignRequisition.cs" />
     <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Designation.cs" />
@@ -141,6 +142,10 @@
     <Compile Include="Migrations\201808132023362_Upazila_Seeds.Designer.cs">
       <DependentUpon>201808132023362_Upazila_Seeds.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808132058401_Address_added.cs" />
+    <Compile Include="Migrations\201808132058401_Address_added.Designer.cs">
+      <DependentUpon>201808132058401_Address_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -204,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808132023362_Upazila_Seeds.resx">
       <DependentUpon>201808132023362_Upazila_Seeds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808132058401_Address_added.resx">
+      <DependentUpon>201808132058401_Address_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

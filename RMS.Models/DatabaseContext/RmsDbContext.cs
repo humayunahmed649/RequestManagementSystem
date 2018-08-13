@@ -25,6 +25,7 @@ namespace RMS.Models.DatabaseContext
         public DbSet<Division> Divisions { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Upazila> Upazilas { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         
     }
 }
