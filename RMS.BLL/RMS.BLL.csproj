@@ -44,10 +44,13 @@
     <Compile Include="Base\Manager.cs" />
     <Compile Include="DepartmentManager.cs" />
     <Compile Include="DesignationManager.cs" />
+    <Compile Include="DistrictManager.cs" />
+    <Compile Include="DivisionManager.cs" />
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="OrganizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequisitionManager.cs" />
+    <Compile Include="UpazilaManager.cs" />
     <Compile Include="VehicleManager.cs" />
     <Compile Include="VehicleTypeManager.cs" />
   </ItemGroup>

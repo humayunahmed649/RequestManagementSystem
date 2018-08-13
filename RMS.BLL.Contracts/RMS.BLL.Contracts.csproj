@@ -43,10 +43,13 @@
     <Compile Include="IAssignRequisitionManager.cs" />
     <Compile Include="IDepartmentManager.cs" />
     <Compile Include="IDesignationManager.cs" />
+    <Compile Include="IDistrictManager.cs" />
+    <Compile Include="IDivisionManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="IManager.cs" />
     <Compile Include="IOrganizationManager.cs" />
     <Compile Include="IRequisitionManager.cs" />
+    <Compile Include="IUpazilaManager.cs" />
     <Compile Include="IVehicleManager.cs" />
     <Compile Include="IVehicleTypeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
