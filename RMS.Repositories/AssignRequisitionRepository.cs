@@ -21,6 +21,16 @@ namespace RMS.Repositories
             return
                 db.Set<AssignRequisition>().Include(c => c.Employee).Include(c => c.Requisition).Include(c => c.Vehicle).ToList();
         }
+
+        public ICollection<AssignRequisition> GetAllWithInformation()
+        {
+            return db.Set<AssignRequisition>()
+                .Include(c => c.Employee).Include(c=>c.Employee.Designation)
+                .Include(c => c.Vehicle)
+                .Include(c => c.Vehicle.VehicleType)
+                .Include(c => c.Requisition).Include(c=>c.Requisition.Employee).Include(c=>c.Requisition.Employee.Designation)
+                .ToList();
+        }
     }
     
 }

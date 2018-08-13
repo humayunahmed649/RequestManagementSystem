@@ -17,5 +17,10 @@ namespace RMS.BLL
         {
             this._requisitionRepository = repository;
         }
+
+        public ICollection<Requisition> GetAllWithEmployee()
+        {
+            return _requisitionRepository.GetAllWithEmployee();
+        }
     }
 }

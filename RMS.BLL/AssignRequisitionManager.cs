@@ -17,5 +17,10 @@ namespace RMS.BLL
         {
             this._assignRequisitionRepository = repository;
         }
+
+        public ICollection<AssignRequisition> GetAllWithInformation()
+        {
+            return _assignRequisitionRepository.GetAllWithInformation();
+        }
     }
 }

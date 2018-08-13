@@ -9,5 +9,6 @@ namespace RMS.BLL.Contracts
 {
     public interface IRequisitionManager:IManager<Requisition>
     {
+        ICollection<Requisition> GetAllWithEmployee();
     }
 }

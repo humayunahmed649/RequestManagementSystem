@@ -16,6 +16,14 @@ namespace RMS.Repositories
         {
         }
 
-        
+        public override ICollection<Requisition> GetAll()
+        {
+            return db.Set<Requisition>().Include(c => c.Employee).ToList();
+        }
+
+        public ICollection<Requisition> GetAllWithEmployee()
+        {
+            return db.Set<Requisition>().Include(c => c.Employee).Include(c=>c.Employee.Designation).ToList();
+        }
     }
 }

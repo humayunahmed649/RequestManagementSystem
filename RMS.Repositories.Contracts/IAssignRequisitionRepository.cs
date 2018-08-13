@@ -9,5 +9,6 @@ namespace RMS.Repositories.Contracts
 {
     public interface IAssignRequisitionRepository:IRepository<AssignRequisition>
     {
+        ICollection<AssignRequisition> GetAllWithInformation();
     }
 }

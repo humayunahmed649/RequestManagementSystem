@@ -1,0 +1,58 @@
+﻿@model RMS.App.ViewModels.RequisitionViewModel
+
+@{
+    ViewBag.Title = "ViewDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Requisition Details</h2>
+<div>
+    <hr/>
+    <table class="table table-light table-active table-primary table-hover">
+        
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.FromPlace)</td>
+            <td>@Html.DisplayFor(model => model.FromPlace)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.DestinationPlace)</td>
+            <td>@Html.DisplayFor(model => model.DestinationPlace)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.StartDateTime)</td>
+            <td>@Html.DisplayFor(model => model.StartDateTime)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.EndDateTime)</td>
+            <td>@Html.DisplayFor(model => model.EndDateTime)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Description)</td>
+            <td>@Html.DisplayFor(model => model.Description)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.RequestFor)</td>
+            <td>@Html.DisplayFor(model => model.RequestFor)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Employee.FullName)</td>
+            <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Employee.Designation.Title)</td>
+            <td>@Html.DisplayFor(model => model.Employee.Designation.Title)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Employee.Email)</td>
+            <td>@Html.DisplayFor(model => model.Employee.Email)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
+            <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
+        </tr>
+    </table>
+    
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditRequisition", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Requests")
+</p>

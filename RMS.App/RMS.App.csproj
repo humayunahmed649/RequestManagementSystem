@@ -202,7 +202,6 @@
     <Compile Include="ViewModels\EmployeeTypes.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
-    <Compile Include="ViewModels\RequisitionAndAssignRequisition.cs" />
     <Compile Include="ViewModels\RequisitionViewModel.cs" />
     <Compile Include="ViewModels\RequisitonForAnotherViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
@@ -598,7 +597,6 @@
     <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
     <Content Include="Views\Requisitions\CreateRequestForOther.cshtml" />
-    <Content Include="Views\Requisitions\Requests.cshtml" />
     <Content Include="Views\Requisitions\Assign.cshtml" />
     <Content Include="Views\AssignRequisitions\Delete.cshtml" />
     <Content Include="Views\AssignRequisitions\RequisitionDetails.cshtml" />
@@ -607,7 +605,9 @@
     <Content Include="Views\AssignRequisitions\Requests.cshtml" />
     <Content Include="Views\AssignRequisitions\Details.cshtml" />
     <Content Include="Views\AssignRequisitions\Create.cshtml" />
-    <Content Include="Views\neksd\create.cshtml" />
+    <Content Include="Views\AssignRequisitions\ViewDetails.cshtml" />
+    <Content Include="Views\AssignRequisitions\Error.cshtml" />
+    <Content Include="Views\AssignRequisitions\EditRequisition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
