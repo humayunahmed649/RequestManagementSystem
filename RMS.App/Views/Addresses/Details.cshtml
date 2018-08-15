@@ -1,0 +1,91 @@
+﻿@model RMS.Models.EntityModels.Address
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Address</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.District.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Division.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Division.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Upazila.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Upazila.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressLine1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressLine2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostOffice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostOffice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostCode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
