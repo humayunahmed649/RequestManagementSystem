@@ -50,6 +50,7 @@
     <Compile Include="OrganizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequisitionManager.cs" />
+    <Compile Include="RequisitionStatusManager.cs" />
     <Compile Include="UpazilaManager.cs" />
     <Compile Include="VehicleManager.cs" />
     <Compile Include="VehicleTypeManager.cs" />

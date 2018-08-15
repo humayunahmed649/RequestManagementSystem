@@ -21,13 +21,15 @@ namespace RMS.App.Controllers
         private IVehicleManager _vehicleManager;
         private IEmployeeManager _employeeManager;
         private IAssignRequisitionManager _assignRequisitionManager;
+        private IRequisitionStatusManager _requisitionStatusManager;
 
-        public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager)
+        public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
             this._vehicleManager = vehicleManager;
             this._assignRequisitionManager = assignRequisitionManager;
+            this._requisitionStatusManager = requisitionStatusManager;
         }
 
         // GET: AssignRequisitions
@@ -70,6 +72,7 @@ namespace RMS.App.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Requisition requisition = _requisitionManager.FindById((int)id);
+            
             if (requisition == null)
             {
                 return HttpNotFound();
@@ -92,6 +95,10 @@ namespace RMS.App.Controllers
             {
                 AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
                 _assignRequisitionManager.Add(assignRequisition);
+                RequisitionStatus status = new RequisitionStatus();
+                status.RequisitionId = assignRequisition.RequisitionId;
+                status.StatusType = "Assigned";
+                _requisitionStatusManager.Add(status);
                 return RedirectToAction("Index");
             }
 

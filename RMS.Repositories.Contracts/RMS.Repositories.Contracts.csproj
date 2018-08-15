@@ -49,6 +49,7 @@
     <Compile Include="IOrganizationRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRequisitionRepository.cs" />
+    <Compile Include="IRequisitionStatusRepository.cs" />
     <Compile Include="IUpazilaRepository.cs" />
     <Compile Include="IVehicleRepository.cs" />
     <Compile Include="IVehicleTypeRepository.cs" />

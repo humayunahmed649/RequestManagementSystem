@@ -59,6 +59,7 @@
     <Compile Include="EntityModels\Employee.cs" />
     <Compile Include="EntityModels\Organization.cs" />
     <Compile Include="EntityModels\Requisition.cs" />
+    <Compile Include="EntityModels\RequisitionStatus.cs" />
     <Compile Include="EntityModels\Upazila.cs" />
     <Compile Include="EntityModels\Vehicle.cs" />
     <Compile Include="EntityModels\VehicleType.cs" />
@@ -150,6 +151,10 @@
     <Compile Include="Migrations\201808152225233_Requisition Number added in requisition model.Designer.cs">
       <DependentUpon>201808152225233_Requisition Number added in requisition model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808152254061_Requisition Status Model Added.cs" />
+    <Compile Include="Migrations\201808152254061_Requisition Status Model Added.Designer.cs">
+      <DependentUpon>201808152254061_Requisition Status Model Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808152225233_Requisition Number added in requisition model.resx">
       <DependentUpon>201808152225233_Requisition Number added in requisition model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808152254061_Requisition Status Model Added.resx">
+      <DependentUpon>201808152254061_Requisition Status Model Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

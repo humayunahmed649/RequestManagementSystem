@@ -190,6 +190,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\RequisitionsController.cs" />
+    <Compile Include="Controllers\RequisitionStatusController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -585,6 +586,11 @@
     <Content Include="Views\AssignRequisitions\ViewDetails.cshtml" />
     <Content Include="Views\AssignRequisitions\Error.cshtml" />
     <Content Include="Views\AssignRequisitions\EditRequisition.cshtml" />
+    <Content Include="Views\RequisitionStatus\Create.cshtml" />
+    <Content Include="Views\RequisitionStatus\Delete.cshtml" />
+    <Content Include="Views\RequisitionStatus\Details.cshtml" />
+    <Content Include="Views\RequisitionStatus\Edit.cshtml" />
+    <Content Include="Views\RequisitionStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

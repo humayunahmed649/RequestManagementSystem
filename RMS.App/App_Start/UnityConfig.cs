@@ -81,6 +81,8 @@ namespace RMS.App
 
             container.RegisterType<IUpazilaRepository, UpazilaRepository>();
             container.RegisterType<IUpazilaManager, UpazilaManager>();
+            container.RegisterType<IRequisitionStatusManager, RequisitionStatusManager>();
+            container.RegisterType<IRequisitionStatusRepository, RequisitionStatusRepository>();
 
         }
     }
