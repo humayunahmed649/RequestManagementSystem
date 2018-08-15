@@ -18,6 +18,7 @@ namespace RMS.App.ViewModels
         public string Code { get; set; }
 
         [Required(ErrorMessage = "Please provide a registration no!")]
+        [Display(Name = "Registration No")]
         public string RegNo { get; set; }
 
     }

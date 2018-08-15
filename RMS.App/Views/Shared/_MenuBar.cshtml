@@ -32,10 +32,16 @@
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li class="menu-has-children">
-                            <a href="#">Organization</a>
+                            <a href="#">Organization SetUp</a>
                             <ul>
-                                <li>@Html.ActionLink("Create New", "Create", "Organizations")</li>
-                                <li>@Html.ActionLink("Organization List", "Index", "Organizations")</li>
+                                <li class="menu-has-children">
+                                    <a href="#">Organization</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "Organizations")</li>
+                                        <li>@Html.ActionLink("Organization List", "Index", "Organizations")</li>
+                                    </ul>
+                                </li>
+                                
                                 <li class="menu-has-children">
                                     <a href="#">Department</a>
                                     <ul>
@@ -103,10 +109,7 @@
                                     <li>@Html.ActionLink("Create New", "Create", "VehicleTypes")</li>
                                     <li>@Html.ActionLink("List Of Vehile Type", "Index", "VehicleTypes")</li>
                                 </ul>
-
                             </li>
-                        
-
                     </ul>        
                     
                 </nav><!-- #nav-menu-container -->

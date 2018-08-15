@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using RMS.Models.EntityModels;
@@ -44,6 +45,11 @@ namespace RMS.Repositories.Base
         {
             return db.Set<T>().ToList();
         }
+
+        //public ICollection<T> Get(Expression<Func<T, bool>> query)
+        //{
+        //    return db.Set<T>().Where(c=>c.Equals(query)).ToList();
+        //}
 
         public virtual T FindById(int id)
         {
