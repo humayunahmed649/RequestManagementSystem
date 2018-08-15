@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using RMS.BLL.Base;
@@ -18,9 +19,11 @@ namespace RMS.BLL
             this._organizationRepository = repository;
         }
 
-        public ICollection<Organization> SearchByName(string searchTextOrgName)
+        public ICollection<Organization> SearchByName(string searchByText)
         {
-            return _organizationRepository.SearchByName(searchTextOrgName);
+            return _organizationRepository.SearchByName(searchByText);
         }
+
+
     }
 }

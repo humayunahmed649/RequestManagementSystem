@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using RMS.Models.DatabaseContext;
@@ -18,9 +19,11 @@ namespace RMS.Repositories
         {
         }
 
-        public ICollection<Organization> SearchByName(string searchTextOrgName)
+        public ICollection<Organization> SearchByName(string searchByText)
         {
-            return db.Set<Organization>().Where(c => c.Name.StartsWith(searchTextOrgName)).ToList();
+            return db.Set<Organization>().Where(c =>c.Name.StartsWith(searchByText)||c.Code.StartsWith(searchByText)||c.RegNo.StartsWith(searchByText)).ToList();
         }
+
+
     }
 }
