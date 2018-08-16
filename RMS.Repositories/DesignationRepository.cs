@@ -18,9 +18,9 @@ namespace RMS.Repositories
         {
         }
 
-        public ICollection<Designation> SearchByTitle(string searchDesignationTitle)
+        public ICollection<Designation> SearchByText(string searchText)
         {
-            return db.Set<Designation>().Where(c => c.Title.StartsWith(searchDesignationTitle)).ToList();
+            return db.Set<Designation>().Where(c => c.Title.StartsWith(searchText)).ToList();
         }
     }
 }

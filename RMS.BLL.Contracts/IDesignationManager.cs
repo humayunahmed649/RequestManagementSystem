@@ -9,6 +9,6 @@ namespace RMS.BLL.Contracts
 {
     public interface IDesignationManager:IManager<Designation>
     {
-        ICollection<Designation> SearchByTitle(string searchDesignationTitle);
+        ICollection<Designation> SearchByText(string searchText);
     }
 }

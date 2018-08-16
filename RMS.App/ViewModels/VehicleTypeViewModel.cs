@@ -12,6 +12,7 @@ namespace RMS.App.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please provide a type name!")]
+        [Display(Name = "Vehicle Type")]
         public string Name { get; set; }
 
     }

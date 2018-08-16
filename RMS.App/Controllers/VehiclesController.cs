@@ -27,12 +27,12 @@ namespace RMS.App.Controllers
 
 
         // GET: Vehicles
-        public ActionResult Index(string searchTextVehicleBrand)
+        public ActionResult Index(string searchText)
         {
 
-            if (searchTextVehicleBrand != null)
+            if (searchText != null)
             {
-                ICollection<Vehicle> vehicles = _vehicleManager.SearchByVehicleBrand(searchTextVehicleBrand);
+                ICollection<Vehicle> vehicles = _vehicleManager.SearchByText(searchText);
                 IEnumerable<VehicleViewModel> vehicleViewModels = Mapper.Map<IEnumerable<VehicleViewModel>>(vehicles);
                 return View(vehicleViewModels);
             }

@@ -20,9 +20,9 @@ namespace RMS.BLL
 
         
 
-        public ICollection<Department> SearchByName(string searchText)
+        public ICollection<Department> SearchByText(string searchText)
         {
-            return _departmentRepository.SearchByName(searchText);
+            return _departmentRepository.SearchByText(searchText);
         }
     }
 }

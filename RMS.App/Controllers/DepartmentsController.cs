@@ -31,7 +31,7 @@ namespace RMS.App.Controllers
         {
             if (searchText != null)
             {
-                ICollection<Department> departments = _departmentManager.SearchByName(searchText);
+                ICollection<Department> departments = _departmentManager.SearchByText(searchText);
                 IEnumerable<DepartmentViewModel> departmentViewModels= Mapper.Map<IEnumerable<DepartmentViewModel>>(departments);
                 return View(departmentViewModels);
             }

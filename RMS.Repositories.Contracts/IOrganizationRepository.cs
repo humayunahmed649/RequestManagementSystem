@@ -10,6 +10,6 @@ namespace RMS.Repositories.Contracts
 {
     public interface IOrganizationRepository:IRepository<Organization>
     {
-        ICollection<Organization> SearchByName(string searchByText);
+        ICollection<Organization> SearchByText(string searchText);
     }
 }
