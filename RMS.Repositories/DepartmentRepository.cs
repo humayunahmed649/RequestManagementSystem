@@ -36,7 +36,7 @@ namespace RMS.Repositories
         }
         public override Department FindById(int id)
         {
-            return db.Set<Department>().Find(id);
+            return db.Set<Department>().Where(c=>c.Id==id).Include(c=>c.Organization).SingleOrDefault();
         }
 
     }

@@ -18,9 +18,9 @@ namespace RMS.BLL
             this._employeeRepository = repository;
         }
 
-        public ICollection<Employee> SearchByName(string searchTextEmpName)
+        public ICollection<Employee> SearchByText(string searchText)
         {
-            return _employeeRepository.SearchByName(searchTextEmpName);
+            return _employeeRepository.SearchByText(searchText);
         }
 
         public ICollection<Employee> GetAllDriver()

@@ -9,7 +9,7 @@ namespace RMS.BLL.Contracts
 {
     public interface IEmployeeManager:IManager<Employee>
     {
-        ICollection<Employee> SearchByName(string searchTextEmpName);
+        ICollection<Employee> SearchByText(string searchText);
         ICollection<Employee> GetAllDriver();
     }
 }

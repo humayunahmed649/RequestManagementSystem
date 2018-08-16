@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressManager.cs" />
     <Compile Include="AssignRequisitionManager.cs" />
     <Compile Include="Base\Manager.cs" />
     <Compile Include="DepartmentManager.cs" />
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\RMS.BLL.Contracts\RMS.BLL.Contracts.csproj">
       <Project>{5eda7932-c1ff-49ee-82dc-093f4e787c30}</Project>
       <Name>RMS.BLL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RMS.Models.Contracts\RMS.Models.Contracts.csproj">
+      <Project>{F44B1413-1E46-410B-A35B-A440AE52FBC5}</Project>
+      <Name>RMS.Models.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\RMS.Models\RMS.Models.csproj">
       <Project>{ec92faca-b541-4cbe-8546-767d78b56d5b}</Project>
