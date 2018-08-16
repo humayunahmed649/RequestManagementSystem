@@ -13,18 +13,18 @@
 }
 <div class="container">
     <div class="row align-items-center">
-        <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
+        <div class="col-lg-4 col-sm-4 col-4 header-top-left no-padding">
             <p>
                 @Html.ActionLink("Create New", "Create",null,new {@class="btn btn-default"})
             </p>
         </div>
 
-        <div class="col-lg-6 col-sm-6 col-8 text-right no-padding">
+        <div class="col-lg-8 col-sm-8 col-8 text-right no-padding">
             <p>
                 @using (Html.BeginForm("Index", "Vehicles", FormMethod.Get))
                 {
-                    <b>Search</b>
-                    @Html.TextBox("searchTextVehicleBrand")
+                    <b>Search by (Type/Brand/Model/Reg No/Chassis/Seat Capacity ) </b>
+                    @Html.TextBox("searchText")
                     <input type="submit" value="Search" />
                 }
             </p>

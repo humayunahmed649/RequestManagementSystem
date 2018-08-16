@@ -9,6 +9,6 @@ namespace RMS.Repositories.Contracts
 {
     public interface IVehicleRepository:IRepository<Vehicle>
     {
-        ICollection<Vehicle> SearchByVehicleBrand(string searchTextVehicleBrand);
+        ICollection<Vehicle> SearchByText(string searchText);
     }
 }

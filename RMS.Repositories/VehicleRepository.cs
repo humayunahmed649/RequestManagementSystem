@@ -23,12 +23,13 @@ namespace RMS.Repositories
             return db.Set<Vehicle>().Include(c => c.VehicleType).ToList();
         }
 
-        public ICollection<Vehicle> SearchByVehicleBrand(string searchTextVehicleBrand)
+        public ICollection<Vehicle> SearchByText(string searchText)
         {
             return
                 db.Set<Vehicle>()
                     .Include(c => c.VehicleType)
-                    .Where(c => c.BrandName.StartsWith(searchTextVehicleBrand))
+                    .Where(c => c.BrandName.StartsWith(searchText)||c.ModelName.StartsWith(searchText)||c.RegNo.StartsWith(searchText)
+                    ||c.ChassisNo.StartsWith(searchText)||c.VehicleType.Name.StartsWith(searchText)||c.SeatCapacity.ToString().StartsWith(searchText))
                     .ToList();
         }
     }
