@@ -19,9 +19,9 @@ namespace RMS.BLL
             this._organizationRepository = repository;
         }
 
-        public ICollection<Organization> SearchByName(string searchByText)
+        public ICollection<Organization> SearchByText(string searchText)
         {
-            return _organizationRepository.SearchByName(searchByText);
+            return _organizationRepository.SearchByText(searchText);
         }
 
 

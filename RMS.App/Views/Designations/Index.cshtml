@@ -23,8 +23,8 @@
             <p>
                 @using (Html.BeginForm("Index", "Designations", FormMethod.Get))
                 {
-                    <b>Search</b>
-                    @Html.TextBox("searchDesignationTitle")
+                    <b>Search by (Title)</b>
+                    @Html.TextBox("searchText")
                     <input type="submit" value="Search" />
                 }
             </p>

@@ -24,11 +24,11 @@ namespace RMS.App.Controllers
         }
 
         // GET: Organizations
-        public ActionResult Index(string searchByText)
+        public ActionResult Index(string searchText)
         {
-            if (searchByText != null)
+            if (searchText != null)
             {
-                ICollection<Organization> organization = _organizationManager.SearchByName(searchByText);
+                ICollection<Organization> organization = _organizationManager.SearchByText(searchText);
                 IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
                 return View(organizationViewModels);
             }

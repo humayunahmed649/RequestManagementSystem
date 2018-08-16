@@ -9,6 +9,6 @@ namespace RMS.BLL.Contracts
 {
     public interface IDepartmentManager:IManager<Department>
     {
-        ICollection<Department> SearchByName(string searchText);
+        ICollection<Department> SearchByText(string searchText);
     }
 }

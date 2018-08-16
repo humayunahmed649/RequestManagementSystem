@@ -19,9 +19,9 @@ namespace RMS.Repositories
         {
         }
 
-        public ICollection<Organization> SearchByName(string searchByText)
+        public ICollection<Organization> SearchByText(string searchText)
         {
-            return db.Set<Organization>().Where(c =>c.Name.StartsWith(searchByText)||c.Code.StartsWith(searchByText)||c.RegNo.StartsWith(searchByText)).ToList();
+            return db.Set<Organization>().Where(c =>c.Name.StartsWith(searchText)||c.Code.StartsWith(searchText)||c.RegNo.StartsWith(searchText)).ToList();
         }
 
 
