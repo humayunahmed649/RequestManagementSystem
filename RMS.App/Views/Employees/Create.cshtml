@@ -1,4 +1,5 @@
-﻿@model RMS.App.ViewModels.EmployeeViewModel
+﻿@using RMS.App.ViewModels
+@model RMS.App.ViewModels.EmployeeViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -12,6 +13,7 @@
             {
     @Html.AntiForgeryToken()
 
+    
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">&nbsp; <strong>Read this Carefully</strong> &nbsp;&nbsp;</a></li>
@@ -19,6 +21,13 @@
             <li class=""><a data-toggle="tab" href="#menu2">&nbsp;&nbsp; <strong>Address</strong> &nbsp;&nbsp; </a></li>
             <li class=""><a data-toggle="tab" href="#menu3">&nbsp;&nbsp; <strong>Office Information</strong> &nbsp;&nbsp;</a></li>
         </ul>
+        @if (TempData["msg"] != null)
+        {
+            <div class="alert alert-success text-danger">
+                @Html.Raw(TempData["msg"])
+            </div>
+        }
+ 
 
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">

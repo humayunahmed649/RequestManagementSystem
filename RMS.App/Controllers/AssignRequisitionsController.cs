@@ -33,8 +33,15 @@ namespace RMS.App.Controllers
         }
 
         // GET: AssignRequisitions
-        public ActionResult Index()
+        public ActionResult Index(string searchByText)
         {
+            if (searchByText != null)
+            {
+                ////IEnumerable<AssignRequisition> requisition = _assignRequisitionManager.SearchByName(searchByText);
+                //IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModel =
+                //Mapper.Map<IEnumerable<AssignRequisitionViewModel>>(requisition);
+                //return View(assignRequisitionViewModel);
+            }
 
             ICollection<AssignRequisition> requisitions = _assignRequisitionManager.GetAll();
             IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModels =
@@ -94,6 +101,7 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
+                assignRequisition.RequisitionNumber = assignRequisitionViewModel.RequisitionNumber;
                 _assignRequisitionManager.Add(assignRequisition);
                 RequisitionStatus status = new RequisitionStatus();
                 status.RequisitionId = assignRequisition.RequisitionId;

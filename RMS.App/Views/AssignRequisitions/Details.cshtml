@@ -19,6 +19,10 @@
                 <td>@Html.DisplayFor(model => model.RequisitionId)</td>
             </tr>
             <tr>
+                <td>@Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)</td>
+                <td>@Html.DisplayFor(model => model.Requisition.RequisitionNumber)</td>
+            </tr>
+            <tr>
                 <td>@Html.DisplayName("Requestor Full Name")</td>
                 <td>@Html.DisplayFor(model => model.Requisition.Employee.FullName)</td>
             </tr>

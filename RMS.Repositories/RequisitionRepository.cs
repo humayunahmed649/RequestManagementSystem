@@ -25,5 +25,7 @@ namespace RMS.Repositories
         {
             return db.Set<Requisition>().Include(c => c.Employee).Include(c=>c.Employee.Designation).ToList();
         }
+
+       
     }
 }

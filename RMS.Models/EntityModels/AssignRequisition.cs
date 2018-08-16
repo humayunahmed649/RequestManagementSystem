@@ -9,6 +9,7 @@ namespace RMS.Models.EntityModels
     public class AssignRequisition
     {
         public int Id { get; set; }
+        public string RequisitionNumber { get; set; }
         public int RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
         public int VehicleId { get; set; }

@@ -31,6 +31,11 @@ namespace RMS.Repositories
                 .Include(c => c.Requisition).Include(c=>c.Requisition.Employee).Include(c=>c.Requisition.Employee.Designation)
                 .ToList();
         }
+
+        public AssignRequisition SearchByName(string searchByText)
+        {
+            return db.Set<AssignRequisition>().Include(c => c.Requisition).FirstOrDefault();
+        }
     }
     
 }

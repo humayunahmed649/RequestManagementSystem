@@ -19,12 +19,14 @@ namespace RMS.App.Controllers
         private IRequisitionManager _requisitionManager;
         private IEmployeeManager _employeeManager;
         private IVehicleManager _vehicleManager;
+        private IRequisitionStatusManager _requisitionStatusManager;
 
-        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager)
+        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
             this._vehicleManager = vehicleManager;
+            this._requisitionStatusManager = requisitionStatusManager;
         }
 
         // GET: Requisitions
@@ -82,13 +84,16 @@ namespace RMS.App.Controllers
                 requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
                 Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
                 _requisitionManager.Add(requisition);
-                TempData["msg"] = "Information has been saved successfully";
+                TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
                 return RedirectToAction("Index");
             }
 
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
             return View(requisitionViewModel);
         }
+
+      
+
         [HttpGet]
         public ActionResult CreateRequestForOther()
         {

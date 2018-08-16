@@ -187,6 +187,7 @@
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DesignationsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\GatePassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\RequisitionsController.cs" />
@@ -591,6 +592,7 @@
     <Content Include="Views\RequisitionStatus\Details.cshtml" />
     <Content Include="Views\RequisitionStatus\Edit.cshtml" />
     <Content Include="Views\RequisitionStatus\Index.cshtml" />
+    <Content Include="Views\GatePass\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

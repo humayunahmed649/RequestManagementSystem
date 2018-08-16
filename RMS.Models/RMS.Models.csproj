@@ -155,6 +155,10 @@
     <Compile Include="Migrations\201808152254061_Requisition Status Model Added.Designer.cs">
       <DependentUpon>201808152254061_Requisition Status Model Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.cs" />
+    <Compile Include="Migrations\201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.Designer.cs">
+      <DependentUpon>201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -227,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808152254061_Requisition Status Model Added.resx">
       <DependentUpon>201808152254061_Requisition Status Model Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.resx">
+      <DependentUpon>201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@ namespace RMS.Models.EntityModels
     {
         public int Id { get; set; }
         public string StatusType { get; set; }
+        public string RequisitionNumber { get; set; }
         public int RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
 

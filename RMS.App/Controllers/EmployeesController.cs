@@ -91,6 +91,7 @@ namespace RMS.App.Controllers
                 return RedirectToAction("Index");
             }
 
+            TempData["msg"] = "Please Check Your Information. Got some error";
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);

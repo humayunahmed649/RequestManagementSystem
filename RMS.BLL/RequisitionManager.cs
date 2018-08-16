@@ -22,5 +22,7 @@ namespace RMS.BLL
         {
             return _requisitionRepository.GetAllWithEmployee();
         }
+
+        
     }
 }
