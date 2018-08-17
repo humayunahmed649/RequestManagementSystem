@@ -17,10 +17,17 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.RequisitionId, "RequisitionId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RequisitionId, "RequisitionId", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.TextBox("RequisitionId",null, new { htmlAttributes = new { @class = "text-box single-line readonly" } })
-                @Html.ValidationMessageFor(model => model.RequisitionId, "Requisition Id Not Changed", new { @class = "text-danger" })
+                @Html.TextBox("RequisitionId", null, new {htmlAttributes = new {@class = "text-box single-line readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionId, "Requisition Id Not Changed", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RequisitionNumber, "RequisitionNumber", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("RequisitionNumber",null, new { htmlAttributes = new {@readonly=true}} )
+                @Html.ValidationMessageFor(model => model.RequisitionNumber, "Requisition Number Not Changed", new { @class = "text-danger" })
             </div>
         </div>
 

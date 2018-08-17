@@ -23,5 +23,6 @@ namespace RMS.BLL
         {
             return _requisitionStatusRepository.GetAllWithRequisitionDetails();
         }
+        
     }
 }

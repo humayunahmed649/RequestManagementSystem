@@ -11,6 +11,5 @@ namespace RMS.BLL.Contracts
     {
         ICollection<AssignRequisition> GetAllWithInformation();
         AssignRequisition SearchByName(string searchByText);
-
     }
 }

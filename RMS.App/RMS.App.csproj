@@ -204,6 +204,7 @@
     <Compile Include="ViewModels\EmployeeTypes.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
+    <Compile Include="ViewModels\RequisitionStatusViewModel.cs" />
     <Compile Include="ViewModels\RequisitionViewModel.cs" />
     <Compile Include="ViewModels\RequisitonForAnotherViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
@@ -593,6 +594,7 @@
     <Content Include="Views\RequisitionStatus\Edit.cshtml" />
     <Content Include="Views\RequisitionStatus\Index.cshtml" />
     <Content Include="Views\GatePass\Index.cshtml" />
+    <Content Include="Views\GatePass\CheckOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

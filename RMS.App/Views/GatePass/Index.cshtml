@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-12">
             <p>
-                @using (Html.BeginForm("Index", "AssignRequisitions", FormMethod.Get))
+                @using (Html.BeginForm("Index", "GatePass", FormMethod.Get))
                 {
                     <b>Search by (Requisition Number)</b>
                     @Html.TextBox("searchByText")
@@ -62,8 +62,8 @@
             @Html.DisplayFor(modelItem => item.Employee.FullName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Check-Out", "CheckOut", new { id=item.Id }) |
+            @Html.ActionLink("Check-In", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

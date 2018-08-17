@@ -36,6 +36,8 @@ namespace RMS.Repositories
         {
             return db.Set<AssignRequisition>().Include(c => c.Requisition).FirstOrDefault();
         }
+
+        
     }
     
 }

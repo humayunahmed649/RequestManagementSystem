@@ -20,5 +20,7 @@ namespace RMS.Repositories
         {
             return db.Set<RequisitionStatus>().Include(c => c.Requisition).ToList();
         }
+        
+
     }
 }

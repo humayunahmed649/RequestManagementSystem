@@ -46,10 +46,7 @@ namespace RMS.Repositories.Base
             return db.Set<T>().ToList();
         }
 
-        //public ICollection<T> Get(Expression<Func<T, bool>> query)
-        //{
-        //    return db.Set<T>().Where(c=>c.Equals(query)).ToList();
-        //}
+        
 
         public virtual T FindById(int id)
         {

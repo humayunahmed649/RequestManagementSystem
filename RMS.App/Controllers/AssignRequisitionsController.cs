@@ -86,6 +86,7 @@ namespace RMS.App.Controllers
             }
             RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
             ViewBag.RequisitionId = requisition.Id;
+            ViewBag.RequisitionNumber = requisition.RequisitionNumber;
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
             ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
             return View();
@@ -96,12 +97,11 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RequisitionId,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,RequisitionId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
         {
             if (ModelState.IsValid)
             {
                 AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
-                assignRequisition.RequisitionNumber = assignRequisitionViewModel.RequisitionNumber;
                 _assignRequisitionManager.Add(assignRequisition);
                 RequisitionStatus status = new RequisitionStatus();
                 status.RequisitionId = assignRequisition.RequisitionId;
@@ -115,6 +115,8 @@ namespace RMS.App.Controllers
             ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
             return View(assignRequisitionViewModel);
         }
+
+      
 
         // GET: AssignRequisitions/Edit/5
         public ActionResult Edit(int? id)
