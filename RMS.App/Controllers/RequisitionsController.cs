@@ -83,9 +83,19 @@ namespace RMS.App.Controllers
                 requisitionViewModel.RequestFor = "Own";
                 requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
                 Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
-                _requisitionManager.Add(requisition);
-                TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
-                return RedirectToAction("Index");
+                bool IsSaved = _requisitionManager.Add(requisition);
+                //Requisition Status Save
+                if (IsSaved == true)
+                {
+                    RequisitionStatus status = new RequisitionStatus();
+                    status.RequisitionNumber = requisition.RequisitionNumber;
+
+                    status.RequisitionId = requisition.Id;
+                    status.StatusType = "New";
+                    _requisitionStatusManager.Add(status);
+                    TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
