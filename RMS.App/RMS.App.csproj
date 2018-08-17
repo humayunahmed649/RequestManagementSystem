@@ -585,7 +585,6 @@
     <Content Include="Views\AssignRequisitions\RequisitionDetails.cshtml" />
     <Content Include="Views\AssignRequisitions\Edit.cshtml" />
     <Content Include="Views\AssignRequisitions\Index.cshtml" />
-    <Content Include="Views\AssignRequisitions\Requests.cshtml" />
     <Content Include="Views\AssignRequisitions\Details.cshtml" />
     <Content Include="Views\AssignRequisitions\Create.cshtml" />
     <Content Include="Views\AssignRequisitions\ViewDetails.cshtml" />
@@ -609,6 +608,7 @@
     <Content Include="Views\EmployeeTypes\Edit.cshtml" />
     <Content Include="Views\EmployeeTypes\Index.cshtml" />
     <Content Include="Views\GatePass\CheckOut.cshtml" />
+    <Content Include="Views\AssignRequisitions\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RMS.App.ViewModels.RequisitionViewModel>
+﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
 
 @{
     ViewBag.Title = "Requests";
@@ -13,65 +13,33 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FromPlace)
+            @Html.DisplayNameFor(model => model.StatusType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DestinationPlace)
+            @Html.DisplayNameFor(model => model.RequisitionNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RequestFor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee.Designation)
+            @Html.DisplayNameFor(model => model.RequisitionId)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromPlace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DestinationPlace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequestFor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.Designation.Title)
-            </td>
-            <td>
-                @Html.ActionLink("Assign ", "Create", new { id = item.Id }) 
-                @Html.ActionLink("View", "ViewDetails", new { id = item.Id }) 
-                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequisitionNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequisitionId)
+        </td>
+        <td>
+            @Html.ActionLink("Assign Requisition", "Create", new { id=item.RequisitionId }) |
+            @Html.ActionLink("View", "ViewDetails", new { id=item.Id }) 
+        </td>
+    </tr>
+}
 
 </table>

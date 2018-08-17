@@ -78,7 +78,7 @@ namespace RMS.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Requisition requisition = _requisitionManager.FindById((int)id);
+            Requisition requisition = _requisitionManager.FindById(id);
             
             if (requisition == null)
             {
@@ -86,6 +86,7 @@ namespace RMS.App.Controllers
             }
             RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
             ViewBag.RequisitionId = requisition.Id;
+            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAll(), "Id", "StatusType");
             ViewBag.RequisitionNumber = requisition.RequisitionNumber;
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
             ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
@@ -97,16 +98,18 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RequisitionId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,RequisitionStatusId,RequisitionId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
         {
             if (ModelState.IsValid)
             {
                 AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
                 _assignRequisitionManager.Add(assignRequisition);
                 RequisitionStatus status = new RequisitionStatus();
+                status.Id = assignRequisition.RequisitionStatusId;
                 status.RequisitionId = assignRequisition.RequisitionId;
+                status.RequisitionNumber = assignRequisition.RequisitionNumber;
                 status.StatusType = "Assigned";
-                _requisitionStatusManager.Add(status);
+                _requisitionStatusManager.Update(status);
                 return RedirectToAction("Index");
             }
 
@@ -188,9 +191,9 @@ namespace RMS.App.Controllers
 
         public ActionResult Requests()
         {
-            ICollection<Requisition> requisitions = _requisitionManager.GetAllWithEmployee();
-            IEnumerable<RequisitionViewModel> requisitionViewModels =
-                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+            ICollection<RequisitionStatus> requisitions = _requisitionStatusManager.GetAllStatusNew();
+            IEnumerable<RequisitionStatusViewModel> requisitionViewModels =
+                Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitions);
             return View(requisitionViewModels);
         }
         public ActionResult ViewDetails(int? id)

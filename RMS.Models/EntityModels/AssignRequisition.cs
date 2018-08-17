@@ -17,7 +17,7 @@ namespace RMS.Models.EntityModels
         public Vehicle Vehicle { get; set; }
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
-        [NotMapped]
+        public int RequisitionStatusId { get; set; }
         public RequisitionStatus RequisitionStatus { get; set; }
 
 

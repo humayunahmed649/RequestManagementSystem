@@ -10,5 +10,6 @@ namespace RMS.Repositories.Contracts
     public interface IRequisitionStatusRepository:IRepository<RequisitionStatus>
     {
         ICollection<RequisitionStatus> GetAllWithRequisitionDetails();
+        ICollection<RequisitionStatus> GetAllStatusNew();
     }
 }

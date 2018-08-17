@@ -59,8 +59,7 @@
       
         <td>
             @Html.ActionLink("Check-Out", "CheckOut", new { id=item.Id }) |
-            @Html.ActionLink("Check-In", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Check-In", "Details", new { id=item.RequisitionId }) 
         </td>
     </tr>
 }

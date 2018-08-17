@@ -168,6 +168,10 @@
     <Compile Include="Migrations\201808170617180_Employtype_nullable.Designer.cs">
       <DependentUpon>201808170617180_Employtype_nullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808172030352_RequisitionStatusId Added in Assign Requisition Model.cs" />
+    <Compile Include="Migrations\201808172030352_RequisitionStatusId Added in Assign Requisition Model.Designer.cs">
+      <DependentUpon>201808172030352_RequisitionStatusId Added in Assign Requisition Model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -249,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808170617180_Employtype_nullable.resx">
       <DependentUpon>201808170617180_Employtype_nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808172030352_RequisitionStatusId Added in Assign Requisition Model.resx">
+      <DependentUpon>201808172030352_RequisitionStatusId Added in Assign Requisition Model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

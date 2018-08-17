@@ -24,8 +24,11 @@ namespace RMS.App.ViewModels
         [Display(Name = "Name of Driver")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+        public int RequisitionStatusId { get; set; }
+        public RequisitionStatus RequisitionStatus { get; set; }
+
 
         //private IEnumerable<AssignRequisitionViewModel> AssignRequisitionViewModels { get; set; } 
-        
+
     }
 }

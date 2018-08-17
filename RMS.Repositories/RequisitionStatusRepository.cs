@@ -18,9 +18,14 @@ namespace RMS.Repositories
 
         public ICollection<RequisitionStatus> GetAllWithRequisitionDetails()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition).ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c=>c.StatusType=="Assigned").ToList();
         }
-        
 
+        public ICollection<RequisitionStatus> GetAllStatusNew()
+        {
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "New").ToList();
+        }
+
+        
     }
 }

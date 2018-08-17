@@ -10,5 +10,6 @@ namespace RMS.BLL.Contracts
     public interface IRequisitionStatusManager:IManager<RequisitionStatus>
     {
         ICollection<RequisitionStatus> GetAllWithRequisitionDetails();
+        ICollection<RequisitionStatus> GetAllStatusNew();
     }
 }

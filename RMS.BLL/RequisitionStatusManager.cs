@@ -23,6 +23,11 @@ namespace RMS.BLL
         {
             return _requisitionStatusRepository.GetAllWithRequisitionDetails();
         }
-        
+        public ICollection<RequisitionStatus> GetAllStatusNew()
+        {
+            return _requisitionStatusRepository.GetAllStatusNew();
+        }
+
+       
     }
 }

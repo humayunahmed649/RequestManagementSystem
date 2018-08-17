@@ -44,12 +44,9 @@ namespace RMS.App.Controllers
             }
             if (requisitionStatus != null)
             {
-                
-                RequisitionStatusViewModel assignRequisitionViewModel =
+                RequisitionStatusViewModel requisitionStatusViewModel =
                     Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
-
-                //ViewBag.StatusId = _assignRequisitionManager.FindByRequisitionId((int)id);
-                return View(assignRequisitionViewModel);
+                return View(requisitionStatusViewModel);
             }
             return View("Error");
         }
@@ -59,12 +56,8 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
-                
                 requisitionStatus.StatusType = "OnExecute";
-                
                 _requisitionStatusManager.Update(requisitionStatus);
-
-                
                 return RedirectToAction("Index");
             }
             

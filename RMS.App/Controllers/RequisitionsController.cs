@@ -32,7 +32,7 @@ namespace RMS.App.Controllers
         // GET: Requisitions
         public ActionResult Index()
         {
-            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+            ICollection<Requisition> requisitions = _requisitionManager.GetAllWithEmployee();
             IEnumerable<RequisitionViewModel> requisitionViewModels =
                 Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
             return View(requisitionViewModels);
@@ -107,9 +107,19 @@ namespace RMS.App.Controllers
             {
                 requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
                 Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
-                _requisitionManager.Add(requisition);
-                TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
-                return RedirectToAction("Index");
+                bool IsSaved=_requisitionManager.Add(requisition);
+                //Requisition Status Save
+                if (IsSaved == true)
+                {
+                    RequisitionStatus status = new RequisitionStatus();
+                    status.RequisitionNumber = requisition.RequisitionNumber;
+
+                    status.RequisitionId = requisition.Id;
+                    status.StatusType = "New";
+                    _requisitionStatusManager.Add(status);
+                    TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitonForAnother.EmployeeId);
