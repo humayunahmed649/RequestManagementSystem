@@ -26,8 +26,8 @@ namespace RMS.App.Controllers
         // GET: GatePass
         public ActionResult Index()
         {
-            ICollection<AssignRequisition> assignRequisitions = _assignRequisitionManager.GetAllWithInformation();
-            IEnumerable<AssignRequisitionViewModel> assignRequisitionView = Mapper.Map<IEnumerable<AssignRequisitionViewModel>>(assignRequisitions);
+            ICollection<RequisitionStatus> requisitionStatus = _requisitionStatusManager.GetAllWithRequisitionDetails();
+            IEnumerable<RequisitionStatusViewModel> assignRequisitionView = Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitionStatus);
             return View(assignRequisitionView);
         }
         [HttpGet]
@@ -37,16 +37,16 @@ namespace RMS.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
-            if (assignRequisition == null)
+            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+            if (requisitionStatus == null)
             {
                 return HttpNotFound();
             }
-            if (assignRequisition != null)
+            if (requisitionStatus != null)
             {
                 
-                AssignRequisitionViewModel assignRequisitionViewModel =
-                    Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+                RequisitionStatusViewModel assignRequisitionViewModel =
+                    Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
 
                 //ViewBag.StatusId = _assignRequisitionManager.FindByRequisitionId((int)id);
                 return View(assignRequisitionViewModel);
@@ -54,33 +54,22 @@ namespace RMS.App.Controllers
             return View("Error");
         }
         [HttpPost]
-        public ActionResult CheckOut([Bind(Include = "Id,RequisitionId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel model)
+        public ActionResult CheckOut([Bind(Include = "Id,StatusType,RequisitionNumber,RequisitionId")] RequisitionStatusViewModel model)
         {
             if (ModelState.IsValid)
             {
-                AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(model);
-                _assignRequisitionManager.Update(assignRequisition);
+                RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
+                
+                requisitionStatus.StatusType = "OnExecute";
+                
+                _requisitionStatusManager.Update(requisitionStatus);
 
-                //RequisitionStatus status=new RequisitionStatus();
-                ////status.Id = _assignRequisitionManager.FindByRequisitionId(model.RequisitionId);
-                //status.StatusType = "OnExecute";
-                //status.RequisitionNumber = model.RequisitionNumber;
-                //status.RequisitionId = model.RequisitionId;
-                //_requisitionStatusManager.Update(status);
-                //return RedirectToAction("Index");
+                
+                return RedirectToAction("Index");
             }
             
             return View();
         }
-        //[HttpGet]
-        //public ActionResult CheckIn()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult CheckIn()
-        //{
-        //    return View();
-        //}
+       
     }
 }

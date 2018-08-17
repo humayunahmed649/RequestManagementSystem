@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RMS.App.ViewModels.AssignRequisitionViewModel>
+﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -27,40 +27,36 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Requisition.Id)
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequisitionId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vehicle.RegNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vehicle.VehicleType.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee.FullName)
-        </th>
+       
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Requisition.Id)
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequisitionId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Requisition.RequisitionNumber)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vehicle.RegNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vehicle.VehicleType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.FullName)
-        </td>
+      
         <td>
             @Html.ActionLink("Check-Out", "CheckOut", new { id=item.Id }) |
             @Html.ActionLink("Check-In", "Details", new { id=item.Id }) |

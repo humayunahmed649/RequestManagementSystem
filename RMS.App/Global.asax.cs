@@ -45,6 +45,9 @@ namespace RMS.App
 
                 cfg.CreateMap<AssignRequisition, AssignRequisitionViewModel>();
                 cfg.CreateMap<AssignRequisitionViewModel, AssignRequisition>();
+
+                cfg.CreateMap<RequisitionStatus, RequisitionStatusViewModel>();
+                cfg.CreateMap<RequisitionStatusViewModel, RequisitionStatus>();
             });
             
         }
