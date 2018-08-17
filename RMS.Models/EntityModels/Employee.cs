@@ -47,6 +47,8 @@ namespace RMS.Models.EntityModels
         [Required,StringLength(50)]
         public string EmployeeTypes { get; set; }
 
+        public List<Address> Addresses { get; set; }
+
         public bool IsDelete()
         {
             return false;

@@ -23,14 +23,14 @@ namespace RMS.Repositories
             return db.Set<Employee>().Include(c => c.Department).Include(c=>c.Organization).Include(c=>c.Designation).ToList();
         }
 
-        public ICollection<Employee> SearchByName(string searchTextEmpName)
+        public ICollection<Employee> SearchByText(string searchText)
         {
             return
                 db.Set<Employee>()
-                    .Include(c => c.Organization)
-                    .Include(c => c.Department)
-                    .Include(c => c.Designation)
-                    .Where(c => c.FullName.StartsWith(searchTextEmpName))
+                    .Include(c => c.Organization).Include(c => c.Department).Include(c => c.Designation)
+                    .Where(c => c.FullName.StartsWith(searchText)||c.ContactNo.StartsWith(searchText)||c.NID.StartsWith(searchText)
+                    ||c.BloodGroup.StartsWith(searchText)||c.DrivingLicence.StartsWith(searchText)||c.Organization.Name.StartsWith(searchText)
+                    ||c.Department.Name.StartsWith(searchText)||c.Designation.Title.StartsWith(searchText)||c.Email.StartsWith(searchText))
                     .ToList();
         }
 

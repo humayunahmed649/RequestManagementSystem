@@ -61,13 +61,13 @@ namespace RMS.App.Controllers
                 AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(model);
                 _assignRequisitionManager.Update(assignRequisition);
 
-                RequisitionStatus status=new RequisitionStatus();
-                //status.Id = _assignRequisitionManager.FindByRequisitionId(model.RequisitionId);
-                status.StatusType = "OnExecute";
-                status.RequisitionNumber = model.RequisitionNumber;
-                status.RequisitionId = model.RequisitionId;
-                _requisitionStatusManager.Update(status);
-                return RedirectToAction("Index");
+                //RequisitionStatus status=new RequisitionStatus();
+                ////status.Id = _assignRequisitionManager.FindByRequisitionId(model.RequisitionId);
+                //status.StatusType = "OnExecute";
+                //status.RequisitionNumber = model.RequisitionNumber;
+                //status.RequisitionId = model.RequisitionId;
+                //_requisitionStatusManager.Update(status);
+                //return RedirectToAction("Index");
             }
             
             return View();

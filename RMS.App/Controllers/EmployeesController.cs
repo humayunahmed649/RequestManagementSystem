@@ -31,11 +31,11 @@ namespace RMS.App.Controllers
         }
 
         // GET: Employees
-        public ActionResult Index(string searchTextEmpName)
+        public ActionResult Index(string searchText)
         {
-            if (searchTextEmpName != null)
+            if (searchText != null)
             {
-                ICollection<Employee> employees = _employeeManager.SearchByName(searchTextEmpName);
+                ICollection<Employee> employees = _employeeManager.SearchByText(searchText);
                 IEnumerable<EmployeeViewModel> employeeViewModel = Mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
                 return View(employeeViewModel);
             }

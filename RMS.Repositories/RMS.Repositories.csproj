@@ -69,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RMS.Models.Contracts\RMS.Models.Contracts.csproj">
+      <Project>{F44B1413-1E46-410B-A35B-A440AE52FBC5}</Project>
+      <Name>RMS.Models.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RMS.Models\RMS.Models.csproj">
       <Project>{ec92faca-b541-4cbe-8546-767d78b56d5b}</Project>
       <Name>RMS.Models</Name>

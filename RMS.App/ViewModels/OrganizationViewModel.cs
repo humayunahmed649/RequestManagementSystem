@@ -12,6 +12,7 @@ namespace RMS.App.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please provide a name!")]
+        [Display(Name = "Organization")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please provide a code!")]

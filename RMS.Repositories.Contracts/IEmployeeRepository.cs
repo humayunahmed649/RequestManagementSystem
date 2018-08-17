@@ -9,7 +9,7 @@ namespace RMS.Repositories.Contracts
 {
     public interface IEmployeeRepository:IRepository<Employee>
     {
-        ICollection<Employee> SearchByName(string searchTextEmpName);
+        ICollection<Employee> SearchByText(string searchText);  
         ICollection<Employee> GetAllDriver();
     }
 }
