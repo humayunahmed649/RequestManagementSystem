@@ -24,7 +24,7 @@ namespace RMS.App.Controllers
         }
         public ActionResult Index()
         {
-            var requisitionStatuses = _requisitionStatusManager.GetAllWithRequisitionDetails();
+            var requisitionStatuses = _requisitionStatusManager.GetAll();
             return View(requisitionStatuses.ToList());
         }
 
