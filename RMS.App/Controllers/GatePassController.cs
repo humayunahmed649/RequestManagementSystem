@@ -63,6 +63,48 @@ namespace RMS.App.Controllers
             
             return View();
         }
-       
+        [HttpGet]
+        public ActionResult CheckIn()
+        {
+            ICollection<RequisitionStatus> onExecuteRequisition = _requisitionStatusManager.GetAllStatusExecute();
+
+            IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModel =
+                Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(onExecuteRequisition);
+            return View(requisitionStatusViewModel);
+        }
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+            if (requisitionStatus == null)
+            {
+                return HttpNotFound();
+            }
+            if (requisitionStatus != null)
+            {
+                RequisitionStatusViewModel requisitionStatusViewModel =
+                    Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
+                return View(requisitionStatusViewModel);
+            }
+            return View("Error");
+        }
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "Id,StatusType,RequisitionNumber,RequisitionId")] RequisitionStatusViewModel model)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                RequisitionStatus request = Mapper.Map<RequisitionStatus>(model);
+                request.StatusType = "Completed";
+                _requisitionStatusManager.Update(request);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }

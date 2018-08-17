@@ -25,7 +25,10 @@ namespace RMS.Repositories
         {
             return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "New").ToList();
         }
+        public ICollection<RequisitionStatus> GetAllStatusExecute()
+        {
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "OnExecute").ToList();
+        }
 
-        
     }
 }
