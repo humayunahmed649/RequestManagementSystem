@@ -53,6 +53,7 @@
     <Compile Include="IRequisitionStatusRepository.cs" />
     <Compile Include="IUpazilaRepository.cs" />
     <Compile Include="IVehicleRepository.cs" />
+    <Compile Include="IEmployeeTypeRepository.cs" />
     <Compile Include="IVehicleTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

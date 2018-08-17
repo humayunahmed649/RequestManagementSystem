@@ -44,8 +44,9 @@ namespace RMS.Models.EntityModels
         [StringLength(25)]
         public string DrivingLicence { get; set; }
 
-        [Required,StringLength(50)]
-        public string EmployeeTypes { get; set; }
+        [ForeignKey("EmployeeType")]
+        public int? EmployeeTypeId { get; set; }
+        public EmployeeType EmployeeType { get; set; }
 
         public List<Address> Addresses { get; set; }
 

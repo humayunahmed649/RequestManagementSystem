@@ -22,7 +22,7 @@
             <p>
                 @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
                 {
-                    <b>Search by (Name/Contact/NID/Email/DL/Organization/Designation/Department) </b>
+                    <b>Search by (Name/Contact/NID/Mail/DL/Org/Desig/Dept/Type) </b>
                     @Html.TextBox("searchText")
                     <input type="submit" value="Search"/>
                 }
@@ -64,7 +64,7 @@
             @Html.DisplayNameFor(model => model.BloodGroup)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeTypes)
+            @Html.DisplayNameFor(model => model.EmployeeTypeId)
         </th>
         <th>
             Action
@@ -109,7 +109,7 @@
                         @Html.DisplayFor(modelItem => item.BloodGroup)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EmployeeTypes)
+                        @Html.DisplayFor(modelItem => item.EmployeeType.Type)
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

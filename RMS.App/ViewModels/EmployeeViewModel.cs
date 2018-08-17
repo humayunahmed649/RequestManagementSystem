@@ -50,7 +50,8 @@ namespace RMS.App.ViewModels
 
         [Required(ErrorMessage = "Please provide employee type!")]
         [Display(Name = "Employee Type")]
-        public string EmployeeTypes { get; set; }
+        public int EmployeeTypeId { get; set; }
+        public EmployeeType EmployeeType { get; set; }
 
         public List<Address>Addresses { get; set; }  
         

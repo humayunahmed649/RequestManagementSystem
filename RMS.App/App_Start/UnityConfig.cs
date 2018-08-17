@@ -53,6 +53,9 @@ namespace RMS.App
             container.RegisterType<IDepartmentManager, DepartmentManager>();
             container.RegisterType<IDepartmentRepository, DepartmentRepository>();
 
+            container.RegisterType<IEmployeeTypeManager, EmployeeTypeManager>();
+            container.RegisterType<IEmployeeTypeRepository, EmployeeTypeRepository>();
+
             container.RegisterType<IEmployeeManager, EmployeeManager>();
             container.RegisterType<IEmployeeRepository, EmployeeRepository>();
 
@@ -81,6 +84,7 @@ namespace RMS.App
 
             container.RegisterType<IUpazilaRepository, UpazilaRepository>();
             container.RegisterType<IUpazilaManager, UpazilaManager>();
+
             container.RegisterType<IRequisitionStatusManager, RequisitionStatusManager>();
             container.RegisterType<IRequisitionStatusRepository, RequisitionStatusRepository>();
 

@@ -20,14 +20,16 @@ namespace RMS.App.Controllers
         private IDesignationManager _designationManager;
         private IOrganizationManager _organizationManager;
         private IDepartmentManager _departmentManager;
+        private IEmployeeTypeManager _employeeTypeManager;
 
         public EmployeesController(IEmployeeManager employeeManager, IDepartmentManager departmentManager,
-            IDesignationManager designationManager, IOrganizationManager organizationManager)
+            IDesignationManager designationManager, IOrganizationManager organizationManager,IEmployeeTypeManager employeeTypeManager)
         {
             this._employeeManager = employeeManager;
             this._departmentManager = departmentManager;
             this._designationManager = designationManager;
             this._organizationManager = organizationManager;
+            this._employeeTypeManager = employeeTypeManager;
         }
 
         // GET: Employees
@@ -70,8 +72,7 @@ namespace RMS.App.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-            EmployeeTypes emp=new EmployeeTypes();
-            ViewBag.EmployeeTypes=new SelectList(emp.SetTypes(),"Id","Name");
+            ViewBag.EmployeeTypeId=new SelectList(_employeeTypeManager.GetAll(),"Id","Type");
             return View();
         }
         
@@ -81,7 +82,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypes")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -95,8 +96,7 @@ namespace RMS.App.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
-            EmployeeTypes emp = new EmployeeTypes();
-            ViewBag.EmployeeTypes = new SelectList(emp.SetTypes(), "Id", "Name",employeeViewModel.EmployeeTypes);
+            ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type",employeeViewModel.EmployeeTypeId);
             return View(employeeViewModel);
         }
 
@@ -115,6 +115,7 @@ namespace RMS.App.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employee.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employee.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employee.OrganizationId);
+            ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employee.EmployeeTypeId);
             EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
             return View(employeeViewModel);
         }
@@ -124,7 +125,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypes")] EmployeeViewModel employeeViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +137,7 @@ namespace RMS.App.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+            ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
             return View(employeeViewModel);
         }
 
@@ -175,6 +177,7 @@ namespace RMS.App.Controllers
                 _departmentManager.Dispose();
                 _designationManager.Dispose();
                 _organizationManager.Dispose();
+                _employeeTypeManager.Dispose();
             }
             base.Dispose(disposing);
         }

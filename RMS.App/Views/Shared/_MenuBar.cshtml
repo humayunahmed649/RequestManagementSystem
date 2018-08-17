@@ -59,15 +59,26 @@
                                 </li>
                             </ul>
                         </li>
-
-
                         <li class="menu-has-children">
-                            <a href="#">Employee</a>
+                            <a href="#">Employee SetUp</a>
                             <ul>
-                                <li>@Html.ActionLink("Create New", "Create", "Employees")</li>
-                                <li>@Html.ActionLink("List Of Employee", "Index", "Employees")</li>
+                                <li class="menu-has-children">
+                                    <a href="#">Employee Type</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "EmployeeTypes")</li>
+                                        <li>@Html.ActionLink("List Of Employee", "Index", "EmployeeTypes")</li>
+                                    </ul>
+                                </li>
+                                <li class="menu-has-children">
+                                    <a href="#">Employee</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "Employees")</li>
+                                        <li>@Html.ActionLink("List Of Employee", "Index", "Employees")</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
+                        
                         <li class="menu-has-children">
                             <a href="#">Vehicle SetUp</a>
                             <ul>

@@ -20,23 +20,27 @@ namespace RMS.Repositories
 
         public override ICollection<Employee> GetAll()
         {
-            return db.Set<Employee>().Include(c => c.Department).Include(c=>c.Organization).Include(c=>c.Designation).ToList();
+            return db.Set<Employee>().Include(c => c.Department).Include(c=>c.Organization).Include(c=>c.Designation).Include(c=>c.EmployeeType).ToList();
         }
 
         public ICollection<Employee> SearchByText(string searchText)
         {
             return
                 db.Set<Employee>()
-                    .Include(c => c.Organization).Include(c => c.Department).Include(c => c.Designation)
+                    .Include(c => c.Organization).Include(c => c.Department).Include(c => c.Designation).Include(c=>c.EmployeeType)
                     .Where(c => c.FullName.StartsWith(searchText)||c.ContactNo.StartsWith(searchText)||c.NID.StartsWith(searchText)
                     ||c.BloodGroup.StartsWith(searchText)||c.DrivingLicence.StartsWith(searchText)||c.Organization.Name.StartsWith(searchText)
-                    ||c.Department.Name.StartsWith(searchText)||c.Designation.Title.StartsWith(searchText)||c.Email.StartsWith(searchText))
-                    .ToList();
+                    ||c.Department.Name.StartsWith(searchText)||c.Designation.Title.StartsWith(searchText)||c.Email.StartsWith(searchText)
+                    ||c.EmployeeType.Type.StartsWith(searchText)).ToList();
         }
-
+        public override Employee FindById(int id)
+        {
+            return db.Set<Employee>().Where(c => c.Id == id).Include(c => c.EmployeeType).Include(c=>c.Organization)
+                .Include(c=>c.Department).Include(c=>c.Designation).SingleOrDefault();
+        }
         public ICollection<Employee> GetAllDriver()
         {
-            return db.Set<Employee>().Where(c => c.Designation.Title == "Driver").ToList();
+            return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").ToList();
         }
     }
 }

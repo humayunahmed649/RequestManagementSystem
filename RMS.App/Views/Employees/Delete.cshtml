@@ -6,13 +6,13 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3 class="text-danger">Are you sure you want to delete this?</h3>
 <div>
     <h4>Employee</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Department.Name)
+            @Html.DisplayNameFor(model => model.DepartmentId)
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Designation.Title)
+            @Html.DisplayNameFor(model => model.DesignationId)
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Organization.Name)
+            @Html.DisplayNameFor(model => model.OrganizationId)
         </dt>
 
         <dd>
@@ -84,11 +84,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmployeeTypes)
+            @Html.DisplayNameFor(model => model.EmployeeTypeId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmployeeTypes)
+            @Html.DisplayFor(model => model.EmployeeType.Type)
         </dd>
 
 

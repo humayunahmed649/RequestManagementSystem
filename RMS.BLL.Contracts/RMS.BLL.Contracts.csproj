@@ -53,6 +53,7 @@
     <Compile Include="IRequisitionStatusManager.cs" />
     <Compile Include="IUpazilaManager.cs" />
     <Compile Include="IVehicleManager.cs" />
+    <Compile Include="IEmployeeTypeManager.cs" />
     <Compile Include="IVehicleTypeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

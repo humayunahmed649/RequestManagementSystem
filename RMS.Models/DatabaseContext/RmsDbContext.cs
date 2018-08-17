@@ -16,7 +16,7 @@ namespace RMS.Models.DatabaseContext
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.Designation> Designations { get; set; }
 
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.Employee> Employees { get; set; }
-
+        public DbSet<EmployeeType> EmployeeTypes { get; set; }
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.VehicleType> VehicleTypes { get; set; }
 
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.Vehicle> Vehicles { get; set; }

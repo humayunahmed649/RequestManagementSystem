@@ -57,6 +57,7 @@
     <Compile Include="EntityModels\District.cs" />
     <Compile Include="EntityModels\Division.cs" />
     <Compile Include="EntityModels\Employee.cs" />
+    <Compile Include="EntityModels\EmployeeType.cs" />
     <Compile Include="EntityModels\Organization.cs" />
     <Compile Include="EntityModels\Requisition.cs" />
     <Compile Include="EntityModels\RequisitionStatus.cs" />
@@ -159,6 +160,14 @@
     <Compile Include="Migrations\201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.Designer.cs">
       <DependentUpon>201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808170557221_EmployeeType_Added.cs" />
+    <Compile Include="Migrations\201808170557221_EmployeeType_Added.Designer.cs">
+      <DependentUpon>201808170557221_EmployeeType_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808170617180_Employtype_nullable.cs" />
+    <Compile Include="Migrations\201808170617180_Employtype_nullable.Designer.cs">
+      <DependentUpon>201808170617180_Employtype_nullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -234,6 +243,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.resx">
       <DependentUpon>201808161400037_Requisition Number Added in AssignRequisition Model and RequisitionStatus Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808170557221_EmployeeType_Added.resx">
+      <DependentUpon>201808170557221_EmployeeType_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808170617180_Employtype_nullable.resx">
+      <DependentUpon>201808170617180_Employtype_nullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

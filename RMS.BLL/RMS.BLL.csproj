@@ -54,6 +54,7 @@
     <Compile Include="RequisitionStatusManager.cs" />
     <Compile Include="UpazilaManager.cs" />
     <Compile Include="VehicleManager.cs" />
+    <Compile Include="EmployeeTypeManager.cs" />
     <Compile Include="VehicleTypeManager.cs" />
   </ItemGroup>
   <ItemGroup />

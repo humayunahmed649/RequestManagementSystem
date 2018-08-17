@@ -62,6 +62,7 @@
     <Compile Include="RequisitionStatusRepository.cs" />
     <Compile Include="UpazilaRepository.cs" />
     <Compile Include="VehicleRepository.cs" />
+    <Compile Include="EmployeeTypeRepository.cs" />
     <Compile Include="VehicleTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
