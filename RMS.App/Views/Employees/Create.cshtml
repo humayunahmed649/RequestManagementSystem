@@ -1,4 +1,5 @@
-﻿@using RMS.App.ViewModels
+﻿@using System.Web.UI.WebControls
+@using RMS.App.ViewModels
 @model RMS.App.ViewModels.EmployeeViewModel
 
 @{
@@ -132,34 +133,139 @@
             <div id="menu2" class="tab-pane fade">
                 <br />
                 <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6" style="background-color: #e6e6fa">
+                            <br />
+                            <div class="form-group row">
 
-                    <h3 class="col-md-offset-3">Present Address</h3><br />
+                                    @*@Html.LabelFor(model => model.AddressViewModel.AddressType, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model=>model.AddressViewModel.AddressType, null, new { htmlAttributes= new { @class = "form-control" ,PlaceHolder="Present Address",Type="Text",value="Present Address",@readOnly="readonly"}})
+                                        @Html.ValidationMessageFor(model => model.AddressViewModel.AddressType, "", new { @class = "text-danger" })
+                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.AddressLine1, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.AddressLine1, null, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:"} })
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.AddressLine2, null, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Village: / Moholla:" } })
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.PostOffice, null, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.PostOffice, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.PostCode, null, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.PostCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("DivisionDropDown", new SelectList(Model.DivisionList, "Id", "Name"), "Select Division", htmlAttributes: new { @class = "form-control", id = "divisionDD" })
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.DivisionId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("DistrictDropDown", null, htmlAttributes: new {@class = "form-control", @id = "districtDD"})
 
-                    <div class="form-group row">
-                        @*@Html.LabelFor(model => model.PresentAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.PresentAddress, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "House no: Flat No: Vill: Post: District: Division:" } })
-                            @Html.ValidationMessageFor(model => model.PresentAddress, "", new { @class = "text-danger" })
-                        </div>*@
-                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-9">
+                                    @Html.DropDownList("UpazilaDropDown", null, htmlAttributes: new {@class = "form-control", @id = "upazilaDD"})
 
-                    <h3 class="col-md-offset-3">Pemanant Address</h3><br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="background-color: #e6e6fa">
+                            
+                            <br/>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.AddressViewModel.AddressType, null, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Permanent Address", Type = "Text", value = "Permanent Address", @readOnly = "readonly"}})
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.AddressType, "", new {@class = "text-danger"})
+                                </div>
+                                <br/><br/>
+                                <div class="col-md-5" style="background-color: #e9ecef; margin: 0 15px;">
+                                    <p><input type="checkbox" id="PACheckBox"/> <strong> Same as present address </strong></p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.AddressLine1, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.AddressLine1, null, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:"}})
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine1, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.AddressLine2, null, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Village: / Moholla:"}})
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine2, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.PostOffice, null, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.PostOffice, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.AddressViewModel.PostCode, null, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.PostCode, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-9">
+                                    @Html.DropDownList("DivisionDropDown", new SelectList(Model.DivisionList, "Id", "Name"), "Select Division", htmlAttributes: new { @class = "form-control", id = "divisionDD" })
+                                    @Html.ValidationMessageFor(model => model.AddressViewModel.DivisionId, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-9">
+                                    @Html.DropDownList("DistrictDropDown", null, htmlAttributes: new {@class = "form-control", @id = "districtDD" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("UpazilaDropDown", null, htmlAttributes: new { @class = "form-control", @id = "upazilaDD" })
 
-                    <div class="form-group row">
-                        @*@Html.LabelFor(model => model.PermanentAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.PermanentAddress, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "House no: Flat No: Vill: Post: District: Division:" } })
-                            @Html.ValidationMessageFor(model => model.PermanentAddress, "", new { @class = "text-danger" })
-                        </div>*@
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <br />
                 <div class="form-group row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <ul class="nav nav-tabs border-0">
                             <li><a class="btn btn-dark" data-toggle="tab" href="#menu1">Provious</a></li> &nbsp;
-                            <li><a class="btn btn-dark" data-toggle="tab" href="#menu3">Next</a></li>
+                            <li>&nbsp;&nbsp;</li>&nbsp;
+                            <li><a class="btn btn-dark" data-toggle="tab" href="#menu3"> &nbsp; Next &nbsp; </a></li>
                         </ul>
                     </div>
                 </div>
@@ -218,7 +324,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+<script src="~/Scripts/AddressJs/DivisionDistrictUpazilaLoad.js"></script>
     @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
         <script src="~/Scripts/jquery-1.10.2.js"></script>*@
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -21,15 +22,22 @@ namespace RMS.App.Controllers
         private IOrganizationManager _organizationManager;
         private IDepartmentManager _departmentManager;
         private IEmployeeTypeManager _employeeTypeManager;
+        private IDivisionManager _divisionManager;
+        private IDistrictManager _districtManager;
+        private IUpazilaManager _upazilaManager;
 
         public EmployeesController(IEmployeeManager employeeManager, IDepartmentManager departmentManager,
-            IDesignationManager designationManager, IOrganizationManager organizationManager,IEmployeeTypeManager employeeTypeManager)
+            IDesignationManager designationManager, IOrganizationManager organizationManager,IEmployeeTypeManager employeeTypeManager ,
+            IDivisionManager divisionManager, IDistrictManager districtManager, IUpazilaManager upazilaManager)
         {
             this._employeeManager = employeeManager;
             this._departmentManager = departmentManager;
             this._designationManager = designationManager;
             this._organizationManager = organizationManager;
             this._employeeTypeManager = employeeTypeManager;
+            this._divisionManager = divisionManager;
+            this._districtManager = districtManager;
+            this._upazilaManager = upazilaManager;
         }
 
         // GET: Employees
@@ -73,7 +81,11 @@ namespace RMS.App.Controllers
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
             ViewBag.EmployeeTypeId=new SelectList(_employeeTypeManager.GetAll(),"Id","Type");
-            return View();
+            EmployeeViewModel employeeViewModel=new EmployeeViewModel();
+            employeeViewModel.DivisionList = (List<Division>) _divisionManager.GetAllDivisions();
+            ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+            ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+            return View(employeeViewModel);
         }
         
 
@@ -167,8 +179,17 @@ namespace RMS.App.Controllers
             TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
-   
 
+        public JsonResult GetDistrictsByDivisionId(int? divisionId)
+        {
+            if (divisionId == null)
+            {
+                return null;
+            }
+
+            var districts = _districtManager.GetDistrictsById((int)divisionId);
+            return Json(districts, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -178,6 +199,8 @@ namespace RMS.App.Controllers
                 _designationManager.Dispose();
                 _organizationManager.Dispose();
                 _employeeTypeManager.Dispose();
+                _districtManager.Dispose();
+                _upazilaManager.Dispose();
             }
             base.Dispose(disposing);
         }
