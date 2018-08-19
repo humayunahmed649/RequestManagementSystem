@@ -190,6 +190,16 @@ namespace RMS.App.Controllers
             var districts = _districtManager.GetDistrictsById((int)divisionId);
             return Json(districts, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetUpazilaByDistrictId(int? districtId)
+        {
+            if (districtId == null)
+            {
+                return null;
+            }
+
+            var upazilas = _upazilaManager.GetUpazilasById((int)districtId);
+            return Json(upazilas, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
