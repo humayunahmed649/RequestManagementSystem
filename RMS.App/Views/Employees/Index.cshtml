@@ -22,7 +22,7 @@
             <p>
                 @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
                 {
-                    <b>Search by (Name/Contact/NID/Mail/DL/Org/Desig/Dept/Type) </b>
+                    <b>Search by (Name/Contact/NID/Mail/Type) </b>
                     @Html.TextBox("searchText")
                     <input type="submit" value="Search"/>
                 }
@@ -40,7 +40,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.FullName)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.OrganizationId)
             </th>
             <th>
@@ -48,7 +48,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DesignationId)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ContactNo)
             </th>
@@ -58,9 +58,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.NID)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.DrivingLicence)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.BloodGroup)
             </th>
@@ -85,7 +85,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.FullName)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.Organization.Name)
                         </td>
                         <td>
@@ -93,7 +93,7 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Designation.Title)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.ContactNo)
                         </td>
@@ -103,9 +103,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.NID)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.DrivingLicence)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.BloodGroup)
                         </td>
@@ -123,7 +123,7 @@
             else
             {
                 <tr>
-                    <td class="text-center text-danger" colspan="12"> Data Not Found!</td>
+                    <td class="text-center text-danger" colspan="8"> Data Not Found!</td>
                 </tr>
             }
         }
