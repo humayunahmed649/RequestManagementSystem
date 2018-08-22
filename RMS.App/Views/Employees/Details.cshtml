@@ -4,97 +4,181 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Employee Details</h2>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Personal Information :</h3>
+            <br/>
+            <table class="table table-bordered table-info table-striped">
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.FullName)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.EmployeeTypeId)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.EmployeeType.Type)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.ContactNo)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.ContactNo)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.NID)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.NID)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.DrivingLicence)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.DrivingLicence)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.BloodGroup)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.BloodGroup)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <br/><br/>
+            <img src="~/Content/img/EmpImg.gif" style="width: 150px; height: 180px !important; border: 1px solid #808080"/>
+        </div>
 
-<div>
-    <h4>Employee</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.Name)
-        </dt>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Office Information :</h3>
+            <br/>
+            <table class="table table-bordered table-info table-striped">
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.OrganizationId)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.Organization.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.DepartmentId)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.Department.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%">
+                        @Html.DisplayNameFor(model => model.DesignationId)
+                    </td>
+                    <td style="width: 80%">
+                        @Html.DisplayFor(model => model.Designation.Title)
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Address :</h3>
+            <br/>
+            <div class="row border table-info">
+                <br/>
+                <div class="col-md-6">
+                    <div class="row">
+                        
+                        <div class="col-md-4 border">
+                            <br /><br /><br/>
+                            @Html.DisplayName("Present Address")
+                        </div>
+                        <div class="col-md-8 border">
+                            <br />
+                            @foreach (var item in Model.Addresses)
+                            {
+                                if (item.AddressType == "Present Address")
+                                {
+                                    @Html.DisplayFor(modelItem => item.AddressLine1)<br/>
+                                    @Html.DisplayFor(modelItem => item.AddressLine2)<br/>
+                                    @Html.DisplayFor(modelItem => item.PostOffice)<br/>
+                                    @Html.DisplayFor(modelItem => item.PostCode)<br/>
+                                    @Html.DisplayFor(modelItem => item.DivisionId)<br/>
+                                    @Html.DisplayFor(modelItem => item.DistrictId)<br/>
+                                    @Html.DisplayFor(modelItem => item.UpazilaId)<br/><br/>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <br/>
+                        <div class="col-md-4 border">
+                            <br/><br/><br/>
+                            @Html.DisplayName("Permanent Address")
+                        </div>
+                        <div class="col-md-8 border">
+                            <br/>
+                            @foreach (var item in Model.Addresses)
+                            {
+                                if (item.AddressType == "Permanent Address")
+                                {
+                                    @Html.DisplayFor(modelItem => item.AddressLine1)<br/>
+                                    @Html.DisplayFor(modelItem => item.AddressLine2)<br/>
+                                    @Html.DisplayFor(modelItem => item.PostOffice)<br/>
+                                    @Html.DisplayFor(modelItem => item.PostCode)<br/>
+                                    @Html.DisplayFor(modelItem => item.DivisionId)<br/>
+                                    @Html.DisplayFor(modelItem => item.DistrictId)<br/>
+                                    @Html.DisplayFor(modelItem => item.UpazilaId)<br/><br/>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Department.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Designation.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Designation.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Organization.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Organization.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContactNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BloodGroup)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BloodGroup)
-        </dd>
-
-        <dt>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DrivingLicence)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DrivingLicence)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployeeTypeId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeType.Type)
-        </dd>
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class="btn btn-warning"}) 
-    @Html.ActionLink("Back to List", "Index",null,new {@class="btn btn-info"})
-</p>
+<br/>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="&nbsp; Print &nbsp;" class="btn btn-success"/>
+    </div>
+    <div class="col-md-8">
+        <p class="text-right">
+            @Html.ActionLink(" Edit ", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) &nbsp;
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+        </p>
+    </div>
+</div>
+

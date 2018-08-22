@@ -349,6 +349,8 @@
     <Content Include="Content\img\elements\t4.jpg" />
     <Content Include="Content\img\elements\user1.png" />
     <Content Include="Content\img\elements\user2.png" />
+    <Content Include="Content\img\EmpImg.gif" />
+    <Content Include="Content\img\ict.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\p3.jpg" />
     <Content Include="Content\img\play-btn.png" />
