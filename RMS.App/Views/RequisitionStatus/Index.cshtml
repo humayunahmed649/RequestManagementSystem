@@ -5,34 +5,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Requisition Status List</h2>
+<br/>
 
-
-<table class="table">
+<table class="table table-bordered table-active table-striped">
     <tr>
+        <th>
+            SL
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.RequisitionNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StatusType)
         </th>
-        <th></th>
+        <th>
+            Action
+        </th>
     </tr>
+    @{
+        var sl = 0;
+        if (Model.Count()!=0)
+        {
+            foreach (var item in Model)
+            {
+                sl++;
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RequisitionNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusType)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                <tr>
+                    <td>
+                        @sl
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequisitionNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusType)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                        @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td class="text-center text-danger" colspan="4"> Data Not Found!</td>
+            </tr>
+        }
+    }
+
 
 </table>

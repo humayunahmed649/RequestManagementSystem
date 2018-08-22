@@ -5,11 +5,14 @@
 }
 
 
-<p>
-    Assigned Requisition
-</p>
-<table class="table">
+<h2>Assigned Requisition</h2>
+<br/>
+
+<table class="table table-bordered table-active table-striped">
     <tr>
+        <th>
+            SL
+        </th>
         <th>
             @Html.DisplayName("Driver Name")
         </th>
@@ -22,32 +25,48 @@
         <th>
             @Html.DisplayName("Vehicle Reg No")
         </th>
-        
-        <th></th>
+
+        <th>
+            Action
+        </th>
     </tr>
+    @{
+        var sl = 0;
+        if (Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+                sl++;
+                <tr>
+                    <td>
+                        @sl
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requisition.FromPlace)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vehicle.BrandName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vehicle.RegNo)
+                    </td>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Requisition.FromPlace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.BrandName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.RegNo)
-            </td>
-            
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                        @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td class="text-center text-danger" colspan="6"> Data Not Found!</td>
+            </tr>
+        }
     }
-
 </table>

@@ -218,6 +218,7 @@ namespace RMS.App.Controllers
                 _designationManager.Dispose();
                 _organizationManager.Dispose();
                 _employeeTypeManager.Dispose();
+                _divisionManager.Dispose();
                 _districtManager.Dispose();
                 _upazilaManager.Dispose();
             }

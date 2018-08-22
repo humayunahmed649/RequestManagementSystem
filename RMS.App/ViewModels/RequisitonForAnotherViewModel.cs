@@ -12,6 +12,7 @@ namespace RMS.App.ViewModels
         public int Id { get; set; }
 
         public string RequisitionNumber { get; set; }
+
         [Required(ErrorMessage = "Please provide a journey start place details!")]
         [Display(Name = "From Place")]
         public string FromPlace { get; set; }
@@ -36,9 +37,12 @@ namespace RMS.App.ViewModels
         public string RequestFor { get; set; }
 
         [Display(Name = "Employee")]
+        [Required(ErrorMessage = "Please select Employee!")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+
         public List<RequisitonForAnotherViewModel> RequisitionForAnotherViewModels { get; set; }
+
         public string GetRequisitionNumber()
         {
             string requestNumber = DateTime.Now.ToString("HH:mm-d-MMM/ddd/yyyy");
