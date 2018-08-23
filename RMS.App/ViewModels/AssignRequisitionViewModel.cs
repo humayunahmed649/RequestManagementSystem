@@ -21,9 +21,10 @@ namespace RMS.App.ViewModels
         public Vehicle Vehicle { get; set; }
 
         [Required(ErrorMessage = "Please Enter valid Driver Information")]
-        [Display(Name = "Name of Driver")]
+        [Display(Name = "Driver Name")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+
         public int RequisitionStatusId { get; set; }
         public RequisitionStatus RequisitionStatus { get; set; }
 

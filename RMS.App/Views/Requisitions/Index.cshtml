@@ -20,8 +20,16 @@
         </div>
 
         <div class="col-lg-8 col-sm-8 col-8 text-right no-padding">
-            <input type="text" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search () '" />
-            <button class="nw-btn primary-btn">Search<span class="lnr lnr-arrow-right"></span></button>
+            <p>
+                @using (Html.BeginForm("Index", "Requisitions", FormMethod.Get))
+                {
+                    <b>Search by : </b>
+                    @Html.TextBox("searchText")
+                    <input type="submit" value="Search" />
+                }
+            </p>
+            @*<input type="text" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search () '" />
+            <button class="nw-btn primary-btn">Search<span class="lnr lnr-arrow-right"></span></button>*@
         </div>
     </div>
 </div>

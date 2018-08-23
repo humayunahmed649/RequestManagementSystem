@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RMS.Models.EntityModels.RequisitionStatus>
+﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +7,28 @@
 
 <h2>Requisition Status List</h2>
 <br/>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-4 col-sm-4 col-4 header-top-left no-padding">
 
+        </div>
+
+        <div class="col-lg-8 col-sm-8 col-8 text-right no-padding">
+            <p>
+                @using (Html.BeginForm("Index", "RequisitionStatus", FormMethod.Get))
+                {
+
+                    <b>Search by (Requisition Number) </b>
+                    @Html.TextBox("searchText")
+                    <input type="submit" value="Search" />
+
+                }
+            </p>
+
+        </div>
+    </div>
+</div>
+<br />
 <table class="table table-bordered table-active table-striped">
     <tr>
         <th>
