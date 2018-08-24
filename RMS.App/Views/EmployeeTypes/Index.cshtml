@@ -1,12 +1,13 @@
 ﻿@model IEnumerable<RMS.App.ViewModels.EmployeeTypeViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employee Type List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Employee Type List</h2>
-<br />
+<hr/>
+
 @if (TempData["msg"] != null)
 {
     <div class="alert alert-info">

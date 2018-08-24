@@ -1,20 +1,19 @@
 ﻿@model RMS.App.ViewModels.EmployeeTypeViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Employee Type";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
+<h2>Create Employee Type</h2>
+<hr/>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Employee Type</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">
             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })

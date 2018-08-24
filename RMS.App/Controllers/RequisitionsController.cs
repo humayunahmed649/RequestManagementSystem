@@ -207,6 +207,8 @@ namespace RMS.App.Controllers
             {
                 _requisitionManager.Dispose();
                 _employeeManager.Dispose();
+                _requisitionStatusManager.Dispose();
+                _vehicleManager.Dispose();
             }
             base.Dispose(disposing);
         }

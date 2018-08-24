@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<RMS.App.ViewModels.VehicleViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vehicle List";
 }
-<br/>
+
 <h2>Vehicle List</h2>
+<hr/>
+
 @if (TempData["msg"] != null)
 {
     <div class="alert alert-info">

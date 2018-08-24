@@ -1,19 +1,18 @@
 ﻿@model RMS.App.ViewModels.VehicleViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Vehicle";
 }
-<br/>
-<h2>Edit</h2>
 
+<h2>Edit Vehicle</h2>
+<hr/>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Vehicle</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 

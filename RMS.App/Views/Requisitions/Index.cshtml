@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<RMS.App.ViewModels.RequisitionViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Requisitions";
 }
 <h2>All Requisitions</h2>
-<br/>
+<hr/>
+
 @if (TempData["msg"] != null)
 {
     <div class="alert alert-info">

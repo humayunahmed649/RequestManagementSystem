@@ -11,7 +11,11 @@ namespace RMS.App.ViewModels
     public class AssignRequisitionViewModel
     {
         public int Id { get; set; }
+
+        [Display(Name = "Requisition Number")]
         public string RequisitionNumber { get; set; }
+
+        [Display(Name = "Requisition")]
         public int RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
 
@@ -25,6 +29,7 @@ namespace RMS.App.ViewModels
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
 
+        [Display(Name = "Requisition Status")]
         public int RequisitionStatusId { get; set; }
         public RequisitionStatus RequisitionStatus { get; set; }
 

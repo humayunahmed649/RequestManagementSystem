@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<RMS.App.ViewModels.OrganizationViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Organization List";
 }
-<br/>
 
 <h2>Organization List</h2>
-
+<hr/>
 @if (TempData["msg"] != null)
 {
     <div class="alert alert-info">
         @Html.Raw(TempData["msg"])
     </div>
 }
+<br />
 <div class="container">
     <div class="row align-items-center">
         <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">

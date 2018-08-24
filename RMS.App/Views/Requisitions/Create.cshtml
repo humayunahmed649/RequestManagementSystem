@@ -1,7 +1,7 @@
 ﻿@model RMS.App.ViewModels.RequisitionViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Vehicle Requisition";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -103,13 +103,14 @@
             </div>
             <div class="modal-body table-info">
                 @Html.Action("RequisitionList", "Requisitions")
-                
+
             </div>
-            <br />
+
             <div class="col-md-12 text-right">
-                <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
+                <br/>
+                <p><a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
+                </p>
             </div>
-            <br />
         </div>
     </div>
 </div>

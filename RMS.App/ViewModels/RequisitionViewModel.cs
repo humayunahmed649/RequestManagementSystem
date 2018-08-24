@@ -12,6 +12,7 @@ namespace RMS.App.ViewModels
     {
         public int Id { get; set; }
 
+        [Display(Name = "Requisition Number")]
         public string RequisitionNumber { get; set; }
 
         [Required(ErrorMessage = "Please provide a journey start place details!")]

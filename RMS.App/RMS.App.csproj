@@ -291,6 +291,7 @@
     <Content Include="Content\img\b3.jpg" />
     <Content Include="Content\img\b4.jpg" />
     <Content Include="Content\img\banner-bg.jpg" />
+    <Content Include="Content\img\bcc_logo.png" />
     <Content Include="Content\img\blog\ads-banner.jpg" />
     <Content Include="Content\img\blog\blog-home-banner.jpg" />
     <Content Include="Content\img\blog\c1.jpg" />
@@ -528,6 +529,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Shared\bcc_logo.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
