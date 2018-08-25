@@ -197,9 +197,6 @@ namespace RMS.App.Controllers
             TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
-        
-        
-
 
         protected override void Dispose(bool disposing)
         {

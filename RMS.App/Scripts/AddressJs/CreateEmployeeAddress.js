@@ -123,7 +123,7 @@ $("#PACheckBox").click(function () {
     var districtDd = "<td><input type='hidden' name='Addresses[" + index + "].DistrictId' value='" + address.districtDD + "'/>" + address.districtDD + "</td>";
     var upazilaDd = "<td><input type='hidden' name='Addresses[" + index + "].UpazilaId' value='" + address.upazilaDD + "'/>" + address.upazilaDD + "</td>";
 
-    var tr = "<tr>" + slCell + indexCell + addressType + addressLine1 + addressLine2 + postOffice + postCode + divisionDd + districtDd + upazilaDd + "</tr>";
+    var tr = "<tr>" + slCell + indexCell + addressType + addressLine1 + addressLine2 + postOffice + postCode + divisionDd + districtDd + upazilaDd +"</tr>";
 
     tableBody.append(tr);
     ++index;
@@ -143,10 +143,10 @@ function getPresentAddressForForm() {
     var districtDropDown = $("#districtDD").val();
     var upazilaDropDown = $("#upazilaDD").val();
 
+
     return {
         slNo:sl, addressType: addressType, addressLine1: addressLine1, addressLine2: addressLine2, postOffice: postOffice, postCode: postCode,
         divisionDD: divisionDropDown, districtDD:districtDropDown, upazilaDD:upazilaDropDown
-
     }
 }
 
@@ -165,6 +165,7 @@ $("#PACheckBox1").click(function () {
     var divisionDd = "<td><input type='hidden' name='Addresses[" + index + "].DivisionId' value='" + address.divisionDD + "'/>" + address.divisionDD + "</td>";
     var districtDd = "<td><input type='hidden' name='Addresses[" + index + "].DistrictId' value='" + address.districtDD + "'/>" + address.districtDD + "</td>";
     var upazilaDd = "<td><input type='hidden' name='Addresses[" + index + "].UpazilaId' value='" + address.upazilaDD + "'/>" + address.upazilaDD + "</td>";
+
 
     var tr = "<tr>" + slCell + indexCell + addressType + addressLine1 + addressLine2 + postOffice + postCode + divisionDd + districtDd + upazilaDd + "</tr>";
 
@@ -193,6 +194,7 @@ function getSamePermanentAddressForForm() {
     var districtDropDown = $("#districtDD").val();
     var upazilaDropDown = $("#upazilaDD").val();
 
+
     return {
         slNo: sl, addressType: addressType, addressLine1: addressLine1, addressLine2: addressLine2, postOffice: postOffice, postCode: postCode,
         divisionDD: divisionDropDown, districtDD: districtDropDown, upazilaDD: upazilaDropDown
@@ -216,7 +218,8 @@ $("#PACheckBox2").click(function () {
     var districtDd = "<td><input type='hidden' name='Addresses[" + index + "].DistrictId' value='" + address.districtDD + "'/>" + address.districtDD + "</td>";
     var upazilaDd = "<td><input type='hidden' name='Addresses[" + index + "].UpazilaId' value='" + address.upazilaDD + "'/>" + address.upazilaDD + "</td>";
 
-    var tr = "<tr>" + slCell + indexCell + addressType + addressLine1 + addressLine2 + postOffice + postCode + divisionDd + districtDd + upazilaDd + "</tr>";
+
+    var tr = "<tr>" + slCell + indexCell + addressType + addressLine1 + addressLine2 + postOffice + postCode + divisionDd + districtDd + upazilaDd+ "</tr>";
 
     tableBody.append(tr);
     ++index;

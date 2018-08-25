@@ -32,7 +32,7 @@
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li class="menu-has-children">
-                            <a href="#">Organization SetUp</a>
+                            <a href="#">SetUp All</a>
                             <ul>
                                 <li class="menu-has-children">
                                     <a href="#">Organization</a>
@@ -41,7 +41,6 @@
                                         <li>@Html.ActionLink("Organization List", "Index", "Organizations")</li>
                                     </ul>
                                 </li>
-                                
                                 <li class="menu-has-children">
                                     <a href="#">Department</a>
                                     <ul>
@@ -57,11 +56,6 @@
                                         <li>@Html.ActionLink("List Of Designation", "Index", "Designations")</li>
                                     </ul>
                                 </li>
-                            </ul>
-                        </li>
-                        <li class="menu-has-children">
-                            <a href="#">Employee SetUp</a>
-                            <ul>
                                 <li class="menu-has-children">
                                     <a href="#">Employee Type</a>
                                     <ul>
@@ -76,12 +70,13 @@
                                         <li>@Html.ActionLink("List Of Employee", "Index", "Employees")</li>
                                     </ul>
                                 </li>
-                            </ul>
-                        </li>
-                        
-                        <li class="menu-has-children">
-                            <a href="#">Vehicle SetUp</a>
-                            <ul>
+                                <li class="menu-has-children">
+                                    <a href="#">Vehicle Types</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Create New", "Create", "VehicleTypes")</li>
+                                        <li>@Html.ActionLink("List Of Vehile Type", "Index", "VehicleTypes")</li>
+                                    </ul>
+                                </li>
                                 <li class="menu-has-children">
                                     <a href="#">Vehicle</a>
                                     <ul>
@@ -90,32 +85,21 @@
 
                                     </ul>
                                 </li>
-                                <li class="menu-has-children">
-                                    <a href="#">Vehicle Types</a>
-
-                                    <ul>
-                                        <li>@Html.ActionLink("Create New", "Create", "VehicleTypes")</li>
-                                        <li>@Html.ActionLink("List Of Vehile Type", "Index", "VehicleTypes")</li>
-                                    </ul>
-
-                                </li>
                             </ul>
                         </li>
 
                         <li>@Html.ActionLink("Send Requisition", "Create", "Requisitions")</li>
-
                         
-                            <li class="menu-has-children">
+                        <li class="menu-has-children">
                                 <a href="#">Requisition Queue</a>
                                 <ul>
                                     <li>@Html.ActionLink("New Requisitions", "Requests", "AssignRequisitions")</li>
                                     <li>@Html.ActionLink("Assigned Requisitions", "Index", "AssignRequisitions")</li>
                                     <li>@Html.ActionLink("Requisitions Status", "Index", "RequisitionStatus")</li>
                                     <li>@Html.ActionLink("All Requisitions", "Index", "Requisitions")</li>
-
                                 </ul>
                             </li>
-                            <li class="menu-has-children">
+                        <li class="menu-has-children">
                                 <a href="#">Gate Pass</a>
 
                                 <ul>
@@ -124,7 +108,6 @@
                                 </ul>
                             </li>
                     </ul>        
-                    
                 </nav><!-- #nav-menu-container -->
             
             @*<div class="col-md-2 menu-social-icons text-right align-text-top">

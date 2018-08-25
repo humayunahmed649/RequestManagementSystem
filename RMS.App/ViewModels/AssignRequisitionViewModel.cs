@@ -15,7 +15,7 @@ namespace RMS.App.ViewModels
         [Display(Name = "Requisition Number")]
         public string RequisitionNumber { get; set; }
 
-        [Display(Name = "Requisition")]
+        [Display(Name = "Requisition Id")]
         public int RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
 
@@ -25,7 +25,7 @@ namespace RMS.App.ViewModels
         public Vehicle Vehicle { get; set; }
 
         [Required(ErrorMessage = "Please Enter valid Driver Information")]
-        [Display(Name = "Driver Name")]
+        [Display(Name = "Driver")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
 

@@ -387,7 +387,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\AddressJs\DivisionDistrictUpazilaLoad.js" />
+    <Content Include="Scripts\AddressJs\CreateEmployeeAddress.js" />
+    <Content Include="Scripts\AddressJs\EditEmployeeAddress.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -529,7 +530,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Shared\bcc_logo.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

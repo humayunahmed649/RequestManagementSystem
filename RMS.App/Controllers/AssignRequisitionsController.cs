@@ -33,9 +33,9 @@ namespace RMS.App.Controllers
         }
 
         // GET: AssignRequisitions
-        public ActionResult Index(string searchByText)
+        public ActionResult Index(string searchText)
         {
-            if (searchByText != null)
+            if (searchText != null)
             {
                 ////IEnumerable<AssignRequisition> requisition = _assignRequisitionManager.SearchByName(searchByText);
                 //IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModel =
@@ -74,7 +74,7 @@ namespace RMS.App.Controllers
         // GET: AssignRequisitions/Create
         public ActionResult Create(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

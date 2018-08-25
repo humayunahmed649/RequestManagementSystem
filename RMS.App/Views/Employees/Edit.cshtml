@@ -129,7 +129,8 @@
                     </div>
 
                     <div class="col-md-6">
-                        @Html.HiddenFor(modelItem => item.Id)
+                        @Html.HiddenFor(modelItem => item.Id,new {@id="addressId"})
+                        @Html.HiddenFor(modelItem=>item.EmployeeId,new {@id="employeeId"})
                         @*<div class="form-group row">
                                 @Html.LabelFor(model => model.AddressViewModel.AddressType, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-12">
@@ -219,7 +220,8 @@
                     </div>
 
                     <div class="col-md-6">
-                        @Html.HiddenFor(modelItem => item.Id)
+                        @Html.HiddenFor(modelItem => item.Id, new { @id = "addressIdp" })
+                        @Html.HiddenFor(modelItem => item.EmployeeId, new { @id = "employeeIdp" })
                         @*<div class="form-group row">
                             <div class="col-md-6">
                                 @Html.EditorFor(model => model.AddressViewModel.AddressType, null, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Permanent Address", Type = "Text", value = "Permanent Address", @readOnly = "readonly" } })
@@ -461,18 +463,20 @@
             </div>
         </div>
     }
-        <table id="addressTable" class="table table-bordered " style="display: none !important">
+        <table id="addressTable" class="table table-bordered " @*style="display: none !important"*@>
             <thead>
                 <tr>
                     <th style="width: 10%">SL</th>
                     <th style="width: 10%">Address Type</th>
-                    <th style="width: 15%">Address Line1</th>
-                    <th style="width: 15%">Address Line2</th>
+                    <th style="width: 10%">Address Line1</th>
+                    <th style="width: 10%">Address Line2</th>
                     <th style="width: 10%">Post Office</th>
                     <th style="width: 10%">Post Code</th>
                     <th style="width: 10%">Division</th>
                     <th style="width: 10%">District</th>
                     <th style="width: 10%">Upazila</th>
+                    <th style="width: 5%">Address Id</th>
+                    <th style="width: 5%">Employee Id</th>
                 </tr>
             </thead>
             <tbody id="addressDetails"></tbody>
@@ -492,5 +496,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/AddressJs/DivisionDistrictUpazilaLoad.js"></script>
+    <script src="~/Scripts/AddressJs/EditEmployeeAddress.js"></script>
 }

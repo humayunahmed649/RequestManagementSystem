@@ -3,38 +3,37 @@
 @{
     ViewBag.Title = "Employee List";
 }
+<div class="container" style="min-height: 400px">
+    <h2>Employee List</h2>
+    <hr />
 
-<h2>Employee List</h2>
-<hr/>
-
-@if (TempData["msg"] != null)
-{
-    <div class="alert alert-info">
-        @Html.Raw(TempData["msg"])
-    </div>
-}
-<div class="container">
-    <div class="row align-items-center">
-        <div class="col-lg-3 col-sm-3 col-3 text-left no-padding">
-            <p>
-                @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-default"})
-            </p>
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-info">
+            @Html.Raw(TempData["msg"])
         </div>
+    }
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-3 col-sm-3 col-3 text-left no-padding">
+                <p>
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+                </p>
+            </div>
 
-        <div class="col-lg-9 col-sm-9 col-9 text-right no-padding">
-            <p>
-                @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
-                {
-                    <b>Search by (Name/Contact/NID/Mail/Type) </b>
-                    @Html.TextBox("searchText")
-                    <input type="submit" value="Search"/>
-                }
-            </p>
+            <div class="col-lg-9 col-sm-9 col-9 text-right no-padding">
+                <p>
+                    @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+                    {
+                        <b>Search by (Name/Contact/NID/Mail/Type) </b>
+                        @Html.TextBox("searchText")
+                        <input type="submit" value="Search" />
+                    }
+                </p>
+            </div>
         </div>
     </div>
-</div>
-<br/>
-    
+
     <table class="table table-bordered table-active table-striped">
         <tr>
             <th>
@@ -44,14 +43,14 @@
                 @Html.DisplayNameFor(model => model.FullName)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.OrganizationId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DesignationId)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.OrganizationId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DesignationId)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ContactNo)
             </th>
@@ -62,8 +61,8 @@
                 @Html.DisplayNameFor(model => model.NID)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.DrivingLicence)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.DrivingLicence)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.BloodGroup)
             </th>
@@ -89,14 +88,14 @@
                             @Html.DisplayFor(modelItem => item.FullName)
                         </td>
                         @*<td>
-                            @Html.DisplayFor(modelItem => item.Organization.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Department.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Designation.Title)
-                        </td>*@
+                                @Html.DisplayFor(modelItem => item.Organization.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Department.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Designation.Title)
+                            </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.ContactNo)
                         </td>
@@ -107,8 +106,8 @@
                             @Html.DisplayFor(modelItem => item.NID)
                         </td>
                         @*<td>
-                            @Html.DisplayFor(modelItem => item.DrivingLicence)
-                        </td>*@
+                                @Html.DisplayFor(modelItem => item.DrivingLicence)
+                            </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.BloodGroup)
                         </td>
@@ -116,9 +115,9 @@
                             @Html.DisplayFor(modelItem => item.EmployeeType.Type)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-                            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-                            @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                         </td>
                     </tr>
                 }
@@ -132,7 +131,7 @@
         }
 
     </table>
-
+</div>
 
 
 

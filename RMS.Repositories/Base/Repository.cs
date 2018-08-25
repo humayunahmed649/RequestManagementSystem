@@ -14,7 +14,7 @@ namespace RMS.Repositories.Base
     {
         protected DbContext db;
 
-        public Repository(DbContext db)
+        protected Repository(DbContext db)
         {
             this.db = db;
         }
