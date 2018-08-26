@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using AutoMapper;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
@@ -74,6 +75,24 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Organization organization = Mapper.Map<Organization>(organizationViewModel);
+                var name = organization.Name.Trim();
+                if (_organizationManager.GetAll().Count(o=>o.Name==name)>0)
+                {
+                    ViewBag.Message1 = "Organization name already exist.";
+                    return View(organizationViewModel);
+                }
+                var code = organization.Code.Trim();
+                if (_organizationManager.GetAll().Count(o => o.Code == code) > 0)
+                {
+                    ViewBag.Message2 = "Organization code already exist.";
+                    return View(organizationViewModel);
+                }
+                var regNo = organization.RegNo.Trim();
+                if (_organizationManager.GetAll().Count(o => o.RegNo == regNo) > 0)
+                {
+                    ViewBag.Message3 = "Organization registration no already exist.";
+                    return View(organizationViewModel);
+                }
                 _organizationManager.Add(organization);
 
                 TempData["msg"] = "Information has been save successfully";
@@ -109,6 +128,25 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Organization organization = Mapper.Map<Organization>(organizationViewModel);
+                var name = organization.Name.Trim();
+                if (_organizationManager.GetAll().Count(o => o.Name == name && o.Id != organization.Id) > 0)
+                {
+                    ViewBag.Message1 = "Organization name already exist.";
+                    return View(organizationViewModel);
+                }
+                var code = organization.Code.Trim();
+                if (_organizationManager.GetAll().Count(o => o.Code == code && o.Id != organization.Id) > 0)
+                {
+                    ViewBag.Message2 = "Organization code already exist.";
+                    return View(organizationViewModel);
+                }
+                var regNo = organization.RegNo.Trim();
+                if (_organizationManager.GetAll().Count(o => o.RegNo == regNo && o.Id != organization.Id) > 0)
+                {
+                    ViewBag.Message3 = "Organization registration no already exist.";
+                    return View(organizationViewModel);
+                }
+
                 _organizationManager.Update(organization);
 
                 TempData["msg"] = "Information has been updated successfully";

@@ -7,7 +7,7 @@
 <h2>Create Department</h2>
 <hr/>
 
-@using (Html.BeginForm("Create","Departments",FormMethod.Post, new {id="departmentForm"})) 
+@using (Html.BeginForm(@*"Create","Departments",FormMethod.Post, new {id="departmentForm"}*@)) 
 {
     @Html.AntiForgeryToken()
     
@@ -28,6 +28,7 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                <p class="text-danger">@ViewBag.Message1</p>
             </div>
         </div>
 
@@ -36,6 +37,7 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                <p class="text-danger">@ViewBag.Message2</p>
             </div>
         </div>
 

@@ -24,6 +24,7 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                <p class="text-danger">@ViewBag.Message1</p>
             </div>
 
         </div>
@@ -34,6 +35,7 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                <p class="text-danger">@ViewBag.Message2</p>
             </div>
 
         </div>
@@ -44,6 +46,7 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.RegNo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RegNo, "", new { @class = "text-danger" })
+                <p class="text-danger">@ViewBag.Message3</p>
             </div>
 
         </div>

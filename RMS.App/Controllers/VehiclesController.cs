@@ -78,6 +78,22 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Vehicle vehicle = Mapper.Map<Vehicle>(vehicleViewModel);
+
+                var chassisNo = vehicle.ChassisNo.Trim();
+                if (_vehicleManager.GetAll().Count(o => o.ChassisNo == chassisNo) > 0)
+                {
+                    ViewBag.Message1 = "Vehicle chassis no already exist.";
+                    ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "Name", vehicleViewModel.VehicleTypeId);
+                    return View(vehicleViewModel);
+                }
+
+                var regNo = vehicle.RegNo.Trim();
+                if (_vehicleManager.GetAll().Count(o => o.RegNo == regNo) > 0)
+                {
+                    ViewBag.Message2 = "Vehicle registration no already exist.";
+                    ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "Name", vehicleViewModel.VehicleTypeId);
+                    return View(vehicleViewModel);
+                }
                 _vehicleManager.Add(vehicle);
                 TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
@@ -114,6 +130,21 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Vehicle vehicle = Mapper.Map<Vehicle>(vehicleViewModel);
+
+                var chassisNo = vehicle.ChassisNo.Trim();
+                if (_vehicleManager.GetAll().Count(o => o.ChassisNo == chassisNo && o.Id != vehicle.Id) > 0)
+                {
+                    ViewBag.Message1 = "Vehicle chassis no already exist.";
+                    ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "Name", vehicleViewModel.VehicleTypeId);
+                    return View(vehicleViewModel);
+                }
+                var regNo = vehicle.RegNo.Trim();
+                if (_vehicleManager.GetAll().Count(o => o.RegNo == regNo && o.Id != vehicle.Id) > 0)
+                {
+                    ViewBag.Message2 = "Vehicle registration no already exist.";
+                    ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "Name", vehicleViewModel.VehicleTypeId);
+                    return View(vehicleViewModel);
+                }
                 _vehicleManager.Update(vehicle);
                 TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
