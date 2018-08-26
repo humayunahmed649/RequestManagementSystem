@@ -32,8 +32,8 @@ namespace RMS.App.ViewModels
         [Display(Name = "Seat Capacity")]
         public int SeatCapacity { get; set; }
 
-        [Display(Name = "Vehicle Type")]
         [Required(ErrorMessage = "Please select a vehicle type!")]
+        [Display(Name = "Vehicle Type")]
         public int VehicleTypeId { get; set; }
         public VehicleType VehicleType { get; set; }
 

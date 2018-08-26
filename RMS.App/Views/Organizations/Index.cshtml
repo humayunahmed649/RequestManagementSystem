@@ -14,26 +14,28 @@
         </div>
     }
     <br />
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 col-sm-4 col-4 header-top-left no-padding">
+                <p>
+                    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-default" })
+                </p>
+            </div>
 
-    <div class="row align-items-center">
-        <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
-            <p>
-                @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-default" })
-            </p>
-        </div>
+            <div class="col-lg-8 col-sm-8 col-8 text-right no-padding">
+                <p>
+                    @using (Html.BeginForm("Index", "Organizations", FormMethod.Get))
+                    {
+                        <b>Search by (Name/Code/Reg No)</b>
+                        @Html.TextBox("searchText")
+                        <input type="submit" value="Search" />
+                    }
+                </p>
 
-        <div class="col-lg-6 col-sm-6 col-8 text-right no-padding">
-            <p>
-                @using (Html.BeginForm("Index", "Organizations", FormMethod.Get))
-                {
-                    <b>Search by (Name/Code/Reg No)</b>
-                    @Html.TextBox("searchText")
-                    <input type="submit" value="Search" />
-                }
-            </p>
-
+            </div>
         </div>
     </div>
+    
     <table class="table table-bordered table-active table-striped">
         <tr>
             <th>
