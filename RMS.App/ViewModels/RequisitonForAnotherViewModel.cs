@@ -23,14 +23,23 @@ namespace RMS.App.ViewModels
         public string DestinationPlace { get; set; }
 
         [Required(ErrorMessage = "Please provide a journey start date and time!")]
-        [Display(Name = "Start Date Time")]
+        [Display(Name = "Journey Date")]
         public DateTime StartDateTime { get; set; }
 
+        [Display(Name = "Journey Time")]
+        [Required(ErrorMessage = "Please set a journey time!")]
+        public string StartTime { get; set; }
+
         [Required(ErrorMessage = "Please provide a journey end date and time!")]
-        [Display(Name = "End Date Time")]
+        [Display(Name = "Return Date")]
         public DateTime EndDateTime { get; set; }
 
+        [Display(Name = "Return Time")]
+        [Required(ErrorMessage = "Please set a return time!")]
+        public string EndTime { get; set; }
+
         [Required(ErrorMessage = "Please provide a short journey description!")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please provide a request for self or others!")]

@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="~/Content/css/main.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <!--Start Header Menu-->
@@ -129,7 +130,9 @@
     <script src="~/Content/js/owl.carousel.min.js"></script>
     <script src="~/Content/js/jquery.nice-select.min.js"></script>
     <script src="~/Content/js/mail-script.js"></script>
-    <script src="~/Content/js/main.js"></script> 
-            @RenderSection("scripts", required: false)
+    <script src="~/Content/js/main.js"></script>
+
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>
