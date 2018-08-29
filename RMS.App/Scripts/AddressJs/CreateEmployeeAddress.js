@@ -127,8 +127,7 @@ $("#PACheckBox").click(function () {
 
     tableBody.append(tr);
     ++index;
-    $("#PACheckBox").hide();
-
+    readOnlyPresentAddressAllField();
 });
 
 function getPresentAddressForForm() {
@@ -148,6 +147,17 @@ function getPresentAddressForForm() {
         slNo:sl, addressType: addressType, addressLine1: addressLine1, addressLine2: addressLine2, postOffice: postOffice, postCode: postCode,
         divisionDD: divisionDropDown, districtDD:districtDropDown, upazilaDD:upazilaDropDown
     }
+}
+
+function readOnlyPresentAddressAllField() {
+    $("#PACheckBox").hide();
+    $('#addressLine1').attr('disabled', true);
+    $('#addressLine2').attr('disabled', true);
+    $('#postOffice').attr('disabled', true);
+    $('#postCode').attr('disabled', true);
+    $('#divisionDD').attr('disabled', true);
+    $('#districtDD').attr('disabled', true);
+    $('#upazilaDD').attr('disabled', true);
 }
 
 //Permanent address same as Present address
@@ -171,15 +181,7 @@ $("#PACheckBox1").click(function () {
 
     tableBody.append(tr);
     ++index;
-    $("#PACheckBox1").hide();
-    $("#addressLine1p").hide();
-    $("#addressLine2p").hide();
-    $("#postOfficep").hide();
-    $("#postCodep").hide();
-    $("#divisionDDp").hide();
-    $("#districtDDp").hide();
-    $("#upazilaDDp").hide();
-    $("#PACheckBox2").hide();
+    readOnlyPermanentAddressAllField();
 });
 
 function getSamePermanentAddressForForm() {
@@ -193,7 +195,6 @@ function getSamePermanentAddressForForm() {
     var divisionDropDown = $("#divisionDD").val();
     var districtDropDown = $("#districtDD").val();
     var upazilaDropDown = $("#upazilaDD").val();
-
 
     return {
         slNo: sl, addressType: addressType, addressLine1: addressLine1, addressLine2: addressLine2, postOffice: postOffice, postCode: postCode,
@@ -223,9 +224,7 @@ $("#PACheckBox2").click(function () {
 
     tableBody.append(tr);
     ++index;
-    $("#PACheckBox1").hide();
-    $("#PACheckBox2").hide();
-
+    readOnlyPermanentAddressAllField();
 });
 
 function getPermanentAddressForForm() {
@@ -245,4 +244,16 @@ function getPermanentAddressForForm() {
         divisionDD: divisionDropDown, districtDD: districtDropDown, upazilaDD: upazilaDropDown
 
     }
+}
+
+function readOnlyPermanentAddressAllField() {
+    $("#PACheckBox1").hide();
+    $("#PACheckBox2").hide();
+    $('#addressLine1p').attr('disabled', true);
+    $('#addressLine2p').attr('disabled', true);
+    $('#postOfficep').attr('disabled', true);
+    $('#postCodep').attr('disabled', true);
+    $('#divisionDDp').attr('disabled', true);
+    $('#districtDDp').attr('disabled', true);
+    $('#upazilaDDp').attr('disabled', true);
 }

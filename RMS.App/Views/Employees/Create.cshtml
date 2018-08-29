@@ -9,7 +9,6 @@
 <h2>Create Employee</h2>
 <br />
 
-
 @using (Html.BeginForm())
             {
     @Html.AntiForgeryToken()
@@ -147,10 +146,9 @@
                 <h3 class="col-md-offset-3">Address Info</h3><br/>
                 <div class="row">
                     <!--Present Address-->
-                    <div class="col-md-6" style="background-color: #e6e6fa">
+                    <div class="col-md-6" style="background-color: #e6e6fa" id="readOnlyPresentAddress">
                         <br/>
                         <div class="form-group row">
-
                             <div class="col-md-12">
                                 <b><strong><u>Mailing/Present Address :</u></strong></b>
                                 @*@Html.EditorFor(model => model.AddressViewModel.AddressType, null, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Present Address", Type = "Text", value = "Present Address", @readOnly = "readonly", @id = "addressType"}})*@
@@ -218,17 +216,14 @@
 
                     <!--Permanent Address-->
                     <div class="col-md-6" style="background-color: #e6e6fa">
-
                         <br/>
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <b><strong><u>Permanent Address :</u></strong></b>
                                 @*@Html.EditorFor(model => model.AddressViewModel.AddressType, null, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Permanent Address", Type = "Text", value = "Permanent Address", @readOnly = "readonly"}})*@
                             </div>
-                            <br/><br/>
                             <div class="col-md-5" style="margin: 0 15px;">
-                                <p><input type="checkbox" id="PACheckBox1"/> <strong> Same as present address </strong>
-                                </p>
+                                <input type="checkbox" id="PACheckBox1"/> <strong> Same as present address </strong>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -371,10 +366,11 @@
 
 }
 
-
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
     <script src="~/Scripts/AddressJs/CreateEmployeeAddress.js"></script>
 
 }
