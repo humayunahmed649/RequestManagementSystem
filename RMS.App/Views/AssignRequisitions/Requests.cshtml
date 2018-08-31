@@ -49,7 +49,9 @@
                         </td>
                         <td>
                             @Html.ActionLink("Assign Requisition", "Create", new { id = item.RequisitionId }) |
-                            @Html.ActionLink("View", "ViewDetails", new { id = item.Id })
+                            @Html.ActionLink("View", "ViewDetails", new { id = item.RequisitionId }) |
+                            @Html.ActionLink("Cancel Requisition", "Cancel", new { id = item.RequisitionId })
+
                         </td>
                     </tr>
                 }
@@ -64,8 +66,8 @@
     </table>
 </div>
 
-<<<<<<< HEAD
-@foreach (var item in Model) {
+@*@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.StatusType)
@@ -77,14 +79,12 @@
             @Html.DisplayFor(modelItem => item.RequisitionId)
         </td>
         <td>
-            @Html.ActionLink("Assign Requisition", "Create", new { id=item.RequisitionId }) |
+            @Html.ActionLink("Assign Requisition", "Create", new {id = item.RequisitionId}) |
             @Html.ActionLink("View", "ViewDetails", new {id = item.RequisitionId}) |
-            @Html.ActionLink("Cancel Requisition", "Cancel", new { id = item.RequisitionId })
-            
+            @Html.ActionLink("Cancel Requisition", "Cancel", new {id = item.RequisitionId})
+
         </td>
     </tr>
 }
 
-</table>
-=======
->>>>>>> 97536f54b3cf80ff3931503338c4b63e6fc413de
+    </table >*@
