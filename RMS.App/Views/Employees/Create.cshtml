@@ -206,10 +206,9 @@
                         <div class="form-group row">
                             <div class="col-md-3">
                             </div>
-                            <br/><br/>
-                            <div class="col-md-6" style="margin: 0 15px;">
-                                <p><input type="checkbox" id="PACheckBox"/> <strong> Present address is true! </strong>
-                                </p>
+                            <div class="col-md-6">
+                                <input type="checkbox" id="PACheckBox"/> <strong> Present address is true! </strong>
+
                             </div>
                         </div>
                     </div>
@@ -222,7 +221,7 @@
                                 <b><strong><u>Permanent Address :</u></strong></b>
                                 @*@Html.EditorFor(model => model.AddressViewModel.AddressType, null, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Permanent Address", Type = "Text", value = "Permanent Address", @readOnly = "readonly"}})*@
                             </div>
-                            <div class="col-md-5" style="margin: 0 15px;">
+                            <div class="col-md-5">
                                 <input type="checkbox" id="PACheckBox1"/> <strong> Same as present address </strong>
                             </div>
                         </div>
@@ -277,10 +276,8 @@
                         <div class="form-group row">
                             <div class="col-md-3">
                             </div>
-                            <br/><br/>
-                            <div class="col-md-6" style="margin: 0 15px;">
-                                <p><input type="checkbox" id="PACheckBox2"/> <strong> Permanent address is true! </strong>
-                                </p>
+                            <div class="col-md-6">
+                                <input type="checkbox" id="PACheckBox2"/> <strong> Permanent address is true! </strong>
                             </div>
                         </div>
                     </div>
@@ -369,8 +366,6 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-
-    <script src="~/Scripts/jquery-3.2.1.js"></script>
     <script src="~/Scripts/AddressJs/CreateEmployeeAddress.js"></script>
 
 }
