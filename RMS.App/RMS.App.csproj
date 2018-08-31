@@ -581,7 +581,6 @@
     <Content Include="Views\Requisitions\CreateRequestForOther.cshtml" />
     <Content Include="Views\Requisitions\Assign.cshtml" />
     <Content Include="Views\AssignRequisitions\Delete.cshtml" />
-    <Content Include="Views\AssignRequisitions\RequisitionDetails.cshtml" />
     <Content Include="Views\AssignRequisitions\Edit.cshtml" />
     <Content Include="Views\AssignRequisitions\Index.cshtml" />
     <Content Include="Views\AssignRequisitions\Details.cshtml" />
@@ -611,6 +610,7 @@
     <Content Include="Views\GatePass\CompleteRequisition.cshtml" />
     <Content Include="Views\GatePass\Edit.cshtml" />
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
+    <Content Include="Views\AssignRequisitions\Cancel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

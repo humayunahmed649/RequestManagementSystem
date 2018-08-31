@@ -42,5 +42,10 @@ namespace RMS.Repositories
         {
             return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").ToList();
         }
+
+        public ICollection<Employee> GetAllEmployees()
+        {
+            return db.Set<Employee>().Include(c => c.EmployeeType).Where(c => c.EmployeeType.Type == "Employee").ToList();
+        }
     }
 }

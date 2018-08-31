@@ -10,5 +10,6 @@ namespace RMS.Repositories.Contracts
     public interface IRequisitionRepository:IRepository<Requisition>
     {
         ICollection<Requisition> GetAllWithEmployee();
+        
     }
 }

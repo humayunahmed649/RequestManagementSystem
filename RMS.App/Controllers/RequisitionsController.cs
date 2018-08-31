@@ -66,7 +66,7 @@ namespace RMS.App.Controllers
         // GET: Requisitions/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName");
+            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
             return View();
         }
         
@@ -107,7 +107,7 @@ namespace RMS.App.Controllers
         [HttpGet]
         public ActionResult CreateRequestForOther()
         {
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName");
+            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
             return View();
         }
         [HttpPost]
@@ -132,7 +132,7 @@ namespace RMS.App.Controllers
                 }
             }
 
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitonForAnother.EmployeeId);
+            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName", requisitonForAnother.EmployeeId);
             return View(requisitonForAnother);
         }
 

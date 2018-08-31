@@ -209,47 +209,54 @@ namespace RMS.App.Controllers
             }
             if (requisition != null)
             {
-                var requestDetails = _requisitionManager.GetAllWithEmployee();
+                var requisitions = _requisitionManager.GetAllWithEmployee();
                 RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
 
                 return View(requisitionViewModel);
             }
             return View("Error");
         }
-
-        public ActionResult EditRequisition(int? id)
+        [HttpGet]
+        public ActionResult Cancel(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Requisition requisition = _requisitionManager.FindById((int)id);
+            Requisition requisition = _requisitionManager.FindById(id);
+
             if (requisition == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
             RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-            return View(requisitionViewModel);
+            ViewBag.RequisitionId = requisition.Id;
+            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAll(), "Id", "StatusType");
+            ViewBag.RequisitionNumber = requisition.RequisitionNumber;
+            return View();
         }
 
-        // POST: Requisitions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditRequisition([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] RequisitionViewModel requisitionViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
-                _requisitionManager.Update(requisition);
-                TempData["msg"] = "Information has been updated successfully";
-                return RedirectToAction("Index");
-            }
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
-            return View(requisitionViewModel);
-        }
+        //public ActionResult Cancel([Bind(Include = "Id,RequisitionStatusId,RequisitionId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
+        //        assignRequisition.Id = assignRequisition.Id;
+        //        assignRequisition.VehicleId = 0;
+        //        assignRequisition.EmployeeId = 0;
+        //        _assignRequisitionManager.Add(assignRequisition);
+        //        RequisitionStatus status = new RequisitionStatus();
+        //        status.Id = assignRequisition.RequisitionStatusId;
+        //        status.RequisitionId = assignRequisition.RequisitionId;
+        //        status.RequisitionNumber = assignRequisition.RequisitionNumber;
+        //        status.StatusType = "Cancelled";
+        //        _requisitionStatusManager.Update(status);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+
+        //}
 
         protected override void Dispose(bool disposing)
         {

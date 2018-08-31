@@ -11,5 +11,6 @@ namespace RMS.Repositories.Contracts
     {
         ICollection<Employee> SearchByText(string searchText);  
         ICollection<Employee> GetAllDriver();
+        ICollection<Employee> GetAllEmployees();
     }
 }

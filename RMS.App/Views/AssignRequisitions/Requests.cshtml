@@ -34,7 +34,9 @@
         </td>
         <td>
             @Html.ActionLink("Assign Requisition", "Create", new { id=item.RequisitionId }) |
-            @Html.ActionLink("View", "ViewDetails", new { id=item.Id }) 
+            @Html.ActionLink("View", "ViewDetails", new {id = item.RequisitionId}) |
+            @Html.ActionLink("Cancel Requisition", "Cancel", new { id = item.RequisitionId })
+            
         </td>
     </tr>
 }

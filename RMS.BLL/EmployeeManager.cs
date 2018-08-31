@@ -27,5 +27,10 @@ namespace RMS.BLL
         {
             return _employeeRepository.GetAllDriver();
         }
+
+        public ICollection<Employee> GetAllEmployees()
+        {
+            return _employeeRepository.GetAllEmployees();
+        }
     }
 }
