@@ -1,26 +1,70 @@
 ﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
 
 @{
-    ViewBag.Title = "Requests";
+    ViewBag.Title = "New Requests List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Requests</h2>
+<div class="container" style="min-height: 400px">
+    <h2>New Requests List</h2>
+    <hr />
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RequisitionNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RequisitionId)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table table-bordered table-active table-striped">
+        <tr>
+            <th>
+                SL
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequisitionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequisitionId)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        @{
+            var sl = 0;
+            if (Model.Count() != 0)
+            {
+                foreach (var item in Model)
+                {
+                    sl++;
+                    <tr>
+                        <td>
+                            @sl
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StatusType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequisitionNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequisitionId)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Assign Requisition", "Create", new { id = item.RequisitionId }) |
+                            @Html.ActionLink("View", "ViewDetails", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center text-danger" colspan="5"> Data Not Found!</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
 
+<<<<<<< HEAD
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -42,3 +86,5 @@
 }
 
 </table>
+=======
+>>>>>>> 97536f54b3cf80ff3931503338c4b63e6fc413de

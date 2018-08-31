@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -21,15 +22,22 @@ namespace RMS.App.Controllers
         private IOrganizationManager _organizationManager;
         private IDepartmentManager _departmentManager;
         private IEmployeeTypeManager _employeeTypeManager;
+        private IDivisionManager _divisionManager;
+        private IDistrictManager _districtManager;
+        private IUpazilaManager _upazilaManager;
 
         public EmployeesController(IEmployeeManager employeeManager, IDepartmentManager departmentManager,
-            IDesignationManager designationManager, IOrganizationManager organizationManager,IEmployeeTypeManager employeeTypeManager)
+            IDesignationManager designationManager, IOrganizationManager organizationManager,IEmployeeTypeManager employeeTypeManager ,
+            IDivisionManager divisionManager, IDistrictManager districtManager, IUpazilaManager upazilaManager)
         {
             this._employeeManager = employeeManager;
             this._departmentManager = departmentManager;
             this._designationManager = designationManager;
             this._organizationManager = organizationManager;
             this._employeeTypeManager = employeeTypeManager;
+            this._divisionManager = divisionManager;
+            this._districtManager = districtManager;
+            this._upazilaManager = upazilaManager;
         }
 
         // GET: Employees
@@ -73,7 +81,11 @@ namespace RMS.App.Controllers
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
             ViewBag.EmployeeTypeId=new SelectList(_employeeTypeManager.GetAll(),"Id","Type");
-            return View();
+            EmployeeViewModel employeeViewModel=new EmployeeViewModel();
+            employeeViewModel.DivisionList = (List<Division>) _divisionManager.GetAllDivisions();
+            ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+            ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+            return View(employeeViewModel);
         }
         
 
@@ -82,21 +94,78 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
                 Employee employee = Mapper.Map<Employee>(employeeViewModel);
+
+                var email = employee.Email.Trim();
+                if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
+                {
+                    ViewBag.Message1 = "Employee email already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
+                var contactNo = employee.ContactNo.Trim();
+                if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo) > 0)
+                {
+                    ViewBag.Message2 = "Employee contact no already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
+                var nid = employee.NID.Trim();
+                if (_employeeManager.GetAll().Count(o => o.NID == nid) > 0)
+                {
+                    ViewBag.Message3 = "Employee NID already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
+                var drivingLicence = employee.DrivingLicence.Trim();
+                if (_employeeManager.GetAll().Count(o=>o.DrivingLicence==drivingLicence)>0) 
+                {
+                    ViewBag.Message4 = "Employee driving licence no already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
+
                 _employeeManager.Add(employee);
                 TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
             }
 
-            TempData["msg"] = "Please Check Your Information. Got some error";
+            TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
             ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type",employeeViewModel.EmployeeTypeId);
+            employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+            ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+            ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
             return View(employeeViewModel);
         }
 
@@ -117,6 +186,9 @@ namespace RMS.App.Controllers
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employee.OrganizationId);
             ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employee.EmployeeTypeId);
             EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
+            employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+            ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+            ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
             return View(employeeViewModel);
         }
 
@@ -125,11 +197,64 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId")] EmployeeViewModel employeeViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
                 Employee employee = Mapper.Map<Employee>(employeeViewModel);
+
+                var email = employee.Email.Trim();
+                if (_employeeManager.GetAll().Count(o => o.Email == email && o.Id!=employee.Id) > 0)
+                {
+                    ViewBag.Message1 = "Employee email already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
+                var contactNo = employee.ContactNo.Trim();
+                if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo && o.Id != employee.Id) > 0)
+                {
+                    ViewBag.Message2 = "Employee contact no already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
+                var nid = employee.NID.Trim();
+                if (_employeeManager.GetAll().Count(o => o.NID == nid && o.Id != employee.Id) > 0)
+                {
+                    ViewBag.Message3 = "Employee NID already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
+                var drivingLicence = employee.DrivingLicence.Trim();
+                if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence && o.Id != employee.Id) > 0)
+                {
+                    ViewBag.Message4 = "Employee driving licence no already exist.";
+                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
+                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
+                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
+                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
+                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                    return View(employeeViewModel);
+                }
                 _employeeManager.Update(employee);
                 TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
@@ -138,6 +263,9 @@ namespace RMS.App.Controllers
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
             ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
+            employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+            ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+            ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
             return View(employeeViewModel);
         }
 
@@ -167,8 +295,27 @@ namespace RMS.App.Controllers
             TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
-   
 
+        public JsonResult GetDistrictsByDivisionId(int? divisionId)
+        {
+            if (divisionId == null)
+            {
+                return null;
+            }
+
+            var districts = _districtManager.GetDistrictsById((int)divisionId);
+            return Json(districts, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetUpazilaByDistrictId(int? districtId)
+        {
+            if (districtId == null)
+            {
+                return null;
+            }
+
+            var upazilas = _upazilaManager.GetUpazilasById((int)districtId);
+            return Json(upazilas, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -178,6 +325,9 @@ namespace RMS.App.Controllers
                 _designationManager.Dispose();
                 _organizationManager.Dispose();
                 _employeeTypeManager.Dispose();
+                _divisionManager.Dispose();
+                _districtManager.Dispose();
+                _upazilaManager.Dispose();
             }
             base.Dispose(disposing);
         }

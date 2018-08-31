@@ -76,6 +76,14 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
+
+                var name = vehicleType.Name.Trim();
+                if (_vehicleTypeManager.GetAll().Count(o => o.Name == name) > 0)
+                {
+                    ViewBag.Message = "Vehicle type name already exist.";
+                    return View(vehicleTypeViewModel);
+                }
+
                 _vehicleTypeManager.Add(vehicleType);
                 TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
@@ -110,6 +118,13 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
+
+                var name = vehicleType.Name.Trim();
+                if (_vehicleTypeManager.GetAll().Count(o => o.Name == name && o.Id != vehicleType.Id) > 0)
+                {
+                    ViewBag.Message = "Vehicle type name already exist.";
+                    return View(vehicleTypeViewModel);
+                }
                 _vehicleTypeManager.Update(vehicleType);
                 TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");

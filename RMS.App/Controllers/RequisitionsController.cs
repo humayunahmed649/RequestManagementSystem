@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -76,14 +77,26 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,EmployeeId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,EmployeeId")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
+                var startDate = requisitionViewModel.StartDateTime.ToString("MM/dd/yyyy");
+                var startTime = requisitionViewModel.StartTime;
+                DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
+                requisitionViewModel.StartDateTime = startDateTime;
+
+                var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
+                var endTime = requisitionViewModel.EndTime;
+                DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
+                requisitionViewModel.StartDateTime = endDateTime;
+
                 requisitionViewModel.RequestFor = "Own";
                 requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
+
                 Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
                 bool IsSaved = _requisitionManager.Add(requisition);
+
                 //Requisition Status Save
                 if (IsSaved == true)
                 {
@@ -102,21 +115,34 @@ namespace RMS.App.Controllers
             return View(requisitionViewModel);
         }
 
-      
-
+        // GET: Requisitions/CreateRequestForOther
         [HttpGet]
         public ActionResult CreateRequestForOther()
         {
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
             return View();
         }
+
+        // POST: Requisitions/CreateRequestForOther
         [HttpPost]
-        public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] RequisitonForAnotherViewModel requisitonForAnother)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId")] RequisitonForAnotherViewModel requisitonForAnother)
         {
             if (ModelState.IsValid)
             {
+                var startDate = requisitonForAnother.StartDateTime.ToString("MM/dd/yyyy");
+                var startTime = requisitonForAnother.StartTime;
+                DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
+                requisitonForAnother.StartDateTime = startDateTime;
+
+                var endDate = requisitonForAnother.EndDateTime.ToString("MM/dd/yyyy");
+                var endTime = requisitonForAnother.EndTime;
+                DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
+                requisitonForAnother.StartDateTime = endDateTime;
+
                 requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
                 Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
+
                 bool IsSaved=_requisitionManager.Add(requisition);
                 //Requisition Status Save
                 if (IsSaved == true)
@@ -158,11 +184,22 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,EndDateTime,Description,RequestFor,EmployeeId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
+                var startDate = requisitionViewModel.StartDateTime.ToString("MM/dd/yyyy");
+                var startTime = requisitionViewModel.StartTime;
+                DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
+                requisitionViewModel.StartDateTime = startDateTime;
+
+                var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
+                var endTime = requisitionViewModel.EndTime;
+                DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
+                requisitionViewModel.StartDateTime = endDateTime;
+
                 Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
+
                 _requisitionManager.Update(requisition);
                 TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");
@@ -197,9 +234,6 @@ namespace RMS.App.Controllers
             TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
         }
-        
-        
-
 
         protected override void Dispose(bool disposing)
         {
@@ -207,6 +241,8 @@ namespace RMS.App.Controllers
             {
                 _requisitionManager.Dispose();
                 _employeeManager.Dispose();
+                _requisitionStatusManager.Dispose();
+                _vehicleManager.Dispose();
             }
             base.Dispose(disposing);
         }

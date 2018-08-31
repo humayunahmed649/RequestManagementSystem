@@ -1,18 +1,17 @@
 ﻿@model RMS.App.ViewModels.AssignRequisitionViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Assigned Requisition Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Assigned Requisition Details</h2>
+<hr/>
 
 <div class="row">
 
     <div class="col-md-8">
-        <br/>
-        <h4>Requestor Information</h4>
-        <br/>
+
         <table class="table table-light table-active table-primary table-hover">
             <tr>
                 <td>@Html.DisplayNameFor(model => model.RequisitionId)</td>
@@ -150,6 +149,6 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) &nbsp;
     @Html.ActionLink("Back to List", "Index")
 </p>

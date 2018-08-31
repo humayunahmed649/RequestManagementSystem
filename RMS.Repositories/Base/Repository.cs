@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -14,14 +15,11 @@ namespace RMS.Repositories.Base
     {
         protected DbContext db;
 
-        public Repository(DbContext db)
+        protected Repository(DbContext db)
         {
             this.db = db;
         }
-        public void Dispose()
-        {
-            db?.Dispose();
-        }
+        
         public virtual bool Add(T entity)
         {
             db.Set<T>().Add(entity);
@@ -51,6 +49,10 @@ namespace RMS.Repositories.Base
         public virtual T FindById(int id)
         {
             return db.Set<T>().Find(id);
+        }
+        public void Dispose()
+        {
+            db?.Dispose();
         }
     }
 }

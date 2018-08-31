@@ -1,12 +1,13 @@
 ﻿@model RMS.App.ViewModels.EmployeeTypeViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Employee Type Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Employee Type Details</h2>
 <hr/>
+
 <div class="row">
     <div class="col-md-2">@Html.DisplayNameFor(model => model.Type)</div>
     <div class="col-md-10">@Html.DisplayFor(model => model.Type)</div>

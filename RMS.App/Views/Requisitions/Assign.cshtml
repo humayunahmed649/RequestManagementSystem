@@ -2,12 +2,14 @@
 @model RMS.App.ViewModels.AssignRequisitionViewModel
 
 @{
+    ViewBag.Title = "Assign Requisition";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2> Assign Requisition</h2>
+<hr/>
 
 <div>
-    <h4>Requisition</h4>
     
     <dl>
 
@@ -68,10 +70,10 @@
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>Assign Form</h4>
-            <hr/>
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+
+            <div class="form-group row">
                 @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.RequisitionId, new { htmlAttributes = new { @readonly = "readonly" } })
@@ -79,7 +81,7 @@
                 </div>
             </div>
     
-            <div class="form-group">
+            <div class="form-group row">
                 @Html.LabelFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("Vehicle",null, new { htmlAttributes = new { @class = "dropdown form-control" } })
@@ -87,32 +89,32 @@
                 </div>
             </div>
     
-            <div class="form-group">
-                @Html.LabelFor(model => model.DriverId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("Driver",null, new { htmlAttributes = new { @class = "dropdown form-control" } })
-                    @Html.ValidationMessageFor(model => model.DriverId, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                 </div>
             </div>
     
             
     
-            <div class="form-group">
-                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.RequisitionStatusId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.RequisitionStatusId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RequisitionStatusId, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default"/> &nbsp;
+                    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-info"})
                 </div>
             </div>
         </div>
     }
     
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+

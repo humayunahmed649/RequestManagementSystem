@@ -71,6 +71,12 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
+
+                if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type) > 0)
+                {
+                    ViewBag.Message = "Employee type name already exist.";
+                    return View(employeeTypeViewModel);
+                }
                 _employeeTypeManager.Add(employeeType);
                 TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
@@ -105,6 +111,12 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
+
+                if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type && o.Id != employeeType.Id) > 0)
+                {
+                    ViewBag.Message = "Employee type name already exist.";
+                    return View(employeeTypeViewModel);
+                }
                 _employeeTypeManager.Update(employeeType);
                 TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");

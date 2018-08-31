@@ -1,137 +1,166 @@
-﻿@model RMS.App.ViewModels.RequisitionViewModel
+﻿@using RMS.App.ViewModels
+@model RMS.App.ViewModels.RequisitionViewModel
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Vehicle Requisition";
 }
-<br />
-
-<div class="col-md-6">
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a>
-
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a>
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a>
+@section styles{
+    
+<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+}
+<div class="col-md-12" style="height: 400px;">
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a> &nbsp;
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a> &nbsp;
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a> &nbsp;
 </div>
 
-
-<div class="modal fade" id="forRequest">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h3 class="modal-title">Request For Other</h3>
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-            </div>
-            <div class="modal-body">
-
-                @Html.Partial("CreateRequestForOther")
-
-            </div>
-            <div class="modal-footer"></div>
-            <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
-        </div>
-    </div>
-</div>
-
-<!-----------start Request for me-->
+<!--Request for me-->
 <div class="modal fade" id="ownRequest">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <div class="modal-header">
+            <div class="modal-header bg-info">
                 <h3 class="modal-title">Request For Own</h3>
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
             </div>
-            <div class="modal-body">
+            <div class="modal-body table-info">
 
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("Create","Requisitions",FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.FromPlace, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.FromPlace, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
                                 @Html.EditorFor(model => model.FromPlace, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.FromPlace, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.DestinationPlace, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.DestinationPlace, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
                                 @Html.EditorFor(model => model.DestinationPlace, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.DestinationPlace, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                                @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.StartDateTime, new {htmlAttributes = new {@class = "form-control datePicker" } })
+                                @Html.ValidationMessageFor(model => model.StartDateTime, "", new {@class = "text-danger"})
                             </div>
+
+                            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.StartTime, new { htmlAttributes =new { @class= "form-control timePicker" } })
+                                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control datePicker" } })
                                 @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
                             </div>
+
+                            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control timePicker" } })
+                                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                        @*<div class="form-group row">
+                            @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control", @id= "datepicker1" } })
+                                @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
                                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
                                 @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                                <input type="submit" value="Create" class="btn btn-success"/> &nbsp;
+                                <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
                             </div>
                         </div>
                     </div>
                 }
-            </div>
-            <div class="modal-footer"></div>
-            <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
-            
+            </div>           
         </div>
     </div>
 </div>
 
-<!-----------end Request for me-->
-
+<!--end Request for me-->
 <div class="modal fade" id="myRequest">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
-            <div class="modal-header">
+            <div class="modal-header bg-info">
                 <h3 class="modal-title">My Requisition</h3>
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
             </div>
-            <div class="modal-body">
-                <h4>My Request</h4>
-               @Html.Action("RequisitionList","Requisitions")
+            <div class="modal-body table-info">
+                @Html.Action("RequisitionList", "Requisitions")
+
             </div>
-            <div class="modal-footer"></div>
-            <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
+
+            <div class="col-md-12 text-right">
+                <br/>
+                <p><a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>
+
+<!--Request for other-->
+<div class="modal fade" id="forRequest">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h3 class="modal-title">Request For Other</h3>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body table-info">
+                @Html.Partial("CreateRequestForOther")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+@Scripts.Render("~/bundles/jqueryval")
+@*<script src="~/Scripts/jquery-3.2.1.js"></script>*@
+<script src="~/Scripts/moment.js"></script>
+@*<script src="~/Scripts/bootstrap.js"></script>*@
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<script src="~/Scripts/RequisitionJs/RequisitionDataTime.js"></script>
+
+}

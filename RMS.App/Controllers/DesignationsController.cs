@@ -73,6 +73,13 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Designation designation = Mapper.Map<Designation>(designationViewModel);
+
+                var title = designation.Title.Trim();
+                if (_designationManager.GetAll().Count(o => o.Title == title) > 0)
+                {
+                    ViewBag.Message = "Designation title already exist.";
+                    return View(designationViewModel);
+                }
                 _designationManager.Add(designation);
                 TempData["msg"] = "Information has been saved successfully";
                 return RedirectToAction("Index");
@@ -107,6 +114,13 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Designation designation = Mapper.Map<Designation>(designationViewModel);
+                var title = designation.Title.Trim();
+                if (_designationManager.GetAll().Count(o => o.Title == title && o.Id!=designation.Id) > 0)
+                {
+                    ViewBag.Message = "Designation title already exist.";
+                    return View(designationViewModel);
+                }
+
                 _designationManager.Update(designation);
                 TempData["msg"] = "Information has been updated successfully";
                 return RedirectToAction("Index");

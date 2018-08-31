@@ -12,6 +12,7 @@ namespace RMS.Models.EntityModels
     {
         [Key]
         public int Id { get; set; }
+
         [Required,StringLength(250)]
         public string RequisitionNumber { get; set; }
 

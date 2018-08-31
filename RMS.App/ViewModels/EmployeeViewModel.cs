@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
@@ -52,6 +53,12 @@ namespace RMS.App.ViewModels
         [Display(Name = "Employee Type")]
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
+
+        [NotMapped]
+        public AddressViewModel AddressViewModel { get; set; }
+
+        [NotMapped]
+        public List<Division> DivisionList { get; set; }
 
         public List<Address>Addresses { get; set; }  
         
