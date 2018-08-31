@@ -66,25 +66,4 @@
     </table>
 </div>
 
-@*@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RequisitionNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RequisitionId)
-        </td>
-        <td>
-            @Html.ActionLink("Assign Requisition", "Create", new {id = item.RequisitionId}) |
-            @Html.ActionLink("View", "ViewDetails", new {id = item.RequisitionId}) |
-            @Html.ActionLink("Cancel Requisition", "Cancel", new {id = item.RequisitionId})
 
-        </td>
-    </tr>
-}
-
-    </table >*@

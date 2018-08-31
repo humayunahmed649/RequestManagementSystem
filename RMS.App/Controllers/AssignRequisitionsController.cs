@@ -86,7 +86,7 @@ namespace RMS.App.Controllers
             }
             RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
             ViewBag.RequisitionId = requisition.Id;
-            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAll(), "Id", "StatusType");
+            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
             ViewBag.RequisitionNumber = requisition.RequisitionNumber;
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
             ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
