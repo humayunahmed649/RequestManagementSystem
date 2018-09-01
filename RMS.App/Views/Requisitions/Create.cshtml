@@ -12,6 +12,7 @@
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a> &nbsp;
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a> &nbsp;
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a> &nbsp;
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#notification">Notification</a> &nbsp;
 </div>
 
 <!--Request for me-->
@@ -79,13 +80,7 @@
 
                         </div>
 
-                        @*<div class="form-group row">
-                            @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control", @id= "datepicker1" } })
-                                @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
+                       
 
                         <div class="form-group row">
                             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -149,6 +144,27 @@
             </div>
             <div class="modal-body table-info">
                 @Html.Partial("CreateRequestForOther")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="notification">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h3 class="modal-title">Notification</h3>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body table-info">
+                @Html.Action("Notification")
+
+            </div>
+
+            <div class="col-md-12 text-right">
+                <br />
+                <p>
+                    <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
+                </p>
             </div>
         </div>
     </div>

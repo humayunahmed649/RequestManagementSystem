@@ -1,0 +1,126 @@
+﻿@model RMS.App.ViewModels.CommentViewModel
+
+@{
+    ViewBag.Title = "Notification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Notification</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.RequisitionNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.FromPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.FromPlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.DestinationPlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.StartDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.StartDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.EndDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.EndDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.RequestFor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.RequestFor)
+        </dd>
+        <dd>
+            @Html.HiddenFor(model => model.Requisition.Id)
+        </dd>
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>
+    
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal row">
+
+        
+    <div class="col-md-6">
+        <div class="form-group row">
+            @Html.Label("Write a Comment", htmlAttributes: new {@class = "control-label col-md-3"})
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Text, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model=>model.Text, "", new {@class = "text-danger"})
+            </div>
+        </div>
+    </div>
+
+        <div class="col-md-9">
+            <input type="submit" value="Post" class="btn btn-success" /> &nbsp;
+        </div>
+    </div>
+
+}
+

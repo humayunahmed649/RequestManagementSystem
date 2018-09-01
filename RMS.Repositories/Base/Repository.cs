@@ -28,8 +28,8 @@ namespace RMS.Repositories.Base
 
         public virtual bool Update(T entity)
         {
-            db.Set<T>().AddOrUpdate(entity);
-            db.Entry(entity).State = EntityState.Detached;
+            //db.Set<T>().AddOrUpdate(entity);
+            db.Entry(entity).State = EntityState.Modified;
             return db.SaveChanges() > 0;
         }
 

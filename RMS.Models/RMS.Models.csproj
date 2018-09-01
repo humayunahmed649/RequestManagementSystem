@@ -52,6 +52,7 @@
     <Compile Include="DatabaseContext\RmsDbContext.cs" />
     <Compile Include="EntityModels\Address.cs" />
     <Compile Include="EntityModels\AssignRequisition.cs" />
+    <Compile Include="EntityModels\Comment.cs" />
     <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Designation.cs" />
     <Compile Include="EntityModels\District.cs" />

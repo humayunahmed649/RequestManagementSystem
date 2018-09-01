@@ -184,7 +184,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId,RequisitionNumber")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -233,6 +233,25 @@ namespace RMS.App.Controllers
             _requisitionManager.Remove(requisition);
             TempData["msg"] = "Information has been deleted successfully";
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Notification(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Requisition requisition = _requisitionManager.FindById((int)id);
+            if (requisition == null)
+            {
+                return HttpNotFound();
+            }
+            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+            CommentViewModel cvm=new CommentViewModel();
+            cvm.Requisition = requisition;
+            return View(cvm);
+            
         }
 
         protected override void Dispose(bool disposing)
