@@ -46,7 +46,7 @@ namespace RMS.App.Controllers
             ICollection<AssignRequisition> requisitions = _assignRequisitionManager.GetAll();
             IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModels =
                 Mapper.Map<IEnumerable<AssignRequisitionViewModel>>(requisitions);
-            return View((IEnumerable<AssignRequisitionViewModel>) assignRequisitionViewModels);
+            return View(assignRequisitionViewModels);
         }
 
         // GET: AssignRequisitions/Details/5
@@ -189,8 +189,16 @@ namespace RMS.App.Controllers
 
        
 
-        public ActionResult Requests()
+        public ActionResult Requests(string searchText)
         {
+            if (searchText != null)
+            {
+                IEnumerable<RequisitionStatus> requisition = _requisitionStatusManager.SearchByRequisitionId(searchText);
+                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
+                Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisition);
+                return View(requisitionStatusViewModels);
+            }
+
             ICollection<RequisitionStatus> requisitions = _requisitionStatusManager.GetAllStatusNew();
             IEnumerable<RequisitionStatusViewModel> requisitionViewModels =
                 Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitions);
@@ -219,7 +227,7 @@ namespace RMS.App.Controllers
         [HttpGet]
         public ActionResult Cancel(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

@@ -30,5 +30,13 @@ namespace RMS.Repositories
             return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "OnExecute").ToList();
         }
 
+        public ICollection<RequisitionStatus> SearchByRequisitionId(string searchText)
+        {
+            return
+                db.Set<RequisitionStatus>().Where(c=>c.StatusType=="New")
+                    .Include(c => c.Requisition)
+                    .Where(c => c.Requisition.RequisitionNumber.StartsWith(searchText))
+                    .ToList();
+        }
     }
 }

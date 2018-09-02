@@ -25,7 +25,7 @@ namespace RMS.BLL
 
         public AssignRequisition SearchByName(string searchByText)
         {
-            return _assignRequisitionRepository.SearchByName(searchByText);
+            return _assignRequisitionRepository.SearchByText(searchByText);
         }
 
        

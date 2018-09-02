@@ -18,8 +18,7 @@ namespace RMS.Repositories
 
         public override ICollection<AssignRequisition> GetAll()
         {
-            return
-                db.Set<AssignRequisition>().Include(c => c.Employee).Include(c => c.Requisition).Include(c => c.Vehicle).ToList();
+            return db.Set<AssignRequisition>().Include(c => c.Employee).Include(c => c.Requisition).Include(c => c.Vehicle).ToList();
         }
 
         public ICollection<AssignRequisition> GetAllWithInformation()
@@ -32,7 +31,7 @@ namespace RMS.Repositories
                 .ToList();
         }
 
-        public AssignRequisition SearchByName(string searchByText)
+        public AssignRequisition SearchByText(string searchByText)
         {
             return db.Set<AssignRequisition>().Include(c => c.Requisition).FirstOrDefault();
         }

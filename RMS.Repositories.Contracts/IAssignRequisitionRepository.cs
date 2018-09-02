@@ -10,6 +10,6 @@ namespace RMS.Repositories.Contracts
     public interface IAssignRequisitionRepository:IRepository<AssignRequisition>
     {
         ICollection<AssignRequisition> GetAllWithInformation();
-        AssignRequisition  SearchByName(string searchByText);
+        AssignRequisition  SearchByText(string searchByText);
     }
 }
