@@ -89,7 +89,7 @@ namespace RMS.App.Controllers
                 var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
                 var endTime = requisitionViewModel.EndTime;
                 DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
-                requisitionViewModel.StartDateTime = endDateTime;
+                requisitionViewModel.EndDateTime = endDateTime;
 
                 requisitionViewModel.RequestFor = "Own";
                 requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
@@ -138,7 +138,7 @@ namespace RMS.App.Controllers
                 var endDate = requisitonForAnother.EndDateTime.ToString("MM/dd/yyyy");
                 var endTime = requisitonForAnother.EndTime;
                 DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
-                requisitonForAnother.StartDateTime = endDateTime;
+                requisitonForAnother.EndDateTime = endDateTime;
 
                 requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
                 Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
@@ -196,7 +196,7 @@ namespace RMS.App.Controllers
                 var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
                 var endTime = requisitionViewModel.EndTime;
                 DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
-                requisitionViewModel.StartDateTime = endDateTime;
+                requisitionViewModel.EndDateTime = endDateTime;
 
                 Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
 

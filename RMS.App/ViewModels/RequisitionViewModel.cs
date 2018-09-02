@@ -56,7 +56,7 @@ namespace RMS.App.ViewModels
 
         public string GetRequisitionNumber()
         {
-            string requestNumber = DateTime.Now.ToString("HH:mm-d-MM/dd/yyyy");
+            string requestNumber = DateTime.Now.ToString("HHmmssMMddyyyy");
             return requestNumber;
         }
     }

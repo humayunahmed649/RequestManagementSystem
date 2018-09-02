@@ -26,6 +26,10 @@ namespace RMS.Repositories
             return db.Set<Requisition>().Include(c => c.Employee).Include(c=>c.Employee.Designation).ToList();
         }
 
+        public override Requisition FindById(int id)
+        {
+            return db.Set<Requisition>().Where(c => c.Id == id).Include(c => c.Employee).SingleOrDefault();
+        }
         
     }
 }
