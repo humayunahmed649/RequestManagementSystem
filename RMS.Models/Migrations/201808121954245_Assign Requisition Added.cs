@@ -20,7 +20,7 @@ namespace RMS.Models.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: true)
                 .ForeignKey("dbo.Requisitions", t => t.RequisitionId, cascadeDelete: false)
-                .ForeignKey("dbo.Vehicles", t => t.VehicleId, cascadeDelete: true)
+                .ForeignKey("dbo.Vehicles", t => t.VehicleId, cascadeDelete: false)
                 .Index(t => t.RequisitionId)
                 .Index(t => t.VehicleId)
                 .Index(t => t.EmployeeId);

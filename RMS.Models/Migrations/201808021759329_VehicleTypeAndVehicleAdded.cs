@@ -19,7 +19,7 @@ namespace RMS.Models.Migrations
                         VehicleTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.VehicleTypes", t => t.VehicleTypeId, cascadeDelete: true)
+                .ForeignKey("dbo.VehicleTypes", t => t.VehicleTypeId, cascadeDelete: false)
                 .Index(t => t.VehicleTypeId);
             
             CreateTable(

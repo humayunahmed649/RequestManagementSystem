@@ -20,7 +20,7 @@ namespace RMS.Models.Migrations
             DropIndex("dbo.Employees", new[] { "EmployeeTypeId" });
             AlterColumn("dbo.Employees", "EmployeeTypeId", c => c.Int(nullable: false));
             CreateIndex("dbo.Employees", "EmployeeTypeId");
-            AddForeignKey("dbo.Employees", "EmployeeTypeId", "dbo.EmployeeTypes", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Employees", "EmployeeTypeId", "dbo.EmployeeTypes", "Id", cascadeDelete: false);
         }
     }
 }

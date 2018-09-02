@@ -17,7 +17,7 @@ namespace RMS.Models.Migrations
                         OrganizationId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Organizations", t => t.OrganizationId, cascadeDelete: true)
+                .ForeignKey("dbo.Organizations", t => t.OrganizationId, cascadeDelete: false)
                 .Index(t => t.OrganizationId);
             
         }

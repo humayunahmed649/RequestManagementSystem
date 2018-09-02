@@ -20,7 +20,7 @@ namespace RMS.Models.Migrations
                         Website = c.String(nullable: false, maxLength: 150),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Divisions", t => t.DivisionId, cascadeDelete: true)
+                .ForeignKey("dbo.Divisions", t => t.DivisionId, cascadeDelete: false)
                 .Index(t => t.DivisionId);
             
             CreateTable(
@@ -43,7 +43,7 @@ namespace RMS.Models.Migrations
                         BnName = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Districts", t => t.DistrictId, cascadeDelete: true)
+                .ForeignKey("dbo.Districts", t => t.DistrictId, cascadeDelete: false)
                 .Index(t => t.DistrictId);
             
         }

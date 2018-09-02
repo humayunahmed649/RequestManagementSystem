@@ -44,8 +44,6 @@ namespace RMS.Repositories.Base
             return db.Set<T>().ToList();
         }
 
-        
-
         public virtual T FindById(int id)
         {
             return db.Set<T>().Find(id);

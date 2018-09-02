@@ -21,7 +21,7 @@ namespace RMS.Models.Migrations
                         EmployeeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: true)
+                .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: false)
                 .Index(t => t.EmployeeId);
             
         }
