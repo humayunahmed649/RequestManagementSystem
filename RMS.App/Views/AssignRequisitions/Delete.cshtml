@@ -1,57 +1,48 @@
 ﻿@model RMS.App.ViewModels.AssignRequisitionViewModel
 
 @{
-    Layout = null;
+    ViewBag.Title = "Delete Assign Requisition";
 }
+    <h2>Delete Assign Requisition</h2>
+    <h3 class="text-danger">Are you sure you want to delete this?</h3>
+    <hr />
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </dt>
 
-<!DOCTYPE html>
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>Assign Requisition</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Employee.FullName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Employee.FullName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Requisition.FromPlace)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Requisition.FromPlace)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Vehicle.BrandName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Vehicle.BrandName)
-            </dd>
-    
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
-    </div>
-</body>
-</html>
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.FromPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.FromPlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.BrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.BrandName)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-denger"/> &nbsp;
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-info"})
+        </div>
+    }
+</div>
