@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using AutoMapper;
+using Microsoft.Ajax.Utilities;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
@@ -75,28 +76,30 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Organization organization = Mapper.Map<Organization>(organizationViewModel);
+
                 var name = organization.Name.Trim();
+                var code = organization.Code.Trim();
+                var regNo = organization.RegNo.Trim();
+
                 if (_organizationManager.GetAll().Count(o=>o.Name==name)>0)
                 {
                     ViewBag.Message1 = "Organization name already exist.";
-                    return View(organizationViewModel);
                 }
-                var code = organization.Code.Trim();
                 if (_organizationManager.GetAll().Count(o => o.Code == code) > 0)
                 {
                     ViewBag.Message2 = "Organization code already exist.";
-                    return View(organizationViewModel);
                 }
-                var regNo = organization.RegNo.Trim();
                 if (_organizationManager.GetAll().Count(o => o.RegNo == regNo) > 0)
                 {
                     ViewBag.Message3 = "Organization registration no already exist.";
-                    return View(organizationViewModel);
                 }
-                _organizationManager.Add(organization);
+                if(ViewBag.Message1==null && ViewBag.Message2==null && ViewBag.Message3 ==null )
+                {
+                    _organizationManager.Add(organization);
 
-                TempData["msg"] = "Information has been save successfully";
-                return RedirectToAction("Index");
+                    TempData["msg"] = "Information has been save successfully";
+                    return RedirectToAction("Index");
+                }
             }
             
             return View(organizationViewModel);
@@ -128,29 +131,29 @@ namespace RMS.App.Controllers
             if (ModelState.IsValid)
             {
                 Organization organization = Mapper.Map<Organization>(organizationViewModel);
+
                 var name = organization.Name.Trim();
-                if (_organizationManager.GetAll().Count(o => o.Name == name && o.Id != organization.Id) > 0)
+                var code = organization.Code.Trim();
+                var regNo = organization.RegNo.Trim();
+
+                if (_organizationManager.GetAll().Count(o => o.Name == name && o.Id!=organization.Id) > 0)
                 {
                     ViewBag.Message1 = "Organization name already exist.";
-                    return View(organizationViewModel);
                 }
-                var code = organization.Code.Trim();
                 if (_organizationManager.GetAll().Count(o => o.Code == code && o.Id != organization.Id) > 0)
                 {
                     ViewBag.Message2 = "Organization code already exist.";
-                    return View(organizationViewModel);
                 }
-                var regNo = organization.RegNo.Trim();
                 if (_organizationManager.GetAll().Count(o => o.RegNo == regNo && o.Id != organization.Id) > 0)
                 {
                     ViewBag.Message3 = "Organization registration no already exist.";
-                    return View(organizationViewModel);
                 }
-
-                _organizationManager.Update(organization);
-
-                TempData["msg"] = "Information has been updated successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null)
+                {
+                    _organizationManager.Update(organization);
+                    TempData["msg"] = "Information has been updated successfully";
+                    return RedirectToAction("Index");
+                }
             }
             return View(organizationViewModel);
         }

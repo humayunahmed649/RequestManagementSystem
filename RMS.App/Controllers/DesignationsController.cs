@@ -78,11 +78,13 @@ namespace RMS.App.Controllers
                 if (_designationManager.GetAll().Count(o => o.Title == title) > 0)
                 {
                     ViewBag.Message = "Designation title already exist.";
-                    return View(designationViewModel);
                 }
-                _designationManager.Add(designation);
-                TempData["msg"] = "Information has been saved successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message==null) 
+                {
+                    _designationManager.Add(designation);
+                    TempData["msg"] = "Information has been saved successfully";
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(designationViewModel);
@@ -118,12 +120,13 @@ namespace RMS.App.Controllers
                 if (_designationManager.GetAll().Count(o => o.Title == title && o.Id!=designation.Id) > 0)
                 {
                     ViewBag.Message = "Designation title already exist.";
-                    return View(designationViewModel);
                 }
-
-                _designationManager.Update(designation);
-                TempData["msg"] = "Information has been updated successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message==null) 
+                {
+                    _designationManager.Update(designation);
+                    TempData["msg"] = "Information has been updated successfully";
+                    return RedirectToAction("Index");
+                }
             }
             return View(designationViewModel);
         }

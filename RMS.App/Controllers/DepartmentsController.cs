@@ -80,23 +80,23 @@ namespace RMS.App.Controllers
                 Department department = Mapper.Map<Department>(departmentViewMode);
 
                 var name = department.Name.Trim();
+                var code = department.Code.Trim();
+
                 if (_departmentManager.GetAll().Count(o => o.Name ==name) > 0)
                 {
                     ViewBag.Message1 = "Department name already exist.";
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewMode.OrganizationId);
-                    return View(departmentViewMode);
                 }
-                var code = department.Code.Trim();
+                
                 if (_departmentManager.GetAll().Count(o => o.Code == code) > 0)
                 {
                     ViewBag.Message2 = "Department code already exist.";
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewMode.OrganizationId);
-                    return View(departmentViewMode);
                 }
-
-                _departmentManager.Add(department);
-                TempData["msg"] = "Information has been saved successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message1==null && ViewBag.Message2==null) 
+                {
+                    _departmentManager.Add(department);
+                    TempData["msg"] = "Information has been saved successfully";
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewMode.OrganizationId);
@@ -132,24 +132,21 @@ namespace RMS.App.Controllers
                 Department department = Mapper.Map<Department>(departmentViewModel);
 
                 var name = department.Name.Trim();
+                var code = department.Code.Trim();
                 if (_departmentManager.GetAll().Count(o => o.Name == name && o.Id != department.Id) > 0)
                 {
                     ViewBag.Message1 = "Department name already exist.";
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewModel.OrganizationId);
-                    return View(departmentViewModel);
                 }
-
-                var code = department.Code.Trim();
                 if (_departmentManager.GetAll().Count(o => o.Code == code && o.Id != department.Id) > 0)
                 {
                     ViewBag.Message2 = "Department code already exist.";
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewModel.OrganizationId);
-                    return View(departmentViewModel);
                 }
-
-                _departmentManager.Update(department);
-                TempData["msg"] = "Information has been updated successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message1==null && ViewBag.Message2==null) 
+                {
+                    _departmentManager.Update(department);
+                    TempData["msg"] = "Information has been updated successfully";
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewModel.OrganizationId);
             return View(departmentViewModel);

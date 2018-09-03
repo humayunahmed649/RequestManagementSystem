@@ -81,12 +81,13 @@ namespace RMS.App.Controllers
                 if (_vehicleTypeManager.GetAll().Count(o => o.Name == name) > 0)
                 {
                     ViewBag.Message = "Vehicle type name already exist.";
-                    return View(vehicleTypeViewModel);
                 }
-
-                _vehicleTypeManager.Add(vehicleType);
-                TempData["msg"] = "Information has been saved successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message==null)
+                {
+                    _vehicleTypeManager.Add(vehicleType);
+                    TempData["msg"] = "Information has been saved successfully";
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(vehicleTypeViewModel);
@@ -123,11 +124,13 @@ namespace RMS.App.Controllers
                 if (_vehicleTypeManager.GetAll().Count(o => o.Name == name && o.Id != vehicleType.Id) > 0)
                 {
                     ViewBag.Message = "Vehicle type name already exist.";
-                    return View(vehicleTypeViewModel);
                 }
-                _vehicleTypeManager.Update(vehicleType);
-                TempData["msg"] = "Information has been updated successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message==null)
+                {
+                    _vehicleTypeManager.Update(vehicleType);
+                    TempData["msg"] = "Information has been updated successfully";
+                    return RedirectToAction("Index");
+                }
             }
             return View(vehicleTypeViewModel);
         }

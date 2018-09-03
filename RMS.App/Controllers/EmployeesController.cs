@@ -101,61 +101,35 @@ namespace RMS.App.Controllers
                 Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
                 var email = employee.Email.Trim();
+                var contactNo = employee.ContactNo.Trim();
+                var nid = employee.NID.Trim();
+                var drivingLicence = employee.DrivingLicence.Trim();
+
                 if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
                 {
                     ViewBag.Message1 = "Employee email already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-                var contactNo = employee.ContactNo.Trim();
+                
                 if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo) > 0)
                 {
                     ViewBag.Message2 = "Employee contact no already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-                var nid = employee.NID.Trim();
+                
                 if (_employeeManager.GetAll().Count(o => o.NID == nid) > 0)
                 {
                     ViewBag.Message3 = "Employee NID already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-                var drivingLicence = employee.DrivingLicence.Trim();
+                
                 if (_employeeManager.GetAll().Count(o=>o.DrivingLicence==drivingLicence)>0) 
                 {
                     ViewBag.Message4 = "Employee driving licence no already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-
-                _employeeManager.Add(employee);
-                TempData["msg"] = "Information has been saved successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message1==null && ViewBag.Message2 == null && ViewBag.Message3 == null && ViewBag.Message4 == null) 
+                {
+                    _employeeManager.Add(employee);
+                    TempData["msg"] = "Information has been saved successfully";
+                    return RedirectToAction("Index");
+                }
             }
 
             TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
@@ -204,61 +178,35 @@ namespace RMS.App.Controllers
                 Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
                 var email = employee.Email.Trim();
+                var contactNo = employee.ContactNo.Trim();
+                var nid = employee.NID.Trim();
+                var drivingLicence = employee.DrivingLicence.Trim();
+
                 if (_employeeManager.GetAll().Count(o => o.Email == email && o.Id!=employee.Id) > 0)
                 {
                     ViewBag.Message1 = "Employee email already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-                var contactNo = employee.ContactNo.Trim();
                 if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo && o.Id != employee.Id) > 0)
                 {
                     ViewBag.Message2 = "Employee contact no already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-                var nid = employee.NID.Trim();
                 if (_employeeManager.GetAll().Count(o => o.NID == nid && o.Id != employee.Id) > 0)
                 {
                     ViewBag.Message3 = "Employee NID already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-                var drivingLicence = employee.DrivingLicence.Trim();
                 if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence && o.Id != employee.Id) > 0)
                 {
                     ViewBag.Message4 = "Employee driving licence no already exist.";
-                    ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
-                    ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
-                    ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
-                    ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
-                    employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
-                    ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
-                    ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                    return View(employeeViewModel);
                 }
-                _employeeManager.Update(employee);
-                TempData["msg"] = "Information has been updated successfully";
-                return RedirectToAction("Index");
+                if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null && ViewBag.Message4 == null)
+                {
+                    _employeeManager.Update(employee);
+                    TempData["msg"] = "Information has been updated successfully";
+                    return RedirectToAction("Index");
+                }
             }
+
+            TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
             ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
             ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
