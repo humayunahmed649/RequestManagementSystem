@@ -14,6 +14,40 @@
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a> &nbsp;
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#notification">Notification</a> &nbsp;
 </div>
+<br/>
+<br/>
+<div class="col-md-12">
+    <table class="table table-bordered table-active table-striped">
+        <thead>
+        <th>From Place</th>
+        <th>Destination Place</th>
+        <th>Start Date Time</th>
+        <th>End Date Time</th>
+        <th>Description</th>
+        <th>Request For</th>
+        </thead>
+
+        @{
+            var data = ViewBag.Requisition;
+        }
+
+
+        @foreach (var item in data)
+        {
+            <tr>
+                <td>@item.FromPlace</td>
+                <td>@item.DestinationPlace</td>
+                <td>@item.StartDateTime</td>
+                <td>@item.EndDateTime</td>
+                <td>@item.Description</td>
+                <td>@item.RequestFor</td>
+            </tr>
+
+        }
+
+
+    </table>
+</div>
 
 <!--Request for me-->
 <div class="modal fade" id="ownRequest">
@@ -112,7 +146,7 @@
     </div>
 </div>
 
-<!--end Request for me-->
+<!--My rrequest Request -->
 <div class="modal fade" id="myRequest">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
