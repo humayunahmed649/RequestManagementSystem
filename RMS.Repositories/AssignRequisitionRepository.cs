@@ -31,6 +31,19 @@ namespace RMS.Repositories
                 .ToList();
         }
 
+        public override AssignRequisition FindById(int id)
+        {
+            return
+                db.Set<AssignRequisition>()
+                    .Include(c => c.Employee).
+                    Include(c=>c.Employee.Designation)
+                    .Include(c => c.Vehicle).Include(c=>c.Vehicle.VehicleType)
+                    .Include(c => c.Requisition)
+                    .Include(c => c.RequisitionStatus)
+                    .AsNoTracking()
+                    .FirstOrDefault();
+        }
+
         public AssignRequisition SearchByText(string searchByText)
         {
             return db.Set<AssignRequisition>().Include(c => c.Requisition).FirstOrDefault();

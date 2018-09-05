@@ -35,13 +35,6 @@ namespace RMS.App.Controllers
         // GET: AssignRequisitions
         public ActionResult Index(string searchText)
         {
-            if (searchText != null)
-            {
-                ////IEnumerable<AssignRequisition> requisition = _assignRequisitionManager.SearchByName(searchByText);
-                //IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModel =
-                //Mapper.Map<IEnumerable<AssignRequisitionViewModel>>(requisition);
-                //return View(assignRequisitionViewModel);
-            }
 
             ICollection<AssignRequisition> requisitions = _assignRequisitionManager.GetAll();
             IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModels =
@@ -166,9 +159,6 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName",assignRequisition.EmployeeId);
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "DestinationPlace",assignRequisition.RequisitionId);
-            ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo",assignRequisition.VehicleId);
             AssignRequisitionViewModel assignRequisitionViewModel =
                 Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
             return View(assignRequisitionViewModel);
