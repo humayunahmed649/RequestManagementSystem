@@ -71,29 +71,7 @@ namespace RMS.App.Controllers
             return View("Error");
         }
 
-        // GET: AssignRequisitions/Create
-        //public ActionResult Create(int requisitionId)
-        //{
-        //    if (requisitionId == 0)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Requisition requisition = _requisitionManager.FindById(requisitionId);
-            
-        //    if (requisition == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
-        //    ViewBag.RequisitionId = requisitionId;
-        //    //RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-        //    ViewBag.RequisitionNumber = requisition.RequisitionNumber;
-        //    ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-        //    ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
-        //    AssignRequisitionViewModel assignRequisitionViewModel=new AssignRequisitionViewModel();
-        //    return View(assignRequisitionViewModel);
-        //}
+        
         //Get
         public ActionResult Create(int requisitionId)
         {
