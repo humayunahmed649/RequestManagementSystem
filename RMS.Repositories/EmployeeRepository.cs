@@ -40,12 +40,12 @@ namespace RMS.Repositories
         }
         public ICollection<Employee> GetAllDriver()
         {
-            return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").Include(c=>c.Addresses).ToList();
+            return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").Include(c=>c.Addresses).AsNoTracking().ToList();
         }
 
         public ICollection<Employee> GetAllEmployees()
         {
-            return db.Set<Employee>().Include(c => c.EmployeeType).Where(c => c.EmployeeType.Type == "Employee").ToList();
+            return db.Set<Employee>().Include(c => c.EmployeeType).Where(c => c.EmployeeType.Type == "Employee").AsNoTracking().ToList();
         }
     }
 }
