@@ -71,37 +71,38 @@ namespace RMS.App.Controllers
             return View("Error");
         }
 
-        // GET: AssignRequisitions/Create
-        public ActionResult Create(int id)
+        
+        //Get
+        public ActionResult Create(int requisitionId)
         {
-            if (id == 0)
+            if (requisitionId == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Requisition requisition = _requisitionManager.FindById(id);
-            
+            Requisition requisition = _requisitionManager.FindById(requisitionId);
             if (requisition == null)
             {
                 return HttpNotFound();
             }
-            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-            ViewBag.RequisitionId = requisition.Id;
-            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
+            AssignRequisitionViewModel assignRequisitionViewModel=new AssignRequisitionViewModel();
+            assignRequisitionViewModel.RequisitionId = requisitionId;
             ViewBag.RequisitionNumber = requisition.RequisitionNumber;
+
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
             ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
+            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
             return View();
         }
-
-        // POST: AssignRequisitions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RequisitionStatusId,RequisitionId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,VehicleId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
         {
             if (ModelState.IsValid)
             {
+
                 AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
                 _assignRequisitionManager.Add(assignRequisition);
                 RequisitionStatus status = new RequisitionStatus();
@@ -119,7 +120,7 @@ namespace RMS.App.Controllers
             return View(assignRequisitionViewModel);
         }
 
-      
+
 
         // GET: AssignRequisitions/Edit/5
         public ActionResult Edit(int? id)

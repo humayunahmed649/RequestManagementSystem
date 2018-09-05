@@ -33,10 +33,20 @@ namespace RMS.App.Controllers
         // GET: Requisitions
         public ActionResult Index()
         {
-            ICollection<Requisition> requisitions = _requisitionManager.GetAllWithEmployee();
-            IEnumerable<RequisitionViewModel> requisitionViewModels =
-                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
-            return View(requisitionViewModels);
+            try
+            {
+
+                ICollection<Requisition> requisitions = _requisitionManager.GetAllWithEmployee();
+                IEnumerable<RequisitionViewModel> requisitionViewModels =
+                    Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+                return View(requisitionViewModels);
+            }
+            catch (Exception ex)
+            {
+                ex=ViewBag.Message = "Error 400";
+                
+            }
+            return View();
         }
 
         public ActionResult RequisitionList()
@@ -68,6 +78,10 @@ namespace RMS.App.Controllers
         public ActionResult Create()
         {
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
+            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+            IEnumerable<RequisitionViewModel> requisitionViewModels =
+                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+            ViewBag.Requisition = requisitionViewModels;
             return View();
         }
         

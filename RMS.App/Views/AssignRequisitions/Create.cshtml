@@ -9,7 +9,7 @@
 <hr/>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create","AssignRequisitions",FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
 
@@ -18,33 +18,34 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.Label("RequisitionId", htmlAttributes: new {@class = "control -label col-md-3"})
             <div class="col-md-4">
-                @Html.TextBox("RequisitionId", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
-                @Html.ValidationMessageFor(model => model.RequisitionId, "", new { @class = "text-danger" })
+                @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
+                @Html.ValidationMessage("RequisitionId", "", new {@class = "text-danger"})
             </div>
         </div>
+
             <div class="form-group row">
-                @Html.LabelFor(model=>model.RequisitionStatusId, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.Label("RequisitionStatusId", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-4">
-                    @Html.DropDownList("RequisitionStatusId", null, htmlAttributes:new { @class = "form-control", @disabled= "disabled" })
-                    @Html.ValidationMessageFor(model=>model.RequisitionStatusId, "", new { @class = "text-danger" })
+                    @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessage("RequisitionStatusId", "", new { @class = "text-danger" })
                 </div>
             </div>
         
         <div class="form-group row">
-            @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.Label("RequisitionNumber", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-4">
-                @Html.TextBox("RequisitionNumber",null,htmlAttributes:new {@class="form-control", @disabled = "disabled" })
-                @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new { @class = "text-danger" })
+                @Html.TextBox("RequisitionNumber", null,htmlAttributes:new {@class="form-control", @readonly = "readonly" })
+                @Html.ValidationMessage("RequisitionNumber", "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.Label("VehicleId", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-4">
-                @Html.DropDownList("VehicleId", null, "Select" ,htmlAttributes:new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VehicleId, "", new { @class = "text-danger" })
+                @Html.DropDownList("VehicleId", null, "Select", htmlAttributes:new { @class = "form-control" })
+                @Html.ValidationMessage("VehicleId", "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -59,7 +60,7 @@
         <div class="form-group row">
             <div class="col-md-3"></div>
             <div class="col-md-9">
-                <input type="submit" value="Assign" class="btn btn-default"/> &nbsp;
+                <input type="submit" value="Create" class="btn btn-default"/> &nbsp;
                 @Html.ActionLink("Back to List", "Requests",null,new {@class="btn btn-info"})
             </div>
         </div>
