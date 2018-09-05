@@ -10,6 +10,6 @@ namespace RMS.Repositories.Contracts
     public interface IUpazilaRepository:IRepository<Upazila>
     {
         ICollection<Upazila> GetAllUpazila();
-        ICollection<Upazila> GeUpazilasById(int id); 
+        ICollection<Upazila> GetUpazilasById(int id); 
     }
 }

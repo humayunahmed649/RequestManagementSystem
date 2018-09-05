@@ -13,9 +13,11 @@ namespace RMS.BLL
     public class EmployeeManager:Manager<Employee>,IEmployeeManager
     {
         private IEmployeeRepository _employeeRepository;
-        public EmployeeManager(IEmployeeRepository repository) : base(repository)
+        IAddressManager _addressManager;
+        public EmployeeManager(IEmployeeRepository repository, IAddressManager addressManager) : base(repository)
         {
             this._employeeRepository = repository;
+            this._addressManager = addressManager;
         }
 
         public ICollection<Employee> SearchByText(string searchText)
@@ -31,6 +33,30 @@ namespace RMS.BLL
         public ICollection<Employee> GetAllEmployees()
         {
             return _employeeRepository.GetAllEmployees();
+        }
+
+        public override bool Update(Employee entity)
+        {
+          if(entity.Addresses!=null)
+            {
+                var addressIdList = entity.Addresses.Select(c => c.Id);
+                var existingEmployee = FindById(entity.Id);
+                var updateableAddresses = entity.Addresses.Where(c => c.Id > 0);
+                var addeableAddresses = entity.Addresses.Where(c=>c.Id == 0);
+                var deleteableAddresses = existingEmployee.Addresses.Where(c => !addressIdList.Contains(c.Id));
+
+                if(addeableAddresses!=null)
+                {
+                    _addressManager.AddOrUpdate(addeableAddresses.ToList());
+                }
+                if(updateableAddresses!=null)
+                {
+                    _addressManager.AddOrUpdate(updateableAddresses.ToList());
+                }      
+
+            }
+
+            return _Repository.Update(entity);
         }
     }
 }

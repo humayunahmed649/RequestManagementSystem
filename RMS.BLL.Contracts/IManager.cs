@@ -12,6 +12,7 @@ namespace RMS.BLL.Contracts
     {
         bool Add(T entity);
         bool Update(T entity);
+        bool AddOrUpdate(ICollection<T> entities);
         bool Remove(T entity);
         T FindById(int id);
         ICollection<T> GetAll();

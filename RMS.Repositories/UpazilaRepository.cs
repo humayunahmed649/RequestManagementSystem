@@ -18,9 +18,9 @@ namespace RMS.Repositories
 
         public ICollection<Upazila> GetAllUpazila()
         {
-            return db.Set<Upazila>().ToList();
+            return db.Set<Upazila>().AsNoTracking().ToList();
         }
-        public ICollection<Upazila> GeUpazilasById(int id)
+        public ICollection<Upazila> GetUpazilasById(int id)
         {
             return db.Set<Upazila>().Where(c => c.DistrictId == id).ToList();
         }

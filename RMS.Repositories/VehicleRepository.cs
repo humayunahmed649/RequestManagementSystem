@@ -20,7 +20,7 @@ namespace RMS.Repositories
 
         public override ICollection<Vehicle> GetAll()
         {
-            return db.Set<Vehicle>().Include(c => c.VehicleType).ToList();
+            return db.Set<Vehicle>().Include(c => c.VehicleType).AsNoTracking().ToList();
         }
 
         public ICollection<Vehicle> SearchByText(string searchText)
@@ -35,7 +35,7 @@ namespace RMS.Repositories
 
         public override Vehicle FindById(int id)
         {
-            return db.Set<Vehicle>().Where(c=>c.Id==id).Include(c=>c.VehicleType).SingleOrDefault();
+            return db.Set<Vehicle>().Where(c=>c.Id==id).Include(c=>c.VehicleType).AsNoTracking().SingleOrDefault();
         }
     }
 }

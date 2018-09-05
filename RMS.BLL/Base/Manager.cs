@@ -29,11 +29,15 @@ namespace RMS.BLL.Base
             return _Repository.Add(entity);
         }
 
-        public bool Update(T entity)
+        public virtual bool Update(T entity)
         {
             return _Repository.Update(entity);
         }
 
+        public bool AddOrUpdate(ICollection<T> entities)
+        {
+            return _Repository.AddOrUpdate(entities);
+        }
         public bool Remove(T entity)
         {
             return _Repository.Remove(entity);

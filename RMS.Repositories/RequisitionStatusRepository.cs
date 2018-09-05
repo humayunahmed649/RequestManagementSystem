@@ -18,16 +18,16 @@ namespace RMS.Repositories
 
         public ICollection<RequisitionStatus> GetAllWithRequisitionDetails()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c=>c.StatusType=="Assigned").ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c=>c.StatusType=="Assigned").AsNoTracking().ToList();
         }
 
         public ICollection<RequisitionStatus> GetAllStatusNew()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "New").ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "New").AsNoTracking().ToList();
         }
         public ICollection<RequisitionStatus> GetAllStatusExecute()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "OnExecute").ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "OnExecute").AsNoTracking().ToList();
         }
 
         public ICollection<RequisitionStatus> SearchByRequisitionId(string searchText)

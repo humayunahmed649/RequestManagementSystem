@@ -489,7 +489,7 @@
                 INSERT [dbo].[Upazilas] ([Id], [DistrictId], [Name], [BnName]) VALUES (427, 20, N'Raninagar Upazila', N'রাণীনগর')
                 INSERT [dbo].[Upazilas] ([Id], [DistrictId], [Name], [BnName]) VALUES (428, 20, N'Patnitala Upazila', N'পত্নীতলা')
                 INSERT [dbo].[Upazilas] ([Id], [DistrictId], [Name], [BnName]) VALUES (429, 20, N'Dhamoirhat Upazila', N'ধামইরহাট ')
-                INSERT [dbo].[Upazilas] ([Id], [DistrictId], [Name], [BnName]) VALUES (530, 20, N'Sapahar Upazila', N'সাপাহার')
+                INSERT [dbo].[Upazilas] ([Id], [DistrictId], [Name], [BnName]) VALUES (430, 20, N'Sapahar Upazila', N'সাপাহার')
                 INSERT [dbo].[Upazilas] ([Id], [DistrictId], [Name], [BnName]) VALUES (431, 20, N'Porsha Upazila', N'পোরশা')
                 INSERT [dbo].[Upazilas] ([Id], [DistrictId], [Name], [BnName]) VALUES (432, 20, N'Badalgachhi Upazila', N'বদলগাছি')
 

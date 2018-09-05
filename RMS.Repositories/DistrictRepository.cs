@@ -18,7 +18,7 @@ namespace RMS.Repositories
 
         public ICollection<District> GetAllDistrict()
         {
-            return db.Set<District>().ToList();
+            return db.Set<District>().AsNoTracking().ToList();
         }
 
         public ICollection<District> GetDistrictsById(int id)

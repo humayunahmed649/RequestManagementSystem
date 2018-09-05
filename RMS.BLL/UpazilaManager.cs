@@ -25,7 +25,7 @@ namespace RMS.BLL
 
         public ICollection<Upazila> GetUpazilasById(int id)
         {
-            return _upazilaRepository.GeUpazilasById(id);
+            return _upazilaRepository.GetUpazilasById(id);
         }
     }
 }

@@ -32,11 +32,11 @@ namespace RMS.Repositories
 
         public override ICollection<Department> GetAll()
         {
-            return db.Set<Department>().Include(c => c.Organization).ToList();
+            return db.Set<Department>().Include(c => c.Organization).AsNoTracking().ToList();
         }
         public override Department FindById(int id)
         {
-            return db.Set<Department>().Where(c=>c.Id==id).Include(c=>c.Organization).SingleOrDefault();
+            return db.Set<Department>().Where(c=>c.Id==id).Include(c=>c.Organization).AsNoTracking().SingleOrDefault();
         }
 
     }

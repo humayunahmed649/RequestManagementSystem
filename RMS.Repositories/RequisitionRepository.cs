@@ -18,17 +18,17 @@ namespace RMS.Repositories
 
         public override ICollection<Requisition> GetAll()
         {
-            return db.Set<Requisition>().Include(c => c.Employee).ToList();
+            return db.Set<Requisition>().Include(c => c.Employee).AsNoTracking().ToList();
         }
 
         public ICollection<Requisition> GetAllWithEmployee()
         {
-            return db.Set<Requisition>().Include(c => c.Employee).Include(c=>c.Employee.Designation).ToList();
+            return db.Set<Requisition>().Include(c => c.Employee).Include(c=>c.Employee.Designation).AsNoTracking().ToList();
         }
 
         public override Requisition FindById(int id)
         {
-            return db.Set<Requisition>().Where(c => c.Id == id).Include(c => c.Employee).SingleOrDefault();
+            return db.Set<Requisition>().Where(c => c.Id == id).Include(c => c.Employee).AsNoTracking().SingleOrDefault();
         }
         
     }

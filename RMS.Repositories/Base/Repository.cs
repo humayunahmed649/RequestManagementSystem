@@ -28,8 +28,14 @@ namespace RMS.Repositories.Base
 
         public virtual bool Update(T entity)
         {
-            //db.Set<T>().AddOrUpdate(entity);
+            db.Set<T>().Attach(entity);
             db.Entry(entity).State = EntityState.Modified;
+            return db.SaveChanges() > 0;
+        }
+
+        public virtual bool AddOrUpdate(ICollection<T> entities)
+        {
+            db.Set<T>().AddOrUpdate(entities.ToArray());
             return db.SaveChanges() > 0;
         }
 
@@ -41,7 +47,7 @@ namespace RMS.Repositories.Base
 
         public virtual ICollection<T> GetAll()
         {
-            return db.Set<T>().ToList();
+            return db.Set<T>().AsNoTracking().ToList();
         }
 
         public virtual T FindById(int id)

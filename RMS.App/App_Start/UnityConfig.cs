@@ -88,6 +88,9 @@ namespace RMS.App
             container.RegisterType<IRequisitionStatusManager, RequisitionStatusManager>();
             container.RegisterType<IRequisitionStatusRepository, RequisitionStatusRepository>();
 
+            container.RegisterType<IAddressManager, AddressManager>();
+            container.RegisterType<IAddressRepository, AddressRepository>();
+
         }
     }
 }

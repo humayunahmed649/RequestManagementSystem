@@ -20,7 +20,7 @@ namespace RMS.Repositories
 
         public override ICollection<Employee> GetAll()
         {
-            return db.Set<Employee>().Include(c => c.Department).Include(c=>c.Organization).Include(c=>c.Designation).Include(c=>c.EmployeeType).Include(c=>c.Addresses).ToList();
+            return db.Set<Employee>().Include(c => c.Department).Include(c=>c.Organization).Include(c=>c.Designation).Include(c=>c.EmployeeType).Include(c=>c.Addresses).AsNoTracking().ToList();
         }
 
         public ICollection<Employee> SearchByText(string searchText)
@@ -36,16 +36,16 @@ namespace RMS.Repositories
         public override Employee FindById(int id)
         {
             return db.Set<Employee>().Where(c => c.Id == id).Include(c => c.EmployeeType).Include(c=>c.Organization)
-                .Include(c=>c.Department).Include(c=>c.Designation).Include(c=>c.Addresses).SingleOrDefault();
+                .Include(c=>c.Department).Include(c=>c.Designation).Include(c=>c.Addresses).AsNoTracking().SingleOrDefault();
         }
         public ICollection<Employee> GetAllDriver()
         {
-            return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").Include(c=>c.Addresses).ToList();
+            return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").Include(c=>c.Addresses).AsNoTracking().ToList();
         }
 
         public ICollection<Employee> GetAllEmployees()
         {
-            return db.Set<Employee>().Include(c => c.EmployeeType).Where(c => c.EmployeeType.Type == "Employee").ToList();
+            return db.Set<Employee>().Include(c => c.EmployeeType).Where(c => c.EmployeeType.Type == "Employee").AsNoTracking().ToList();
         }
     }
 }

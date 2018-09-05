@@ -16,7 +16,7 @@ namespace RMS.Repositories
 
         public ICollection<Division> GetAllDivisions()
         {
-            return db.Set<Division>().ToList();
+            return db.Set<Division>().AsNoTracking().ToList();
         }
 
         public DivisionRepository(DbContext db) : base(db)
