@@ -37,6 +37,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StatusType)
+                
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RequisitionNumber)
@@ -61,6 +62,7 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.StatusType)
+                            @Html.HiddenFor(modelItem=>item.Id)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.RequisitionNumber)
@@ -71,7 +73,7 @@
                         <td>
                             @Html.ActionLink("Assign Requisition", "Create", new { requisitionId = item.RequisitionId }) |
                             @Html.ActionLink("View", "ViewDetails", new {id = item.RequisitionId}) |
-                            @Html.ActionLink("Cancel Requisition", "Cancel", new {id = item.RequisitionId})
+                            @Html.ActionLink("Cancel Requisition", "Cancel", new { statusId = item.Id })
 
                         </td>
                     </tr>

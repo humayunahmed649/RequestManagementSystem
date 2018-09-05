@@ -73,11 +73,7 @@ namespace RMS.App.Controllers
                 _addressManager.Add(address);
                 return RedirectToAction("Index");
             }
-
-            //ViewBag.DistrictId = new SelectList(db.Districts, "Id", "Name", address.DistrictId);
-            //ViewBag.DivisionId = new SelectList(db.Divisions, "Id", "Name", address.DivisionId);
-            //ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FullName", address.EmployeeId);
-            //ViewBag.UpazilaId = new SelectList(db.Upazilas, "Id", "Name", address.UpazilaId);
+            
             return View();
         }
 
@@ -95,7 +91,6 @@ namespace RMS.App.Controllers
             }
             ViewBag.DistrictId = new SelectList(_districtManager.GetAll(), "Id", "Name", address.DistrictId);
             ViewBag.DivisionId = new SelectList(_divisionManager.GetAll(), "Id", "Name", address.DivisionId);
-            //ViewBag.EmployeeId = new SelectList(_, "Id", "FullName", address.EmployeeId);
             ViewBag.UpazilaId = new SelectList(_upazilaManager.GetAll(), "Id", "Name", address.UpazilaId);
             return View(address);
         }

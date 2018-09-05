@@ -1,4 +1,4 @@
-﻿@model RMS.App.ViewModels.AssignRequisitionViewModel
+﻿@model RMS.App.ViewModels.RequisitionStatusViewModel
 
 @{
     ViewBag.Title = "Cancel";
@@ -11,47 +11,48 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>AssignRequisitionViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4>Requisition Status </h4>
+        <hr/>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group row">
-            @Html.LabelFor(model => model.RequisitionNumber, "RequisitionNumber", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-5">
-                @Html.TextBox("RequisitionNumber", null, htmlAttributes: new {@class = "form-control", @disabled = "disabled"})
+        <div class="form-group">
+            @Html.LabelFor(model => model.StatusType, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StatusType, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.StatusType, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RequisitionNumber, new {htmlAttributes = new {@class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new {@class = "text-danger"})
             </div>
         </div>
-        <div class="form-group row">
-            @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
 
-                @Html.TextBox("RequisitionId", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
-                @Html.ValidationMessageFor(model => model.RequisitionId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group row">
-            @Html.LabelFor(model=>model.RequisitionStatusId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
-                @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
-                @Html.ValidationMessage("RequisitionStatusId", "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RequisitionId, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.RequisitionId, "", new {@class = "text-danger"})
             </div>
         </div>
 
-        <div class="form-group row">
-            <div class="col-md-2"></div>
-            <div class="col-md-5">
-                <input type="submit" value="Cancel Requist" class="btn btn-warning"/> &nbsp;
-                @Html.ActionLink("Back to List", "Requests",null,new {@class="btn btn-info"})
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cancel" class="btn btn-default"/>
             </div>
         </div>
     </div>
 }
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
