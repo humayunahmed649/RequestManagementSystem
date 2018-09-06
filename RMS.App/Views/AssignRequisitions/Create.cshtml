@@ -5,69 +5,137 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Assign Requisition</h2>
-<hr/>
 
-
-@using (Html.BeginForm("Create","AssignRequisitions",FormMethod.Post)) 
+@if (Model != null)
 {
-    @Html.AntiForgeryToken()
+    var data = ViewBag.Requisition;
 
-    <div class="form-horizontal">
+    <div class="row">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-6">
+            <h4>Requisition Details</h4>
+            <br />
+            <table class="table table-light table-active table-primary table-hover">
 
-        <div class="form-group row">
-            @Html.Label("RequisitionId", htmlAttributes: new {@class = "control -label col-md-3"})
-            <div class="col-md-4">
-                @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
-                @Html.ValidationMessage("RequisitionId", "", new {@class = "text-danger"})
-            </div>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)</td>
+                    <td>@data.RequisitionNumber</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Requestor Full Name")</td>
+                    <td>@data.Employee.FullName</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Designation")</td>
+                    <td>@data.Employee.Designation.Title</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.Employee.ContactNo)</td>
+                    <td>@data.Employee.ContactNo</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.Employee.Email)</td>
+                    <td>@data.Employee.Email</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.RequestFor)</td>
+                    <td>@data.RequestFor</td>
+                </tr>
+            </table>
         </div>
 
-            <div class="form-group row">
-                @Html.Label("RequisitionStatusId", htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-4">
-                    @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessage("RequisitionStatusId", "", new { @class = "text-danger" })
+    <div class="col-md-6">
+        <h4>Where When ...????</h4>
+        <br/>
+        <table class="table table-light table-active table-primary table-hover">
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Requisition.StartDateTime)</td>
+                <td>@data.StartDateTime</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Requisition.EndDateTime)</td>
+                <td>@data.EndDateTime</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Requisition.FromPlace)</td>
+                <td>@data.FromPlace</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</td>
+                <td>@data.DestinationPlace</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Requisition.Description)</td>
+                <td>@data.Description</td>
+            </tr>
+
+        </table>
+    </div>
+        </div>
+
+        }
+
+<h2>Assign Requisition</h2>
+<hr />
+        @using (Html.BeginForm("Create", "AssignRequisitions", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group row">
+                    @Html.Label("RequisitionId", htmlAttributes: new { @class = "control -label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBox("RequisitionId", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessage("RequisitionId", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("RequisitionStatusId", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessage("RequisitionStatusId", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("RequisitionNumber", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBox("RequisitionNumber", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessage("RequisitionNumber", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("VehicleId", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("VehicleId", null, "Select", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessage("VehicleId", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <input type="submit" value="Create" class="btn btn-default" /> &nbsp;
+                        @Html.ActionLink("Back to List", "Requests", null, new { @class = "btn btn-info" })
+                    </div>
                 </div>
             </div>
-        
-        <div class="form-group row">
-            @Html.Label("RequisitionNumber", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-4">
-                @Html.TextBox("RequisitionNumber", null,htmlAttributes:new {@class="form-control", @readonly = "readonly" })
-                @Html.ValidationMessage("RequisitionNumber", "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.Label("VehicleId", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-4">
-                @Html.DropDownList("VehicleId", null, "Select", htmlAttributes:new { @class = "form-control" })
-                @Html.ValidationMessage("VehicleId", "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-4">
-                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes:new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3"></div>
-            <div class="col-md-9">
-                <input type="submit" value="Create" class="btn btn-default"/> &nbsp;
-                @Html.ActionLink("Back to List", "Requests",null,new {@class="btn btn-info"})
-            </div>
-        </div>
-    </div>
-}
+        }
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

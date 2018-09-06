@@ -77,6 +77,10 @@ namespace RMS.App.Controllers
             {
                 return HttpNotFound();
             }
+
+            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(ViewBag.Requisition=requisition);
+            
+
             AssignRequisitionViewModel assignRequisitionViewModel=new AssignRequisitionViewModel();
             assignRequisitionViewModel.RequisitionId = requisitionId;
             ViewBag.RequisitionNumber = requisition.RequisitionNumber;
@@ -84,7 +88,7 @@ namespace RMS.App.Controllers
             ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
             ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
             ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
-            return View();
+            return View(assignRequisitionViewModel);
         }
         
         
@@ -243,7 +247,6 @@ namespace RMS.App.Controllers
             }
             if (requisition != null)
             {
-                var requisitions = _requisitionManager.GetAllWithEmployee();
                 RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
 
                 return View(requisitionViewModel);

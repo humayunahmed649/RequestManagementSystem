@@ -28,7 +28,7 @@ namespace RMS.Repositories
 
         public override Requisition FindById(int id)
         {
-            return db.Set<Requisition>().Where(c => c.Id == id).Include(c => c.Employee).AsNoTracking().SingleOrDefault();
+            return db.Set<Requisition>().Where(c => c.Id == id).Include(c => c.Employee.Designation).AsNoTracking().SingleOrDefault();
         }
         
     }
