@@ -111,10 +111,10 @@ namespace RMS.App.Controllers
                 requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
 
                 Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
-                bool IsSaved = _requisitionManager.Add(requisition);
+                bool isSaved = _requisitionManager.Add(requisition);
 
                 //Requisition Status Save
-                if (IsSaved == true)
+                if (isSaved == true)
                 {
                     RequisitionStatus status = new RequisitionStatus();
                     status.RequisitionNumber = requisition.RequisitionNumber;
@@ -159,9 +159,9 @@ namespace RMS.App.Controllers
                 requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
                 Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
 
-                bool IsSaved=_requisitionManager.Add(requisition);
+                bool isSaved=_requisitionManager.Add(requisition);
                 //Requisition Status Save
-                if (IsSaved == true)
+                if (isSaved == true)
                 {
                     RequisitionStatus status = new RequisitionStatus();
                     status.RequisitionNumber = requisition.RequisitionNumber;
@@ -253,11 +253,6 @@ namespace RMS.App.Controllers
         [HttpGet]
         public ActionResult Feedback(int requisitionId)
         {
-
-            if (requisitionId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Requisition requisition = _requisitionManager.FindById((int)requisitionId);
             if (requisition == null)
             {
@@ -295,10 +290,6 @@ namespace RMS.App.Controllers
         [HttpGet]
         public ActionResult Reply(int feedbackId)
         {
-            if (feedbackId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Feedback feedback = _feedbackManager.FindById((int)feedbackId);
             if (feedback == null)
             {
