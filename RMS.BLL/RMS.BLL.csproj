@@ -48,6 +48,7 @@
     <Compile Include="DistrictManager.cs" />
     <Compile Include="DivisionManager.cs" />
     <Compile Include="EmployeeManager.cs" />
+    <Compile Include="FeedbackManager.cs" />
     <Compile Include="OrganizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequisitionManager.cs" />

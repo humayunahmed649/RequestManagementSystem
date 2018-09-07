@@ -21,13 +21,15 @@ namespace RMS.App.Controllers
         private IEmployeeManager _employeeManager;
         private IVehicleManager _vehicleManager;
         private IRequisitionStatusManager _requisitionStatusManager;
+        private IFeedbackManager _feedbackManager;
 
-        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager)
+        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager,IFeedbackManager feedbackManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
             this._vehicleManager = vehicleManager;
             this._requisitionStatusManager = requisitionStatusManager;
+            this._feedbackManager = feedbackManager;
         }
 
         // GET: Requisitions
@@ -249,23 +251,85 @@ namespace RMS.App.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public ActionResult Notification(int? id)
+        public ActionResult Feedback(int requisitionId)
         {
 
-            if (id == null)
+            if (requisitionId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Requisition requisition = _requisitionManager.FindById((int)id);
+            Requisition requisition = _requisitionManager.FindById((int)requisitionId);
             if (requisition == null)
             {
                 return HttpNotFound();
             }
             RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-            CommentViewModel cvm=new CommentViewModel();
-            cvm.Requisition = requisition;
-            return View(cvm);
+            FeedbackViewModel feedbackViewModel=new FeedbackViewModel();
+            feedbackViewModel.Requisition = requisition;
+            ViewBag.Feedback = _feedbackManager.GetAll().Where(c=>c.RequisitionId==requisitionId);
+            return View(feedbackViewModel);
             
+        }
+
+        [HttpPost]
+        public ActionResult Feedback([Bind(Include = "Id,RequisitionId,CommentText")]FeedbackViewModel feedbackViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
+                    _feedbackManager.Add(feedback);
+                    ViewBag.Feedback = _feedbackManager.GetAll();
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
+
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Reply(int feedbackId)
+        {
+            if (feedbackId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Feedback feedback = _feedbackManager.FindById((int)feedbackId);
+            if (feedback == null)
+            {
+                return HttpNotFound();
+            }
+            FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
+            
+            return View(feedbackViewModel);
+
+        }
+
+        [HttpPost]
+        public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId")]FeedbackViewModel feedbackViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
+
+                    _feedbackManager.Add(feedback);
+                    ViewBag.Feedback = _feedbackManager.GetAll();
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
+
+            }
+            return View();
         }
 
         protected override void Dispose(bool disposing)
