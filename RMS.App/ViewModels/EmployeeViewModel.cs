@@ -60,8 +60,8 @@ namespace RMS.App.ViewModels
         [NotMapped]
         public List<Division> DivisionList { get; set; }
 
-        public List<Address>Addresses { get; set; }  
-        
+        public List<Address>Addresses { get; set; }
+
     }
  
 

@@ -103,8 +103,7 @@ namespace RMS.App.Controllers
                 var email = employee.Email.Trim();
                 var contactNo = employee.ContactNo.Trim();
                 var nid = employee.NID.Trim();
-                var drivingLicence = employee.DrivingLicence.Trim();
-
+                
                 if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
                 {
                     ViewBag.Message1 = "Employee email already exist.";
@@ -119,11 +118,15 @@ namespace RMS.App.Controllers
                 {
                     ViewBag.Message3 = "Employee NID already exist.";
                 }
-                
-                if (_employeeManager.GetAll().Count(o=>o.DrivingLicence==drivingLicence)>0) 
+                if (employee.DrivingLicence != null)
                 {
-                    ViewBag.Message4 = "Employee driving licence no already exist.";
+                    var drivingLicence = employee.DrivingLicence.Trim();
+                    if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence) > 0)
+                    {
+                        ViewBag.Message4 = "Employee driving licence no already exist.";
+                    }
                 }
+                
                 if (ViewBag.Message1==null && ViewBag.Message2 == null && ViewBag.Message3 == null && ViewBag.Message4 == null) 
                 {
                     _employeeManager.Add(employee);
@@ -180,7 +183,6 @@ namespace RMS.App.Controllers
                 var email = employee.Email.Trim();
                 var contactNo = employee.ContactNo.Trim();
                 var nid = employee.NID.Trim();
-                var drivingLicence = employee.DrivingLicence.Trim();
 
                 if (_employeeManager.GetAll().Count(o => o.Email == email && o.Id!=employee.Id) > 0)
                 {
@@ -194,10 +196,15 @@ namespace RMS.App.Controllers
                 {
                     ViewBag.Message3 = "Employee NID already exist.";
                 }
-                if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence && o.Id != employee.Id) > 0)
+                if (employee.DrivingLicence!=null) 
                 {
-                    ViewBag.Message4 = "Employee driving licence no already exist.";
+                    var drivingLicence = employee.DrivingLicence.Trim();
+                    if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence && o.Id != employee.Id) > 0)
+                    {
+                        ViewBag.Message4 = "Employee driving licence no already exist.";
+                    }
                 }
+               
                 if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null && ViewBag.Message4 == null)
                 {
                     _employeeManager.Update(employee);
