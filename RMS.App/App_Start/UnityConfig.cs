@@ -91,6 +91,10 @@ namespace RMS.App
             container.RegisterType<IAddressManager, AddressManager>();
             container.RegisterType<IAddressRepository, AddressRepository>();
 
+
+            container.RegisterType<IFeedbackManager, FeedbackManager>();
+            container.RegisterType<IFeedbackRepository, FeedbackRepository>();
+
         }
     }
 }

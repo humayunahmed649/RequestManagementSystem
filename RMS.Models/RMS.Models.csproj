@@ -52,13 +52,13 @@
     <Compile Include="DatabaseContext\RmsDbContext.cs" />
     <Compile Include="EntityModels\Address.cs" />
     <Compile Include="EntityModels\AssignRequisition.cs" />
-    <Compile Include="EntityModels\Comment.cs" />
     <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Designation.cs" />
     <Compile Include="EntityModels\District.cs" />
     <Compile Include="EntityModels\Division.cs" />
     <Compile Include="EntityModels\Employee.cs" />
     <Compile Include="EntityModels\EmployeeType.cs" />
+    <Compile Include="EntityModels\Feedback.cs" />
     <Compile Include="EntityModels\Organization.cs" />
     <Compile Include="EntityModels\Requisition.cs" />
     <Compile Include="EntityModels\RequisitionStatus.cs" />
@@ -173,6 +173,10 @@
     <Compile Include="Migrations\201808172030352_RequisitionStatusId Added in Assign Requisition Model.Designer.cs">
       <DependentUpon>201808172030352_RequisitionStatusId Added in Assign Requisition Model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809062125292_FeedbackModelAdded.cs" />
+    <Compile Include="Migrations\201809062125292_FeedbackModelAdded.Designer.cs">
+      <DependentUpon>201809062125292_FeedbackModelAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -258,6 +262,9 @@
     <EmbeddedResource Include="Migrations\201808172030352_RequisitionStatusId Added in Assign Requisition Model.resx">
       <DependentUpon>201808172030352_RequisitionStatusId Added in Assign Requisition Model.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809062125292_FeedbackModelAdded.resx">
+      <DependentUpon>201809062125292_FeedbackModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -268,6 +275,9 @@
       <Project>{f44b1413-1e46-410b-a35b-a440ae52fbc5}</Project>
       <Name>RMS.Models.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\201809062121158_Feedback\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
