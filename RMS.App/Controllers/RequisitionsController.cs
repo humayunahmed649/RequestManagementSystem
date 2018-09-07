@@ -45,46 +45,68 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
-                ex=ViewBag.Message = "Error 400";
-                
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Index"));
+
             }
-            return View();
         }
 
         public ActionResult RequisitionList()
         {
+            try
+            {
 
-            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
-            IEnumerable<RequisitionViewModel> requisitionViewModels =
-                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
-            return View(requisitionViewModels);
+                ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+                IEnumerable<RequisitionViewModel> requisitionViewModels =
+                    Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+                return View(requisitionViewModels);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "RequisitionList"));
+            }
         }
 
         // GET: Requisitions/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Requisition requisition = _requisitionManager.FindById((int)id);
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                return View(requisitionViewModel);
             }
-            Requisition requisition = _requisitionManager.FindById((int)id);
-            if (requisition == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Details"));
             }
-            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-            return View(requisitionViewModel);
+            
         }
 
         // GET: Requisitions/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
-            ICollection<Requisition> requisitions = _requisitionManager.GetAll();
-            IEnumerable<RequisitionViewModel> requisitionViewModels =
-                Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
-            ViewBag.Requisition = requisitionViewModels;
-            return View();
+            try
+            {
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
+                ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+                IEnumerable<RequisitionViewModel> requisitionViewModels =
+                    Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+                ViewBag.Requisition = requisitionViewModels;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Create"));
+            }
+            
         }
         
 
@@ -95,48 +117,64 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,EmployeeId")] RequisitionViewModel requisitionViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var startDate = requisitionViewModel.StartDateTime.ToString("MM/dd/yyyy");
-                var startTime = requisitionViewModel.StartTime;
-                DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
-                requisitionViewModel.StartDateTime = startDateTime;
 
-                var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
-                var endTime = requisitionViewModel.EndTime;
-                DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
-                requisitionViewModel.EndDateTime = endDateTime;
-
-                requisitionViewModel.RequestFor = "Own";
-                requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
-
-                Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
-                bool isSaved = _requisitionManager.Add(requisition);
-
-                //Requisition Status Save
-                if (isSaved == true)
+                if (ModelState.IsValid)
                 {
-                    RequisitionStatus status = new RequisitionStatus();
-                    status.RequisitionNumber = requisition.RequisitionNumber;
+                    var startDate = requisitionViewModel.StartDateTime.ToString("MM/dd/yyyy");
+                    var startTime = requisitionViewModel.StartTime;
+                    DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
+                    requisitionViewModel.StartDateTime = startDateTime;
 
-                    status.RequisitionId = requisition.Id;
-                    status.StatusType = "New";
-                    _requisitionStatusManager.Add(status);
-                    TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
-                    return RedirectToAction("Index");
+                    var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
+                    var endTime = requisitionViewModel.EndTime;
+                    DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
+                    requisitionViewModel.EndDateTime = endDateTime;
+
+                    requisitionViewModel.RequestFor = "Own";
+                    requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
+
+                    Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
+                    bool isSaved = _requisitionManager.Add(requisition);
+
+                    //Requisition Status Save
+                    if (isSaved == true)
+                    {
+                        RequisitionStatus status = new RequisitionStatus();
+                        status.RequisitionNumber = requisition.RequisitionNumber;
+
+                        status.RequisitionId = requisition.Id;
+                        status.StatusType = "New";
+                        _requisitionStatusManager.Add(status);
+                        TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
+                        return RedirectToAction("Index");
+                    }
                 }
-            }
 
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
-            return View(requisitionViewModel);
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
+                return View(requisitionViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("", new HandleErrorInfo(ex, "Requisitions", "Create"));
+            }
         }
 
         // GET: Requisitions/CreateRequestForOther
         [HttpGet]
         public ActionResult CreateRequestForOther()
         {
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
-            return View();
+            try
+            {
+
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "CreateRequestForOther"));
+            }
         }
 
         // POST: Requisitions/CreateRequestForOther
@@ -144,56 +182,72 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId")] RequisitonForAnotherViewModel requisitonForAnother)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var startDate = requisitonForAnother.StartDateTime.ToString("MM/dd/yyyy");
-                var startTime = requisitonForAnother.StartTime;
-                DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
-                requisitonForAnother.StartDateTime = startDateTime;
 
-                var endDate = requisitonForAnother.EndDateTime.ToString("MM/dd/yyyy");
-                var endTime = requisitonForAnother.EndTime;
-                DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
-                requisitonForAnother.EndDateTime = endDateTime;
-
-                requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
-                Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
-
-                bool isSaved=_requisitionManager.Add(requisition);
-                //Requisition Status Save
-                if (isSaved == true)
+                if (ModelState.IsValid)
                 {
-                    RequisitionStatus status = new RequisitionStatus();
-                    status.RequisitionNumber = requisition.RequisitionNumber;
+                    var startDate = requisitonForAnother.StartDateTime.ToString("MM/dd/yyyy");
+                    var startTime = requisitonForAnother.StartTime;
+                    DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
+                    requisitonForAnother.StartDateTime = startDateTime;
 
-                    status.RequisitionId = requisition.Id;
-                    status.StatusType = "New";
-                    _requisitionStatusManager.Add(status);
-                    TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
-                    return RedirectToAction("Index");
+                    var endDate = requisitonForAnother.EndDateTime.ToString("MM/dd/yyyy");
+                    var endTime = requisitonForAnother.EndTime;
+                    DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
+                    requisitonForAnother.EndDateTime = endDateTime;
+
+                    requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
+                    Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
+
+                    bool isSaved = _requisitionManager.Add(requisition);
+                    //Requisition Status Save
+                    if (isSaved == true)
+                    {
+                        RequisitionStatus status = new RequisitionStatus();
+                        status.RequisitionNumber = requisition.RequisitionNumber;
+
+                        status.RequisitionId = requisition.Id;
+                        status.StatusType = "New";
+                        _requisitionStatusManager.Add(status);
+                        TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
+                        return RedirectToAction("Index");
+                    }
                 }
-            }
 
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName", requisitonForAnother.EmployeeId);
-            return View(requisitonForAnother);
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName", requisitonForAnother.EmployeeId);
+                return View(requisitonForAnother);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "CreateRequestForOther"));
+            }
         }
 
         // GET: Requisitions/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Requisition requisition = _requisitionManager.FindById((int)id);
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
+                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                return View(requisitionViewModel);
+
             }
-            Requisition requisition = _requisitionManager.FindById((int)id);
-            if (requisition == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
-            }
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
-            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-            return View(requisitionViewModel);
-        }
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Edit"));
+            }        }
 
         // POST: Requisitions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -202,42 +256,58 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId,RequisitionNumber")] RequisitionViewModel requisitionViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var startDate = requisitionViewModel.StartDateTime.ToString("MM/dd/yyyy");
-                var startTime = requisitionViewModel.StartTime;
-                DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
-                requisitionViewModel.StartDateTime = startDateTime;
 
-                var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
-                var endTime = requisitionViewModel.EndTime;
-                DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
-                requisitionViewModel.EndDateTime = endDateTime;
+                if (ModelState.IsValid)
+                {
+                    var startDate = requisitionViewModel.StartDateTime.ToString("MM/dd/yyyy");
+                    var startTime = requisitionViewModel.StartTime;
+                    DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
+                    requisitionViewModel.StartDateTime = startDateTime;
 
-                Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
+                    var endDate = requisitionViewModel.EndDateTime.ToString("MM/dd/yyyy");
+                    var endTime = requisitionViewModel.EndTime;
+                    DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
+                    requisitionViewModel.EndDateTime = endDateTime;
 
-                _requisitionManager.Update(requisition);
-                TempData["msg"] = "Information has been updated successfully";
-                return RedirectToAction("Index");
+                    Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
+
+                    _requisitionManager.Update(requisition);
+                    TempData["msg"] = "Information has been updated successfully";
+                    return RedirectToAction("Index");
+                }
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
+                return View(requisitionViewModel);
             }
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
-            return View(requisitionViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Edit"));
+            }
         }
 
         // GET: Requisitions/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Requisition requisition = _requisitionManager.FindById((int)id);
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                return View(requisitionViewModel);
             }
-            Requisition requisition = _requisitionManager.FindById((int)id);
-            if (requisition == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Delete"));
             }
-            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-            return View(requisitionViewModel);
+            
         }
 
         // POST: Requisitions/Delete/5
@@ -245,24 +315,40 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Requisition requisition = _requisitionManager.FindById((int)id);
-            _requisitionManager.Remove(requisition);
-            TempData["msg"] = "Information has been deleted successfully";
-            return RedirectToAction("Index");
+            try
+            {
+
+                Requisition requisition = _requisitionManager.FindById((int)id);
+                _requisitionManager.Remove(requisition);
+                TempData["msg"] = "Information has been deleted successfully";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Delete"));
+            }
         }
         [HttpGet]
         public ActionResult Feedback(int requisitionId)
         {
-            Requisition requisition = _requisitionManager.FindById((int)requisitionId);
-            if (requisition == null)
+            try
             {
-                return HttpNotFound();
+                Requisition requisition = _requisitionManager.FindById((int)requisitionId);
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                FeedbackViewModel feedbackViewModel = new FeedbackViewModel();
+                feedbackViewModel.Requisition = requisition;
+                ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == requisitionId);
+                return View(feedbackViewModel);
             }
-            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-            FeedbackViewModel feedbackViewModel=new FeedbackViewModel();
-            feedbackViewModel.Requisition = requisition;
-            ViewBag.Feedback = _feedbackManager.GetAll().Where(c=>c.RequisitionId==requisitionId);
-            return View(feedbackViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
+            }
+            
             
         }
 
@@ -290,14 +376,21 @@ namespace RMS.App.Controllers
         [HttpGet]
         public ActionResult Reply(int feedbackId)
         {
-            Feedback feedback = _feedbackManager.FindById((int)feedbackId);
-            if (feedback == null)
+            try
             {
-                return HttpNotFound();
+                Feedback feedback = _feedbackManager.FindById((int)feedbackId);
+                if (feedback == null)
+                {
+                    return HttpNotFound();
+                }
+                FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
+
+                return View(feedbackViewModel);
             }
-            FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
-            
-            return View(feedbackViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Reply"));
+            }
 
         }
 
