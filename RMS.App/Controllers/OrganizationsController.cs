@@ -13,6 +13,7 @@ using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
+using System.Linq.Dynamic;
 
 namespace RMS.App.Controllers
 {
@@ -44,6 +45,33 @@ namespace RMS.App.Controllers
             
         }
 
+        public ActionResult SearchIndex()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult GetList()
+        {
+            int start = Convert.ToInt32(Request["start"]);
+            int length = Convert.ToInt32(Request["length"]);
+            string searchValue = Request["search[value]"];
+            string shortingColumnName = Request["columns["+Request["order[0][column]"]+"][name]"];
+            string sortDirection = Request["order[0][dir]"];
+
+            List<Organization> organizations = (List<Organization>) _organizationManager.GetAll();
+            int totalRows = organizations.Count();
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                organizations = organizations.Where(x => x.Name.ToLower().Contains(searchValue.ToLower())||x.Code.ToString().Contains(searchValue.ToString())||x.RegNo.ToString().Contains(searchValue.ToString())).ToList<Organization>();
+            }
+            //Shorting.....
+            int dataAfterFiltering = organizations.Count();
+            organizations = organizations.OrderBy(shortingColumnName + " " + sortDirection).ToList<Organization>();
+            //Paging.....
+            organizations = organizations.Skip(start).Take(length).ToList<Organization>();
+
+            return Json(new {data=organizations,draw=Request["draw"], recordsTotal = totalRows, recordsFiltered =dataAfterFiltering},JsonRequestBehavior.AllowGet);
+        }
         // GET: Organizations/Details/5
         public ActionResult Details(int? id)
         {
