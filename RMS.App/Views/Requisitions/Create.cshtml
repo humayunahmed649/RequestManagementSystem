@@ -5,8 +5,10 @@
     ViewBag.Title = "Vehicle Requisition";
 }
 @section styles{
-    
-<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" rel="stylesheet" />
 }
 <div class="col-md-12">
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a> &nbsp;
@@ -17,24 +19,31 @@
 <br/>
 <br/>
 <div class="col-md-12">
-    <table class="table table-bordered table-active table-striped">
+    <table id="example" class="table table-striped table-bordered table-hover" style="width: 100%">
         <thead>
-        <th>From Place</th>
-        <th>Destination Place</th>
-        <th>Start Date Time</th>
-        <th>End Date Time</th>
-        <th>Description</th>
-        <th>Request For</th>
+        <tr class="bg-info">
+            <th>SL</th>
+            <th>From Place</th>
+            <th>Destination Place</th>
+            <th>Start Date Time</th>
+            <th>End Date Time</th>
+            <th>Description</th>
+            <th>Request For</th>
+        </tr>
         </thead>
-
+        <tbody>
         @{
             var data = ViewBag.Requisition;
+            var sl = 0;
         }
-
 
         @foreach (var item in data)
         {
+            sl++;
             <tr>
+                <td>
+                    @sl
+                </td>
                 <td>@item.FromPlace</td>
                 <td>@item.DestinationPlace</td>
                 <td>@item.StartDateTime</td>
@@ -42,10 +51,19 @@
                 <td>@item.Description</td>
                 <td>@item.RequestFor</td>
             </tr>
-
         }
-
-
+        </tbody>
+        <tfoot>
+        <tr class="bg-secondary">
+            <th>SL</th>
+            <th>From Place</th>
+            <th>Destination Place</th>
+            <th>Start Date Time</th>
+            <th>End Date Time</th>
+            <th>Description</th>
+            <th>Request For</th>
+        </tr>
+        </tfoot>
     </table>
 </div>
 
@@ -96,7 +114,6 @@
                                 @Html.EditorFor(model => model.StartTime, new { htmlAttributes =new { @class= "form-control timePicker" } })
                                 @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
                             </div>
-
                         </div>
 
                         <div class="form-group row">
@@ -111,10 +128,7 @@
                                 @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control timePicker" } })
                                 @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
                             </div>
-
                         </div>
-
-                       
 
                         <div class="form-group row">
                             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -156,13 +170,12 @@
             </div>
             <div class="modal-body table-info">
                 @Html.Action("RequisitionList", "Requisitions")
-
             </div>
-
             <div class="col-md-12 text-right">
                 <br/>
                 <p><a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
                 </p>
+                <br/>
             </div>
         </div>
     </div>
@@ -192,4 +205,15 @@
 <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
 <script src="~/Scripts/RequisitionJs/RequisitionDataTime.js"></script>
 
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+        $(document).ready(function () {
+            $('#example1').DataTable();
+        });
+</script>
 }
