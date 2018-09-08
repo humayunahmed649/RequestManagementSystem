@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Edit Employee Type";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Edit Employee Type</h2>
@@ -28,7 +27,7 @@
         <div class="form-group row">
             <div class="control-label col-md-2"></div>
             <div class="col-md-6">
-                <input type="submit" value="Update" class="btn btn-default" /> &nbsp;
+                <input type="submit" value="Update" class="btn btn-success" /> &nbsp;
                 @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
             </div>
         </div>
