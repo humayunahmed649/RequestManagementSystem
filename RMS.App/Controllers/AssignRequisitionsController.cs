@@ -35,31 +35,45 @@ namespace RMS.App.Controllers
         // GET: AssignRequisitions
         public ActionResult Index(string searchText)
         {
+            try
+            {
 
-            ICollection<AssignRequisition> requisitions = _assignRequisitionManager.GetAll();
-            IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModels =
-                Mapper.Map<IEnumerable<AssignRequisitionViewModel>>(requisitions);
-            return View(assignRequisitionViewModels);
+                ICollection<AssignRequisition> requisitions = _assignRequisitionManager.GetAll();
+                IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModels =
+                    Mapper.Map<IEnumerable<AssignRequisitionViewModel>>(requisitions);
+                return View(assignRequisitionViewModels);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Index"));
+            }
         }
 
         // GET: AssignRequisitions/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
-            if (assignRequisition == null)
-            {
-                return HttpNotFound();
-            }
-            if (assignRequisition != null)
-            {
-                var requestDetails = _assignRequisitionManager.GetAllWithInformation();
-                AssignRequisitionViewModel assignRequisitionViewModel = Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
+                if (assignRequisition == null)
+                {
+                    return HttpNotFound();
+                }
+                if (assignRequisition != null)
+                {
+                    var requestDetails = _assignRequisitionManager.GetAllWithInformation();
+                    AssignRequisitionViewModel assignRequisitionViewModel = Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
 
-                return View(assignRequisitionViewModel);
+                    return View(assignRequisitionViewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Details"));
             }
             return View("Error");
         }
@@ -68,27 +82,35 @@ namespace RMS.App.Controllers
         //Get
         public ActionResult Create(int requisitionId)
         {
-            if (requisitionId == 0)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Requisition requisition = _requisitionManager.FindById(requisitionId);
-            if (requisition == null)
-            {
-                return HttpNotFound();
-            }
+                if (requisitionId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Requisition requisition = _requisitionManager.FindById(requisitionId);
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
 
-            RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(ViewBag.Requisition=requisition);
+                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(ViewBag.Requisition = requisition);
+
+
+                AssignRequisitionViewModel assignRequisitionViewModel = new AssignRequisitionViewModel();
+                assignRequisitionViewModel.RequisitionId = requisitionId;
+                ViewBag.RequisitionNumber = requisition.RequisitionNumber;
+
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
+                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
+                ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
+                return View(assignRequisitionViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Create"));
+            }
             
-
-            AssignRequisitionViewModel assignRequisitionViewModel=new AssignRequisitionViewModel();
-            assignRequisitionViewModel.RequisitionId = requisitionId;
-            ViewBag.RequisitionNumber = requisition.RequisitionNumber;
-
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-            ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
-            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
-            return View(assignRequisitionViewModel);
         }
         
         
@@ -97,56 +119,77 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,VehicleId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (ModelState.IsValid)
+                {
 
-                AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
-                _assignRequisitionManager.Add(assignRequisition);
-                RequisitionStatus status = new RequisitionStatus();
-                status.Id = assignRequisition.RequisitionStatusId;
-                status.RequisitionId = assignRequisition.RequisitionId;
-                status.RequisitionNumber = assignRequisition.RequisitionNumber;
-                status.StatusType = "Assigned";
-                _requisitionStatusManager.Update(status);
-                return RedirectToAction("Index");
+                    AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
+                    _assignRequisitionManager.Add(assignRequisition);
+                    RequisitionStatus status = new RequisitionStatus();
+                    status.Id = assignRequisition.RequisitionStatusId;
+                    status.RequisitionId = assignRequisition.RequisitionId;
+                    status.RequisitionNumber = assignRequisition.RequisitionNumber;
+                    status.StatusType = "Assigned";
+                    _requisitionStatusManager.Update(status);
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
+                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "DestinationPlace");
+                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
+                return View(assignRequisitionViewModel);
             }
-
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "DestinationPlace");
-            ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
-            return View(assignRequisitionViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Create"));
+            }
         }
 
         [HttpGet]
         public ActionResult Cancel(int statusId)
         {
-            if (statusId == 0)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RequisitionStatus requisition = _requisitionStatusManager.FindById(statusId);
+                if (statusId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                RequisitionStatus requisition = _requisitionStatusManager.FindById(statusId);
 
-            if (requisition == null)
-            {
-                return HttpNotFound();
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
+                return View(requisitionStatusViewModel);
             }
-            RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
-            return View(requisitionStatusViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Cancel"));
+            }
         }
 
         [HttpPost]
         public ActionResult Cancel([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber")]RequisitionStatusViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
-                requisitionStatus.Id = requisitionStatus.Id;
-                requisitionStatus.RequisitionId = requisitionStatus.RequisitionId;
-                requisitionStatus.StatusType = "Cancelled";
-                _requisitionStatusManager.Update(requisitionStatus);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
+                    requisitionStatus.Id = requisitionStatus.Id;
+                    requisitionStatus.RequisitionId = requisitionStatus.RequisitionId;
+                    requisitionStatus.StatusType = "Cancelled";
+                    _requisitionStatusManager.Update(requisitionStatus);
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Cancel"));
+            }
 
         }
 
@@ -154,21 +197,28 @@ namespace RMS.App.Controllers
         // GET: AssignRequisitions/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
+                if (assignRequisition == null)
+                {
+                    return HttpNotFound();
+                }
+                AssignRequisitionViewModel assignRequisitionViewModel =
+                    Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
+                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
+                ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAll(), "Id", "StatusType");
+                return View(assignRequisitionViewModel);
             }
-            AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
-            if (assignRequisition == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Edit"));
             }
-            AssignRequisitionViewModel assignRequisitionViewModel =
-                Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-            ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
-            ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAll(), "Id", "StatusType");
-            return View(assignRequisitionViewModel);
         }
 
         // POST: AssignRequisitions/Edit/5
@@ -178,33 +228,48 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                AssignRequisition requisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
-                _assignRequisitionManager.Update(requisition);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    AssignRequisition requisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
+                    _assignRequisitionManager.Update(requisition);
+                    return RedirectToAction("Index");
+                }
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName", assignRequisitionViewModel.EmployeeId);
+                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "DestinationPlace", assignRequisitionViewModel.RequisitionId);
+                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo", assignRequisitionViewModel.VehicleId);
+                return View(assignRequisitionViewModel);
             }
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName", assignRequisitionViewModel.EmployeeId);
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "DestinationPlace", assignRequisitionViewModel.RequisitionId);
-            ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo", assignRequisitionViewModel.VehicleId);
-            return View(assignRequisitionViewModel);
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Edit"));
+            }
         }
 
         // GET: AssignRequisitions/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
+                if (assignRequisition == null)
+                {
+                    return HttpNotFound();
+                }
+                AssignRequisitionViewModel assignRequisitionViewModel =
+                    Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+                return View(assignRequisitionViewModel);
             }
-            AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
-            if (assignRequisition == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Delete"));
             }
-            AssignRequisitionViewModel assignRequisitionViewModel =
-                Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
-            return View(assignRequisitionViewModel);
         }
 
         // POST: AssignRequisitions/Delete/5
@@ -212,46 +277,69 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
-            _assignRequisitionManager.Remove(assignRequisition);
-            return RedirectToAction("Index");
+            try
+            {
+                AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
+                _assignRequisitionManager.Remove(assignRequisition);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Delete"));
+            }
         }
 
        
 
         public ActionResult Requests(string searchText)
         {
-            if (searchText != null)
+            try
             {
-                IEnumerable<RequisitionStatus> requisition = _requisitionStatusManager.SearchByRequisitionId(searchText);
-                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
-                Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisition);
-                return View(requisitionStatusViewModels);
-            }
+                if (searchText != null)
+                {
+                    IEnumerable<RequisitionStatus> requisition = _requisitionStatusManager.SearchByRequisitionId(searchText);
+                    IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
+                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisition);
+                    return View(requisitionStatusViewModels);
+                }
 
-            ICollection<RequisitionStatus> requisitions = _requisitionStatusManager.GetAllStatusNew();
-            IEnumerable<RequisitionStatusViewModel> requisitionViewModels =
-                Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitions);
-            return View(requisitionViewModels);
+                ICollection<RequisitionStatus> requisitions = _requisitionStatusManager.GetAllStatusNew();
+                IEnumerable<RequisitionStatusViewModel> requisitionViewModels =
+                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitions);
+                return View(requisitionViewModels);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Requests"));
+            }
         }
         public ActionResult ViewDetails(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Requisition requisition = _requisitionManager.FindById((int)id);
-            if (requisition == null)
-            {
-                return HttpNotFound();
-            }
-            if (requisition != null)
-            {
-                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
 
-                return View(requisitionViewModel);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Requisition requisition = _requisitionManager.FindById((int)id);
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+                if (requisition != null)
+                {
+                    RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+
+                    return View(requisitionViewModel);
+                }
+                return View("Error");
             }
-            return View("Error");
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ViewDetails"));
+            }
+            
         }
         
 

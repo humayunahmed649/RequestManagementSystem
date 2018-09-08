@@ -26,41 +26,63 @@ namespace RMS.App.Controllers
         // GET: Designations
         public ActionResult Index(string searchText)
         {
-            if (searchText != null)
+            try
             {
-                ICollection<Designation> designations =_designationManager.SearchByText(searchText);
-                IEnumerable<DesignationViewModel> designationViewModel = Mapper.Map<IEnumerable<DesignationViewModel>>(designations);
-                return View(designationViewModel);
-            }
-            else
-            {
+                if (searchText != null)
+                {
+                    ICollection<Designation> designations = _designationManager.SearchByText(searchText);
+                    IEnumerable<DesignationViewModel> designationViewModel = Mapper.Map<IEnumerable<DesignationViewModel>>(designations);
+                    return View(designationViewModel);
+                }
+                else
+                {
 
-                ICollection<Designation> designation = _designationManager.GetAll();
-                IEnumerable<DesignationViewModel> designationViewModels = Mapper.Map<IEnumerable<DesignationViewModel>>(designation);
-                return View(designationViewModels);
+                    ICollection<Designation> designation = _designationManager.GetAll();
+                    IEnumerable<DesignationViewModel> designationViewModels = Mapper.Map<IEnumerable<DesignationViewModel>>(designation);
+                    return View(designationViewModels);
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Index"));
             }
         }
 
         // GET: Designations/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Designation designation = _designationManager.FindById((int)id);
+                if (designation == null)
+                {
+                    return HttpNotFound();
+                }
+                DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
+                return View(designationViewModel);
             }
-            Designation designation = _designationManager.FindById((int) id);
-            if (designation == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Details"));
             }
-            DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
-            return View(designationViewModel);
         }
 
         // GET: Designations/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Create"));
+            }
         }
 
         // POST: Designations/Create
@@ -70,40 +92,54 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title")] DesignationViewModel designationViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Designation designation = Mapper.Map<Designation>(designationViewModel);
+                if (ModelState.IsValid)
+                {
+                    Designation designation = Mapper.Map<Designation>(designationViewModel);
 
-                var title = designation.Title.Trim();
-                if (_designationManager.GetAll().Count(o => o.Title == title) > 0)
-                {
-                    ViewBag.Message = "Designation title already exist.";
+                    var title = designation.Title.Trim();
+                    if (_designationManager.GetAll().Count(o => o.Title == title) > 0)
+                    {
+                        ViewBag.Message = "Designation title already exist.";
+                    }
+                    if (ViewBag.Message == null)
+                    {
+                        _designationManager.Add(designation);
+                        TempData["msg"] = "Information has been saved successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (ViewBag.Message==null) 
-                {
-                    _designationManager.Add(designation);
-                    TempData["msg"] = "Information has been saved successfully";
-                    return RedirectToAction("Index");
-                }
+
+                return View(designationViewModel);
             }
-
-            return View(designationViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Create"));
+            }
         }
 
         // GET: Designations/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Designation designation = _designationManager.FindById((int)id);
+                if (designation == null)
+                {
+                    return HttpNotFound();
+                }
+                DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
+                return View(designationViewModel);
             }
-            Designation designation = _designationManager.FindById((int)id);
-            if (designation == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Edit"));
             }
-            DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
-            return View(designationViewModel);
         }
 
         // POST: Designations/Edit/5
@@ -113,38 +149,52 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title")] DesignationViewModel designationViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Designation designation = Mapper.Map<Designation>(designationViewModel);
-                var title = designation.Title.Trim();
-                if (_designationManager.GetAll().Count(o => o.Title == title && o.Id!=designation.Id) > 0)
+                if (ModelState.IsValid)
                 {
-                    ViewBag.Message = "Designation title already exist.";
+                    Designation designation = Mapper.Map<Designation>(designationViewModel);
+                    var title = designation.Title.Trim();
+                    if (_designationManager.GetAll().Count(o => o.Title == title && o.Id != designation.Id) > 0)
+                    {
+                        ViewBag.Message = "Designation title already exist.";
+                    }
+                    if (ViewBag.Message == null)
+                    {
+                        _designationManager.Update(designation);
+                        TempData["msg"] = "Information has been updated successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (ViewBag.Message==null) 
-                {
-                    _designationManager.Update(designation);
-                    TempData["msg"] = "Information has been updated successfully";
-                    return RedirectToAction("Index");
-                }
+                return View(designationViewModel);
             }
-            return View(designationViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Edit"));
+            }
         }
 
         // GET: Designations/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Designation designation = _designationManager.FindById((int)id);
+                if (designation == null)
+                {
+                    return HttpNotFound();
+                }
+                DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
+                return View(designationViewModel);
             }
-            Designation designation = _designationManager.FindById((int)id);
-            if (designation == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Delete"));
             }
-            DesignationViewModel designationViewModel = Mapper.Map<DesignationViewModel>(designation);
-            return View(designationViewModel);
         }
 
         // POST: Designations/Delete/5
@@ -152,10 +202,17 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Designation designation = _designationManager.FindById((int)id);
-            _designationManager.Remove(designation);
-            TempData["msg"] = "Information has been deleted successfully";
-            return RedirectToAction("Index");
+            try
+            {
+                Designation designation = _designationManager.FindById((int)id);
+                _designationManager.Remove(designation);
+                TempData["msg"] = "Information has been deleted successfully";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Designations", "Delete"));
+            }
         }
 
         protected override void Dispose(bool disposing)
