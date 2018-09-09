@@ -405,7 +405,7 @@ namespace RMS.App.Controllers
 
                     _feedbackManager.Add(feedback);
                     ViewBag.Feedback = _feedbackManager.GetAll();
-                    return View();
+                    return RedirectToAction("Feedback","Requisitions");
                 }
             }
             catch (Exception ex)

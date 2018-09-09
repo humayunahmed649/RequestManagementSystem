@@ -67,9 +67,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.RequestFor)
                 </th>
-                <th>
+                @*<th>
                     Action
-                </th>
+                </th>*@
             </tr>
         </thead>
         <tbody>
@@ -105,11 +105,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.RequestFor)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
                             @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
                             @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
-                        </td>
+                        </td>*@
                     </tr>
                 }
             }
@@ -147,9 +147,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.RequestFor)
                 </th>
-                <th>
+                @*<th>
                     Action
-                </th>
+                </th>*@
             </tr>
         </tfoot>
     </table>

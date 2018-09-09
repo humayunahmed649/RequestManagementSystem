@@ -9,13 +9,16 @@
 <hr/>
 
 <div class="row">
-    
-    <div class="col-md-3">@Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)</div>
-    <div class="col-md=9">@Html.DisplayFor(model => model.Requisition.RequisitionNumber)</div>
-    <div class="col-md-3">@Html.DisplayNameFor(model => model.StatusType)</div>
-    <div class="col-md=9">@Html.DisplayFor(model => model.StatusType)</div>
+
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.RequisitionId)</div>
+    <div class="col-md=5">@Html.DisplayFor(model => model.RequisitionId)</div>
+</div>
+<div class="row">
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.StatusType)</div>
+    <div class="col-md=5">@Html.DisplayFor(model => model.StatusType)</div>
 
 </div>
+<br/>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class="btn btn-warning"}) &nbsp;
     @Html.ActionLink("Back to List", "Index",null,new {@class="btn btn-info"})
