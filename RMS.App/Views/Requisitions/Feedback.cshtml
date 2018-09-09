@@ -8,6 +8,15 @@
 <hr />
 <div class="container border">
     <br/>
+
+    <div class="col-md-6">
+        @if (ViewBag.Msg != null)
+        {
+            <div>@ViewBag.Msg</div>
+        }
+    </div>
+
+
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
@@ -60,6 +69,14 @@
                     @Html.EditorFor(model => model.Requisition.RequestFor, new {htmlAttributes = new {@class = "form-control", @readOnly = "readonly"}})
                 </div>
             </div>
+
+            @*<div class="form-group row">
+                Like
+                <div class="col-md-9">
+                    @Html.ActionLink("Like", "Like", new {id = Model.Id}, new {@class = "btn-btn-default"})
+                </div>
+            </div>*@
+
         </div>
     </div>
     @Html.HiddenFor(model => model.Requisition.Id)
