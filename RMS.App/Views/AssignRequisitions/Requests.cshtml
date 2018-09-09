@@ -48,7 +48,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.RequisitionId)
                 </th>
-                <th>
+                <th class="text-center">
                     Action
                 </th>
             </tr>
@@ -75,7 +75,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.RequisitionId)
                         </td>
-                        <td>
+                        <td class="text-right">
                             @Html.ActionLink("Assign Requisition", "Create", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-primary btn-sm" })
                             @Html.ActionLink("View", "ViewDetails", new { id = item.RequisitionId }, new { @class = "btn btn-info btn-sm" })
                             @Html.ActionLink("Cancel Requisition", "Cancel", new { statusId = item.Id }, new { @class = "btn btn-warning btn-sm" })
@@ -107,7 +107,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.RequisitionId)
                 </th>
-                <th>
+                <th class="text-center">
                     Action
                 </th>
             </tr>
