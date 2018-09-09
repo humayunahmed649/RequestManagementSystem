@@ -334,7 +334,7 @@ namespace RMS.App.Controllers
             }
         }
         [HttpGet]
-        public ActionResult Feedback(int requisitionId)
+        public ActionResult Feedback(int? requisitionId)
         {
             try
             {
@@ -366,16 +366,22 @@ namespace RMS.App.Controllers
                 {
                     Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
                     _feedbackManager.Add(feedback);
-                    ViewBag.Feedback = _feedbackManager.GetAll();
-                    return View();
+                    ViewBag.Msg = "Comment Save successfully";
+
+
+                    Requisition requisition = _requisitionManager.FindById(feedbackViewModel.RequisitionId);
+                    RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                    feedbackViewModel.Requisition = requisition;
+                    ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == feedbackViewModel.RequisitionId);
+
                 }
+                return View(feedbackViewModel);
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
 
             }
-            return View();
         }
 
         [HttpGet]
@@ -389,7 +395,6 @@ namespace RMS.App.Controllers
                     return HttpNotFound();
                 }
                 FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
-
                 return View(feedbackViewModel);
             }
             catch (Exception ex)
@@ -409,17 +414,17 @@ namespace RMS.App.Controllers
                     Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
 
                     _feedbackManager.Add(feedback);
-                    ViewBag.Feedback = _feedbackManager.GetAll();
-                    return RedirectToAction("Feedback","Requisitions");
+                    ViewBag.Msg = "Reply Has been saved successfully";
                 }
+                return View();
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
 
             }
-            return View();
         }
+        
 
         protected override void Dispose(bool disposing)
         {
