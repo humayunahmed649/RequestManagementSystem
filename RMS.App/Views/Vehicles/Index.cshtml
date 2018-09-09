@@ -63,7 +63,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.SeatCapacity)
             </th>
-            <th>
+            <th class="text-center">
                 Action
             </th>
         </tr>
@@ -98,7 +98,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.SeatCapacity)
                         </td>
-                        <td>
+                        <td class="text-right">
                             @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-warning btn-sm"})
                             @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-primary btn-sm"})
                             @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger btn-sm"})
@@ -137,7 +137,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.SeatCapacity)
             </th>
-            <th>
+            <th class="text-center">
                 Action
             </th>
         </tr>
