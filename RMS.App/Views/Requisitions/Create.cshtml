@@ -17,6 +17,12 @@
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#notification">Notification</a> &nbsp;
 </div>
 <br/>
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-warning">
+        @Html.Raw(TempData["msg"])
+    </div>
+}
 <br/>
 <div class="col-md-12">
     <table id="example" class="table table-striped table-bordered table-hover" style="width: 100%">
@@ -37,24 +43,30 @@
             var sl = 0;
         }
 
-        @foreach (var item in data)
-        {
-            sl++;
-            <tr>
-                <td>
-                    @sl
-                </td>
-                <td>@item.FromPlace</td>
-                <td>@item.DestinationPlace</td>
-                <td>@item.StartDateTime</td>
-                <td>@item.EndDateTime</td>
-                <td>@item.Description</td>
-                <td>@item.RequestFor</td>
-            </tr>
+        @{
+            if (data!=null)
+            {
+                foreach (var item in data)
+                {
+                    sl++;
+                    <tr>
+                        <td>
+                            @sl
+                        </td>
+                        <td>@item.FromPlace</td>
+                        <td>@item.DestinationPlace</td>
+                        <td>@item.StartDateTime</td>
+                        <td>@item.EndDateTime</td>
+                        <td>@item.Description</td>
+                        <td>@item.RequestFor</td>
+                    </tr>
+                }
+            }
         }
+        
         </tbody>
         <tfoot>
-        <tr class="bg-secondary">
+        <tr class="bg-secondary text-white">
             <th>SL</th>
             <th>From Place</th>
             <th>Destination Place</th>

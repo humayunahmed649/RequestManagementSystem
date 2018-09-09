@@ -212,6 +212,8 @@
     <Compile Include="ViewModels\EmployeeTypeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
+    <Compile Include="ViewModels\ValidationModels\RequisitionDateTimeValidationCheckForOther.cs" />
+    <Compile Include="ViewModels\ValidationModels\RequisitionDateTimeValidationCheckForOwn.cs" />
     <Compile Include="ViewModels\RequisitionStatusViewModel.cs" />
     <Compile Include="ViewModels\RequisitionViewModel.cs" />
     <Compile Include="ViewModels\RequisitonForAnotherViewModel.cs" />

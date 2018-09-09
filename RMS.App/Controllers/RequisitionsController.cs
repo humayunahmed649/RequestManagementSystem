@@ -153,7 +153,12 @@ namespace RMS.App.Controllers
                 }
 
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
-                return View(requisitionViewModel);
+                ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+                IEnumerable<RequisitionViewModel> requisitionViewModels =
+                    Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+                ViewBag.Requisition = requisitionViewModels;
+                TempData["msg"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
+                return View();
             }
             catch (Exception ex)
             {

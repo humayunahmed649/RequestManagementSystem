@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.ValidationModels;
 using RMS.Models.EntityModels;
 
 namespace RMS.App.ViewModels
@@ -24,16 +25,20 @@ namespace RMS.App.ViewModels
         [Display(Name = "Destination")]
         public string DestinationPlace { get; set; }
 
+        [RequisitionDateTimeValidationCheckForOwn]
         [Required(ErrorMessage = "Please provide a journey start date and time!")]
         [Display(Name = "Journey Date")]
+        
         public DateTime StartDateTime { get; set; }
         
         [Display(Name = "Journey Time")]
         [Required(ErrorMessage = "Please set a journey time!")]
         public string StartTime { get; set; }
 
+        [RequisitionDateTimeValidationCheckForOwn]
         [Required(ErrorMessage = "Please provide a journey end date and time!")]
         [Display(Name = "Return Date")]
+        
         public DateTime EndDateTime { get; set; }
 
         [Display(Name = "Return Time")]
