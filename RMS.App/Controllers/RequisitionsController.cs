@@ -162,7 +162,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
-                return View("", new HandleErrorInfo(ex, "Requisitions", "Create"));
+                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Create"));
             }
         }
 

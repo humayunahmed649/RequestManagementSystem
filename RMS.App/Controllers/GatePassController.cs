@@ -26,84 +26,131 @@ namespace RMS.App.Controllers
         // GET: GatePass
         public ActionResult Index()
         {
-            ICollection<RequisitionStatus> requisitionStatus = _requisitionStatusManager.GetAllWithRequisitionDetails();
-            IEnumerable<RequisitionStatusViewModel> assignRequisitionView = Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitionStatus);
-            return View(assignRequisitionView);
+            try
+            {
+
+                ICollection<RequisitionStatus> requisitionStatus = _requisitionStatusManager.GetAllWithRequisitionDetails();
+                IEnumerable<RequisitionStatusViewModel> assignRequisitionView = Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitionStatus);
+                return View(assignRequisitionView);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "Index"));
+            }
         }
         [HttpGet]
         public ActionResult CheckOut(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+                if (requisitionStatus == null)
+                {
+                    return HttpNotFound();
+                }
+                if (requisitionStatus != null)
+                {
+                    RequisitionStatusViewModel requisitionStatusViewModel =
+                        Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
+                    return View(requisitionStatusViewModel);
+                }
+                return View();
             }
-            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
-            if (requisitionStatus == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckOut"));
             }
-            if (requisitionStatus != null)
-            {
-                RequisitionStatusViewModel requisitionStatusViewModel =
-                    Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
-                return View(requisitionStatusViewModel);
-            }
-            return View("Error");
+
         }
         [HttpPost]
         public ActionResult CheckOut([Bind(Include = "Id,StatusType,RequisitionNumber,RequisitionId")] RequisitionStatusViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
-                requisitionStatus.StatusType = "OnExecute";
-                _requisitionStatusManager.Update(requisitionStatus);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
+                    requisitionStatus.StatusType = "OnExecute";
+                    _requisitionStatusManager.Update(requisitionStatus);
+                    return RedirectToAction("Index");
+                }
+
+                return View();
+
             }
-            
-            return View();
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckIn"));
+            }
+
         }
         [HttpGet]
         public ActionResult CheckIn()
         {
-            ICollection<RequisitionStatus> onExecuteRequisition = _requisitionStatusManager.GetAllStatusExecute();
+            try
+            {
+                ICollection<RequisitionStatus> onExecuteRequisition = _requisitionStatusManager.GetAllStatusExecute();
 
-            IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModel =
-                Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(onExecuteRequisition);
-            return View(requisitionStatusViewModel);
+                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModel =
+                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(onExecuteRequisition);
+                return View(requisitionStatusViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckIn"));
+            }
+
         }
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+                if (requisitionStatus == null)
+                {
+                    return HttpNotFound();
+                }
+                if (requisitionStatus != null)
+                {
+                    RequisitionStatusViewModel requisitionStatusViewModel =
+                        Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
+                    return View(requisitionStatusViewModel);
+                }
+                return View("Error");
             }
-            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
-            if (requisitionStatus == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "Edit"));
             }
-            if (requisitionStatus != null)
-            {
-                RequisitionStatusViewModel requisitionStatusViewModel =
-                    Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
-                return View(requisitionStatusViewModel);
-            }
-            return View("Error");
         }
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,StatusType,RequisitionNumber,RequisitionId")] RequisitionStatusViewModel model)
         {
-            
-            if (ModelState.IsValid)
+            try
             {
-                RequisitionStatus request = Mapper.Map<RequisitionStatus>(model);
-                request.StatusType = "Completed";
-                _requisitionStatusManager.Update(request);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    RequisitionStatus request = Mapper.Map<RequisitionStatus>(model);
+                    request.StatusType = "Completed";
+                    _requisitionStatusManager.Update(request);
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "Edit"));
+            }
+
         }
 
     }

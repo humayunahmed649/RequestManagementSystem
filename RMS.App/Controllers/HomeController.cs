@@ -10,21 +10,45 @@ namespace RMS.App.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Home", "Index"));
+            }
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            try
+            {
 
-            return View();
+                ViewBag.Message = "Your application description page.";
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Home", "About"));
+            }
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            try
+            {
 
-            return View();
+                ViewBag.Message = "Your contact page.";
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Home", "Contact"));
+            }
         }
     }
 }

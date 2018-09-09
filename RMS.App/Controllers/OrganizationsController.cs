@@ -29,69 +29,108 @@ namespace RMS.App.Controllers
         // GET: Organizations
         public ActionResult Index(string searchText)
         {
-            if (searchText != null)
+            try
             {
-                ICollection<Organization> organization = _organizationManager.SearchByText(searchText);
-                IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
-                return View(organizationViewModels);
+                if (searchText != null)
+                {
+                    ICollection<Organization> organization = _organizationManager.SearchByText(searchText);
+                    IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
+                    return View(organizationViewModels);
+                }
+                else
+                {
+                    ICollection<Organization> organization = _organizationManager.GetAll();
+                    IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
+                    return View(organizationViewModels);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ICollection<Organization> organization = _organizationManager.GetAll();
-                IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
-                return View(organizationViewModels);
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Index"));
             }
 
-            
+
         }
 
         public ActionResult SearchIndex()
         {
-            return View();
+            try
+            {
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "SearchIndex"));
+            }
         }
         [HttpPost]
         public ActionResult GetList()
         {
-            int start = Convert.ToInt32(Request["start"]);
-            int length = Convert.ToInt32(Request["length"]);
-            string searchValue = Request["search[value]"];
-            string shortingColumnName = Request["columns["+Request["order[0][column]"]+"][name]"];
-            string sortDirection = Request["order[0][dir]"];
-
-            List<Organization> organizations = (List<Organization>) _organizationManager.GetAll();
-            int totalRows = organizations.Count();
-            if (!string.IsNullOrEmpty(searchValue))
+            try
             {
-                organizations = organizations.Where(x => x.Name.ToLower().Contains(searchValue.ToLower())||x.Code.ToString().Contains(searchValue.ToString())||x.RegNo.ToString().Contains(searchValue.ToString())).ToList<Organization>();
-            }
-            //Shorting.....
-            int dataAfterFiltering = organizations.Count();
-            organizations = organizations.OrderBy(shortingColumnName + " " + sortDirection).ToList<Organization>();
-            //Paging.....
-            organizations = organizations.Skip(start).Take(length).ToList<Organization>();
 
-            return Json(new {data=organizations,draw=Request["draw"], recordsTotal = totalRows, recordsFiltered =dataAfterFiltering},JsonRequestBehavior.AllowGet);
+                int start = Convert.ToInt32(Request["start"]);
+                int length = Convert.ToInt32(Request["length"]);
+                string searchValue = Request["search[value]"];
+                string shortingColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
+                string sortDirection = Request["order[0][dir]"];
+
+                List<Organization> organizations = (List<Organization>)_organizationManager.GetAll();
+                int totalRows = organizations.Count();
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    organizations = organizations.Where(x => x.Name.ToLower().Contains(searchValue.ToLower()) || x.Code.ToString().Contains(searchValue.ToString()) || x.RegNo.ToString().Contains(searchValue.ToString())).ToList<Organization>();
+                }
+                //Shorting.....
+                int dataAfterFiltering = organizations.Count();
+                organizations = organizations.OrderBy(shortingColumnName + " " + sortDirection).ToList<Organization>();
+                //Paging.....
+                organizations = organizations.Skip(start).Take(length).ToList<Organization>();
+
+                return Json(new { data = organizations, draw = Request["draw"], recordsTotal = totalRows, recordsFiltered = dataAfterFiltering }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "GetList"));
+            }
         }
         // GET: Organizations/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Organization organization = _organizationManager.FindById((int)id);
+                if (organization == null)
+                {
+                    return HttpNotFound();
+                }
+                OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
+                return View(organizationViewModel);
             }
-            Organization organization = _organizationManager.FindById((int)id);
-            if (organization == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Details"));
             }
-            OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
-            return View(organizationViewModel);
         }
 
         // GET: Organizations/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Create"));
+            }
         }
 
         // POST: Organizations/Create
@@ -101,52 +140,66 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Code,RegNo")] OrganizationViewModel organizationViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Organization organization = Mapper.Map<Organization>(organizationViewModel);
+                if (ModelState.IsValid)
+                {
+                    Organization organization = Mapper.Map<Organization>(organizationViewModel);
 
-                var name = organization.Name.Trim();
-                var code = organization.Code.Trim();
-                var regNo = organization.RegNo.Trim();
+                    var name = organization.Name.Trim();
+                    var code = organization.Code.Trim();
+                    var regNo = organization.RegNo.Trim();
 
-                if (_organizationManager.GetAll().Count(o=>o.Name==name)>0)
-                {
-                    ViewBag.Message1 = "Organization name already exist.";
-                }
-                if (_organizationManager.GetAll().Count(o => o.Code == code) > 0)
-                {
-                    ViewBag.Message2 = "Organization code already exist.";
-                }
-                if (_organizationManager.GetAll().Count(o => o.RegNo == regNo) > 0)
-                {
-                    ViewBag.Message3 = "Organization registration no already exist.";
-                }
-                if(ViewBag.Message1==null && ViewBag.Message2==null && ViewBag.Message3 ==null )
-                {
-                    _organizationManager.Add(organization);
+                    if (_organizationManager.GetAll().Count(o => o.Name == name) > 0)
+                    {
+                        ViewBag.Message1 = "Organization name already exist.";
+                    }
+                    if (_organizationManager.GetAll().Count(o => o.Code == code) > 0)
+                    {
+                        ViewBag.Message2 = "Organization code already exist.";
+                    }
+                    if (_organizationManager.GetAll().Count(o => o.RegNo == regNo) > 0)
+                    {
+                        ViewBag.Message3 = "Organization registration no already exist.";
+                    }
+                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null)
+                    {
+                        _organizationManager.Add(organization);
 
-                    TempData["msg"] = "Information has been save successfully";
-                    return RedirectToAction("Index");
+                        TempData["msg"] = "Information has been save successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
+
+                return View(organizationViewModel);
             }
-            
-            return View(organizationViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Create"));
+            }
         }
 
         // GET: Organizations/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Organization organization = _organizationManager.FindById((int)id);
+                if (organization == null)
+                {
+                    return HttpNotFound();
+                }
+                OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
+                return View(organizationViewModel);
             }
-            Organization organization = _organizationManager.FindById((int)id);
-            if (organization == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Edit"));
             }
-            OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
-            return View(organizationViewModel);
         }
 
         // POST: Organizations/Edit/5
@@ -156,50 +209,64 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Code,RegNo")] OrganizationViewModel organizationViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Organization organization = Mapper.Map<Organization>(organizationViewModel);
+                if (ModelState.IsValid)
+                {
+                    Organization organization = Mapper.Map<Organization>(organizationViewModel);
 
-                var name = organization.Name.Trim();
-                var code = organization.Code.Trim();
-                var regNo = organization.RegNo.Trim();
+                    var name = organization.Name.Trim();
+                    var code = organization.Code.Trim();
+                    var regNo = organization.RegNo.Trim();
 
-                if (_organizationManager.GetAll().Count(o => o.Name == name && o.Id!=organization.Id) > 0)
-                {
-                    ViewBag.Message1 = "Organization name already exist.";
+                    if (_organizationManager.GetAll().Count(o => o.Name == name && o.Id != organization.Id) > 0)
+                    {
+                        ViewBag.Message1 = "Organization name already exist.";
+                    }
+                    if (_organizationManager.GetAll().Count(o => o.Code == code && o.Id != organization.Id) > 0)
+                    {
+                        ViewBag.Message2 = "Organization code already exist.";
+                    }
+                    if (_organizationManager.GetAll().Count(o => o.RegNo == regNo && o.Id != organization.Id) > 0)
+                    {
+                        ViewBag.Message3 = "Organization registration no already exist.";
+                    }
+                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null)
+                    {
+                        _organizationManager.Update(organization);
+                        TempData["msg"] = "Information has been updated successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (_organizationManager.GetAll().Count(o => o.Code == code && o.Id != organization.Id) > 0)
-                {
-                    ViewBag.Message2 = "Organization code already exist.";
-                }
-                if (_organizationManager.GetAll().Count(o => o.RegNo == regNo && o.Id != organization.Id) > 0)
-                {
-                    ViewBag.Message3 = "Organization registration no already exist.";
-                }
-                if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null)
-                {
-                    _organizationManager.Update(organization);
-                    TempData["msg"] = "Information has been updated successfully";
-                    return RedirectToAction("Index");
-                }
+                return View(organizationViewModel);
             }
-            return View(organizationViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Edit"));
+            }
         }
 
         // GET: Organizations/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Organization organization = _organizationManager.FindById((int)id);
+                if (organization == null)
+                {
+                    return HttpNotFound();
+                }
+                OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
+                return View(organizationViewModel);
             }
-            Organization organization = _organizationManager.FindById((int)id);
-            if (organization == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Delete"));
             }
-            OrganizationViewModel organizationViewModel = Mapper.Map<OrganizationViewModel>(organization);
-            return View(organizationViewModel);
         }
 
         // POST: Organizations/Delete/5
@@ -207,10 +274,18 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Organization organization = _organizationManager.FindById((int)id);
-            _organizationManager.Remove(organization);
-            TempData["msg"] = "Information has been deleted successfully";
-            return RedirectToAction("Index");
+            try
+            {
+                Organization organization = _organizationManager.FindById((int)id);
+                _organizationManager.Remove(organization);
+                TempData["msg"] = "Information has been deleted successfully";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Organizations", "Delete"));
+            }
+
         }
 
         protected override void Dispose(bool disposing)

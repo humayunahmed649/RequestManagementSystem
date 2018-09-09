@@ -26,20 +26,27 @@ namespace RMS.App.Controllers
         // GET: VehicleTypes
         public ActionResult Index(string searchText)
         {
+            try
+            {
 
-            if(searchText != null)
-            {
-                ICollection<VehicleType> vehicleType = _vehicleTypeManager.SearchByText(searchText);
-                IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
-                    Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
-                return View(vehicleTypeViewModels);
+                if (searchText != null)
+                {
+                    ICollection<VehicleType> vehicleType = _vehicleTypeManager.SearchByText(searchText);
+                    IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
+                        Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
+                    return View(vehicleTypeViewModels);
+                }
+                else
+                {
+                    ICollection<VehicleType> vehicleType = _vehicleTypeManager.GetAll();
+                    IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
+                        Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
+                    return View(vehicleTypeViewModels);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ICollection<VehicleType> vehicleType = _vehicleTypeManager.GetAll();
-                IEnumerable<VehicleTypeViewModel> vehicleTypeViewModels =
-                    Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
-                return View(vehicleTypeViewModels);
+                return View("Error", new HandleErrorInfo(ex, "VehicleTypes", "Index"));
             }
 
         }
@@ -47,17 +54,24 @@ namespace RMS.App.Controllers
         // GET: VehicleTypes/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
+                if (vehicleType == null)
+                {
+                    return HttpNotFound();
+                }
+                VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
+                return View(vehicleTypeViewModel);
             }
-            VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
-            if (vehicleType == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "VehicleTypes", "Details"));
             }
-            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
-            return View(vehicleTypeViewModel);
         }
 
         // GET: VehicleTypes/Create
@@ -73,40 +87,54 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] VehicleTypeViewModel vehicleTypeViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
+                if (ModelState.IsValid)
+                {
+                    VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
 
-                var name = vehicleType.Name.Trim();
-                if (_vehicleTypeManager.GetAll().Count(o => o.Name == name) > 0)
-                {
-                    ViewBag.Message = "Vehicle type name already exist.";
+                    var name = vehicleType.Name.Trim();
+                    if (_vehicleTypeManager.GetAll().Count(o => o.Name == name) > 0)
+                    {
+                        ViewBag.Message = "Vehicle type name already exist.";
+                    }
+                    if (ViewBag.Message == null)
+                    {
+                        _vehicleTypeManager.Add(vehicleType);
+                        TempData["msg"] = "Information has been saved successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (ViewBag.Message==null)
-                {
-                    _vehicleTypeManager.Add(vehicleType);
-                    TempData["msg"] = "Information has been saved successfully";
-                    return RedirectToAction("Index");
-                }
+
+                return View(vehicleTypeViewModel);
             }
-
-            return View(vehicleTypeViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "VehicleTypes", "Create"));
+            }
         }
 
         // GET: VehicleTypes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
+                if (vehicleType == null)
+                {
+                    return HttpNotFound();
+                }
+                VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
+                return View(vehicleTypeViewModel);
             }
-            VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
-            if (vehicleType == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "VehicleTypes", "Edit"));
             }
-            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
-            return View(vehicleTypeViewModel);
         }
 
         // POST: VehicleTypes/Edit/5
@@ -116,39 +144,53 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] VehicleTypeViewModel vehicleTypeViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
+                if (ModelState.IsValid)
+                {
+                    VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
 
-                var name = vehicleType.Name.Trim();
-                if (_vehicleTypeManager.GetAll().Count(o => o.Name == name && o.Id != vehicleType.Id) > 0)
-                {
-                    ViewBag.Message = "Vehicle type name already exist.";
+                    var name = vehicleType.Name.Trim();
+                    if (_vehicleTypeManager.GetAll().Count(o => o.Name == name && o.Id != vehicleType.Id) > 0)
+                    {
+                        ViewBag.Message = "Vehicle type name already exist.";
+                    }
+                    if (ViewBag.Message == null)
+                    {
+                        _vehicleTypeManager.Update(vehicleType);
+                        TempData["msg"] = "Information has been updated successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (ViewBag.Message==null)
-                {
-                    _vehicleTypeManager.Update(vehicleType);
-                    TempData["msg"] = "Information has been updated successfully";
-                    return RedirectToAction("Index");
-                }
+                return View(vehicleTypeViewModel);
             }
-            return View(vehicleTypeViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "VehicleTypes", "Edit"));
+            }
         }
 
         // GET: VehicleTypes/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
+                if (vehicleType == null)
+                {
+                    return HttpNotFound();
+                }
+                VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
+                return View(vehicleTypeViewModel);
             }
-            VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
-            if (vehicleType == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "VehicleTypes", "Delete"));
             }
-            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicleType);
-            return View(vehicleTypeViewModel);
         }
 
         // POST: VehicleTypes/Delete/5
@@ -156,10 +198,17 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
-            _vehicleTypeManager.Remove(vehicleType);
-            TempData["msg"] = "Information has been deleted successfully";
-            return RedirectToAction("Index");
+            try
+            {
+                VehicleType vehicleType = _vehicleTypeManager.FindById((int)id);
+                _vehicleTypeManager.Remove(vehicleType);
+                TempData["msg"] = "Information has been deleted successfully";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "VehicleTypes", "Delete"));
+            }
         }
 
         protected override void Dispose(bool disposing)

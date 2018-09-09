@@ -26,27 +26,42 @@ namespace RMS.App.Controllers
         }
         public ActionResult Index()
         {
-            var requisitionStatuses = _requisitionStatusManager.GetAll();
-            IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
-                Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitionStatuses);
-            return View(requisitionStatusViewModels);
+            try
+            {
+                var requisitionStatuses = _requisitionStatusManager.GetAll();
+                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
+                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitionStatuses);
+                return View(requisitionStatusViewModels);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Index"));
+            }
         }
 
         // GET: RequisitionStatus/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+                if (requisitionStatus == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionStatusViewModel requisitionStatusViewModel =
+                    Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
+                return View(requisitionStatusViewModel);
             }
-            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
-            if (requisitionStatus == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Details"));
             }
-            RequisitionStatusViewModel requisitionStatusViewModel =
-                Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
-            return View(requisitionStatusViewModel);
+
         }
 
         // GET: RequisitionStatus/Create
@@ -76,19 +91,27 @@ namespace RMS.App.Controllers
         // GET: RequisitionStatus/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+                if (requisitionStatus == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionStatusViewModel requisitionStatusViewModel =
+                    Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
+                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", requisitionStatus.RequisitionId);
+                return View(requisitionStatusViewModel);
             }
-            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
-            if (requisitionStatus == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Edit"));
             }
-            RequisitionStatusViewModel requisitionStatusViewModel =
-                Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", requisitionStatus.RequisitionId);
-            return View(requisitionStatusViewModel);
         }
 
         // POST: RequisitionStatus/Edit/5
@@ -98,31 +121,45 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,StatusType,RequisitionId")] RequisitionStatusViewModel requisitionStatusViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(requisitionStatusViewModel);
-                _requisitionStatusManager.Update(requisitionStatus);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(requisitionStatusViewModel);
+                    _requisitionStatusManager.Update(requisitionStatus);
+                    return RedirectToAction("Index");
+                }
+                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", requisitionStatusViewModel.RequisitionId);
+                return View(requisitionStatusViewModel);
             }
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", requisitionStatusViewModel.RequisitionId);
-            return View(requisitionStatusViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Edit"));
+            }
         }
 
         // GET: RequisitionStatus/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+                if (requisitionStatus == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionStatusViewModel requisitionStatusViewModel =
+                    Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
+                return View(requisitionStatusViewModel);
             }
-            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
-            if (requisitionStatus == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Delete"));
             }
-            RequisitionStatusViewModel requisitionStatusViewModel =
-                Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
-            return View(requisitionStatusViewModel);
         }
 
         // POST: RequisitionStatus/Delete/5
@@ -130,9 +167,17 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
-            _requisitionStatusManager.Remove(requisitionStatus);
-            return RedirectToAction("Index");
+            try
+            {
+
+                RequisitionStatus requisitionStatus = _requisitionStatusManager.FindById((int)id);
+                _requisitionStatusManager.Remove(requisitionStatus);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Delete"));
+            }
         }
 
         

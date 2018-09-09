@@ -25,40 +25,63 @@ namespace RMS.App.Controllers
         // GET: EmployeeTypes
         public ActionResult Index(string searchText)
         {
-            if (searchText != null)
+            try
             {
-                ICollection<EmployeeType> employeeTypes = _employeeTypeManager.SearchByText(searchText);
-                IEnumerable<EmployeeTypeViewModel> employeeTypeViewModels = Mapper.Map<IEnumerable<EmployeeTypeViewModel>>(employeeTypes);
-                return View(employeeTypeViewModels);
+
+                if (searchText != null)
+                {
+                    ICollection<EmployeeType> employeeTypes = _employeeTypeManager.SearchByText(searchText);
+                    IEnumerable<EmployeeTypeViewModel> employeeTypeViewModels = Mapper.Map<IEnumerable<EmployeeTypeViewModel>>(employeeTypes);
+                    return View(employeeTypeViewModels);
+                }
+                else
+                {
+                    ICollection<EmployeeType> employeeTypes = _employeeTypeManager.GetAll();
+                    IEnumerable<EmployeeTypeViewModel> employeeTypeViewModels = Mapper.Map<IEnumerable<EmployeeTypeViewModel>>(employeeTypes);
+                    return View(employeeTypeViewModels);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ICollection<EmployeeType> employeeTypes = _employeeTypeManager.GetAll();
-                IEnumerable<EmployeeTypeViewModel> employeeTypeViewModels = Mapper.Map<IEnumerable<EmployeeTypeViewModel>>(employeeTypes);
-                return View(employeeTypeViewModels);
+                return View("Error",new HandleErrorInfo(ex,"EmployeeTypes","Index"));
             }
         }
 
         // GET: EmployeeTypes/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
+                if (employeeType == null)
+                {
+                    return HttpNotFound();
+                }
+                EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
+                return View(employeeTypeViewModel);
             }
-            EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
-            if (employeeType == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Details"));
             }
-            EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
-            return View(employeeTypeViewModel);
         }
 
         // GET: EmployeeTypes/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Create"));
+            }
         }
 
         // POST: EmployeeTypes/Create
@@ -68,39 +91,55 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Type")] EmployeeTypeViewModel employeeTypeViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
+                if (ModelState.IsValid)
+                {
+                    EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
 
-                if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type) > 0)
-                {
-                    ViewBag.Message = "Employee type name already exist.";
+                    if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type) > 0)
+                    {
+                        ViewBag.Message = "Employee type name already exist.";
+                    }
+                    if (ViewBag.Message == null)
+                    {
+                        _employeeTypeManager.Add(employeeType);
+                        TempData["msg"] = "Information has been saved successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (ViewBag.Message==null) 
-                {
-                    _employeeTypeManager.Add(employeeType);
-                    TempData["msg"] = "Information has been saved successfully";
-                    return RedirectToAction("Index");
-                }
+
+                return View(employeeTypeViewModel);
             }
-
-            return View(employeeTypeViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Create"));
+            }
+            
         }
 
         // GET: EmployeeTypes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
+                if (employeeType == null)
+                {
+                    return HttpNotFound();
+                }
+                EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
+                return View(employeeTypeViewModel);
             }
-            EmployeeType employeeType = _employeeTypeManager.FindById((int) id);
-            if (employeeType == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Edit"));
             }
-            EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
-            return View(employeeTypeViewModel);
+            
         }
 
         // POST: EmployeeTypes/Edit/5
@@ -110,38 +149,54 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Type")] EmployeeTypeViewModel employeeTypeViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
+                if (ModelState.IsValid)
+                {
+                    EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
 
-                if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type && o.Id != employeeType.Id) > 0)
-                {
-                    ViewBag.Message = "Employee type name already exist.";
+                    if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type && o.Id != employeeType.Id) > 0)
+                    {
+                        ViewBag.Message = "Employee type name already exist.";
+                    }
+                    if (ViewBag.Message == null)
+                    {
+                        _employeeTypeManager.Update(employeeType);
+                        TempData["msg"] = "Information has been updated successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (ViewBag.Message==null)
-                {
-                    _employeeTypeManager.Update(employeeType);
-                    TempData["msg"] = "Information has been updated successfully";
-                    return RedirectToAction("Index");
-                }
+                return View(employeeTypeViewModel);
             }
-            return View(employeeTypeViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Edit"));
+            }
+            
         }
 
         // GET: EmployeeTypes/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
+                if (employeeType == null)
+                {
+                    return HttpNotFound();
+                }
+                EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
+                return View(employeeTypeViewModel);
             }
-            EmployeeType employeeType = _employeeTypeManager.FindById((int) id);
-            if (employeeType == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
             }
-            EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
-            return View(employeeTypeViewModel);
+            
         }
 
         // POST: EmployeeTypes/Delete/5
@@ -149,10 +204,18 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EmployeeType employeeType = _employeeTypeManager.FindById(id);
-            _employeeTypeManager.Remove(employeeType);
-            TempData["msg"] = "Information has been deleted successfully";
-            return RedirectToAction("Index");
+            try
+            {
+                EmployeeType employeeType = _employeeTypeManager.FindById(id);
+                _employeeTypeManager.Remove(employeeType);
+                TempData["msg"] = "Information has been deleted successfully";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
+            }
+            
         }
 
         protected override void Dispose(bool disposing)
