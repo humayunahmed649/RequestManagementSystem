@@ -22,14 +22,16 @@ namespace RMS.App.Controllers
         private IEmployeeManager _employeeManager;
         private IAssignRequisitionManager _assignRequisitionManager;
         private IRequisitionStatusManager _requisitionStatusManager;
+        private IVehicleTypeManager _vehicleTypeManager;
 
-        public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager)
+        public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager,IVehicleTypeManager vehicleTypeManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
             this._vehicleManager = vehicleManager;
             this._assignRequisitionManager = assignRequisitionManager;
             this._requisitionStatusManager = requisitionStatusManager;
+            this._vehicleTypeManager = vehicleTypeManager;
         }
 
         // GET: AssignRequisitions
@@ -100,9 +102,10 @@ namespace RMS.App.Controllers
                 AssignRequisitionViewModel assignRequisitionViewModel = new AssignRequisitionViewModel();
                 assignRequisitionViewModel.RequisitionId = requisitionId;
                 ViewBag.RequisitionNumber = requisition.RequisitionNumber;
+                assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
 
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
+                ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select..." } };
                 ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
                 return View(assignRequisitionViewModel);
             }

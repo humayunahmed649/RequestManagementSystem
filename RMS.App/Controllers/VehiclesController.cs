@@ -178,6 +178,19 @@ namespace RMS.App.Controllers
             return RedirectToAction("Index");
         }
 
+        public JsonResult GetByVehicleType(int? vehicleTypeId)
+        {
+            if (vehicleTypeId == null)
+            {
+                return null;
+            }
+
+            var vehicles = _vehicleManager.GetAll().Where(c => c.VehicleTypeId == vehicleTypeId).ToList();
+
+            return Json(vehicles, JsonRequestBehavior.AllowGet);
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

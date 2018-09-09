@@ -33,6 +33,7 @@ namespace RMS.App.ViewModels
         public int RequisitionStatusId { get; set; }
         public RequisitionStatus RequisitionStatus { get; set; }
 
+        public List<VehicleType> VehicleTypes { get; set; } 
 
         //private IEnumerable<AssignRequisitionViewModel> AssignRequisitionViewModels { get; set; } 
 
