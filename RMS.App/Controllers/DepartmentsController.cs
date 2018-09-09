@@ -29,17 +29,24 @@ namespace RMS.App.Controllers
         // GET: Departments
         public ActionResult Index(string searchText)
         {
-            if (searchText != null)
+            try
             {
-                ICollection<Department> departments = _departmentManager.SearchByText(searchText);
-                IEnumerable<DepartmentViewModel> departmentViewModels= Mapper.Map<IEnumerable<DepartmentViewModel>>(departments);
-                return View(departmentViewModels);
+                if (searchText != null)
+                {
+                    ICollection<Department> departments = _departmentManager.SearchByText(searchText);
+                    IEnumerable<DepartmentViewModel> departmentViewModels = Mapper.Map<IEnumerable<DepartmentViewModel>>(departments);
+                    return View(departmentViewModels);
+                }
+                else
+                {
+                    ICollection<Department> department = (ICollection<Department>)_departmentManager.GetAll();
+                    IEnumerable<DepartmentViewModel> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewModel>>(department);
+                    return View(departmentViewModes);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ICollection<Department> department = (ICollection<Department>) _departmentManager.GetAll();
-                IEnumerable<DepartmentViewModel> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewModel>>(department);
-                return View(departmentViewModes);
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Index"));
             }
             
             
@@ -48,24 +55,38 @@ namespace RMS.App.Controllers
         // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Department department = _departmentManager.FindById((int)id);
+                if (department == null)
+                {
+                    return HttpNotFound();
+                }
+                DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
+                return View(departmentViewMode);
             }
-            Department department = _departmentManager.FindById((int)id);
-            if (department == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Details"));
             }
-            DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
-            return View(departmentViewMode);
         }
 
         // GET: Departments/Create
         public ActionResult Create()
         {
-            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-            return View();
+            try
+            {
+                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Create"));
+            }
         }
 
         // POST: Departments/Create
@@ -75,49 +96,63 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Code,OrganizationId")] DepartmentViewModel departmentViewMode)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Department department = Mapper.Map<Department>(departmentViewMode);
+                if (ModelState.IsValid)
+                {
+                    Department department = Mapper.Map<Department>(departmentViewMode);
 
-                var name = department.Name.Trim();
-                var code = department.Code.Trim();
+                    var name = department.Name.Trim();
+                    var code = department.Code.Trim();
 
-                if (_departmentManager.GetAll().Count(o => o.Name ==name) > 0)
-                {
-                    ViewBag.Message1 = "Department name already exist.";
+                    if (_departmentManager.GetAll().Count(o => o.Name == name) > 0)
+                    {
+                        ViewBag.Message1 = "Department name already exist.";
+                    }
+
+                    if (_departmentManager.GetAll().Count(o => o.Code == code) > 0)
+                    {
+                        ViewBag.Message2 = "Department code already exist.";
+                    }
+                    if (ViewBag.Message1 == null && ViewBag.Message2 == null)
+                    {
+                        _departmentManager.Add(department);
+                        TempData["msg"] = "Information has been saved successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                
-                if (_departmentManager.GetAll().Count(o => o.Code == code) > 0)
-                {
-                    ViewBag.Message2 = "Department code already exist.";
-                }
-                if (ViewBag.Message1==null && ViewBag.Message2==null) 
-                {
-                    _departmentManager.Add(department);
-                    TempData["msg"] = "Information has been saved successfully";
-                    return RedirectToAction("Index");
-                }
+
+                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewMode.OrganizationId);
+                return View(departmentViewMode);
             }
-
-            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewMode.OrganizationId);
-            return View(departmentViewMode);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Create"));
+            }
         }
 
         // GET: Departments/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Department department = _departmentManager.FindById((int)id);
+                if (department == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", department.OrganizationId);
+                DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
+                return View(departmentViewMode);
             }
-            Department department = _departmentManager.FindById((int)id);
-            if (department == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Edit"));
             }
-            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", department.OrganizationId);
-            DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
-            return View(departmentViewMode);
         }
 
         // POST: Departments/Edit/5
@@ -127,45 +162,59 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Code,OrganizationId")] DepartmentViewModel departmentViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Department department = Mapper.Map<Department>(departmentViewModel);
+                if (ModelState.IsValid)
+                {
+                    Department department = Mapper.Map<Department>(departmentViewModel);
 
-                var name = department.Name.Trim();
-                var code = department.Code.Trim();
-                if (_departmentManager.GetAll().Count(o => o.Name == name && o.Id != department.Id) > 0)
-                {
-                    ViewBag.Message1 = "Department name already exist.";
+                    var name = department.Name.Trim();
+                    var code = department.Code.Trim();
+                    if (_departmentManager.GetAll().Count(o => o.Name == name && o.Id != department.Id) > 0)
+                    {
+                        ViewBag.Message1 = "Department name already exist.";
+                    }
+                    if (_departmentManager.GetAll().Count(o => o.Code == code && o.Id != department.Id) > 0)
+                    {
+                        ViewBag.Message2 = "Department code already exist.";
+                    }
+                    if (ViewBag.Message1 == null && ViewBag.Message2 == null)
+                    {
+                        _departmentManager.Update(department);
+                        TempData["msg"] = "Information has been updated successfully";
+                        return RedirectToAction("Index");
+                    }
                 }
-                if (_departmentManager.GetAll().Count(o => o.Code == code && o.Id != department.Id) > 0)
-                {
-                    ViewBag.Message2 = "Department code already exist.";
-                }
-                if (ViewBag.Message1==null && ViewBag.Message2==null) 
-                {
-                    _departmentManager.Update(department);
-                    TempData["msg"] = "Information has been updated successfully";
-                    return RedirectToAction("Index");
-                }
+                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewModel.OrganizationId);
+                return View(departmentViewModel);
             }
-            ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", departmentViewModel.OrganizationId);
-            return View(departmentViewModel);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Edit"));
+            }
         }
 
         // GET: Departments/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Department department = _departmentManager.FindById((int)id);
+                if (department == null)
+                {
+                    return HttpNotFound();
+                }
+                DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
+                return View(departmentViewMode);
             }
-            Department department = _departmentManager.FindById((int)id);
-            if (department == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Delete"));
             }
-            DepartmentViewModel departmentViewMode = Mapper.Map<DepartmentViewModel>(department);
-            return View(departmentViewMode);
         }
 
         // POST: Departments/Delete/5
@@ -173,10 +222,18 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Department department = _departmentManager.FindById((int)id);
-            _departmentManager.Remove(department);
-            TempData["msg"] = "Information has been deleted successfully";
-            return RedirectToAction("Index");
+            try
+            {
+
+                Department department = _departmentManager.FindById((int)id);
+                _departmentManager.Remove(department);
+                TempData["msg"] = "Information has been deleted successfully";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Departments", "Delete"));
+            }
         }
 
         protected override void Dispose(bool disposing)

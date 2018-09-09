@@ -32,32 +32,54 @@ namespace RMS.App.Controllers
         // GET: Addresses
         public ActionResult Index()
         {
-            var addresses = _addressManager.GetAll();
-            return View(addresses.ToList());
+            try
+            {
+
+                var addresses = _addressManager.GetAll();
+                return View(addresses.ToList());
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Index"));
+            }
         }
 
         // GET: Addresses/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Address address = _addressManager.FindById((int)id);
+                if (address == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(address);
             }
-            Address address = _addressManager.FindById((int)id);
-            if (address == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Details"));
             }
-            return View(address);
         }
 
         // GET: Addresses/Create
         public ActionResult Create()
         {
-            ViewBag.DistrictId = new SelectList(_districtManager.GetAll(), "Id", "Name");//district
-            ViewBag.DivisionId = new SelectList(_divisionManager.GetAll(), "Id", "Name");//division
-            ViewBag.UpazilaId = new SelectList(_upazilaManager.GetAll(), "Id", "Name");//upazila
-            return View();
+            try
+            {
+                ViewBag.DistrictId = new SelectList(_districtManager.GetAll(), "Id", "Name");//district
+                ViewBag.DivisionId = new SelectList(_divisionManager.GetAll(), "Id", "Name");//division
+                ViewBag.UpazilaId = new SelectList(_upazilaManager.GetAll(), "Id", "Name");//upazila
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Create"));
+            }
         }
 
         // POST: Addresses/Create
@@ -67,32 +89,46 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,AddressType,AddressLine1,AddressLine2,PostOffice,PostCode,DivisionId,DistrictId,UpazilaId,EmployeeId")] Address address)
         {
-            if (ModelState.IsValid)
+            try
             {
-                address.AddressType = "Present Address";
-                _addressManager.Add(address);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    address.AddressType = "Present Address";
+                    _addressManager.Add(address);
+                    return RedirectToAction("Index");
+                }
+
+                return View();
             }
-            
-            return View();
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Create"));
+            }
         }
 
         // GET: Addresses/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Address address = _addressManager.FindById((int)id);
+                if (address == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.DistrictId = new SelectList(_districtManager.GetAll(), "Id", "Name", address.DistrictId);
+                ViewBag.DivisionId = new SelectList(_divisionManager.GetAll(), "Id", "Name", address.DivisionId);
+                ViewBag.UpazilaId = new SelectList(_upazilaManager.GetAll(), "Id", "Name", address.UpazilaId);
+                return View(address);
             }
-            Address address = _addressManager.FindById((int)id);
-            if (address == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Edit"));
             }
-            ViewBag.DistrictId = new SelectList(_districtManager.GetAll(), "Id", "Name", address.DistrictId);
-            ViewBag.DivisionId = new SelectList(_divisionManager.GetAll(), "Id", "Name", address.DivisionId);
-            ViewBag.UpazilaId = new SelectList(_upazilaManager.GetAll(), "Id", "Name", address.UpazilaId);
-            return View(address);
         }
 
         // POST: Addresses/Edit/5
@@ -102,31 +138,45 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,AddressType,AddressLine1,AddressLine2,PostOffice,PostCode,DivisionId,DistrictId,UpazilaId,EmployeeId")] Address address)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _addressManager.Update(address);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _addressManager.Update(address);
+                    return RedirectToAction("Index");
+                }
+                ViewBag.DistrictId = new SelectList(_districtManager.GetAll(), "Id", "Name", address.DistrictId);
+                ViewBag.DivisionId = new SelectList(_divisionManager.GetAll(), "Id", "Name", address.DivisionId);
+                //ViewBag.EmployeeId = new SelectList(_, "Id", "FullName", address.EmployeeId);
+                ViewBag.UpazilaId = new SelectList(_upazilaManager.GetAll(), "Id", "Name", address.UpazilaId);
+                return View(address);
             }
-            ViewBag.DistrictId = new SelectList(_districtManager.GetAll(), "Id", "Name", address.DistrictId);
-            ViewBag.DivisionId = new SelectList(_divisionManager.GetAll(), "Id", "Name", address.DivisionId);
-            //ViewBag.EmployeeId = new SelectList(_, "Id", "FullName", address.EmployeeId);
-            ViewBag.UpazilaId = new SelectList(_upazilaManager.GetAll(), "Id", "Name", address.UpazilaId);
-            return View(address);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Edit"));
+            }
         }
 
         // GET: Addresses/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Address address = _addressManager.FindById((int)id);
+                if (address == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(address);
             }
-            Address address = _addressManager.FindById((int)id);
-            if (address == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Delete"));
             }
-            return View(address);
         }
 
         // POST: Addresses/Delete/5
@@ -134,9 +184,16 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Address address = _addressManager.FindById((int)id);
-            _addressManager.Remove(address);
-            return RedirectToAction("Index");
+            try
+            {
+                Address address = _addressManager.FindById((int)id);
+                _addressManager.Remove(address);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Addresses", "Delete"));
+            }
         }
 
         
