@@ -177,8 +177,9 @@
     </div>
     <div class="col-md-8">
         <p class="text-right">
-            @Html.ActionLink(" Edit ", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) &nbsp;
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+            @Html.ActionLink(" Update ", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) &nbsp;
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-info"}) &nbsp;
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
         </p>
     </div>
 </div>

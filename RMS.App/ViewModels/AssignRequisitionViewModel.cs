@@ -20,7 +20,7 @@ namespace RMS.App.ViewModels
         public Requisition Requisition { get; set; }
 
         [Required(ErrorMessage = "Please Enter valid Vehicle Information")]
-        [Display(Name = "Vehicle Registration No")]
+        [Display(Name = "Vehicle Reg No")]
         public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }
 

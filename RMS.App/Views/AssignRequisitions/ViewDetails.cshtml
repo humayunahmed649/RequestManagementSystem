@@ -8,10 +8,10 @@
 <h2>Requisition Details</h2>
 <hr/>
 
-<div>
-    <table class="table table-light table-active table-primary table-hover">
+<div class="container">
+    <table class="table table-light table-active table-primary">
         <tr>
-            <td>@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
+            <td style="width: 25%">@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
             <td>@Html.DisplayFor(model => model.RequisitionNumber)</td>
         </tr>
         <tr>
@@ -49,8 +49,8 @@
         </tr>
         
     </table>
-    
+    <p>
+        @Html.ActionLink("Back to List", "Requests", null, new { @class = "btn btn-info" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Requests",null,new {@class="btn btn-info"})
-</p>
+

@@ -7,148 +7,133 @@
 
 <h2>Assigned Requisition Details</h2>
 <hr/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <br/>
+            <h4>Assigned Requisition Info :</h4>
+            <br/>
+            <table class="table table-light table-active table-primary">
+                <tr>
+                    <td style="width: 35%">@Html.DisplayNameFor(model => model.RequisitionId)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionId)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionNumber)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Requestor Full Name")</td>
+                    <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Designation")</td>
+                    <td>@Html.DisplayFor(model => model.Employee.Designation.Title)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Employee.Email)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.Email)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.RequestFor)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.RequestFor)</td>
+                </tr>
+            </table>
+        </div>
 
-<div class="row">
+        <div class="col-md-6">
+            <br />
+            <h4>Journey Info :</h4>
+            <br />
+            <table class="table table-light table-active table-primary">
+                <tr>
+                    <td style="width: 35%">@Html.DisplayNameFor(model => model.Requisition.StartDateTime)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.StartDateTime)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.EndDateTime)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.EndDateTime)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.FromPlace)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.FromPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.DestinationPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.Description)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.Description)</td>
+                </tr>
 
-    <div class="col-md-8">
-
-        <table class="table table-light table-active table-primary table-hover">
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.RequisitionId)</td>
-                <td>@Html.DisplayFor(model => model.RequisitionId)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
-                <td>@Html.DisplayFor(model => model.RequisitionNumber)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayName("Requestor Full Name")</td>
-                <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayName("Designation")</td>
-                <td>@Html.DisplayFor(model => model.Employee.Designation.Title)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
-                <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Employee.Email)</td>
-                <td>@Html.DisplayFor(model => model.Employee.Email)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Requisition.RequestFor)</td>
-                <td>@Html.DisplayFor(model => model.Requisition.RequestFor)</td>
-            </tr>
-        </table>
-
+            </table>
+        </div>
 
     </div>
-    <div class="col-md-4">
-        <h4 class="text-center">Another Link</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <br />
+            <h4>Vehicle Info :</h4>
+            <br />
+            <table class="table table-light table-active table-primary">
+                <tr>
+                    <td style="width: 35%">@Html.DisplayNameFor(model => model.Vehicle.BrandName)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.BrandName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.RegNo)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.RegNo)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.ModelName)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.ModelName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.SeatCapacity)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.SeatCapacity)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.VehicleType.Name)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.VehicleType.Name)</td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <br />
+            <h4>Driver Info :</h4>
+            <br />
+            <table class="table table-danger table-active table-primary">
+                <tr>
+                    <td style="width: 35%">@Html.DisplayNameFor(model => model.Employee.FullName)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Employee.Designation.Title)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.Designation.Title)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Employee.NID)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.NID)</td>
+                </tr>
+
+            </table>
+        </div>
     </div>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { @id = Model.Id }, new { @class = "btn btn-warning" }) &nbsp;
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </p>
 </div>
 
-
-
-<div class="row">
-    <div class="col-md-8">
-        <br/>
-        <h4>Where When ...????</h4>
-        <br/>
-        <table class="table table-light table-active table-primary table-hover">
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Requisition.StartDateTime)</td>
-                <td>@Html.DisplayFor(model => model.Requisition.StartDateTime)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Requisition.EndDateTime)</td>
-                <td>@Html.DisplayFor(model => model.Requisition.EndDateTime)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Requisition.FromPlace)</td>
-                <td>@Html.DisplayFor(model => model.Requisition.FromPlace)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</td>
-                <td>@Html.DisplayFor(model => model.Requisition.DestinationPlace)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Requisition.Description)</td>
-                <td>@Html.DisplayFor(model => model.Requisition.Description)</td>
-            </tr>
-
-        </table>
-    </div>
-    <div class="col-md-4">
-        <h4 class="text-center">Another Link</h4>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-8">
-        <br/>
-        <h4>Vehicle Information</h4>
-        <br/>
-        <table class="table table-light table-active table-primary table-hover">
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Vehicle.BrandName)</td>
-                <td>@Html.DisplayFor(model => model.Vehicle.BrandName)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Vehicle.RegNo)</td>
-                <td>@Html.DisplayFor(model => model.Vehicle.RegNo)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Vehicle.ModelName)</td>
-                <td>@Html.DisplayFor(model => model.Vehicle.ModelName)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Vehicle.SeatCapacity)</td>
-                <td>@Html.DisplayFor(model => model.Vehicle.SeatCapacity)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Vehicle.VehicleType.Name)</td>
-                <td>@Html.DisplayFor(model => model.Vehicle.VehicleType.Name)</td>
-            </tr>
-
-        </table>
-    </div>
-    <div class="col-md-4">
-        <h4 class="text-center">Another Link</h4>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-8">
-        <br/>
-        <h4>Driver Information</h4>
-        <br/>
-        <table class="table table-danger table-active table-primary table-hover">
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Employee.FullName)</td>
-                <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Employee.Designation.Title)</td>
-                <td>@Html.DisplayFor(model => model.Employee.Designation.Title)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
-                <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Employee.NID)</td>
-                <td>@Html.DisplayFor(model => model.Employee.NID)</td>
-            </tr>
-
-        </table>
-    </div>
-    <div class="col-md-4">
-        <h4 class="text-center">Another Link</h4>
-    </div>
-</div>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { @id = Model.Id}, new { @class= "btn btn-warning"}) &nbsp;
-    @Html.ActionLink("Back to List", "Index",null,new {@class="btn btn-info"})
-</p>

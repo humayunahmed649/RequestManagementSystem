@@ -641,14 +641,12 @@
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\Requisitions\CreateRequestForOther.cshtml" />
-    <Content Include="Views\Requisitions\Assign.cshtml" />
     <Content Include="Views\AssignRequisitions\Delete.cshtml" />
     <Content Include="Views\AssignRequisitions\Index.cshtml" />
     <Content Include="Views\AssignRequisitions\Details.cshtml" />
     <Content Include="Views\AssignRequisitions\Create.cshtml" />
     <Content Include="Views\AssignRequisitions\ViewDetails.cshtml" />
     <Content Include="Views\AssignRequisitions\Error.cshtml" />
-    <Content Include="Views\RequisitionStatus\Create.cshtml" />
     <Content Include="Views\RequisitionStatus\Delete.cshtml" />
     <Content Include="Views\RequisitionStatus\Details.cshtml" />
     <Content Include="Views\RequisitionStatus\Edit.cshtml" />
