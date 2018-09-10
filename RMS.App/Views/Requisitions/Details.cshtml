@@ -34,7 +34,23 @@
 
     <div class="col-md-2">@Html.DisplayNameFor(model => model.RequestFor)</div>
     <div class="col-md-10">@Html.DisplayFor(model => model.RequestFor)</div>
+    @{
+        var data = ViewBag.Data;
+        if (data != null)
+        {
 
+            <div class="col-md-2">@Html.DisplayName("Vehicle Registration No")</div>
+            <div class="col-md-10">@data.Vehicle.RegNo</div>
+
+            <div class="col-md-2">@Html.DisplayName("Vehicle Brand Name")</div>
+            <div class="col-md-10">@data.Vehicle.BrandName</div>
+        }
+        if (data == null)
+        {
+
+            <div class="col-md-12">This is new Request which is not assigned...</div>
+        }
+    }
 </div>
 <br/>
 <p>

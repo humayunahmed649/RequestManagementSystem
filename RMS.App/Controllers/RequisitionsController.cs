@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using AutoMapper;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
@@ -22,14 +23,16 @@ namespace RMS.App.Controllers
         private IVehicleManager _vehicleManager;
         private IRequisitionStatusManager _requisitionStatusManager;
         private IFeedbackManager _feedbackManager;
+        private IAssignRequisitionManager _assignRequisitionManager;
 
-        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager,IFeedbackManager feedbackManager)
+        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager,IFeedbackManager feedbackManager,IAssignRequisitionManager assignRequisitionManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
             this._vehicleManager = vehicleManager;
             this._requisitionStatusManager = requisitionStatusManager;
             this._feedbackManager = feedbackManager;
+            this._assignRequisitionManager = assignRequisitionManager;
         }
 
         // GET: Requisitions
@@ -75,13 +78,29 @@ namespace RMS.App.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Requisition requisition = _requisitionManager.FindById((int)id);
-                if (requisition == null)
+
+                if (id != null)
                 {
-                    return HttpNotFound();
+                    ViewBag.Data = _assignRequisitionManager.GetAll().Where(c => c.RequisitionId == id).FirstOrDefault();
                 }
-                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                
+                    Requisition requisition = _requisitionManager.FindById((int)id);
+                    if (requisition == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+
+
+                    RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+
+                
+
                 return View(requisitionViewModel);
+
+
+
+
             }
             catch (Exception ex)
             {

@@ -61,6 +61,7 @@ namespace RMS.App.ViewModels
         public Employee Employee { get; set; }
         
         public List<RequisitionViewModel> RequisitionViewModels { get; set; }
+        public AssignRequisitionViewModel AssignRequisitionViewModel { get; set; }
 
         public string GetRequisitionNumber()
         {
