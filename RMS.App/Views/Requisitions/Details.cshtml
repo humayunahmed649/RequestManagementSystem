@@ -44,6 +44,13 @@
 
             <div class="col-md-2">@Html.DisplayName("Vehicle Brand Name")</div>
             <div class="col-md-10">@data.Vehicle.BrandName</div>
+
+            <div class="col-md-2">@Html.DisplayName("Driver Name")</div>
+            <div class="col-md-10">@data.Employee.FullName</div>
+
+
+            <div class="col-md-2">@Html.DisplayName("Driver Contact No")</div>
+            <div class="col-md-10">@data.Employee.ContactNo</div>
         }
         if (data == null)
         {
