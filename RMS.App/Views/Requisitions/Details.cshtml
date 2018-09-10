@@ -39,5 +39,6 @@
 <br/>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class="btn btn-warning"}) &nbsp;
-    @Html.ActionLink("Back to List", "Create",null,new {@class="btn btn-info"})
+    @Html.ActionLink("Back to List", "Create", null, new {@class = "btn btn-info"}) &nbsp;
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id },new {@class="btn btn-danger"})
 </p>

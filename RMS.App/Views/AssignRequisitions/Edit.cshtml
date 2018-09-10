@@ -20,7 +20,7 @@
                         <td>@Html.DisplayFor(model => model.Requisition.RequisitionNumber)</td>
                     </tr>
                     <tr>
-                        <td>@Html.DisplayName("Requestor Full Name")</td>
+                        <td>@Html.DisplayName("Requestor Name")</td>
                         <td>@Html.DisplayFor(model => model.Requisition.Employee.FullName)</td>
                     </tr>
                     <tr>
@@ -61,6 +61,10 @@
                     <tr>
                         <td>@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</td>
                         <td>@Html.DisplayFor(model => model.Requisition.DestinationPlace)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Requisition.PassengerQty)</td>
+                        <td>@Html.DisplayFor(model => model.Requisition.PassengerQty)</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(model => model.Requisition.Description)</td>
