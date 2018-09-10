@@ -45,7 +45,10 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Please set a return time!")]
         public string EndTime { get; set; }
 
-        [Required(ErrorMessage = "Please provide a short journey description!")]
+        [Required(ErrorMessage = "Please provide passenger Qty!")]
+        [Display(Name = "Passenger Qty")]
+        public int PassengerQty { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         

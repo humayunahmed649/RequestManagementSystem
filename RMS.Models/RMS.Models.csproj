@@ -177,6 +177,10 @@
     <Compile Include="Migrations\201809062125292_FeedbackModelAdded.Designer.cs">
       <DependentUpon>201809062125292_FeedbackModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809100552089_Add_passengerQty_in_Requisition_model.cs" />
+    <Compile Include="Migrations\201809100552089_Add_passengerQty_in_Requisition_model.Designer.cs">
+      <DependentUpon>201809100552089_Add_passengerQty_in_Requisition_model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -264,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809062125292_FeedbackModelAdded.resx">
       <DependentUpon>201809062125292_FeedbackModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809100552089_Add_passengerQty_in_Requisition_model.resx">
+      <DependentUpon>201809100552089_Add_passengerQty_in_Requisition_model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

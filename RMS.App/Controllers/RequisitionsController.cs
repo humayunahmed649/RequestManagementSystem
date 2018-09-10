@@ -115,7 +115,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,EmployeeId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,EmployeeId")] RequisitionViewModel requisitionViewModel)
         {
             try
             {
@@ -185,7 +185,7 @@ namespace RMS.App.Controllers
         // POST: Requisitions/CreateRequestForOther
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId")] RequisitonForAnotherViewModel requisitonForAnother)
+        public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId")] RequisitonForAnotherViewModel requisitonForAnother)
         {
             try
             {
@@ -259,7 +259,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,Description,RequestFor,EmployeeId,RequisitionNumber")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber")] RequisitionViewModel requisitionViewModel)
         {
             try
             {
