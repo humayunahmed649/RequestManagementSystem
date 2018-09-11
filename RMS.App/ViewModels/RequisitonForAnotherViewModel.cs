@@ -44,6 +44,7 @@ namespace RMS.App.ViewModels
 
         [Required(ErrorMessage = "Please provide passenger Qty!")]
         [Display(Name = "Passenger Qty")]
+        [GreaterThanZero(ErrorMessage = "Value must be greater then 0!")]
         public int PassengerQty { get; set; }
         
         [DataType(DataType.MultilineText)]

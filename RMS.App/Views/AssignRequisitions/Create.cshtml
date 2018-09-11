@@ -5,170 +5,177 @@
 }
 
 
-@if (Model != null)
-{
-    var data = ViewBag.Requisition;
 
-    <div class="container">
-        <div class="row border">
 
-            <div class="col-md-12">
-                <br />
-                <h3>Requisition Details Information</h3>
-            </div>
-            <div class="col-md-6">
-                <br/>
-                <h4>Requisitor Info :</h4>
-                <br/>
-                <table class="table table-light table-active table-primary">
-
-                    <tr>
-                        <td style="width: 35%">@Html.DisplayName("Requisition Number : ")</td>
-                        <td>@data.RequisitionNumber</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Requestor Name : ")</td>
-                        <td>@data.Employee.FullName</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Designation : ")</td>
-                        <td>@data.Employee.Designation.Title</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Contact No : ")</td>
-                        <td>@data.Employee.ContactNo</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Email : ")</td>
-                        <td>@data.Employee.Email</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Request For : ")</td>
-                        <td>@data.RequestFor</td>
-                    </tr>
-                </table>
-            </div>
+<div class="container">
+    <div class="row text-center">
+        <h3>Requisition No : <strong class="text-info">@Html.Display("RequisitionNumber")</strong></h3>
+    </div>
+    <br />
+    <div class="row border" style="padding: 20px 20px">
+        @if (Model != null)
+        {
+            var data = ViewBag.Requisition;
 
             <div class="col-md-6">
-                <br/>
-                <h4>Journey Info :</h4>
-                <br/>
-                <table class="table table-light table-active table-primary">
-                    <tr>
-                        <td style="width: 35%">@Html.DisplayName("Journey Date Time : ")</td>
-                        <td>@data.StartDateTime</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Return Date Time : ")</td>
-                        <td>@data.EndDateTime</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("From Place : ")</td>
-                        <td>@data.FromPlace</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Destination Place : ")</td>
-                        <td>@data.DestinationPlace</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Passenger Qty : ")</td>
-                        <td>@data.PassengerQty</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayName("Description : ")</td>
-                        <td>@data.Description</td>
-                    </tr>
-                </table>
+                
+                <div class="row">
+                    <div>
+                        <h4>Requisitor Info :</h4><br/>
+                    </div>
+                    
+                    <table class="table table-light table-active table-primary">
+                        <tr>
+                            <td class="col-md-2-custom" style="width: 35%">@Html.DisplayName("Requisition Number : ")</td>
+                            <td>@data.RequisitionNumber</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Requestor Name : ")</td>
+                            <td>@data.Employee.FullName</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Designation : ")</td>
+                            <td>@data.Employee.Designation.Title</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Contact No : ")</td>
+                            <td>@data.Employee.ContactNo</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Email : ")</td>
+                            <td>@data.Employee.Email</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Request For : ")</td>
+                            <td>@data.RequestFor</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <h4>Journey Info :</h4><br/>
+                    </div>
+                    
+                    <table class="table table-light table-active table-primary">
+                        <tr>
+                            <td class="col-md-2-custom" style="width: 35%">@Html.DisplayName("Journey Date Time : ")</td>
+                            <td>@data.StartDateTime</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Return Date Time : ")</td>
+                            <td>@data.EndDateTime</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("From Place : ")</td>
+                            <td>@data.FromPlace</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Destination Place : ")</td>
+                            <td>@data.DestinationPlace</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Passenger Qty : ")</td>
+                            <td>@data.PassengerQty</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Description : ")</td>
+                            <td>@data.Description</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        }
+        <div class="col-md-1"></div>
+
+        <div class="col-md-5">
+            <div class="row">
+                <h4>Assign Requisition</h4>
+                
+                @using (Html.BeginForm("Create", "AssignRequisitions", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <br />
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+                        <div class="form-group row" hidden="hidden">
+
+                            @Html.LabelFor(model=>model.RequisitionId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-8">
+                                @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
+                                @Html.ValidationMessage("RequisitionId", "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.RequisitionStatusId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-8">
+                                @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new {@class = "form-control", @disabled = "disabled"})
+                                @Html.ValidationMessageFor(model => model.RequisitionStatusId, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            @Html.LabelFor(model=>model.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-8">
+                                @Html.TextBox("RequisitionNumber", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
+                                @Html.ValidationMessage("RequisitionNumber", "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.Label("Vehicle Type", htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-8">
+                                @if (Model != null)
+                                {
+                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select...", htmlAttributes: new {@class = "dropdown form-control", id = "vehicleTypeDD"})
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.VehicleId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-8">
+
+                                @Html.DropDownList("VehicleId", null, htmlAttributes: new {@class = "dropdown form-control", id = "vehicleDD"})
+
+                                @Html.ValidationMessageFor(model => model.VehicleId, "", new {@class = "text-danger"})
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-8">
+                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.EmployeeId, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-8">
+                                <input type="submit" value="Assign" class="btn btn-success"/> &nbsp;
+                                @Html.ActionLink("Back to List", "Requests", null, new {@class = "btn btn-info"})
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
+
     </div>
-}
-<br/>
-<div class="container border" style="">
-        <br/>
-        <h3>Assign Requisition</h3>
-        <br />
-        @using (Html.BeginForm("Create", "AssignRequisitions", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                <div class="form-group row">
-
-                    @Html.Label("RequisitionId", htmlAttributes: new {@class = "control-label col-md-2"})
-
-                    <div class="col-md-4">
-                        @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
-                        @Html.ValidationMessage("RequisitionId", "", new {@class = "text-danger"})
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    @Html.LabelFor(model=>model.RequisitionStatusId, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
-                        @Html.ValidationMessageFor(model=>model.RequisitionStatusId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-
-                    @Html.Label("RequisitionNumber", htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-4">
-                        @Html.TextBox("RequisitionNumber", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
-                        @Html.ValidationMessage("RequisitionNumber", "", new {@class = "text-danger"})
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.Label("VehicleType", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @if (Model != null)
-                        {
-                            @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select...", htmlAttributes: new { @class = "dropdown form-control", id = "vehicleTypeDD" })
-                        }
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.LabelFor(model=>model.VehicleId, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-
-                        @Html.DropDownList("VehicleId", null, htmlAttributes: new { @class = "dropdown form-control", id = "vehicleDD" })
-
-                        @Html.ValidationMessageFor(model=>model.VehicleId, "", new { @class = "text-danger" })
-
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-9">
-                        <input type="submit" value="Assign" class="btn btn-success" /> &nbsp;
-                        @Html.ActionLink("Back to List", "Requests", null, new { @class = "btn btn-info" })
-                    </div>
-                </div>
-            </div>
-        }
 </div>
-<div><p></p></div>
 
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-            <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
-        }
+
+ @section Scripts {
+     @Scripts.Render("~/bundles/jqueryval")
+     <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
+    }
 
 

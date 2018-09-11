@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.ValidationModels;
 using RMS.Models.EntityModels;
 
 namespace RMS.App.ViewModels
@@ -30,6 +31,7 @@ namespace RMS.App.ViewModels
 
         [Required(ErrorMessage = "Please provide seat capacity!")]
         [Display(Name = "Seat Capacity")]
+        [GreaterThanZero(ErrorMessage = "Value must be greater then 0!")]
         public int SeatCapacity { get; set; }
 
         [Required(ErrorMessage = "Please select a vehicle type!")]
