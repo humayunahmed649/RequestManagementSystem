@@ -9,12 +9,13 @@
 
 <div class="container">
     <div class="row">
+        
         <div class="col-md-10">
             <h3>Personal Information :</h3>
             <br/>
-            <table class="table table-bordered table-info table-striped">
+            <table class="table table-bordered table-info table-striped" style="width: 100%">
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.FullName)
                     </td>
                     <td style="width: 80%">
@@ -22,7 +23,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.EmployeeTypeId)
                     </td>
                     <td style="width: 80%">
@@ -30,7 +31,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.ContactNo)
                     </td>
                     <td style="width: 80%">
@@ -38,7 +39,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.Email)
                     </td>
                     <td style="width: 80%">
@@ -46,7 +47,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.NID)
                     </td>
                     <td style="width: 80%">
@@ -54,7 +55,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.DrivingLicence)
                     </td>
                     <td style="width: 80%">
@@ -62,7 +63,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.BloodGroup)
                     </td>
                     <td style="width: 80%">
@@ -72,8 +73,8 @@
             </table>
         </div>
         <div class="col-md-2">
-            <br/><br/>
-            <img src="~/Content/img/EmpImg.gif" style="width: 150px; height: 180px !important; border: 1px solid #808080"/>
+            <br /><br />
+            <img src="~/Content/img/EmpImg.gif" style="width: 150px; height: 180px !important; border: 1px solid #808080" />
         </div>
 
     </div>
@@ -83,7 +84,7 @@
             <br/>
             <table class="table table-bordered table-info table-striped">
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.OrganizationId)
                     </td>
                     <td style="width: 80%">
@@ -91,7 +92,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.DepartmentId)
                     </td>
                     <td style="width: 80%">
@@ -99,7 +100,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%">
+                    <td class="col-md-2-custom" style="width: 20%">
                         @Html.DisplayNameFor(model => model.DesignationId)
                     </td>
                     <td style="width: 80%">
@@ -109,7 +110,7 @@
             </table>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin: 0 4px">
         <div class="col-md-12">
             <h3>Address :</h3>
             <br/>
@@ -118,7 +119,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         
-                        <div class="col-md-4 border">
+                        <div class="col-md-4 border col-md-2-custom">
                             <br /><br /><br/>
                             @Html.DisplayName("Present Address")
                         </div>
@@ -132,9 +133,9 @@
                                     @Html.DisplayFor(modelItem => item.AddressLine2)<br/>
                                     @Html.DisplayFor(modelItem => item.PostOffice)<br/>
                                     @Html.DisplayFor(modelItem => item.PostCode)<br/>
-                                    @Html.DisplayFor(modelItem => item.DivisionId)<br/>
-                                    @Html.DisplayFor(modelItem => item.DistrictId)<br/>
-                                    @Html.DisplayFor(modelItem => item.UpazilaId)<br/><br/>
+                                    @Html.DisplayFor(modelItem => item.Division.Name)<br/>
+                                    @Html.DisplayFor(modelItem => item.District.Name)<br/>
+                                    @Html.DisplayFor(modelItem => item.Upazila.Name)<br/><br/>
                                 }
                             }
                         </div>
@@ -143,7 +144,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <br/>
-                        <div class="col-md-4 border">
+                        <div class="col-md-4 border col-md-2-custom">
                             <br/><br/><br/>
                             @Html.DisplayName("Permanent Address")
                         </div>
@@ -157,9 +158,9 @@
                                     @Html.DisplayFor(modelItem => item.AddressLine2)<br/>
                                     @Html.DisplayFor(modelItem => item.PostOffice)<br/>
                                     @Html.DisplayFor(modelItem => item.PostCode)<br/>
-                                    @Html.DisplayFor(modelItem => item.DivisionId)<br/>
-                                    @Html.DisplayFor(modelItem => item.DistrictId)<br/>
-                                    @Html.DisplayFor(modelItem => item.UpazilaId)<br/><br/>
+                                    @Html.DisplayFor(modelItem => item.Division.Name)<br/>
+                                    @Html.DisplayFor(modelItem => item.District.Name)<br/>
+                                    @Html.DisplayFor(modelItem => item.Upazila.Name)<br/><br/>
                                 }
                             }
                         </div>
@@ -171,7 +172,7 @@
     </div>
 </div>
 <br/>
-<div class="row">
+<div class="row" style="margin: 0 5px">
     <div class="col-md-4">
         <input type="button" value="&nbsp; Print &nbsp;" class="btn btn-success"/>
     </div>

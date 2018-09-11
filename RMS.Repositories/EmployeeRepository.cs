@@ -36,7 +36,7 @@ namespace RMS.Repositories
         public override Employee FindById(int id)
         {
             return db.Set<Employee>().Where(c => c.Id == id).Include(c => c.EmployeeType).Include(c=>c.Organization)
-                .Include(c=>c.Department).Include(c=>c.Designation).Include(c=>c.Addresses).AsNoTracking().SingleOrDefault();
+                .Include(c=>c.Department).Include(c=>c.Designation).Include(c=>c.Addresses.Select(a=>a.Upazila).Select(a=>a.District).Select(a=>a.Division)).AsNoTracking().SingleOrDefault();
         }
         public ICollection<Employee> GetAllDriver()
         {

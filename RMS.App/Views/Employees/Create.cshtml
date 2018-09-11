@@ -54,7 +54,6 @@
         </div>
 
         <div id="menu2" class="tab-pane fade">
-            <br/>
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -98,6 +97,39 @@
                                 <p class="text-danger">@ViewBag.Message2</p>
                             </div>
                         </div>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+
+                            @Html.LabelFor(model => model.NID, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.NID, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "NID No"}})
+                                @Html.ValidationMessageFor(model => model.NID, "", new {@class = "text-danger"})
+                                <p class="text-danger">@ViewBag.Message3</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            @Html.LabelFor(model => model.DrivingLicence, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.DrivingLicence, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "DL No"}})
+                                @Html.ValidationMessageFor(model => model.DrivingLicence, "", new {@class = "text-danger"})
+                                <p class="text-danger">@ViewBag.Message4</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            @Html.LabelFor(model => model.BloodGroup, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.BloodGroup, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Blood Group"}})
+                                @Html.ValidationMessageFor(model => model.BloodGroup, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
@@ -109,44 +141,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-
-                            @Html.LabelFor(model => model.NID, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.NID, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "NID No" } })
-                                @Html.ValidationMessageFor(model => model.NID, "", new {@class = "text-danger"})
-                                <p class="text-danger">@ViewBag.Message3</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-
-                            @Html.LabelFor(model => model.DrivingLicence, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.DrivingLicence, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "DL No" } })
-                                @Html.ValidationMessageFor(model => model.DrivingLicence, "", new {@class = "text-danger"})
-                                <p class="text-danger">@ViewBag.Message4</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-
-                            @Html.LabelFor(model => model.BloodGroup, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.BloodGroup, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Blood Group" } })
-                                @Html.ValidationMessageFor(model => model.BloodGroup, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
-                    </div>
-
+                    
                 </div>
+
+                    
 
             </div>
         </div>
 
         <div id="menu3" class="tab-pane fade">
-            <br/>
             <div class="form-horizontal">
                 <h3 class="col-md-offset-3">Address Info</h3><br/>
                 <div class="row">
@@ -227,7 +230,6 @@
 
                     <!--Permanent Address-->
                     <div class="col-md-6" style="background-color: #e6e6fa">
-                        <br/>
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <b><strong><u>Permanent Address :</u></strong></b>

@@ -19,6 +19,7 @@ namespace RMS.App.ViewModels
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "Please provide email!")]
+        [EmailAddress(ErrorMessage = "Email address is not valid!")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please provide contact no!")]
