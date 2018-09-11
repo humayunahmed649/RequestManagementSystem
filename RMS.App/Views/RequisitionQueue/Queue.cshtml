@@ -1,0 +1,87 @@
+﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
+
+@{
+    ViewBag.Title = "Queue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Queue</h2>
+
+
+<div class="row">
+    <div class="col-md-3 border-right border-primary">
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Queue</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">@Html.ActionLink("New Requisitions", "Requests", "AssignRequisitions")</li>
+                    <li>@Html.ActionLink("Assigned Requisitions", "Index", "AssignRequisitions")</li>
+                    <li>@Html.ActionLink("Requisitions Status", "Index", "RequisitionStatus")</li>
+                    <li>@Html.ActionLink("All Requisitions", "Index", "Requisitions")</li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </nav>
+
+    </div>
+    <div class="col-md-9">
+
+
+        <table class="table">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.Designation)
+                </th>
+                <th class="text-right">Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequisitionNumber, new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requisition.Employee.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requisition.Employee.Designation.Title)
+                    </td>
+                    <td class="text-right">
+                        @Html.ActionLink("Assign", "Create","AssignRequisitions", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("View", "ViewDetails","AssignRequisitions", new { id = item.RequisitionId }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Cancel", "Cancel","AssignRequisitions", new { statusId = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+</div>

@@ -23,7 +23,7 @@ namespace RMS.Repositories
 
         public ICollection<RequisitionStatus> GetAllStatusNew()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "New").AsNoTracking().ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition.Employee.Designation).Where(c => c.StatusType == "New").AsNoTracking().ToList();
         }
         public ICollection<RequisitionStatus> GetAllStatusExecute()
         {

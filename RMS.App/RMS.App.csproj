@@ -196,6 +196,7 @@
     <Compile Include="Controllers\GatePassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\RequisitionQueueController.cs" />
     <Compile Include="Controllers\RequisitionsController.cs" />
     <Compile Include="Controllers\RequisitionStatusController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
@@ -912,6 +913,7 @@
     <Content Include="Views\AssignRequisitions\Edit.cshtml" />
     <Content Include="Views\Requisitions\Reply.cshtml" />
     <Content Include="Views\Organizations\SearchIndex.cshtml" />
+    <Content Include="Views\RequisitionQueue\Queue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
