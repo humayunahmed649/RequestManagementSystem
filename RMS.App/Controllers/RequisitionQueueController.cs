@@ -34,5 +34,11 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Index"));
             }
         }
+
+        public ActionResult Report(int id)
+        {
+            var reportData = _requisitionManager.GetRequisitionSummaryReport(id);
+            return View();
+        }
     }
 }

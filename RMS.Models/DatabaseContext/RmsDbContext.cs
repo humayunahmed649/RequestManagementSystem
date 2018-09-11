@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.Report;
 using RMS.Models.EntityModels;
 
 namespace RMS.Models.DatabaseContext
@@ -28,6 +29,12 @@ namespace RMS.Models.DatabaseContext
         public DbSet<Address> Addresses { get; set; }
         public DbSet<RequisitionStatus> RequisitionStatuses { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+
+        public IQueryable<RequisitionSummaryReportVM> GetRequisitionSummaryReport()
+        {
+            var report=Database.SqlQuery<RequisitionSummaryReportVM>("Select * From RequisitionSummary");
+            return report.AsQueryable();
+        } 
         
     }
 }

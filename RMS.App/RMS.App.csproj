@@ -213,6 +213,7 @@
     <Compile Include="ViewModels\EmployeeTypeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
+    <Compile Include="ViewModels\Report\RequisitionSummaryReportVM.cs" />
     <Compile Include="ViewModels\ValidationModels\GreaterThanZeroAttribute.cs" />
     <Compile Include="ViewModels\ValidationModels\RequisitionDateTimeValidationCheckForOther.cs" />
     <Compile Include="ViewModels\ValidationModels\RequisitionDateTimeValidationCheckForOwn.cs" />
@@ -914,6 +915,7 @@
     <Content Include="Views\Requisitions\Reply.cshtml" />
     <Content Include="Views\Organizations\SearchIndex.cshtml" />
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
+    <Content Include="Views\RequisitionQueue\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.Report;
+using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
 using RMS.Repositories.Base;
 using RMS.Repositories.Contracts;
@@ -12,8 +14,10 @@ namespace RMS.Repositories
 {
     public class RequisitionRepository:Repository<Requisition>,IRequisitionRepository
     {
-        public RequisitionRepository(DbContext db) : base(db)
+        private RmsDbContext _db;
+        public RequisitionRepository(RmsDbContext db) : base(db)
         {
+            _db = db;
         }
 
         public override ICollection<Requisition> GetAll()
@@ -30,6 +34,12 @@ namespace RMS.Repositories
         {
             return db.Set<Requisition>().Where(c => c.Id == id).Include(c => c.Employee.Designation).AsNoTracking().SingleOrDefault();
         }
+
+        public RequisitionSummaryReportVM GetRequisitionSummaryReport(int id)
+        {
+            var report = _db.GetRequisitionSummaryReport();
+            return report.FirstOrDefault();
+        } 
         
     }
 }

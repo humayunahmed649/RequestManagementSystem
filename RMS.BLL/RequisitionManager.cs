@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.Report;
 using RMS.BLL.Base;
 using RMS.BLL.Contracts;
 using RMS.Models.EntityModels;
@@ -23,6 +24,12 @@ namespace RMS.BLL
             return _requisitionRepository.GetAllWithEmployee();
         }
 
-        
+        public RequisitionSummaryReportVM GetRequisitionSummaryReport(int id)
+        {
+            return _requisitionRepository.GetRequisitionSummaryReport(id);
+        }
+
+
+
     }
 }
