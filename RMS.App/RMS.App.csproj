@@ -490,6 +490,11 @@
     <Content Include="Content\img\blog\s-img.jpg" />
     <Content Include="Content\img\blog\user-info.png" />
     <Content Include="Content\img\call-action-bg.jpg" />
+    <Content Include="Content\img\developerimg\benazir.jpg" />
+    <Content Include="Content\img\developerimg\bonna.jpg" />
+    <Content Include="Content\img\developerimg\chitto.jpg" />
+    <Content Include="Content\img\developerimg\masum.jpg" />
+    <Content Include="Content\img\developerimg\parvaz.jpg" />
     <Content Include="Content\img\elements\a.jpg" />
     <Content Include="Content\img\elements\a2.jpg" />
     <Content Include="Content\img\elements\d.jpg" />
@@ -916,6 +921,7 @@
     <Content Include="Views\Organizations\SearchIndex.cshtml" />
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
     <Content Include="Views\RequisitionQueue\Report.cshtml" />
+    <Content Include="Views\Home\AboutDeveloper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

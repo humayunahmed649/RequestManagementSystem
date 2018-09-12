@@ -87,11 +87,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <div class="modal-header bg-info">
+            <div class="modal-header table-info">
                 <h3 class="modal-title">Request For Own</h3>
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
             </div>
-            <div class="modal-body table-info">
+            <div class="modal-body table-light">
 
                 @using (Html.BeginForm("Create","Requisitions",FormMethod.Post))
                 {
@@ -120,7 +120,7 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.StartDateTime, new {htmlAttributes = new {@class = "form-control datePicker" } })
+                                @Html.EditorFor(model => model.StartDateTime, new {htmlAttributes = new {@class = "form-control datePicker"} })
                                 @Html.ValidationMessageFor(model => model.StartDateTime, "", new {@class = "text-danger"})
                             </div>
 
@@ -208,11 +208,11 @@
 <div class="modal fade" id="forRequest">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-info">
+            <div class="modal-header table-info">
                 <h3 class="modal-title">Request For Other</h3>
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
             </div>
-            <div class="modal-body table-info">
+            <div class="modal-body table-light">
                 @Html.Partial("CreateRequestForOther")
             </div>
         </div>

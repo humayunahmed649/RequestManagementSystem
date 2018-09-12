@@ -50,5 +50,19 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Home", "Contact"));
             }
         }
+        public ActionResult AboutDeveloper()
+        {
+            try
+            {
+
+                ViewBag.Message = "Developer page.";
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Home", "AboutDeveloper"));
+            }
+        }
     }
 }
