@@ -195,26 +195,17 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.DropDownList("Addresses[0].DistrictId", new SelectList("DistrictDropDown",item.DistrictId),"Select District", htmlAttributes: new {@class = "form-control", @id = "districtDD"})
+                                @Html.DropDownList("Addresses[0].DistrictId", new SelectList("",item.DistrictId),"Select District", htmlAttributes: new {@class = "form-control", @id = "districtDD"})
 
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.DropDownList("Addresses[0].UpazilaId", new SelectList("UpazilaDropDown",item.UpazilaId),"Select Upazila", htmlAttributes: new {@class = "form-control", @id = "upazilaDD"})
+                                @Html.DropDownList("Addresses[0].UpazilaId", new SelectList("",item.UpazilaId),"Select Upazila/Thana", htmlAttributes: new {@class = "form-control", @id = "upazilaDD"})
 
                             </div>
                         </div>
-                        @*<div class="form-group row">
-                            <div class="col-md-3">
-                            </div>
-                            <div class="col-md-6">
-                                
-                                <input type="checkbox" id="PACheckBox"/> <strong> Present address is true! </strong>
-
-                            </div>
-                        </div>*@
                     </div>
                 </div>
                 <br/>
@@ -232,7 +223,7 @@
                         <div class="row">
                             <div class="col-md-3"></div>
                             <div class="col-md-9">
-                                <input type="checkbox" id="PACheckBox1"/> <strong> Same as present address! </strong>
+                                @*<input type="checkbox" id="PACheckBox1"/> <strong> Same as present address! </strong>*@
                             </div>
                         </div>
                         <br/>
@@ -294,27 +285,18 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.DropDownList("Addresses[1].DistrictId", new SelectList("DistrictDropDown"), "Select District", htmlAttributes: new {@class = "form-control", @id = "districtDDp"})
+                                @Html.DropDownList("Addresses[1].DistrictId", new SelectList(""), "Select District", htmlAttributes: new {@class = "form-control", @id = "districtDDp"})
+
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.DropDownList("Addresses[1].UpazilaId", new SelectList("UpazilaDropDown"), "Select Upazila/Thana", htmlAttributes: new {@class = "form-control", @id = "upazilaDDp"})
+                                @Html.DropDownList("Addresses[1].UpazilaId", new SelectList(""), "Select Upazila/Thana", htmlAttributes: new {@class = "form-control", @id = "upazilaDDp"})
+
 
                             </div>
                         </div>
-                        @*<br/>
-                        <div class="form-group row">
-                            <div class="col-md-3">
-                            </div>
-                            <br/><br/>
-                            <div class="col-md-6">
-
-                                    <input type="checkbox" id="PACheckBox2"/> <strong> Permanent address is true! </strong>
-
-                            </div>
-                        </div>*@
                     </div>
                 </div>
             }
@@ -384,14 +366,14 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownList("Addresses[0].DistrictId", new SelectList("DistrictDropDown"),"Select District", htmlAttributes: new { @class = "form-control", @id = "districtDD" })
+                        @Html.DropDownList("Addresses[0].DistrictId", new SelectList(""),"Select District", htmlAttributes: new { @class = "form-control", @id = "districtDD" })
 
                     </div>
                 </div>
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownList("Addresses[0].UpazilaId", new SelectList("UpazilaDropDown"),"Select Upazila/Thana", htmlAttributes: new { @class = "form-control", @id = "upazilaDD" })
+                        @Html.DropDownList("Addresses[0].UpazilaId", new SelectList(""),"Select Upazila/Thana", htmlAttributes: new { @class = "form-control", @id = "upazilaDD" })
 
                     </div>
                 </div>
@@ -411,7 +393,7 @@
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-9">
-                        <input type="checkbox" id="PACheckBox1" /> <strong> Same as present address! </strong>
+                        @*<input type="checkbox" id="PACheckBox1" /> <strong> Same as present address! </strong>*@
                     </div>
                 </div>
                 <br/>
@@ -472,37 +454,20 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownList("Addresses[1].DistrictId", new SelectList("DistrictDropDown"), "Select District", htmlAttributes: new { @class = "form-control", @id = "districtDDp" })
+                        @Html.DropDownList("Addresses[1].DistrictId", new SelectList(""), "Select District", htmlAttributes: new { @class = "form-control", @id = "districtDDp" })
                     </div>
                 </div>
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownList("Addresses[1].UpazilaId", new SelectList("UpazilaDropDown"), "Select Upazila/Thana", htmlAttributes: new { @class = "form-control", @id = "upazilaDDp" })
+                        @Html.DropDownList("Addresses[1].UpazilaId", new SelectList(""), "Select Upazila/Thana", htmlAttributes: new { @class = "form-control", @id = "upazilaDDp" })
 
                     </div>
                 </div>
             </div>
         </div>
     }
-        <table id="addressTable" class="table table-bordered " style="display: none !important">
-            <thead>
-                <tr>
-                    <th style="width: 10%">SL</th>
-                    <th style="width: 10%">Address Type</th>
-                    <th style="width: 10%">Address Line1</th>
-                    <th style="width: 10%">Address Line2</th>
-                    <th style="width: 10%">Post Office</th>
-                    <th style="width: 10%">Post Code</th>
-                    <th style="width: 10%">Division</th>
-                    <th style="width: 10%">District</th>
-                    <th style="width: 10%">Upazila</th>
-                    <th style="width: 5%">Address Id</th>
-                    <th style="width: 5%">Employee Id</th>
-                </tr>
-            </thead>
-            <tbody id="addressDetails"></tbody>
-        </table>
+        
     <br/><br/>
     <div class="form-group row">
         <div class="col-md-9"></div>
