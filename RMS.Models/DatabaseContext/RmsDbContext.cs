@@ -4,13 +4,25 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 using RMS.App.ViewModels.Report;
 using RMS.Models.EntityModels;
+using RMS.Models.EntityModels.Identity;
 
 namespace RMS.Models.DatabaseContext
 {
-    public class RmsDbContext:DbContext
+    public class RmsDbContext:IdentityDbContext<AppUser,AppRole,int,AppUserLogin,AppUserRole,AppUserClaim>
     {
+        public RmsDbContext() : base("RmsDbContext")
+        {
+            
+        }
+
+        public static RmsDbContext Create()
+        {
+            return new RmsDbContext();
+        }
+
         public DbSet<Organization> Organizations { get; set; } 
         public DbSet<Department> Departments { get; set; }
 
@@ -34,7 +46,16 @@ namespace RMS.Models.DatabaseContext
         {
             var report=Database.SqlQuery<RequisitionSummaryReportVM>("Select * From RequisitionSummary");
             return report.AsQueryable();
-        } 
-        
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<AppUser>().ToTable("Users");
+            modelBuilder.Entity<AppRole>().ToTable("Roles");
+            modelBuilder.Entity<AppUserRole>().ToTable("UserRole");
+            modelBuilder.Entity<AppUserLogin>().ToTable("UserLogin");
+            modelBuilder.Entity<AppUserClaim>().ToTable("UserClaim");
+        }
     }
 }
