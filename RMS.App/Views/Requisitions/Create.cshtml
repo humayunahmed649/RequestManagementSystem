@@ -17,7 +17,7 @@
 <div class="col-md-12">
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a> &nbsp;
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a> &nbsp;
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a> &nbsp;
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest" >My Request</a> &nbsp;
     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#notification">Notification</a> &nbsp;
 </div>
 <br/>
@@ -191,12 +191,15 @@
 <div class="modal fade" id="myRequest">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-info">
+            <div class="modal-header table-info">
                 <h3 class="modal-title">My Requisition</h3>
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
             </div>
-            <div class="modal-body table-responsive" style="width: 100%" >
-                @Html.Action("RequisitionList", "Requisitions")
+            <div class="modal-body table-light">
+                <div class="table table-responsive nowrap" style="width: auto">
+                    @Html.Action("RequisitionList", "Requisitions")
+                </div>
+                
             </div>
             <div class="col-md-12 text-right">
                 <br/>
@@ -243,8 +246,11 @@
         $(document).ready(function () {
             $('#example').DataTable();
         });
+
         $(document).ready(function () {
-            $('#example1').DataTable();
+            $('#example1').DataTable({ responsive: true, "autoWidth": false });
+            
         });
+        
     </script>
 }

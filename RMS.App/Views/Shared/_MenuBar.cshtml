@@ -6,25 +6,29 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
 
-                    <p>
+                    <p class="float-left">
                         <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/bcc_logo.png" width="40" height="40" alt="Home Logo" title="Home BCC"/></a>
-                        &nbsp; <strong style="font-size: 20px;" class="font-weight-bold">Bangladesh Computer Council</strong>
+                        &nbsp; <strong style="font-size: 20px;" class="font-weight-bold" id="logotext" >Bangladesh Computer Council</strong>
                     </p>
                 </div>
 
                 <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
-                    <a class="btns" href="tel:+88018727772727">+880123456789</a>
-                    <a class="btns" href="mailto:support@bcc.gov.bd">support@bcc.gov.bd</a>
-                    <a class="icons" href="tel:+880123456789">
-                        <span class="lnr lnr-phone-handset"></span>
-                    </a>
-                    <a class="icons" href="mailto:support@bcc.gov.bd">
-                        <span class="lnr lnr-envelope"></span>
-                    </a>	
+                    <p class="float-right">
+                        <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="#" title="Contact">+880123456789</a>
+                        <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="mailto:support@bcc.gov.bd" title="Support mail">support@bcc.gov.bd</a>
+                        <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!">Help!</a>
+                        @*<a class="icons" href="tel:+880123456789">
+                            <span class="lnr lnr-phone-handset"></span>
+                        </a>
+                        <a class="icons" href="mailto:support@bcc.gov.bd">
+                            <span class="lnr lnr-envelope"></span>
+                        </a>*@
+                    </p>
+                    
                 </div>
-                <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+                @*<div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
 
-                </div>
+                </div>*@
             </div>
         </div>
     </div>

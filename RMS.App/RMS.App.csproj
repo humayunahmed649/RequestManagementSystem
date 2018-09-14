@@ -587,6 +587,7 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\video\Startingintro.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -922,6 +923,7 @@
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
     <Content Include="Views\RequisitionQueue\Report.cshtml" />
     <Content Include="Views\Home\AboutDeveloper.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
