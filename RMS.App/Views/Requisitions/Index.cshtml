@@ -64,14 +64,18 @@
                 <th>
                     @Html.DisplayNameFor(model => model.EndDateTime)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.RequestFor)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.PassengerQty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model=>model.SubmitDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
                 </th>
                 @*<th>
                     Action
@@ -105,15 +109,19 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.EndDateTime)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.RequestFor)
                         </td>
                         <th>
                             @Html.DisplayFor(modelItem => item.PassengerQty)
                         </th>
+                        <th>
+                            @Html.DisplayFor(modleItem=>item.SubmitDateTime)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
                         @*<td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
                             @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
@@ -151,13 +159,16 @@
                     @Html.DisplayNameFor(model => model.EndDateTime)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.RequestFor)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model=>model.PassengerQty)
+                    @Html.DisplayNameFor(model => model.PassengerQty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubmitDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
                 </th>
                 @*<th>
                     Action

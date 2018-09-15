@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201809142122510_IdentityAdded.Designer.cs">
       <DependentUpon>201809142122510_IdentityAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809150713117_Requisition_Submit_DataTime_Added.cs" />
+    <Compile Include="Migrations\201809150713117_Requisition_Submit_DataTime_Added.Designer.cs">
+      <DependentUpon>201809150713117_Requisition_Submit_DataTime_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\RequisitionSummaryReportVM.cs" />
@@ -323,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809142122510_IdentityAdded.resx">
       <DependentUpon>201809142122510_IdentityAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809150713117_Requisition_Submit_DataTime_Added.resx">
+      <DependentUpon>201809150713117_Requisition_Submit_DataTime_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -153,6 +153,7 @@ namespace RMS.App.Controllers
 
                     requisitionViewModel.RequestFor = "Own";
                     requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
+                    requisitionViewModel.SubmitDateTime=DateTime.Now;
 
                     Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
                     bool isSaved = _requisitionManager.Add(requisition);
@@ -222,6 +223,8 @@ namespace RMS.App.Controllers
                     requisitonForAnother.EndDateTime = endDateTime;
 
                     requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
+                    requisitonForAnother.SubmitDateTime=DateTime.Now;
+
                     Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
 
                     bool isSaved = _requisitionManager.Add(requisition);
@@ -278,7 +281,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,SubmitDateTime")] RequisitionViewModel requisitionViewModel)
         {
             try
             {
@@ -294,7 +297,7 @@ namespace RMS.App.Controllers
                     var endTime = requisitionViewModel.EndTime;
                     DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
                     requisitionViewModel.EndDateTime = endDateTime;
-
+                    
                     Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
 
                     _requisitionManager.Update(requisition);
@@ -443,7 +446,6 @@ namespace RMS.App.Controllers
 
             }
         }
-        
 
         protected override void Dispose(bool disposing)
         {
