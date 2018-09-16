@@ -50,8 +50,9 @@ namespace RMS.Models.EntityModels
         public EmployeeType EmployeeType { get; set; }
 
         public List<Address> Addresses { get; set; }
-        public int AppUserId { get; set; }
 
+        [ForeignKey("AppUser")]
+        public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
 
 
