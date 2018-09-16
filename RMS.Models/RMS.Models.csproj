@@ -233,6 +233,10 @@
     <Compile Include="Migrations\201809150713117_Requisition_Submit_DataTime_Added.Designer.cs">
       <DependentUpon>201809150713117_Requisition_Submit_DataTime_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809161424233_EmployeeModelAddedUserId.cs" />
+    <Compile Include="Migrations\201809161424233_EmployeeModelAddedUserId.Designer.cs">
+      <DependentUpon>201809161424233_EmployeeModelAddedUserId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\RequisitionSummaryReportVM.cs" />
@@ -330,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809150713117_Requisition_Submit_DataTime_Added.resx">
       <DependentUpon>201809150713117_Requisition_Submit_DataTime_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809161424233_EmployeeModelAddedUserId.resx">
+      <DependentUpon>201809161424233_EmployeeModelAddedUserId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

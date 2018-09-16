@@ -7,6 +7,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using RMS.Models.Contracts;
+using RMS.Models.EntityModels.Identity;
 
 namespace RMS.Models.EntityModels
 {
@@ -49,6 +50,10 @@ namespace RMS.Models.EntityModels
         public EmployeeType EmployeeType { get; set; }
 
         public List<Address> Addresses { get; set; }
+        public int AppUserId { get; set; }
+
+        public AppUser AppUser { get; set; }
+
 
         public bool IsDelete()
         {

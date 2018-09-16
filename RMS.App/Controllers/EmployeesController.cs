@@ -139,15 +139,15 @@ namespace RMS.App.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                //if (ModelState.IsValid)
+                //{
 
-                    var user = new AppUser()
-                    {
-                        Email = employeeViewModel.Email,
-                        UserName = employeeViewModel.Email
-                    };
-                    var userRole = new AppUserRole()
+                var user = new AppUser()
+                {
+                    Email = employeeViewModel.Email,
+                    UserName = employeeViewModel.Password
+                };
+                var userRole = new AppUserRole()
                     {
                         UserId = user.Id,
                         RoleId = 2
@@ -190,12 +190,13 @@ namespace RMS.App.Controllers
 
                     if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null && ViewBag.Message4 == null)
                     {
+                        employee.AppUserId = user.Id;
                         _employeeManager.Add(employee);
                         TempData["msg"] = "Information has been saved successfully";
                         return RedirectToAction("Index");
                     }
                 }
-                }
+                //}
                 TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
                 ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);

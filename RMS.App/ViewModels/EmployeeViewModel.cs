@@ -57,9 +57,6 @@ namespace RMS.App.ViewModels
         [Display(Name = "Employee Type")]
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
-        //public int AppUserId { get; set; }
-
-        //public AppUser  AppUser { get; set; }
 
         [NotMapped]
         public AddressViewModel AddressViewModel { get; set; }
@@ -72,7 +69,7 @@ namespace RMS.App.ViewModels
         public string Password { get; set; }
         [NotMapped]
         public string ConfirmPassword { get; set; }
-        
+
 
     }
  

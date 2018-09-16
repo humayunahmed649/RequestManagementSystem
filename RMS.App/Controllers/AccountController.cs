@@ -45,12 +45,12 @@ namespace RMS.App.Controllers
                 Email = model.Email,
                 UserName = model.Email
             };
-            var userRole = new AppUserRole()
-            {
-                UserId = user.Id,
-                RoleId = 2
-            };
-            user.Roles.Add(userRole);
+            //var userRole = new AppUserRole()
+            //{
+            //    UserId = user.Id,
+            //    RoleId = 2
+            //};
+            //user.Roles.Add(userRole);
             var result = UserManager.Create(user, model.Password);
             if(result.Succeeded)
             {
