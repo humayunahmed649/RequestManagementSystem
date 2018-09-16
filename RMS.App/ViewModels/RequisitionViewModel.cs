@@ -53,7 +53,7 @@ namespace RMS.App.ViewModels
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Display(Name = "Submiteed Date Time")]
+        [Display(Name = "Submitted Date Time")]
         public DateTime SubmitDateTime { get; set; }
 
         [Display(Name = "Request For")]

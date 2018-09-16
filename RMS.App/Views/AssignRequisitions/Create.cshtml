@@ -8,25 +8,32 @@
 
 
 <div class="container">
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-danger">
+            @Html.Raw(TempData["msg"])
+        </div>
+    }
     <div class="row text-center">
-        <h3>Requisition No : <strong class="text-info">@Html.Display("RequisitionNumber")</strong></h3>
+        <h3>Requisition No : <strong class="text-info">@Html.Display("RequisitionNumber")</strong>
+        </h3>
     </div>
-    <br />
+    <br/>
     <div class="row border" style="padding: 20px 20px">
         @if (Model != null)
         {
             var data = ViewBag.Requisition;
 
             <div class="col-md-6">
-                
+
                 <div class="row">
                     <div>
                         <h4>Requisitor Info :</h4><br/>
                     </div>
-                    
-                    <table class="table table-light table-active table-primary dt-responsive nowrap">
+
+                    <table class="table table-light table-active table-primary table-responsive nowrap">
                         <tr>
-                            <td class="col-md-2-custom" style="width: 35%">@Html.DisplayName("Requisition Number : ")</td>
+                            <td class="col-md-2-custom" style="width: 35%">@Html.DisplayName("Requisition No : ")</td>
                             <td>@data.RequisitionNumber</td>
                         </tr>
                         <tr>
@@ -56,8 +63,8 @@
                     <div>
                         <h4>Journey Info :</h4><br/>
                     </div>
-                    
-                    <table class="table table-light table-active table-primary dt-responsive nowrap">
+
+                    <table class="table table-light table-active table-primary table-responsive nowrap">
                         <tr>
                             <td class="col-md-2-custom" style="width: 35%">@Html.DisplayName("Journey Date Time : ")</td>
                             <td>@data.StartDateTime</td>
@@ -79,6 +86,10 @@
                             <td>@data.PassengerQty</td>
                         </tr>
                         <tr>
+                            <td class="col-md-2-custom">@Html.DisplayName("Submited Time : ")</td>
+                            <td>@data.SubmitDateTime</td>
+                        </tr>
+                        <tr>
                             <td class="col-md-2-custom">@Html.DisplayName("Description : ")</td>
                             <td>@data.Description</td>
                         </tr>
@@ -91,20 +102,20 @@
         <div class="col-md-5">
             <div class="row">
                 <h4>Assign Requisition</h4>
-                
+
                 @using (Html.BeginForm("Create", "AssignRequisitions", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
-                        <br />
+                        <br/>
                         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
                         <div class="form-group row" hidden="hidden">
 
-                            @Html.LabelFor(model=>model.RequisitionId, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-8">
-                                @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
+                            @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly" })
                                 @Html.ValidationMessage("RequisitionId", "", new {@class = "text-danger"})
                             </div>
                         </div>
@@ -112,16 +123,16 @@
 
                         <div class="form-group row" hidden="hidden">
                             @Html.LabelFor(model => model.RequisitionStatusId, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-8">
-                                @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new {@class = "form-control"})
+                            <div class="col-md-9">
+                                @Html.DropDownList("RequisitionStatusId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
                                 @Html.ValidationMessageFor(model => model.RequisitionStatusId, "", new {@class = "text-danger"})
                             </div>
                         </div>
 
                         <div class="form-group row">
 
-                            @Html.LabelFor(model=>model.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-8">
+                            @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
                                 @Html.TextBox("RequisitionNumber", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
                                 @Html.ValidationMessage("RequisitionNumber", "", new {@class = "text-danger"})
                             </div>
@@ -129,19 +140,19 @@
 
                         <div class="form-group row">
                             @Html.Label("Vehicle Type", htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 @if (Model != null)
                                 {
-                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select...", htmlAttributes: new {@class = "dropdown form-control", id = "vehicleTypeDD"})
+                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleTypeDD"})
                                 }
                             </div>
                         </div>
 
                         <div class="form-group row">
                             @Html.LabelFor(model => model.VehicleId, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-8">
+                            <div class="col-md-9">
 
-                                @Html.DropDownList("VehicleId", null, htmlAttributes: new {@class = "dropdown form-control", id = "vehicleDD"})
+                                @Html.DropDownList("VehicleId", null, htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleDD"}) 
 
                                 @Html.ValidationMessageFor(model => model.VehicleId, "", new {@class = "text-danger"})
 
@@ -150,7 +161,7 @@
 
                         <div class="form-group row">
                             @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new {@class = "control-label col-md-3"})
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control"})
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new {@class = "text-danger"})
                             </div>
@@ -158,7 +169,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-3"></div>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <input type="submit" value="Assign" class="btn btn-success"/> &nbsp;
                                 @Html.ActionLink("Back to List", "Requests", null, new {@class = "btn btn-info"})
                             </div>

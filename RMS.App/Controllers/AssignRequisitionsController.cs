@@ -101,11 +101,11 @@ namespace RMS.App.Controllers
 
                 AssignRequisitionViewModel assignRequisitionViewModel = new AssignRequisitionViewModel();
                 assignRequisitionViewModel.RequisitionId = requisitionId;
-                ViewBag.RequisitionNumber = requisition.RequisitionNumber;
                 assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
 
+                ViewBag.RequisitionNumber = requisition.RequisitionNumber;
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-                ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select..." } };
+                ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select Vehicle" } };
                 ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
                 return View(assignRequisitionViewModel);
             }
@@ -113,9 +113,7 @@ namespace RMS.App.Controllers
             {
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Create"));
             }
-            
         }
-        
         
         
         [HttpPost]
@@ -138,9 +136,21 @@ namespace RMS.App.Controllers
                     return RedirectToAction("Index");
                 }
 
+                Requisition requisition = _requisitionManager.FindById(assignRequisitionViewModel.RequisitionId);
+
+                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(ViewBag.Requisition = requisition);
+                assignRequisitionViewModel.RequisitionId = assignRequisitionViewModel.RequisitionId;
+                assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
+
+
+                ViewBag.RequisitionNumber = assignRequisitionViewModel.RequisitionNumber;
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "DestinationPlace");
-                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
+                ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select Vehicle" } };
+                ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
+                
+
+                TempData["msg"] = "Assign faield! You have missed to select all field.";
+
                 return View(assignRequisitionViewModel);
             }
             catch (Exception ex)
