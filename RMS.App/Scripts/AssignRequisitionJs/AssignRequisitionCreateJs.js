@@ -14,13 +14,17 @@ $(document).ready(function() {
                 var options = "<option >Select...</option>";
                 $.each(response,
                     function(key, vehicle) {
-                        options += "<option value='" + vehicle.Id + "'>" + vehicle.RegNo + "</option>"
+                        options += "<option value='" + vehicle.Id + "'>" + vehicle.RegNo + "</option>";
                     });
-
-                $("#vehicleDD").append(options);
-
+                if (options==null) {
+                    alert("Error Message :" + error + "\n Have not found any vehicle with this type!");
+                } else {
+                    $("#vehicleDD").append(options);
+                }
             },
-            error: function(response) {
+            error: function (response) {
+                var error = response;
+                alert("Error Message :" +error + "\n Have not found any vehicle with this type!");
 
             }
 

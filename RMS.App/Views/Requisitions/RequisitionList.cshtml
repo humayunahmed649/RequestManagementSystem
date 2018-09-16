@@ -34,6 +34,9 @@
                 @Html.DisplayNameFor(model => model.PassengerQty)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.SubmitDateTime)
+            </th>
+            <th>
                 Action
             </th>
         </tr>
@@ -69,6 +72,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.PassengerQty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubmitDateTime)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
@@ -109,6 +115,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PassengerQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmitDateTime)
             </th>
             <th>
                 Action

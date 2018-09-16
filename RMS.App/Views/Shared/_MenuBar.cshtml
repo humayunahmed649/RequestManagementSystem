@@ -4,11 +4,12 @@
     <div class="header-top" >
         <div class="container">
             <div class="row align-items-center">
+                
                 <div class="col-lg-4 col-sm-4 col-4 header-top-left no-padding">
 
                     <p class="float-left">
                         <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/bcc_logo.png" width="40" height="40" alt="Home Logo" title="Home BCC"/></a>
-                        &nbsp; <strong style="font-size: 20px;" class="font-weight-bold" id="logotext" >Bangladesh Computer Council</strong>
+                        &nbsp; <strong style="font-size: 20px;" class="font-weight-bold" id="logotext">Bangladesh Computer Council</strong>
                     </p>
                 </div>
 
@@ -16,18 +17,18 @@
                     <p class="float-right">
                         <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="#" title="Contact">+880123456789</a>
                         <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="mailto:support@bcc.gov.bd" title="Support mail">support@bcc.gov.bd</a>
-                        <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!">Help!</a>
+                        <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank">Help!</a>
 
                     </p>
 
                 </div>
                 <div class="col-lg-2 col-sm-2 col-2 header-top-right no-padding">
-                    @Html.Partial("_LoginPartial")
-                </div>
-                    @*<div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
+                    <p class="float-right">
+                        <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Login", "Account")" title="Log In">Log IN</a>
+                    </p>
 
-            </div>*@
                 </div>
+            </div>
         </div>
     </div>
     <div class="container main-menu">
@@ -99,7 +100,7 @@
                             </li>
                         }
 
-                        <li>@Html.ActionLink("Send Requisition", "Create", "Requisitions")</li>
+                        <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
                         <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
                         @*<li class="menu-has-children">
                                 <a href="#">Requisition Queue</a>

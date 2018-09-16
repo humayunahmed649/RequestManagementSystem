@@ -34,6 +34,9 @@ namespace RMS.Models.EntityModels
         [StringLength(500)]
         public string Description { get; set; }
 
+
+        public DateTime SubmitDateTime { get; set; }
+
         [Required,StringLength(250)]
         public string RequestFor { get; set; }
 

@@ -12,7 +12,7 @@ namespace RMS.App.ViewModels
     {
         public int Id { get; set; }
 
-        [Display(Name = "Requisition Number")]
+        [Display(Name = "Requisition No")]
         public string RequisitionNumber { get; set; }
 
         [Display(Name = "Requisition Id")]
@@ -33,9 +33,8 @@ namespace RMS.App.ViewModels
         public int RequisitionStatusId { get; set; }
         public RequisitionStatus RequisitionStatus { get; set; }
 
+        [NotMapped]
         public List<VehicleType> VehicleTypes { get; set; } 
-
-        //private IEnumerable<AssignRequisitionViewModel> AssignRequisitionViewModels { get; set; } 
 
     }
 }
