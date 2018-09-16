@@ -45,11 +45,17 @@ namespace RMS.App.Controllers
                 Email = model.Email,
                 UserName = model.Email
             };
+            var userRole = new AppUserRole()
+            {
+                UserId = user.Id,
+                RoleId = 2
+            };
+            user.Roles.Add(userRole);
             var result = UserManager.Create(user, model.Password);
             if(result.Succeeded)
             {
-                SignInManager.SignIn(user, false, false);
-                return RedirectToAction("Index", "Home");
+                //SignInManager.SignIn(user, false, false);
+                return RedirectToAction("Create", "Employees");
             }
             return View();
         }

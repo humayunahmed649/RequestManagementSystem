@@ -6,8 +6,10 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.Models;
 using RMS.App.ViewModels.ValidationModels;
 using RMS.Models.EntityModels;
+using RMS.Models.EntityModels.Identity;
 
 namespace RMS.App.ViewModels
 {
@@ -55,6 +57,9 @@ namespace RMS.App.ViewModels
         [Display(Name = "Employee Type")]
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
+        //public int AppUserId { get; set; }
+
+        //public AppUser  AppUser { get; set; }
 
         [NotMapped]
         public AddressViewModel AddressViewModel { get; set; }
@@ -63,6 +68,11 @@ namespace RMS.App.ViewModels
         public List<Division> DivisionList { get; set; }
 
         public List<Address>Addresses { get; set; }
+        [NotMapped]
+        public string Password { get; set; }
+        [NotMapped]
+        public string ConfirmPassword { get; set; }
+        
 
     }
  

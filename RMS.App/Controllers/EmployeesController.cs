@@ -8,10 +8,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
+using RMS.Models.EntityModels.Identity;
+using RMS.Models.Identity.IdentityConfig;
 
 namespace RMS.App.Controllers
 {
@@ -26,6 +30,7 @@ namespace RMS.App.Controllers
         private IDistrictManager _districtManager;
         private IUpazilaManager _upazilaManager;
 
+
         public EmployeesController(IEmployeeManager employeeManager, IDepartmentManager departmentManager,
             IDesignationManager designationManager, IOrganizationManager organizationManager,IEmployeeTypeManager employeeTypeManager ,
             IDivisionManager divisionManager, IDistrictManager districtManager, IUpazilaManager upazilaManager)
@@ -39,6 +44,21 @@ namespace RMS.App.Controllers
             this._districtManager = districtManager;
             this._upazilaManager = upazilaManager;
         }
+        //Account controller 
+
+        private AppUserManager _userManager;
+        private AppSignInManager _signInManager;
+        private AppUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().Get<AppUserManager>();
+
+            }
+        }
+
+
+
 
         // GET: Employees
         public ActionResult Index(string searchText)
@@ -115,12 +135,30 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses,password,confirmpassword")] EmployeeViewModel employeeViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+
+                    var user = new AppUser()
+                    {
+                        Email = employeeViewModel.Email,
+                        UserName = employeeViewModel.Email
+                    };
+                    var userRole = new AppUserRole()
+                    {
+                        UserId = user.Id,
+                        RoleId = 2
+                    };
+                    user.Roles.Add(userRole);
+                    var result = UserManager.Create(user, employeeViewModel.Password);
+                    if (result.Succeeded)
+                    {
+                        //SignInManager.SignIn(user, false, false);
+                        //return RedirectToAction("Create", "Employees");
+                    
                     Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
                     var email = employee.Email.Trim();
@@ -157,7 +195,7 @@ namespace RMS.App.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-
+                }
                 TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
                 ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
