@@ -55,7 +55,7 @@ namespace RMS.App.Controllers
             if(result.Succeeded)
             {
                 //SignInManager.SignIn(user, false, false);
-                return RedirectToAction("Create", "Employees");
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }

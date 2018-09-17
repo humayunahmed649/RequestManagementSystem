@@ -139,8 +139,8 @@ namespace RMS.App.Controllers
         {
             try
             {
-                //if (ModelState.IsValid)
-                //{
+                if (ModelState.IsValid)
+                {
 
                 var user = new AppUser()
                 {
@@ -196,7 +196,7 @@ namespace RMS.App.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                //}
+                }
                 TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
                 ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
@@ -211,7 +211,7 @@ namespace RMS.App.Controllers
             {
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
             }
-        }
+         }
 
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
