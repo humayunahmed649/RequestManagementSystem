@@ -7,7 +7,7 @@ namespace RMS.Models.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Employees", "AppUserId", c => c.Int(nullable: true));
+            AddColumn("dbo.Employees", "AppUserId", c => c.Int(nullable: false, defaultValue:0));
             CreateIndex("dbo.Employees", "AppUserId");
             AddForeignKey("dbo.Employees", "AppUserId", "dbo.Users", "Id", cascadeDelete: false);
         }
