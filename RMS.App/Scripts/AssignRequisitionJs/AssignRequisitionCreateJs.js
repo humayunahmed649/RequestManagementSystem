@@ -11,7 +11,7 @@ $(document).ready(function() {
             type: "POST",
             success: function(response) {
                 $("#vehicleDD").empty();
-                var options = "<option >Select...</option>";
+                var options = "<option >Select Vehicle</option>";
                 $.each(response,
                     function(key, vehicle) {
                         options += "<option value='" + vehicle.Id + "'>" + vehicle.RegNo + "</option>";

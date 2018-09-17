@@ -28,3 +28,14 @@ $(document).ready(function () {
         disable_search_threshold: 1
     });
 });
+
+$(document).ready(function() {
+    $(".searchableDD1").chosen({
+        disable_search_threshold: 1
+    });
+});
+$(document).ready(function() {
+    $(".searchableDD2").chosen({
+        disable_search_threshold: 1
+    });
+});

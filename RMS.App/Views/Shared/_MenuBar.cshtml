@@ -42,7 +42,7 @@
                         @if (User.IsInRole("Administrator"))
                         {
 
-                            <li class="menu-has-children">
+                            @*<li class="menu-has-children">
 
                                 <a href="#">SetUp All</a>
                                 <ul>
@@ -98,11 +98,16 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>*@
+
+                            <li>@Html.ActionLink("Setup Queue", "Index", "SetupAll")</li>
                         }
+                       
 
                         <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+
                         <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
+
                         @*<li class="menu-has-children">
                                 <a href="#">Requisition Queue</a>
                                 <ul>

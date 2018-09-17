@@ -33,27 +33,27 @@
 
                     <table class="table table-light table-active table-primary table-responsive nowrap">
                         <tr>
-                            <td class="col-md-2-custom" style="width: 35%">@Html.DisplayName("Requisition No : ")</td>
+                            <td class="col-md-2-custom" style="width: 40%">@Html.DisplayName("Requisition No :")</td>
                             <td>@data.RequisitionNumber</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Requestor Name : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Requestor Name :")</td>
                             <td>@data.Employee.FullName</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Designation : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Designation :")</td>
                             <td>@data.Employee.Designation.Title</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Contact No : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Contact No :")</td>
                             <td>@data.Employee.ContactNo</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Email : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Email :")</td>
                             <td>@data.Employee.Email</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Request For : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Request For :")</td>
                             <td>@data.RequestFor</td>
                         </tr>
                     </table>
@@ -66,31 +66,31 @@
 
                     <table class="table table-light table-active table-primary table-responsive nowrap">
                         <tr>
-                            <td class="col-md-2-custom" style="width: 35%">@Html.DisplayName("Journey Date Time : ")</td>
+                            <td class="col-md-2-custom" style="width: 40%">@Html.DisplayName("Journey Date Time :")</td>
                             <td>@data.StartDateTime</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Return Date Time : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Return Date Time :")</td>
                             <td>@data.EndDateTime</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("From Place : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("From Place :")</td>
                             <td>@data.FromPlace</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Destination Place : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Destination Place :")</td>
                             <td>@data.DestinationPlace</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Passenger Qty : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Passenger Qty :")</td>
                             <td>@data.PassengerQty</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Submited Time : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Submited Time :")</td>
                             <td>@data.SubmitDateTime</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Description : ")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Description :")</td>
                             <td>@data.Description</td>
                         </tr>
                     </table>
@@ -143,7 +143,7 @@
                             <div class="col-md-9">
                                 @if (Model != null)
                                 {
-                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleTypeDD"})
+                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleTypeDD" })
                                 }
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control"})
+                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control", @id= "searchableDD3" })
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new {@class = "text-danger"})
                             </div>
                         </div>
@@ -187,6 +187,7 @@
  @section Scripts {
      @Scripts.Render("~/bundles/jqueryval")
      <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
+    <script src="~/Scripts/chosenDD/chosen_DD.js"></script>
     }
 
 
