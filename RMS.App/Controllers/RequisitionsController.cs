@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
@@ -16,6 +17,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "User")]
     public class RequisitionsController : Controller
     {
         private IRequisitionManager _requisitionManager;
@@ -114,7 +116,7 @@ namespace RMS.App.Controllers
         {
             try
             {
-                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
+                //ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
                 ICollection<Requisition> requisitions = _requisitionManager.GetAll();
                 IEnumerable<RequisitionViewModel> requisitionViewModels =
                     Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
@@ -134,13 +136,13 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,EmployeeId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description")] RequisitionViewModel requisitionViewModel)
         {
-            try
-            {
+            //try
+            //{
 
-                if (ModelState.IsValid)
-                {
+                //if (ModelState.IsValid)
+                //{
                     var startDate = requisitionViewModel.StartDateTime.ToString("MM/dd/yyyy");
                     var startTime = requisitionViewModel.StartTime;
                     DateTime startDateTime = Convert.ToDateTime(startDate + " " + startTime);
@@ -154,8 +156,12 @@ namespace RMS.App.Controllers
                     requisitionViewModel.RequestFor = "Own";
                     requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
                     requisitionViewModel.SubmitDateTime=DateTime.Now;
+                //Get User Id by Login User
 
-                    Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
+                requisitionViewModel.EmployeeId = Convert.ToInt32(User.Identity.GetUserId());
+
+                Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
+                    
                     bool isSaved = _requisitionManager.Add(requisition);
 
                     //Requisition Status Save
@@ -169,7 +175,7 @@ namespace RMS.App.Controllers
                         _requisitionStatusManager.Add(status);
                         TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
                         return RedirectToAction("Index");
-                    }
+                    //}
                 }
 
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
@@ -179,11 +185,11 @@ namespace RMS.App.Controllers
                 ViewBag.Requisition = requisitionViewModels;
                 TempData["msg"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
                 return View();
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Create"));
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return View("Error", new HandleErrorInfo(ex, "Requisitions", "Create"));
+            //}
         }
 
         // GET: Requisitions/CreateRequestForOther

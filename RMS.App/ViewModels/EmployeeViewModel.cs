@@ -65,10 +65,7 @@ namespace RMS.App.ViewModels
         public List<Division> DivisionList { get; set; }
 
         public List<Address>Addresses { get; set; }
-        [NotMapped]
-        public string Password { get; set; }
-        [NotMapped]
-        public string ConfirmPassword { get; set; }
+        
 
 
     }

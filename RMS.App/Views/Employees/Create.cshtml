@@ -332,13 +332,6 @@
                 </div>
             </div>
 
-            @*<div class="form-group row">
-                <div class="col-md-2"></div>
-                <div class="col-md-6">
-                    <input type="submit" value="Save" class="btn btn-success"/> &nbsp;
-                    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-info"})
-                </div>
-            </div>*@
         </div>
             <div class="form-group row">
                 <div class="col-md-8">
@@ -350,36 +343,6 @@
                 </div>
             </div>
         </div>
-
-
-    @*Login Infromation*@
-
-        <div id="menu5" class="tab-pane fade">
-            <br />
-            <div class="form-horizontal">
-                <h3 class="col-md-offset-3">Log In Info</h3><br />
-                <div class="form-group row">
-                   @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.Label("password", htmlAttributes: new { @class = "col-md-2 control-label" })
-                    <div class="col-md-4">
-                        @Html.Password("Password", Model.Password,new { @class = "form-control" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-
-                    @Html.Label("confirmPassword", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.Password("confirmPassword", Model.ConfirmPassword, new { @class = "form-control" })
-                    </div>
-                </div>
-
                 <div class="form-group row">
                     <div class="col-md-2"></div>
                     <div class="col-md-6">
@@ -398,8 +361,7 @@
         </div>
 
 
-    </div>
-</div>
+  
 
 }
 

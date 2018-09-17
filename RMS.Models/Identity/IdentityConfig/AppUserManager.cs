@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using RMS.Models.DatabaseContext;
+using RMS.Models.EntityModels;
 using RMS.Models.EntityModels.Identity;
 
 namespace RMS.Models.Identity.IdentityConfig
@@ -64,6 +65,24 @@ namespace RMS.Models.Identity.IdentityConfig
             //}
             return manager;
         
+        }
+
+        public int AddUserForEmployee(Employee employee)
+        {
+            var user=new AppUser()
+            {
+                UserName = employee.Email,
+                Email = employee.Email
+            };
+            string defaultPassword = "Aa@123456";
+            var result=this.Create(user, defaultPassword);
+            if (result.Succeeded)
+            {
+                var roleAdded=this.AddToRole(user.Id, "User");
+                int Id= user.Id;
+                return Id;
+            }
+            return 0;
         }
     }
 }

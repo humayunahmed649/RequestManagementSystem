@@ -47,7 +47,6 @@ namespace RMS.App.Controllers
         //Account controller 
 
         private AppUserManager _userManager;
-        private AppSignInManager _signInManager;
         private AppUserManager UserManager
         {
             get
@@ -135,30 +134,12 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses,password,confirmpassword")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] EmployeeViewModel employeeViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-
-                var user = new AppUser()
-                {
-                    Email = employeeViewModel.Email,
-                    UserName = employeeViewModel.Password
-                };
-                var userRole = new AppUserRole()
-                    {
-                        UserId = user.Id,
-                        RoleId = 2
-                    };
-                    user.Roles.Add(userRole);
-                    var result = UserManager.Create(user, employeeViewModel.Password);
-                    if (result.Succeeded)
-                    {
-                        //SignInManager.SignIn(user, false, false);
-                        //return RedirectToAction("Create", "Employees");
-                    
                     Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
                     var email = employee.Email.Trim();
@@ -188,16 +169,30 @@ namespace RMS.App.Controllers
                         }
                     }
 
-                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null && ViewBag.Message4 == null)
+                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null &&
+                        ViewBag.Message4 == null)
                     {
-                        employee.AppUserId = user.Id;
-                        _employeeManager.Add(employee);
-                        TempData["msg"] = "Information has been saved successfully";
-                        return RedirectToAction("Index");
+                        if (employee.EmployeeTypeId == 1)
+                        {
+                            var result=UserManager.AddUserForEmployee(employee);
+                            if (result != 0)
+                            {
+                                employee.AppUserId = result;
+                                _employeeManager.Add(employee);
+                                TempData["msg"] = "Information has been saved successfully";
+                                return RedirectToAction("Index");
+                            }
+
+                        }
+                        if (employeeViewModel.EmployeeType.Id == 2)
+                        {
+                            _employeeManager.Add(employee);
+                            TempData["msg"] = "Information has been saved successfully";
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
-                }
-                TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
+                 TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
                 ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
                 ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);

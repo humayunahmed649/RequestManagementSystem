@@ -54,14 +54,13 @@ namespace RMS.App.ViewModels
         public string Description { get; set; }
 
         [Display(Name = "Submitted Date Time")]
-        public DateTime SubmitDateTime { get; set; }
+        public DateTime? SubmitDateTime { get; set; }
 
         [Display(Name = "Request For")]
         public string RequestFor { get; set; }
 
         [Display(Name = "Employee")]
-        [Required(ErrorMessage = "Please select Employee!")]
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public Employee Employee { get; set; }
         
         public List<RequisitionViewModel> RequisitionViewModels { get; set; }
