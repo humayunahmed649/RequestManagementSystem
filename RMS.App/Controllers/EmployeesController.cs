@@ -19,6 +19,7 @@ using RMS.Models.Identity.IdentityConfig;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator")]
     public class EmployeesController : Controller
     {
         private IEmployeeManager _employeeManager;

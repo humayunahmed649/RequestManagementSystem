@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator")]
     public class SetupAllController : Controller
     {
         // GET: SetupAll

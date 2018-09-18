@@ -113,7 +113,7 @@ namespace RMS.App.Controllers
             return RedirectToAction("Index", "Home");
 
         }
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult CreateController()
         {
             return View();
