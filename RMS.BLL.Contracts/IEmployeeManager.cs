@@ -12,6 +12,6 @@ namespace RMS.BLL.Contracts
         ICollection<Employee> SearchByText(string searchText);
         ICollection<Employee> GetAllDriver();
         ICollection<Employee> GetAllEmployees();
-
+        Employee FindByLoginId(int id);
     }
 }
