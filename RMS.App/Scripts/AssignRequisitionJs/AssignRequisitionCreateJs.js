@@ -16,18 +16,34 @@ $(document).ready(function() {
                     function(key, vehicle) {
                         options += "<option value='" + vehicle.Id + "'>" + vehicle.RegNo + "</option>";
                     });
-                if (options==null) {
-                    alert("Error Message :" + error + "\n Have not found any vehicle with this type!");
-                } else {
-                    $("#vehicleDD").append(options);
-                }
+                
             },
             error: function (response) {
-                var error = response;
-                alert("Error Message :" +error + "\n Have not found any vehicle with this type!");
 
             }
 
         });
     });
+  
 });
+
+//$("#vehicleDD").change(function () {
+//    var vehicleId = $("#vehicleDD").val();
+//    var data = { status: vehicleId };
+//    debugger;
+//    $.ajax(
+//    {
+//        url: "/Vehicles/GetVehicleStatusByVehicleId",
+//        data: data,
+//        type: "POST",
+//        success: function (response) {
+//            alert("abc");
+//        },
+//        error: function (response) {
+
+//        }
+//    });
+//    alert('kfjksdfaskdfsjakdfsa');
+
+//});
+

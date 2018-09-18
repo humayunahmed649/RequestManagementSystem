@@ -40,89 +40,39 @@
                         @if (User.IsInRole("Administrator"))
                         {
 
-                            @*<li class="menu-has-children">
 
-                                <a href="#">SetUp All</a>
-                                <ul>
-                                    <li class="menu-has-children">
-                                        <a href="#">Organization</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Create New", "Create", "Organizations")</li>
-                                            <li>@Html.ActionLink("Organization List", "Index", "Organizations")</li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-has-children">
-                                        <a href="#">Department</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Create New", "Create", "Departments")</li>
-                                            <li>@Html.ActionLink("List Of Department", "Index", "Departments")</li>
-
-                                        </ul>
-                                    </li>
-                                    <li class="menu-has-children">
-                                        <a href="#">Designation</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Create New", "Create", "Designations")</li>
-                                            <li>@Html.ActionLink("List Of Designation", "Index", "Designations")</li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-has-children">
-                                        <a href="#">Employee Type</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Create New", "Create", "EmployeeTypes")</li>
-                                            <li>@Html.ActionLink("List Of Employee", "Index", "EmployeeTypes")</li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-has-children">
-                                        <a href="#">Employee</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Create New", "Create", "Employees")</li>
-                                            <li>@Html.ActionLink("List Of Employee", "Index", "Employees")</li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-has-children">
-                                        <a href="#">Vehicle Types</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Create New", "Create", "VehicleTypes")</li>
-                                            <li>@Html.ActionLink("List Of Vehile Type", "Index", "VehicleTypes")</li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-has-children">
-                                        <a href="#">Vehicle</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Create New", "Create", "Vehicles")</li>
-                                            <li>@Html.ActionLink("List Of Vehicle", "Index", "Vehicles")</li>
-
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>*@
-                        
                             <li>@Html.ActionLink("Setup Queue", "Index", "SetupAll")</li>
+                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+                            <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
+                            <li class="menu-has-children">
+                                <a href="#">Gate Pass</a>
+
+                                <ul>
+                                    <li>@Html.ActionLink("Check-Out", "Index", "GatePass")</li>
+                                    <li>@Html.ActionLink("Check-In", "CheckIn", "GatePass")</li>
+                                </ul>
+                            </li>
                         }
                        
+                        @if (User.IsInRole("User"))
+                        {
+                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+                        }
+                        @if (User.IsInRole("Controller"))
+                        {
+                            <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
+                            <li class="menu-has-children">
+                                <a href="#">Gate Pass</a>
 
-                        <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
-
-                        <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
-
-                        @*<li class="menu-has-children">
-                                <a href="#">Requisition Queue</a>
                                 <ul>
-                                    <li>@Html.ActionLink("New Requisitions", "Requests", "AssignRequisitions")</li>
-                                    <li>@Html.ActionLink("Assigned Requisitions", "Index", "AssignRequisitions")</li>
-                                    <li>@Html.ActionLink("Requisitions Status", "Index", "RequisitionStatus")</li>
-                                    <li>@Html.ActionLink("All Requisitions", "Index", "Requisitions")</li>
+                                    <li>@Html.ActionLink("Check-Out", "Index", "GatePass")</li>
+                                    <li>@Html.ActionLink("Check-In", "CheckIn", "GatePass")</li>
                                 </ul>
-                            </li>*@
-                        <li class="menu-has-children">
-                            <a href="#">Gate Pass</a>
+                            </li>
+                        }
 
-                            <ul>
-                                <li>@Html.ActionLink("Check-Out", "Index", "GatePass")</li>
-                                <li>@Html.ActionLink("Check-In", "CheckIn", "GatePass")</li>
-                            </ul>
-                        </li>
+                       
+                        
                         
                     </ul>        
                 </nav><!-- #nav-menu-container -->

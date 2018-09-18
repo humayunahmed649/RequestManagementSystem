@@ -140,41 +140,42 @@ namespace RMS.App.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Employee employee = Mapper.Map<Employee>(employeeViewModel);
-
-                    var email = employee.Email.Trim();
-                    var contactNo = employee.ContactNo.Trim();
-                    var nid = employee.NID.Trim();
-
-                    if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
+                    if(employeeViewModel.EmployeeTypeId==1)
                     {
-                        ViewBag.Message1 = "Employee email already exist.";
-                    }
+                        Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
-                    if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo) > 0)
-                    {
-                        ViewBag.Message2 = "Employee contact no already exist.";
-                    }
+                        var email = employee.Email.Trim();
+                        var contactNo = employee.ContactNo.Trim();
+                        var nid = employee.NID.Trim();
 
-                    if (_employeeManager.GetAll().Count(o => o.NID == nid) > 0)
-                    {
-                        ViewBag.Message3 = "Employee NID already exist.";
-                    }
-                    if (employee.DrivingLicence != null)
-                    {
-                        var drivingLicence = employee.DrivingLicence.Trim();
-                        if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence) > 0)
+                        if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
                         {
-                            ViewBag.Message4 = "Employee driving licence no already exist.";
+                            ViewBag.Message1 = "Employee email already exist.";
                         }
-                    }
 
-                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null &&
-                        ViewBag.Message4 == null)
-                    {
-                        if (employee.EmployeeTypeId == 1)
+                        if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo) > 0)
                         {
-                            var result=UserManager.AddUserForEmployee(employee);
+                            ViewBag.Message2 = "Employee contact no already exist.";
+                        }
+
+                        if (_employeeManager.GetAll().Count(o => o.NID == nid) > 0)
+                        {
+                            ViewBag.Message3 = "Employee NID already exist.";
+                        }
+                        if (employee.DrivingLicence != null)
+                        {
+                            var drivingLicence = employee.DrivingLicence.Trim();
+                            if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence) > 0)
+                            {
+                                ViewBag.Message4 = "Employee driving licence no already exist.";
+                            }
+                        }
+
+                        if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null &&
+                            ViewBag.Message4 == null)
+                        {
+
+                            var result = UserManager.AddUserForEmployee(employee);
                             if (result != 0)
                             {
                                 employee.AppUserId = result;
@@ -184,14 +185,51 @@ namespace RMS.App.Controllers
                             }
 
                         }
-                        if (employeeViewModel.EmployeeType.Id == 2)
+                    }
+
+                    if(employeeViewModel.EmployeeTypeId==2)
+                    {
+                        Employee employee = Mapper.Map<Employee>(employeeViewModel);
+
+                        var email = employee.Email.Trim();
+                        var contactNo = employee.ContactNo.Trim();
+                        var nid = employee.NID.Trim();
+
+                        if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
                         {
-                            _employeeManager.Add(employee);
-                            TempData["msg"] = "Information has been saved successfully";
-                            return RedirectToAction("Index");
+                            ViewBag.Message1 = "Employee email already exist.";
+                        }
+
+                        if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo) > 0)
+                        {
+                            ViewBag.Message2 = "Employee contact no already exist.";
+                        }
+
+                        if (_employeeManager.GetAll().Count(o => o.NID == nid) > 0)
+                        {
+                            ViewBag.Message3 = "Employee NID already exist.";
+                        }
+                        if (employee.DrivingLicence != null)
+                        {
+                            var drivingLicence = employee.DrivingLicence.Trim();
+                            if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence) > 0)
+                            {
+                                ViewBag.Message4 = "Employee driving licence no already exist.";
+                            }
+                        }
+
+                        if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null &&
+                            ViewBag.Message4 == null)
+                        {
+                                employee.AppUserId = null;
+                                _employeeManager.Add(employee);
+                                TempData["msg"] = "Information has been saved successfully";
+                                return RedirectToAction("Index");
+                            }
+
                         }
                     }
-                }
+                  
                  TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
                 ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);

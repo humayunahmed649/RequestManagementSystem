@@ -52,7 +52,7 @@ namespace RMS.Models.EntityModels
         public List<Address> Addresses { get; set; }
 
         [ForeignKey("AppUser")]
-        public int AppUserId { get; set; }
+        public int? AppUserId { get; set; }
         public AppUser AppUser { get; set; }
 
 

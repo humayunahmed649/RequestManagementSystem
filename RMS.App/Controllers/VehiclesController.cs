@@ -18,11 +18,15 @@ namespace RMS.App.Controllers
     {
         private IVehicleManager _vehicleManager;
         private IVehicleTypeManager _vehicleTypeManager;
+        private IRequisitionStatusManager _requisitionStatusManager;
+        private IAssignRequisitionManager _assignRequisitionManager;
 
-        public VehiclesController(IVehicleManager manager,IVehicleTypeManager vehicleTypeManager)
+        public VehiclesController(IVehicleManager manager,IVehicleTypeManager vehicleTypeManager,IRequisitionStatusManager requisitionStatusManager,IAssignRequisitionManager assignRequisitionManager)
         {
             this._vehicleManager = manager;
             this._vehicleTypeManager = vehicleTypeManager;
+            this._requisitionStatusManager = requisitionStatusManager;
+            this._assignRequisitionManager = assignRequisitionManager;
         }
 
 
@@ -255,6 +259,16 @@ namespace RMS.App.Controllers
                 throw;
             }
 
+        }
+
+        public JsonResult GetVehicleStatusByVehicleId(int? vehicleId)
+        {
+            if (vehicleId == null)
+            {
+                return null;
+            }
+            var status = _assignRequisitionManager.GetAll().Where(c => c.VehicleId == vehicleId);
+            return Json(status, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
