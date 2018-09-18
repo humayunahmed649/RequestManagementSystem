@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="~/Content/img/bcc_logo.png">
+    <!-- Author Meta -->
+    <meta name="author" content="colorlib">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!--
+    CSS
+    ============================================= -->
+    <link rel="stylesheet" href="~/Content/css/linearicons.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/css/animate.min.css">
+    <link rel="stylesheet" href="~/Content/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
+    <link href="~/Content/chosenDD/chosen.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <!--Start Header Menu-->
+    @Html.Partial("_MenuBar")
+    <!-- End header menu -->
+
+<!-- Start service Area -->
+<section class="service-area" style="height: 100vh; min-height: 100vh; overflow: hidden; clear: both; height: auto;">
+    <div class="container" style="height: 170px; background-color: #FFF;"></div>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12 bgnewcolor" style="padding: 20px 20px;">
+
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- End service Area -->
+    
+    <!-- start footer Area -->
+    <footer class="footer-area ">
+        <div class="container">
+           
+            <div class="row  d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | this product make by <i class="fa fa-heart-o" aria-hidden="true"></i> &nbsp; <a href="@Url.Action("AboutDeveloper","Home")" target="_blank"><strong>Developers</strong></a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="https://www.facebook.com/chittoranjan.sarker"><i class="fa fa-facebook"></i></a>
+                    <a href="https://twitter.com/chittoranjan"><i class="fa fa-twitter"></i></a>
+                    <a href="https://plus.google.com/u/0/+ChittoRanjanSarker"><i class="fa fa-google-plus"></i></a>
+                    <a href="https://www.linkedin.com/in/chitto-ranjan-sarker-94646557/"><i class="fa fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+<!-- End footer Area -->
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    @*<script src="~/Content/js/vendor/jquery-2.2.4.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/Content/js/vendor/bootstrap.min.js"></script>
+    <script src="~/Content/js/easing.min.js"></script>
+    <script src="~/Content/js/hoverIntent.js"></script>
+    <script src="~/Content/js/superfish.min.js"></script>
+    <script src="~/Content/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.nice-select.min.js"></script>
+    <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="~/Content/js/mail-script.js"></script>
+    <script src="~/Scripts/chosenDD/chosen.jquery.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    
+    @RenderSection("scripts", required: false)
+    
+</body>
+</html>

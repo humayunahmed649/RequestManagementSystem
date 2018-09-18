@@ -43,7 +43,7 @@
 
                             <li>@Html.ActionLink("Setup Queue", "Index", "SetupAll")</li>
                             <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
-                            <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
+                            <li>@Html.ActionLink("Requisition Queue", "Index", "SetupAll")</li>
                             <li class="menu-has-children">
                                 <a href="#">Gate Pass</a>
 
@@ -54,7 +54,7 @@
                             </li>
                         }
                        
-                        @if (User.IsInRole("User"))
+                        @if (User.IsInRole("User, Administrator"))
                         {
                             <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
                         }
@@ -70,9 +70,6 @@
                                 </ul>
                             </li>
                         }
-
-                       
-                        
                         
                     </ul>        
                 </nav><!-- #nav-menu-container -->

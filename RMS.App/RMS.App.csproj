@@ -976,6 +976,7 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\SetupAll\Index.cshtml" />
     <Content Include="Views\Account\CreateController.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
