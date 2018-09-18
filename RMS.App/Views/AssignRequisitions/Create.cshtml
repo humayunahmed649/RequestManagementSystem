@@ -152,11 +152,15 @@
                             @Html.LabelFor(model => model.VehicleId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
 
-                                @Html.DropDownList("VehicleId", null, htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleDD"}) 
+                                @Html.DropDownList("VehicleId", null, htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleDD"})
 
                                 @Html.ValidationMessageFor(model => model.VehicleId, "", new {@class = "text-danger"})
 
                             </div>
+                        </div>
+
+                        <div id="mydata">
+                            <lable id="labelForStatus"></lable>
                         </div>
 
                         <div class="form-group row">
