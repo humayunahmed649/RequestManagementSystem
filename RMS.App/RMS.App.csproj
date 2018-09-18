@@ -236,7 +236,7 @@
     <Compile Include="Controllers\RequisitionQueueController.cs" />
     <Compile Include="Controllers\RequisitionsController.cs" />
     <Compile Include="Controllers\RequisitionStatusController.cs" />
-    <Compile Include="Controllers\SetupAllController.cs" />
+    <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -974,7 +974,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\SetupAll\Index.cshtml" />
+    <Content Include="Views\Queue\Index.cshtml" />
     <Content Include="Views\Account\CreateController.cshtml" />
     <Content Include="Views\Shared\_LayoutLogIn.cshtml" />
   </ItemGroup>

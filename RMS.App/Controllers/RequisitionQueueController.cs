@@ -9,6 +9,7 @@ using RMS.BLL.Contracts;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator")]
     public class RequisitionQueueController : Controller
     {
         private IRequisitionStatusManager _requisitionStatusManager;

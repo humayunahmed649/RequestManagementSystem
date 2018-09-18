@@ -14,6 +14,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles= "Controller,Administrator")]
     public class VehiclesController : Controller
     {
         private IVehicleManager _vehicleManager;

@@ -15,6 +15,7 @@ using RMS.Repositories.Contracts;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator")]
     public class AssignRequisitionsController : Controller
     {
         private IRequisitionManager _requisitionManager;

@@ -12,6 +12,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator")]
     public class GatePassController : Controller
     {
         private IAssignRequisitionManager _assignRequisitionManager;

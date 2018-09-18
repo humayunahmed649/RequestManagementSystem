@@ -17,6 +17,7 @@ using System.Linq.Dynamic;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator")]
     public class OrganizationsController : Controller
     {
         private IOrganizationManager _organizationManager;
