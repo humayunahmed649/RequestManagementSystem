@@ -17,7 +17,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
-    [Authorize(Roles = "User, Administrator, Controller")]
+    [Authorize(Roles = "User,Administrator,Controller")]
     public class RequisitionsController : Controller
     {
         private IRequisitionManager _requisitionManager;
@@ -59,11 +59,19 @@ namespace RMS.App.Controllers
         {
             try
             {
+                //Get employee Id by user login id
+                var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                var empId = _employeeManager.FindByLoginId(loginUserId);
+                if (empId != null)
+                {
+                    ICollection<Requisition> requisitions = _requisitionManager.GetAllRequisitionByEmployeeId(empId.Id);
+                    IEnumerable<RequisitionViewModel> requisitionViewModels =
+                        Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+                    return View(requisitionViewModels);
+                }
+                TempData["msg"] = "You have not sent or assigned requisition!";
+                return View();
 
-                ICollection<Requisition> requisitions = _requisitionManager.GetAll();
-                IEnumerable<RequisitionViewModel> requisitionViewModels =
-                    Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
-                return View(requisitionViewModels);
             }
             catch (Exception ex)
             {

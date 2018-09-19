@@ -3,7 +3,12 @@
 @{
     Layout = null;
 }
-
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-warning">
+        @Html.Raw(TempData["msg"])
+    </div>
+}
 
 <div style="margin-left: 15px;">
     <p>

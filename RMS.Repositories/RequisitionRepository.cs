@@ -39,7 +39,16 @@ namespace RMS.Repositories
         {
             var report = _db.GetRequisitionSummaryReport();
             return report.FirstOrDefault();
-        } 
-        
+        }
+
+        public ICollection<Requisition> GetAllRequisitionByEmployeeId(int id)
+        {
+            return
+                db.Set<Requisition>()
+                    .Where(c => c.EmployeeId == id)
+                    .Include(d => d.Employee.Designation)
+                    .AsNoTracking()
+                    .ToList();
+        }
     }
 }

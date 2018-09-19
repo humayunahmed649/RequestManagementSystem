@@ -41,7 +41,7 @@ namespace RMS.Repositories
         public Employee FindByLoginId(int id)
         {
             return db.Set<Employee>().Where(c => c.AppUserId == id).Include(c => c.EmployeeType).Include(c => c.Organization)
-                .Include(c => c.Department).Include(c => c.Designation).Include(c => c.Addresses.Select(d => d.Division)).Include(c => c.Addresses.Select(s => s.District)).Include(c => c.Addresses.Select(u => u.Upazila)).AsNoTracking().SingleOrDefault();
+                .Include(c => c.Department).Include(c => c.Designation).Include(c => c.Addresses.Select(d => d.Division)).Include(c => c.Addresses.Select(s => s.District)).Include(c => c.Addresses.Select(u => u.Upazila)).AsNoTracking().FirstOrDefault();
         }
         public ICollection<Employee> GetAllDriver()
         {

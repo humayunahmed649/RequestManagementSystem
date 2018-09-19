@@ -12,6 +12,7 @@ namespace RMS.Repositories.Contracts
     {
         ICollection<Requisition> GetAllWithEmployee();
         RequisitionSummaryReportVM GetRequisitionSummaryReport(int id);
+        ICollection<Requisition> GetAllRequisitionByEmployeeId(int id);
 
 
     }

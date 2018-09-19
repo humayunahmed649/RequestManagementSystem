@@ -29,7 +29,9 @@ namespace RMS.BLL
             return _requisitionRepository.GetRequisitionSummaryReport(id);
         }
 
-
-
+        public ICollection<Requisition> GetAllRequisitionByEmployeeId(int id)
+        {
+            return _requisitionRepository.GetAllRequisitionByEmployeeId(id);
+        }
     }
 }
