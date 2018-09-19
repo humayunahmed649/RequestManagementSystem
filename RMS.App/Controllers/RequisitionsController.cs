@@ -17,7 +17,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
-    [Authorize(Roles = "User, Administrator")]
+    [Authorize(Roles = "User, Administrator, Controller")]
     public class RequisitionsController : Controller
     {
         private IRequisitionManager _requisitionManager;

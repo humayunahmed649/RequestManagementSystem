@@ -64,6 +64,8 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Home", "AboutDeveloper"));
             }
         }
+
+        [Authorize]
         public ActionResult Help()
         {
             try

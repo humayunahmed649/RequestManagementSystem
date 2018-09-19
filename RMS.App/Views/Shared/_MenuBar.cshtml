@@ -14,7 +14,18 @@
                 </div>
                 <div class="col-lg-8 col-sm-8 col-8 header-top-right no-padding">
                     <p class="float-right">
+                        @if (User.IsInRole("User"))
+                        {
+                            <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
+                        }
+                       @if (User.IsInRole("Administrator"))
+                       {
                         <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
+                       }
+                        @if (User.IsInRole("Controller"))
+                        {
+                            <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
+                        }
                         @Html.Partial("_LoginPartial")
                     </p>
 
@@ -40,10 +51,10 @@
                         @if (User.IsInRole("Administrator"))
                         {
 
-
                             <li>@Html.ActionLink("Setup Queue", "Index", "Queue")</li>
-                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
                             <li>@Html.ActionLink("Requisition Queue", "Index", "Queue")</li>
+                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+                            
                             <li class="menu-has-children">
                                 <a href="#">Gate Pass</a>
 
@@ -56,12 +67,14 @@
 
                         }
                        
-                        @if (User.IsInRole("User, Administrator"))
+                        @if (User.IsInRole("User"))
                         {
                             <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
                         }
+
                         @if (User.IsInRole("Controller"))
                         {
+                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
                             <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
                             <li class="menu-has-children">
                                 <a href="#">Gate Pass</a>
@@ -75,13 +88,6 @@
                         
                     </ul>        
                 </nav><!-- #nav-menu-container -->
-            
-            @*<div class="col-md-2 menu-social-icons text-right align-text-top">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-dribbble"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-            </div>*@
         </div>
     </div>
 </header><!-- End header -->
