@@ -69,8 +69,9 @@ namespace RMS.App.Controllers
                         Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
                     return View(requisitionViewModels);
                 }
+                IEnumerable<RequisitionViewModel> requisitionViewModel =new List<RequisitionViewModel>();
                 TempData["msg"] = "You have not sent or assigned requisition!";
-                return View();
+                return View(requisitionViewModel);
 
             }
             catch (Exception ex)
@@ -99,24 +100,13 @@ namespace RMS.App.Controllers
                     {
                         return HttpNotFound();
                     }
-
-
-
                     RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-
-                
-
                 return View(requisitionViewModel);
-
-
-
-
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Details"));
             }
-            
         }
 
         // GET: Requisitions/Create

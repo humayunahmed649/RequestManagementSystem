@@ -65,7 +65,7 @@ namespace RMS.App.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles= "User,Administrator,Controller")]
         public ActionResult Help()
         {
             try
