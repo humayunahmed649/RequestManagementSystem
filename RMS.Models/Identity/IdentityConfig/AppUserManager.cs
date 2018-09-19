@@ -74,8 +74,8 @@ namespace RMS.Models.Identity.IdentityConfig
                 UserName = employee.Email,
                 Email = employee.Email
             };
-            string defaultPassword = "Aa@123456";
-            var result=this.Create(user, defaultPassword);
+            //string defaultPassword = "Aa@123456";
+            var result=this.Create(user, employee.Password);
             if (result.Succeeded)
             {
                 var roleAdded=this.AddToRole(user.Id, "User");
@@ -84,5 +84,7 @@ namespace RMS.Models.Identity.IdentityConfig
             }
             return 0;
         }
+
+        
     }
 }

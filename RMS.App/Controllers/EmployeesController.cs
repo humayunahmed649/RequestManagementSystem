@@ -135,12 +135,13 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses,Password,ConfirmPassword")] EmployeeViewModel employeeViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+
                     if(employeeViewModel.EmployeeTypeId==1)
                     {
                         Employee employee = Mapper.Map<Employee>(employeeViewModel);

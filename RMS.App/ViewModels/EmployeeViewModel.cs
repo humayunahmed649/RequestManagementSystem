@@ -20,8 +20,8 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Please provide name!")]
         [Display(Name = "Name")]
         public string FullName { get; set; }
+        
 
-        [Required(ErrorMessage = "Please provide email!")]
         [EmailAddress(ErrorMessage = "Email address is not valid!")]
         public string Email { get; set; }
 
@@ -65,7 +65,17 @@ namespace RMS.App.ViewModels
         public List<Division> DivisionList { get; set; }
 
         public List<Address>Addresses { get; set; }
-        
+        [NotMapped]
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+        [NotMapped]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
 
 
     }
