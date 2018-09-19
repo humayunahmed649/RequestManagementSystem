@@ -81,7 +81,7 @@ namespace RMS.App.Controllers
                 int totalRows = organizations.Count();
                 if (!string.IsNullOrEmpty(searchValue))
                 {
-                    organizations = organizations.Where(x => x.Name.ToLower().Contains(searchValue.ToLower()) || x.Code.ToString().Contains(searchValue.ToString()) || x.RegNo.ToString().Contains(searchValue.ToString())).ToList<Organization>();
+                    organizations = organizations.Where(x => x.Name.ToLower().Contains(searchValue.ToLower())).ToList<Organization>();
                 }
                 //Shorting.....
                 int dataAfterFiltering = organizations.Count();
@@ -139,7 +139,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Code,RegNo")] OrganizationViewModel organizationViewModel)
+        public ActionResult Create([Bind(Include = "Id,Name")] OrganizationViewModel organizationViewModel)
         {
             try
             {
@@ -148,22 +148,12 @@ namespace RMS.App.Controllers
                     Organization organization = Mapper.Map<Organization>(organizationViewModel);
 
                     var name = organization.Name.Trim();
-                    var code = organization.Code.Trim();
-                    var regNo = organization.RegNo.Trim();
 
                     if (_organizationManager.GetAll().Count(o => o.Name == name) > 0)
                     {
                         ViewBag.Message1 = "Organization name already exist.";
                     }
-                    if (_organizationManager.GetAll().Count(o => o.Code == code) > 0)
-                    {
-                        ViewBag.Message2 = "Organization code already exist.";
-                    }
-                    if (_organizationManager.GetAll().Count(o => o.RegNo == regNo) > 0)
-                    {
-                        ViewBag.Message3 = "Organization registration no already exist.";
-                    }
-                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null)
+                    if (ViewBag.Message1 == null)
                     {
                         _organizationManager.Add(organization);
 
@@ -208,7 +198,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Code,RegNo")] OrganizationViewModel organizationViewModel)
+        public ActionResult Edit([Bind(Include = "Id,Name")] OrganizationViewModel organizationViewModel)
         {
             try
             {
@@ -217,22 +207,12 @@ namespace RMS.App.Controllers
                     Organization organization = Mapper.Map<Organization>(organizationViewModel);
 
                     var name = organization.Name.Trim();
-                    var code = organization.Code.Trim();
-                    var regNo = organization.RegNo.Trim();
 
                     if (_organizationManager.GetAll().Count(o => o.Name == name && o.Id != organization.Id) > 0)
                     {
                         ViewBag.Message1 = "Organization name already exist.";
                     }
-                    if (_organizationManager.GetAll().Count(o => o.Code == code && o.Id != organization.Id) > 0)
-                    {
-                        ViewBag.Message2 = "Organization code already exist.";
-                    }
-                    if (_organizationManager.GetAll().Count(o => o.RegNo == regNo && o.Id != organization.Id) > 0)
-                    {
-                        ViewBag.Message3 = "Organization registration no already exist.";
-                    }
-                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null)
+                    if (ViewBag.Message1 == null)
                     {
                         _organizationManager.Update(organization);
                         TempData["msg"] = "Information has been updated successfully";

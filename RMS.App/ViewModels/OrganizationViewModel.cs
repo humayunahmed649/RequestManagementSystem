@@ -14,13 +14,7 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Please provide a name!")]
         [Display(Name = "Organization")]
         public string Name { get; set; }
-
-        [Required(ErrorMessage = "Please provide a code!")]
-        public string Code { get; set; }
-
-        [Required(ErrorMessage = "Please provide a registration no!")]
-        [Display(Name = "Registration No")]
-        public string RegNo { get; set; }
+        
 
     }
 }

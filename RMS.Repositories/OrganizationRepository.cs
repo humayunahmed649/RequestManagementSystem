@@ -21,7 +21,7 @@ namespace RMS.Repositories
 
         public ICollection<Organization> SearchByText(string searchText)
         {
-            return db.Set<Organization>().Where(c =>c.Name.StartsWith(searchText)||c.Code.StartsWith(searchText)||c.RegNo.StartsWith(searchText)).ToList();
+            return db.Set<Organization>().Where(c =>c.Name.StartsWith(searchText)).ToList();
         }
 
 

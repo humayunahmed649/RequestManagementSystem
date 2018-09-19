@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201809181140501_AppUserId Null In employee.Designer.cs">
       <DependentUpon>201809181140501_AppUserId Null In employee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809190846597_Organization Model Changed.cs" />
+    <Compile Include="Migrations\201809190846597_Organization Model Changed.Designer.cs">
+      <DependentUpon>201809190846597_Organization Model Changed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\RequisitionSummaryReportVM.cs" />
@@ -344,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809181140501_AppUserId Null In employee.resx">
       <DependentUpon>201809181140501_AppUserId Null In employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809190846597_Organization Model Changed.resx">
+      <DependentUpon>201809190846597_Organization Model Changed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
