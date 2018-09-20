@@ -243,9 +243,6 @@ namespace RMS.App.Controllers
 
         public JsonResult GetByVehicleType(int? vehicleTypeId)
         {
-            try
-            {
-
                 if (vehicleTypeId == null)
                 {
                     return null;
@@ -254,11 +251,7 @@ namespace RMS.App.Controllers
                 var vehicles = _vehicleManager.GetAll().Where(c => c.VehicleTypeId == vehicleTypeId).ToList();
 
                 return Json(vehicles, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            
 
         }
 

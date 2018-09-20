@@ -48,6 +48,7 @@
     <Compile Include="IDivisionRepository.cs" />
     <Compile Include="IEmployeeRepository.cs" />
     <Compile Include="IFeedbackRepository.cs" />
+    <Compile Include="INotificationRepository.cs" />
     <Compile Include="IOrganizationRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRequisitionRepository.cs" />

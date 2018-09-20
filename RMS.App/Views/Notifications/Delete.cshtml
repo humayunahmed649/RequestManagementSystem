@@ -1,0 +1,73 @@
+﻿@model RMS.App.ViewModels.NotificationViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Notification</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requisition.RequisitionNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotifyDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotifyDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SenderViewStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SenderViewStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ControllerViewStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ControllerViewStatus)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

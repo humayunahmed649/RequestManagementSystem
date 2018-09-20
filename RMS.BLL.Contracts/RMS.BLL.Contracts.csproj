@@ -49,6 +49,7 @@
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="IFeedbackManager.cs" />
     <Compile Include="IManager.cs" />
+    <Compile Include="INotificationManager.cs" />
     <Compile Include="IOrganizationManager.cs" />
     <Compile Include="IRequisitionManager.cs" />
     <Compile Include="IRequisitionStatusManager.cs" />

@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RMS.BLL.Base;
+using RMS.BLL.Contracts;
+using RMS.Models.EntityModels;
+using RMS.Repositories.Contracts;
+
+namespace RMS.BLL
+{
+    public class NotificationManager:Manager<Notification>,INotificationManager
+    {
+        private INotificationRepository _notificationRepository;
+        public NotificationManager(INotificationRepository notificationRepository) : base(notificationRepository)
+        {
+            this._notificationRepository = notificationRepository;
+        }
+
+        public ICollection<Notification> GetNotificationsForController(string controllerViewStatus)
+        {
+            return _notificationRepository.GetNotificationsForController(controllerViewStatus);
+        }
+
+        public ICollection<Notification> GetNotificationsForSender(string senderViewstatus)
+        {
+            return _notificationRepository.GetNotificationsForSender(senderViewstatus);
+        }
+    }
+}

@@ -232,6 +232,7 @@
     <Compile Include="Controllers\EmployeeTypesController.cs" />
     <Compile Include="Controllers\GatePassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\RequisitionQueueController.cs" />
     <Compile Include="Controllers\RequisitionsController.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="ViewModels\DesignationViewModel.cs" />
     <Compile Include="ViewModels\EmployeeTypeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
     <Compile Include="ViewModels\Report\RequisitionSummaryReportVM.cs" />
     <Compile Include="ViewModels\ValidationModels\GreaterThanZeroAttribute.cs" />
@@ -977,6 +979,11 @@
     <Content Include="Views\Queue\Index.cshtml" />
     <Content Include="Views\Account\CreateController.cshtml" />
     <Content Include="Views\Shared\_LayoutLogIn.cshtml" />
+    <Content Include="Views\Notifications\Create.cshtml" />
+    <Content Include="Views\Notifications\Delete.cshtml" />
+    <Content Include="Views\Notifications\Details.cshtml" />
+    <Content Include="Views\Notifications\Edit.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
