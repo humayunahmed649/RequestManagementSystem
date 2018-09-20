@@ -4,9 +4,7 @@
     <div class="header-top" >
         <div class="container">
             <div class="row align-items-center">
-
                 <div class="col-lg-4 col-sm-4 col-4 header-top-left no-padding">
-
                     <p class="float-left">
                         <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/bcc_logo.png" width="40" height="40" alt="Home Logo" title="Home BCC"/></a>
                         &nbsp; <strong style="font-size: 20px;" class="font-weight-bold" id="logotext">Bangladesh Computer Council</strong>
@@ -14,15 +12,7 @@
                 </div>
                 <div class="col-lg-8 col-sm-8 col-8 header-top-right no-padding">
                     <p class="float-right">
-                        @if (User.IsInRole("User"))
-                        {
-                            <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
-                        }
-                       @if (User.IsInRole("Administrator"))
-                       {
-                        <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
-                       }
-                        @if (User.IsInRole("Controller"))
+                        @if (User.IsInRole("User")|| User.IsInRole("Administrator")|| User.IsInRole("Controller"))
                         {
                             <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
                         }
@@ -48,13 +38,16 @@
                         <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
                         @if (User.IsInRole("Administrator"))
                         {
-
                             <li>@Html.ActionLink("Setup Queue", "Index", "Queue")</li>
-                            <li>@Html.ActionLink("Requisition Queue", "Index", "Queue")</li>
+                        }
+                       @if (User.IsInRole("Controller")|| User.IsInRole("Administrator"))
+                       {
+                        <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
                             <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
-                            
+
                             <li class="menu-has-children">
                                 <a href="#">Gate Pass</a>
 
@@ -63,29 +56,16 @@
                                     <li>@Html.ActionLink("Check-In", "CheckIn", "GatePass")</li>
                                 </ul>
                             </li>
+                       }
+                        @if (User.IsInRole("Administrator"))
+                        {
                             <li>@Html.ActionLink("Create Controller", "CreateController", "Account")</li>
-
                         }
-                       
                         @if (User.IsInRole("User"))
                         {
                             <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
                         }
-
-                        @if (User.IsInRole("Controller"))
-                        {
-                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
-                            <li>@Html.ActionLink("Requisition Queue", "Queue", "RequisitionQueue")</li>
-                            <li class="menu-has-children">
-                                <a href="#">Gate Pass</a>
-
-                                <ul>
-                                    <li>@Html.ActionLink("Check-Out", "Index", "GatePass")</li>
-                                    <li>@Html.ActionLink("Check-In", "CheckIn", "GatePass")</li>
-                                </ul>
-                            </li>
-                        }
-                        
+            
                     </ul>        
                 </nav><!-- #nav-menu-container -->
         </div>

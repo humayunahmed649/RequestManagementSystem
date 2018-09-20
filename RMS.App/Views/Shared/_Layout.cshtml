@@ -130,36 +130,9 @@
                                 <br/><br/>
                             </div>
 
-                            <div class="row" style="font-size: 16px;">
-
-                                <div class="col-md-12">
-                                    <h3 class="text-dark">
-                                        <i class="fa fa-gear" aria-hidden="true"></i> Queue Item
-                                    </h3>
-                                    <hr />
-                                </div>
-                                <br /><br />
-                                <div class="col-md-12">
-                                    <a class="dropdown-item" href="@Url.Action("Requests", "AssignRequisitions")"><i class="fa fa-car"></i> New Requisitions </a>
-                                </div>
-                                <br /><br />
-                                <div class="col-md-12">
-                                    <a class="dropdown-item" href="@Url.Action("Index", "AssignRequisitions")"><i class="fa fa-car"></i> Assigned Requisitions </a>
-                                </div>
-                                <br /><br />
-                                <div class="col-md-12">
-                                    <a class="dropdown-item" href="@Url.Action("Index", "RequisitionStatus")"><i class="fa fa-car"></i> Requisitions Status </a>
-                                </div>
-                                <br /><br />
-                                <div class="col-md-12">
-                                    <a class="dropdown-item" href="@Url.Action("Index", "Requisitions")"><i class="fa fa-car"></i> All Requisition</a>
-                                </div>
-                                <br />
-                            </div>
                         }
-
                             <!--Requisition Que-->
-                            @if (User.IsInRole("Controller"))
+                            @if (User.IsInRole("Controller")|| User.IsInRole("Administrator"))
                             {
                                 <div class="row" style="font-size: 16px;">
 
@@ -194,8 +167,6 @@
                         @RenderBody()
                     </div>
                 </div>
-                
-
             </div>
         </div>
     </div>

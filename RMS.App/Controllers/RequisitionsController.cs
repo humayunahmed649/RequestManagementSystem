@@ -90,12 +90,9 @@ namespace RMS.App.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                if (id != null)
-                {
-                    ViewBag.Data = _assignRequisitionManager.GetAll().Where(c => c.RequisitionId == id).FirstOrDefault();
-                }
-                
-                    Requisition requisition = _requisitionManager.FindById((int)id);
+                ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
+
+                Requisition requisition = _requisitionManager.FindById((int)id);
                     if (requisition == null)
                     {
                         return HttpNotFound();
@@ -153,7 +150,6 @@ namespace RMS.App.Controllers
 
                     requisitionViewModel.RequestFor = "Own";
                     requisitionViewModel.RequisitionNumber = requisitionViewModel.GetRequisitionNumber();
-                    requisitionViewModel.SubmitDateTime=DateTime.Now;
 
                     //Get employee Id by user login id
                     var loginUserId= Convert.ToInt32(User.Identity.GetUserId());
@@ -161,7 +157,8 @@ namespace RMS.App.Controllers
                     requisitionViewModel.EmployeeId = empId.Id;
 
                     Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
-                    
+                    requisition.SubmitDateTime=DateTime.Now;
+
                     bool isSaved = _requisitionManager.Add(requisition);
 
                     //Requisition Status Save
@@ -174,7 +171,7 @@ namespace RMS.App.Controllers
                         status.StatusType = "New";
                         _requisitionStatusManager.Add(status);
                         TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Create");
                     }
                 }
 
@@ -229,7 +226,6 @@ namespace RMS.App.Controllers
                     requisitonForAnother.EndDateTime = endDateTime;
 
                     requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
-                    requisitonForAnother.SubmitDateTime=DateTime.Now;
 
                     //Get employee Id by user login id
                     var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
@@ -237,10 +233,11 @@ namespace RMS.App.Controllers
                     requisitonForAnother.EmployeeId = empId.Id;
 
                     Requisition requisition = Mapper.Map<Requisition>(requisitonForAnother);
+                    requisition.SubmitDateTime=DateTime.Now;
 
                     bool isSaved = _requisitionManager.Add(requisition);
                     //Requisition Status Save
-                    if (isSaved == true)
+                    if (isSaved)
                     {
                         RequisitionStatus status = new RequisitionStatus();
                         status.RequisitionNumber = requisition.RequisitionNumber;
@@ -249,7 +246,7 @@ namespace RMS.App.Controllers
                         status.StatusType = "New";
                         _requisitionStatusManager.Add(status);
                         TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Create");
                     }
                 }
 
@@ -292,7 +289,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,SubmitDateTime")] RequisitionViewModel requisitionViewModel)
         {
             try
             {
@@ -309,7 +306,7 @@ namespace RMS.App.Controllers
                     DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
                     requisitionViewModel.EndDateTime = endDateTime;
 
-                    requisitionViewModel.SubmitDateTime=DateTime.Now;
+                    DateTime submitedDateTime=requisitionViewModel.SubmitDateTime;
 
                     //Get employee Id by user login id
                     var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
@@ -317,10 +314,11 @@ namespace RMS.App.Controllers
                     requisitionViewModel.EmployeeId = empId.Id;
 
                     Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
+                    requisition.SubmitDateTime = submitedDateTime;
 
                     _requisitionManager.Update(requisition);
                     TempData["msg"] = "Information has been updated successfully";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Create");
                 }
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
                 return View(requisitionViewModel);

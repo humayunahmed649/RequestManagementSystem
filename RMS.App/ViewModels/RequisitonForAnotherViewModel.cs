@@ -51,7 +51,7 @@ namespace RMS.App.ViewModels
         public string Description { get; set; }
 
         [Display(Name = "Submitted Date Time")]
-        public DateTime SubmitDateTime { get; set; }
+        public string SubmitDateTime { get; set; }
 
         [Required(ErrorMessage = "Please provide a request for self or others!")]
         [Display(Name = "Request For")]
