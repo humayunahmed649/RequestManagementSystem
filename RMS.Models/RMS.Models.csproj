@@ -100,6 +100,7 @@
     <Compile Include="EntityModels\Identity\AppUserClaim.cs" />
     <Compile Include="EntityModels\Identity\AppUserLogin.cs" />
     <Compile Include="EntityModels\Identity\AppUserRole.cs" />
+    <Compile Include="EntityModels\Notification.cs" />
     <Compile Include="EntityModels\Organization.cs" />
     <Compile Include="EntityModels\Requisition.cs" />
     <Compile Include="EntityModels\RequisitionStatus.cs" />
@@ -245,6 +246,10 @@
     <Compile Include="Migrations\201809190846597_Organization Model Changed.Designer.cs">
       <DependentUpon>201809190846597_Organization Model Changed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809202006058_Notificatin_Model_added.cs" />
+    <Compile Include="Migrations\201809202006058_Notificatin_Model_added.Designer.cs">
+      <DependentUpon>201809202006058_Notificatin_Model_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\RequisitionSummaryReportVM.cs" />
@@ -351,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809190846597_Organization Model Changed.resx">
       <DependentUpon>201809190846597_Organization Model Changed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809202006058_Notificatin_Model_added.resx">
+      <DependentUpon>201809202006058_Notificatin_Model_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

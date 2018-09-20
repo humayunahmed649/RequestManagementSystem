@@ -26,8 +26,10 @@ namespace RMS.App.Controllers
         private IRequisitionStatusManager _requisitionStatusManager;
         private IFeedbackManager _feedbackManager;
         private IAssignRequisitionManager _assignRequisitionManager;
+        private INotificationManager _notificationManager;
 
-        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager,IFeedbackManager feedbackManager,IAssignRequisitionManager assignRequisitionManager)
+        public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager,IFeedbackManager feedbackManager,
+            IAssignRequisitionManager assignRequisitionManager, INotificationManager notificationManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
@@ -35,6 +37,7 @@ namespace RMS.App.Controllers
             this._requisitionStatusManager = requisitionStatusManager;
             this._feedbackManager = feedbackManager;
             this._assignRequisitionManager = assignRequisitionManager;
+            this._notificationManager = notificationManager;
         }
 
         // GET: Requisitions
@@ -170,9 +173,21 @@ namespace RMS.App.Controllers
                         status.RequisitionId = requisition.Id;
                         status.StatusType = "New";
                         _requisitionStatusManager.Add(status);
+
+                        // Notification Status Save
+                        Notification notification = new Notification();
+                        notification.Text = "Request for a vehicle";
+                        notification.EmployeeId = empId.Id;
+                        notification.ControllerViewStatus = "Unseen";
+                        notification.RequisitionId = requisition.Id;
+                        notification.NotifyDateTime=DateTime.Now;
+                        _notificationManager.Add(notification);
                         TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
                         return RedirectToAction("Create");
                     }
+                        
+
+
                 }
 
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
@@ -245,6 +260,16 @@ namespace RMS.App.Controllers
                         status.RequisitionId = requisition.Id;
                         status.StatusType = "New";
                         _requisitionStatusManager.Add(status);
+
+                        // Notification Status Save
+                        Notification notification = new Notification();
+                        notification.Text = "Request for a vehicle";
+                        notification.EmployeeId = empId.Id;
+                        notification.ControllerViewStatus = "Unseen";
+                        notification.RequisitionId = requisition.Id;
+                        notification.NotifyDateTime = DateTime.Now;
+                        _notificationManager.Add(notification);
+
                         TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
                         return RedirectToAction("Create");
                     }
@@ -391,8 +416,6 @@ namespace RMS.App.Controllers
             {
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
             }
-            
-            
         }
 
         [HttpPost]

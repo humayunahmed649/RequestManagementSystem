@@ -41,6 +41,7 @@ namespace RMS.Models.DatabaseContext
         public DbSet<Address> Addresses { get; set; }
         public DbSet<RequisitionStatus> RequisitionStatuses { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Notification> Notifications { get; set; } 
 
         public IQueryable<RequisitionSummaryReportVM> GetRequisitionSummaryReport()
         {

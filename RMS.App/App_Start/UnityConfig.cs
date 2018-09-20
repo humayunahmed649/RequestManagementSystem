@@ -3,6 +3,7 @@ using System.Data.Entity;
 using RMS.BLL;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
+using RMS.Models.EntityModels;
 using RMS.Repositories;
 using RMS.Repositories.Contracts;
 using Unity;
@@ -94,6 +95,9 @@ namespace RMS.App
 
             container.RegisterType<IFeedbackManager, FeedbackManager>();
             container.RegisterType<IFeedbackRepository, FeedbackRepository>();
+
+            container.RegisterType<INotificationManager, NotificationManager>();
+            container.RegisterType<INotificationRepository, NotificationRepository>();
 
         }
     }
