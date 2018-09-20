@@ -249,6 +249,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\AssignRequisitionViewModel.cs" />
+    <Compile Include="ViewModels\DriverViewModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
@@ -859,6 +860,7 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\EmployeeCreate\EmployeeCreateJs.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -977,6 +979,7 @@
     <Content Include="Views\Queue\Index.cshtml" />
     <Content Include="Views\Account\CreateController.cshtml" />
     <Content Include="Views\Shared\_LayoutLogIn.cshtml" />
+    <Content Include="Views\Employees\CreateDriver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

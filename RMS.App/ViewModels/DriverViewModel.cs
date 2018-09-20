@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using RMS.App.Models;
-using RMS.App.ViewModels.ValidationModels;
+using System.Web;
 using RMS.Models.EntityModels;
-using RMS.Models.EntityModels.Identity;
 
 namespace RMS.App.ViewModels
 {
-    public class EmployeeViewModel 
+    public class DriverViewModel
     {
         public int Id { get; set; }
 
@@ -21,10 +16,6 @@ namespace RMS.App.ViewModels
         [Display(Name = "Name")]
         public string FullName { get; set; }
         
-
-        [EmailAddress(ErrorMessage = "Email address is not valid!")]
-        public string Email { get; set; }
-
         [Required(ErrorMessage = "Please provide contact no!")]
         [Display(Name = "Contact No")]
         public string ContactNo { get; set; }
@@ -49,7 +40,7 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Please select a designation!")]
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
-
+        [Required]
         [Display(Name = "Driving Licence")]
         public string DrivingLicence { get; set; }
 
@@ -64,22 +55,7 @@ namespace RMS.App.ViewModels
         [NotMapped]
         public List<Division> DivisionList { get; set; }
 
-        public List<Address>Addresses { get; set; }
-        [NotMapped]
-        
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-        [NotMapped]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
+        public List<Address> Addresses { get; set; }
 
     }
- 
-
-    
 }

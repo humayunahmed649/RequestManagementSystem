@@ -53,6 +53,11 @@ namespace RMS.App
                 cfg.CreateMap<RequisitionStatusViewModel, RequisitionStatus>();
                 cfg.CreateMap<Feedback, FeedbackViewModel>();
                 cfg.CreateMap<FeedbackViewModel,Feedback>();
+                cfg.CreateMap<Employee, DriverViewModel>();
+                cfg.CreateMap<DriverViewModel, Employee>().ForMember(c=>c.Password,opt=>opt.Ignore())
+                                                          .ForMember(c=>c.ConfirmPassword,opt=>opt.Ignore())
+                                                          .ForMember(c=>c.Email,opt=>opt.Ignore())
+                                                          .ForMember(c=>c.AppUserId,opt=>opt.Ignore());
             });
             
         }

@@ -24,6 +24,7 @@ $(document).ready(function () {
             }
         });
     });
+    
 });
 
 $(document).ready(function () {
@@ -148,3 +149,4 @@ function readOnlyPermanentAddressAllField() {
     $('#districtDDp').attr('disabled', true);
     $('#upazilaDDp').attr('disabled', true);
 }
+
