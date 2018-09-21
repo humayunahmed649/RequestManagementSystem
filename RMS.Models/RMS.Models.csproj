@@ -250,6 +250,10 @@
     <Compile Include="Migrations\201809202006058_Notificatin_Model_added.Designer.cs">
       <DependentUpon>201809202006058_Notificatin_Model_added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809210908398_RequisitionType Added in Requisition Model.cs" />
+    <Compile Include="Migrations\201809210908398_RequisitionType Added in Requisition Model.Designer.cs">
+      <DependentUpon>201809210908398_RequisitionType Added in Requisition Model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\RequisitionSummaryReportVM.cs" />
@@ -359,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809202006058_Notificatin_Model_added.resx">
       <DependentUpon>201809202006058_Notificatin_Model_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809210908398_RequisitionType Added in Requisition Model.resx">
+      <DependentUpon>201809210908398_RequisitionType Added in Requisition Model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

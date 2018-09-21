@@ -14,5 +14,6 @@ namespace RMS.Repositories.Contracts
         ICollection<RequisitionStatus> GetAllStatusExecute();
         ICollection<RequisitionStatus> SearchByRequisitionId(string searchText);
         ICollection<RequisitionStatus> GetAllById(int id);
+        RequisitionStatus FindByRequisitionId(int id);
     }
 }

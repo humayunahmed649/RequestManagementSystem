@@ -61,7 +61,7 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Please select Employee!")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
-
+        public string RequisitionType { get; set; }
         public List<RequisitonForAnotherViewModel> RequisitionForAnotherViewModels { get; set; }
 
         public string GetRequisitionNumber()

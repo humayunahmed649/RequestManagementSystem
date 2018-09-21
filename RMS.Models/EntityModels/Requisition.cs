@@ -40,6 +40,8 @@ namespace RMS.Models.EntityModels
         [Required,StringLength(250)]
         public string RequestFor { get; set; }
 
+        public string RequisitionType { get; set; }
+
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }

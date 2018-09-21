@@ -48,7 +48,7 @@ namespace RMS.Repositories
                     .ToList();
         }
 
-        public override RequisitionStatus FindById(int id)
+        public  RequisitionStatus FindByRequisitionId(int id)
         {
             return
                 db.Set<RequisitionStatus>()

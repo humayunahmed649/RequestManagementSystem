@@ -96,7 +96,7 @@ namespace RMS.App.Controllers
 
                 //ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
 
-                RequisitionStatus requisition = _requisitionStatusManager.FindById((int)id);
+                RequisitionStatus requisition = _requisitionStatusManager.FindByRequisitionId((int)id);
                 if (requisition.StatusType != "New")
                 {
                     ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
@@ -154,7 +154,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequisitionType")] RequisitionViewModel requisitionViewModel)
         {
             try
             {

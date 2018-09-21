@@ -66,6 +66,9 @@ namespace RMS.App.ViewModels
         public List<RequisitionViewModel> RequisitionViewModels { get; set; }
         public AssignRequisitionViewModel AssignRequisitionViewModel { get; set; }
 
+        public string RequisitionType { get; set; }
+         
+
         public string GetRequisitionNumber()
         {
             string datTimeConvart = DateTime.Now.ToString("HHmmssMMddyyyy");
