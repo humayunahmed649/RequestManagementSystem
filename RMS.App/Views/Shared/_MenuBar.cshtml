@@ -33,7 +33,7 @@
     </div>
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
-                <nav id="nav-menu-container" class="col-md-8">
+                <nav id="nav-menu-container" class="col-md-10">
                     <ul class="nav-menu">
                         <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
@@ -72,17 +72,17 @@
 
 @if (User.IsInRole("Controller"))
 {
-    <nav class="col-md-3">
+    <nav id="" class="col-md-2">
         <!--Notification-->
         <ul>
             <li class="dropdown">
                 @if (@ViewBag.count > 0)
                 {
-                    <button title="Notification" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">&nbsp; &nbsp; @ViewBag.count</span></span></button>
+                    <button title="Unread notifications" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">&nbsp; &nbsp; @ViewBag.count</span></span></button>
                 }
                 else
                 {
-                    <button title="Notification" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i>&nbsp; &nbsp; @ViewBag.count</span></button>
+                    <button title="You have no unread notifications" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i>&nbsp; &nbsp; @ViewBag.count</span></button>
                 }
 
                 <ul class="dropdown-menu">
@@ -91,10 +91,10 @@
                         var data = ViewBag.Notification;
                         foreach (var dt in data)
                         {
-                            <li><a href="#"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
+                            <li><a href="#"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; Req No:  @dt.Requisition.RequisitionNumber&nbsp;  @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
                             <hr/>
                         }
-                        <p class="text-center font-weight-bold">New Requiest List</p>
+                        <li class="text-center">New Requiest</li>
                     }
 
 

@@ -981,15 +981,15 @@
     <Content Include="Views\Queue\Index.cshtml" />
     <Content Include="Views\Account\CreateController.cshtml" />
     <Content Include="Views\Shared\_LayoutLogIn.cshtml" />
-<<<<<<< HEAD
+
     <Content Include="Views\Employees\CreateDriver.cshtml" />
-=======
+
     <Content Include="Views\Notifications\Create.cshtml" />
     <Content Include="Views\Notifications\Delete.cshtml" />
     <Content Include="Views\Notifications\Details.cshtml" />
     <Content Include="Views\Notifications\Edit.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
->>>>>>> a89d350d12d81fb35b8e70cc2a68cc6d61a0f9a3
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

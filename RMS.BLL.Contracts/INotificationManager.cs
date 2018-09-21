@@ -10,6 +10,7 @@ namespace RMS.BLL.Contracts
     public interface INotificationManager:IManager<Notification>
     {
         ICollection<Notification> GetNotificationsForController(string controllerViewStatus);
-        ICollection<Notification> GetNotificationsForSender(string senderViewstatus);
+        ICollection<Notification> GetNotificationsForSender(string senderViewstatus, int id);
+        Notification FindByRequisitionId(int id);
     }
 }

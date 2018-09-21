@@ -58,6 +58,7 @@ namespace RMS.App.Controllers
             }
         }
 
+        //GET: Requisition List
         public ActionResult RequisitionList()
         {
             try
@@ -114,11 +115,26 @@ namespace RMS.App.Controllers
         {
             try
             {
+
                 //ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
                 ICollection<Requisition> requisitions = _requisitionManager.GetAll();
                 IEnumerable<RequisitionViewModel> requisitionViewModels =
                     Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
+
+                //Get employee Id by user login id
+                var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                var empId = _employeeManager.FindByLoginId(loginUserId);
+
+                //Notifications for assignd vehicle from controller
+                var notification = _notificationManager.GetNotificationsForSender("Unseen",empId.Id);
+                var notificationCount = notification.Count;
+                if (notification != null)
+                {
+                    ViewBag.Notification = notification;
+                    ViewBag.count = notificationCount;
+                }
                 ViewBag.Requisition = requisitionViewModels;
+
                 return View();
             }
             catch (Exception ex)
@@ -185,8 +201,6 @@ namespace RMS.App.Controllers
                         TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
                         return RedirectToAction("Create");
                     }
-                        
-
 
                 }
 
@@ -494,6 +508,9 @@ namespace RMS.App.Controllers
                 _employeeManager.Dispose();
                 _requisitionStatusManager.Dispose();
                 _vehicleManager.Dispose();
+                _notificationManager.Dispose();
+                _assignRequisitionManager.Dispose();
+                _feedbackManager.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -16,11 +16,44 @@
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet"/>
 
 }
-<div class="col-md-12">
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a> &nbsp;
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a> &nbsp;
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest" >My Request</a> &nbsp;
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#notification">Notification</a> &nbsp;
+<div class="row">
+    <div class="col-md-5">
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a> &nbsp;
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a> &nbsp;
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a> &nbsp;
+        @*<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#notification">Notification</a>*@
+    </div>
+    <div class="col-md-4">
+        <ul>
+
+            <li class="dropdown">
+                @if (@ViewBag.count > 0)
+            {
+                    <button title="Unread notifications" class="btn badge-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">&nbsp; &nbsp; @ViewBag.count</span></span></button>
+            }
+            else
+            {
+                    <button title="You have no unread notifications" class="btn badge-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i>&nbsp; &nbsp; @ViewBag.count</span></button>
+            }
+
+                <ul class="dropdown-menu">
+                    @if (ViewBag.Notification != null)
+                {
+                    var notify = ViewBag.Notification;
+                    foreach (var dt in notify)
+                    {
+                            <li><a href="#"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; Req No:  @dt.Requisition.RequisitionNumber &nbsp; @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
+                            <hr />
+                        }
+
+
+                    }
+
+
+                </ul>
+            </li>
+        </ul>
+    </div>
 </div>
 <br/>
 @if (TempData["msg"] != null)

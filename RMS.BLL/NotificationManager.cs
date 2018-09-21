@@ -23,9 +23,14 @@ namespace RMS.BLL
             return _notificationRepository.GetNotificationsForController(controllerViewStatus);
         }
 
-        public ICollection<Notification> GetNotificationsForSender(string senderViewstatus)
+        public ICollection<Notification> GetNotificationsForSender(string senderViewstatus, int id)
         {
-            return _notificationRepository.GetNotificationsForSender(senderViewstatus);
+            return _notificationRepository.GetNotificationsForSender(senderViewstatus,id);
+        }
+
+        public Notification FindByRequisitionId(int id)
+        {
+            return _notificationRepository.FindByRequisitionId(id);
         }
     }
 }

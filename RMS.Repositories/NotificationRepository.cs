@@ -27,9 +27,20 @@ namespace RMS.Repositories
             return db.Set<Notification>().Where(s=>s.ControllerViewStatus==controllerViewStatus).Include(c => c.Employee).Include(c => c.Requisition).OrderByDescending(c => c.Id).AsNoTracking().ToList();
         }
 
-        public ICollection<Notification> GetNotificationsForSender(string senderViewstatus)
+        public ICollection<Notification> GetNotificationsForSender(string senderViewstatus,int id)
         {
-            return db.Set<Notification>().Where(s => s.SenderViewStatus == senderViewstatus).Include(c => c.Employee).Include(c => c.Requisition).OrderByDescending(c => c.Id).AsNoTracking().ToList();
+            return db.Set<Notification>().Where(s => s.SenderViewStatus == senderViewstatus && s.EmployeeId==id).Include(c => c.Employee).Include(c => c.Requisition).OrderByDescending(c => c.Id).AsNoTracking().ToList();
+        }
+
+        public Notification FindByRequisitionId(int id)
+        {
+            return
+                db.Set<Notification>()
+                    .Where(c => c.RequisitionId == id)
+                    .Include(c => c.Requisition)
+                    .Include(c => c.Employee)
+                    .AsNoTracking()
+                    .FirstOrDefault();
         }
     }
 }

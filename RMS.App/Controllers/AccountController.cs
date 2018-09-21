@@ -80,17 +80,24 @@ namespace RMS.App.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var result = SignInManager.PasswordSignIn(model.Email, model.Password, model.RememberMe, false);
-                if (result == SignInStatus.Success)
-                {
-                    return RedirectToLocal(returnUrl);
-                }
-            }
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
 
+                if (ModelState.IsValid)
+                {
+                    var result = SignInManager.PasswordSignIn(model.Email, model.Password, model.RememberMe, false);
+                    if (result == SignInStatus.Success)
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                ViewBag.ReturnUrl = returnUrl;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex ,"Account", "Login"));
+            }
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

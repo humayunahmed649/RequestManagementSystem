@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
@@ -24,8 +25,10 @@ namespace RMS.App.Controllers
         private IAssignRequisitionManager _assignRequisitionManager;
         private IRequisitionStatusManager _requisitionStatusManager;
         private IVehicleTypeManager _vehicleTypeManager;
+        private INotificationManager _notificationManager;
 
-        public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager,IVehicleTypeManager vehicleTypeManager)
+        public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager,
+            IVehicleTypeManager vehicleTypeManager, INotificationManager notificationManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
@@ -33,6 +36,7 @@ namespace RMS.App.Controllers
             this._assignRequisitionManager = assignRequisitionManager;
             this._requisitionStatusManager = requisitionStatusManager;
             this._vehicleTypeManager = vehicleTypeManager;
+            this._notificationManager = notificationManager;
         }
 
         // GET: AssignRequisitions
@@ -127,14 +131,40 @@ namespace RMS.App.Controllers
                 {
 
                     AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
-                    _assignRequisitionManager.Add(assignRequisition);
-                    RequisitionStatus status = new RequisitionStatus();
-                    status.Id = assignRequisition.RequisitionStatusId;
-                    status.RequisitionId = assignRequisition.RequisitionId;
-                    status.RequisitionNumber = assignRequisition.RequisitionNumber;
-                    status.StatusType = "Assigned";
-                    _requisitionStatusManager.Update(status);
-                    return RedirectToAction("Index");
+                    bool isSave=_assignRequisitionManager.Add(assignRequisition);
+
+                    if (isSave)
+                    {
+                        //Requisition status information
+                        RequisitionStatus status = new RequisitionStatus();
+                        status.Id = assignRequisition.RequisitionStatusId;
+                        status.RequisitionId = assignRequisition.RequisitionId;
+                        status.RequisitionNumber = assignRequisition.RequisitionNumber;
+                        status.StatusType = "Assigned";
+                        _requisitionStatusManager.Update(status);
+
+                        //Get employee Id by user login id
+                        //var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                        //var empId = _employeeManager.FindByLoginId(loginUserId);
+
+                        //Controller status change for assign requisition
+                        Notification notificationUpdate=_notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
+                        notificationUpdate.ControllerViewStatus = "Seen";
+                        _notificationManager.Update(notificationUpdate);
+
+
+
+                        //Notification for assigned vehicle from Controlle
+                        Notification notification = new Notification();
+                        notification.Text = "Your requisition has been assigned";
+                        notification.EmployeeId = assignRequisition.EmployeeId;
+                        notification.RequisitionId = status.RequisitionId;
+                        notification.SenderViewStatus = "Unseen";
+                        notification.NotifyDateTime=DateTime.Now;
+                        _notificationManager.Add(notification);
+                        return RedirectToAction("Index");
+                    }
+                    
                 }
 
                 Requisition requisition = _requisitionManager.FindById(assignRequisitionViewModel.RequisitionId);
