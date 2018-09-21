@@ -1,4 +1,4 @@
-﻿@model RMS.App.ViewModels.RequisitionViewModel
+﻿@model RMS.App.ViewModels.RequisitionStatusViewModel
 
 @{
     ViewBag.Title = "Requisition Details";
@@ -9,32 +9,36 @@
 <hr/>
 
 <div class="row">
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Employee.FullName)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Employee.FullName)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.Employee.FullName)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.Employee.FullName)</div>
 
     <div class="col-md-2">@Html.DisplayNameFor(model => model.RequisitionNumber)</div>
     <div class="col-md-10">@Html.DisplayFor(model => model.RequisitionNumber)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.FromPlace)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.FromPlace)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.FromPlace)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.FromPlace)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.DestinationPlace)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.DestinationPlace)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.DestinationPlace)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.StartDateTime)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.StartDateTime)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.StartDateTime)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.StartDateTime)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.EndDateTime)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.EndDateTime)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.EndDateTime)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.EndDateTime)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.PassengerQty)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.PassengerQty)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.PassengerQty)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.PassengerQty)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Description)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Description)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.Description)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.Description)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.RequestFor)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.RequestFor)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.RequestFor)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.RequestFor)</div>
+
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.StatusType)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.StatusType)</div>
+
     @{
         var data = ViewBag.Data;
         if (data != null)
@@ -59,6 +63,7 @@
             <div class="col-md-12">This is new Request which is not assigned...</div>
         }
     }
+    
 </div>
 <br/>
 <p>

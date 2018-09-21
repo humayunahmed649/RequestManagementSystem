@@ -68,12 +68,12 @@ namespace RMS.App.Controllers
                 var empId = _employeeManager.FindByLoginId(loginUserId);
                 if (empId != null)
                 {
-                    ICollection<Requisition> requisitions = _requisitionManager.GetAllRequisitionByEmployeeId(empId.Id);
-                    IEnumerable<RequisitionViewModel> requisitionViewModels =
-                        Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
-                    return View(requisitionViewModels);
+                    ICollection<RequisitionStatus> requisitions = _requisitionStatusManager.GetAllById(empId.Id);
+                    IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
+                        Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitions);
+                    return View(requisitionStatusViewModels);
                 }
-                IEnumerable<RequisitionViewModel> requisitionViewModel =new List<RequisitionViewModel>();
+                IEnumerable<RequisitionStatusViewModel> requisitionViewModel =new List<RequisitionStatusViewModel>();
                 TempData["msg"] = "You have not sent or assigned requisition!";
                 return View(requisitionViewModel);
 
@@ -94,15 +94,19 @@ namespace RMS.App.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
+                //ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
 
-                Requisition requisition = _requisitionManager.FindById((int)id);
-                    if (requisition == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-                return View(requisitionViewModel);
+                RequisitionStatus requisition = _requisitionStatusManager.FindById((int)id);
+                if (requisition.StatusType != "New")
+                {
+                    ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
+                }
+                        if (requisition == null)
+                        {
+                            return HttpNotFound();
+                        }
+                      RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
+                    return View(requisitionStatusViewModel);
             }
             catch (Exception ex)
             {
@@ -308,6 +312,7 @@ namespace RMS.App.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                
                 Requisition requisition = _requisitionManager.FindById((int)id);
                 if (requisition == null)
                 {

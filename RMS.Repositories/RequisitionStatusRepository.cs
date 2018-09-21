@@ -38,5 +38,23 @@ namespace RMS.Repositories
                     .Where(c => c.Requisition.RequisitionNumber.StartsWith(searchText))
                     .ToList();
         }
+
+        public ICollection<RequisitionStatus> GetAllById(int id)
+        {
+            return
+                db.Set<RequisitionStatus>()
+                    .Where(c => c.Requisition.Employee.Id == id)
+                    .Include(c => c.Requisition.Employee)
+                    .ToList();
+        }
+
+        public override RequisitionStatus FindById(int id)
+        {
+            return
+                db.Set<RequisitionStatus>()
+                    .Where(c => c.RequisitionId == id)
+                    .Include(c => c.Requisition.Employee)
+                    .FirstOrDefault();
+        }
     }
 }

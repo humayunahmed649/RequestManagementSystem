@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RMS.App.ViewModels.RequisitionViewModel>
+﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
 
 @{
     Layout = null;
@@ -21,25 +21,22 @@
                 SL
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employee.FullName)
+                @Html.DisplayNameFor(model => model.Requisition.FromPlace)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FromPlace)
+                @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DestinationPlace)
+                @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDateTime)
+                @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDateTime)
+                @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PassengerQty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubmitDateTime)
+                @Html.DisplayNameFor(model => model.StatusType)
             </th>
             <th>
                 Action
@@ -61,29 +58,26 @@
 
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Employee.FullName)
+                            @Html.DisplayFor(modelItem => item.Requisition.FromPlace)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FromPlace)
+                            @Html.DisplayFor(modelItem => item.Requisition.DestinationPlace)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DestinationPlace)
+                            @Html.DisplayFor(modelItem => item.Requisition.StartDateTime)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.StartDateTime)
+                            @Html.DisplayFor(modelItem => item.Requisition.EndDateTime)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EndDateTime)
+                            @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.PassengerQty)
+                            @Html.DisplayFor(modelItem => item.StatusType)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.SubmitDateTime)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-                            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                            @Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |
+                            @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}) |
                             @Html.ActionLink("Feedback", "Feedback", new {requisitionId = item.Id})
 
                         </td>
@@ -103,26 +97,24 @@
             <th>
                 SL
             </th>
+            
             <th>
-                @Html.DisplayNameFor(model => model.Employee.FullName)
+                @Html.DisplayNameFor(model => model.Requisition.FromPlace)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FromPlace)
+                @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DestinationPlace)
+                @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDateTime)
+                @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDateTime)
+                @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PassengerQty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubmitDateTime)
+                @Html.DisplayNameFor(model => model.StatusType)
             </th>
             <th>
                 Action

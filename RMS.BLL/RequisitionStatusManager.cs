@@ -37,5 +37,10 @@ namespace RMS.BLL
         {
             return _requisitionStatusRepository.SearchByRequisitionId(searchText);
         }
+
+        public ICollection<RequisitionStatus> GetAllById(int id)
+        {
+            return _requisitionStatusRepository.GetAllById(id);
+        }
     }
 }
