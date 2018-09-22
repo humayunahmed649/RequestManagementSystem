@@ -49,6 +49,23 @@
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.Designation.Title)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.EndTime)
+
+                </th>
+                
+                <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
                 <th class="text-center">
@@ -75,6 +92,19 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.RequisitionNumber)
                         </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Requisition.Employee.Designation.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Requisition.Employee.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Requisition.StartDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Requisition.EndDateTime)
+                        </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
                         </td>
@@ -107,6 +137,23 @@
                 <th>
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.Designation.Title)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.EndTime)
+
+                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>

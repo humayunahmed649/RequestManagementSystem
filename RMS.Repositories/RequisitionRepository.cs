@@ -27,7 +27,7 @@ namespace RMS.Repositories
 
         public ICollection<Requisition> GetAllWithEmployee()
         {
-            return db.Set<Requisition>().Include(c => c.Employee).Include(c=>c.Employee.Designation).AsNoTracking().ToList();
+            return db.Set<Requisition>().Include(c=>c.Employee.Designation).AsNoTracking().ToList();
         }
 
         public override Requisition FindById(int id)

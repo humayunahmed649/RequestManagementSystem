@@ -51,7 +51,13 @@
                     SL
                 </td>
                 <th>
+                    @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Employee.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee.Designation)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FromPlace)
@@ -78,6 +84,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
+                <td>
+                    @Html.DisplayNameFor(model=>model.RequisitionType)
+                </td>
                 @*<th>
                     Action
                 </th>*@
@@ -96,7 +105,13 @@
                             @sl
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.RequisitionNumber)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Employee.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee.Designation.Title)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FromPlace)
@@ -123,6 +138,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequisitionType)
+                        </td>
                         @*<td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
                             @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
@@ -145,7 +163,13 @@
                     SL
                 </td>
                 <th>
+                    @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Employee.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee.Designation)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FromPlace)
@@ -170,6 +194,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequisitionType)
                 </th>
                 @*<th>
                     Action
