@@ -232,6 +232,7 @@
     <Compile Include="Controllers\EmployeeTypesController.cs" />
     <Compile Include="Controllers\GatePassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailServicesController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\RequisitionQueueController.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="ViewModels\DesignationViewModel.cs" />
     <Compile Include="ViewModels\EmployeeTypeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\MailServiceViewModel.cs" />
     <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
     <Compile Include="ViewModels\Report\RequisitionSummaryReportVM.cs" />
@@ -987,6 +989,11 @@
     <Content Include="Views\Notifications\Details.cshtml" />
     <Content Include="Views\Notifications\Edit.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\MailServices\Create.cshtml" />
+    <Content Include="Views\MailServices\Delete.cshtml" />
+    <Content Include="Views\MailServices\Details.cshtml" />
+    <Content Include="Views\MailServices\Edit.cshtml" />
+    <Content Include="Views\MailServices\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

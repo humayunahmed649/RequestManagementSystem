@@ -66,6 +66,7 @@
     <Compile Include="DivisionRepository.cs" />
     <Compile Include="EmployeeRepository.cs" />
     <Compile Include="FeedbackRepository.cs" />
+    <Compile Include="MailServiceRepository.cs" />
     <Compile Include="NotificationRepository.cs" />
     <Compile Include="OrganizationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

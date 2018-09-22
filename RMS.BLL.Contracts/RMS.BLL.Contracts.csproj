@@ -48,6 +48,7 @@
     <Compile Include="IDivisionManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="IFeedbackManager.cs" />
+    <Compile Include="IMailServiceManager.cs" />
     <Compile Include="IManager.cs" />
     <Compile Include="INotificationManager.cs" />
     <Compile Include="IOrganizationManager.cs" />

@@ -99,6 +99,9 @@ namespace RMS.App
             container.RegisterType<INotificationManager, NotificationManager>();
             container.RegisterType<INotificationRepository, NotificationRepository>();
 
+            container.RegisterType<IMailServiceManager, MailServiceManager>();
+            container.RegisterType<IMailServiceRepository, MailServiceRepository>();
+
         }
     }
 }

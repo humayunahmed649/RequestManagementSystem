@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -85,12 +86,32 @@ namespace RMS.App.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    
                     var result = SignInManager.PasswordSignIn(model.Email, model.Password, model.RememberMe, false);
+                   
+                    
                     if (result == SignInStatus.Success)
                     {
+
+                        if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
+                        {
+                            return RedirectToAction("Index", "Queue");
+                        }
+
+                        if (User.IsInRole("User"))
+                        {
+                            return RedirectToAction("Create", "Requisitions");
+                        }
+
                         return RedirectToLocal(returnUrl);
+                    }else
+                    {
+                        ModelState.AddModelError("", "Invalid email or password!");
+                        ViewBag.ReturnUrl = returnUrl;
+                        return View(model);
                     }
                 }
+                
                 ViewBag.ReturnUrl = returnUrl;
                 return View(model);
             }
@@ -120,6 +141,7 @@ namespace RMS.App.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+
         [Authorize(Roles = "Administrator")]
         public ActionResult CreateController()
         {

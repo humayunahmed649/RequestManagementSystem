@@ -41,7 +41,9 @@ namespace RMS.Models.DatabaseContext
         public DbSet<Address> Addresses { get; set; }
         public DbSet<RequisitionStatus> RequisitionStatuses { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<Notification> Notifications { get; set; } 
+        public DbSet<Notification> Notifications { get; set; }
+        public System.Data.Entity.DbSet<RMS.Models.EntityModels.MailService> MailServices { get; set; }
+
 
         public IQueryable<RequisitionSummaryReportVM> GetRequisitionSummaryReport()
         {
@@ -58,5 +60,7 @@ namespace RMS.Models.DatabaseContext
             modelBuilder.Entity<AppUserLogin>().ToTable("UserLogin");
             modelBuilder.Entity<AppUserClaim>().ToTable("UserClaim");
         }
+
+        
     }
 }
