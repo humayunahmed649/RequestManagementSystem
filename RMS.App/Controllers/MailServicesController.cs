@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -55,7 +56,7 @@ namespace RMS.App.Controllers
         // GET: MailServices/Create
         public ActionResult Create()
         {
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber");
+            //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber");
             return View();
         }
 
@@ -64,13 +65,45 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,To,From,Subject,Body,MailSendingDateTime,RequisitionId")] MailServiceViewModel mailServiceViewModel)
+        public ActionResult Create([Bind(Include = "Id,To,Subject,Body")] MailServiceViewModel mailServiceViewModel)
         {
             if (ModelState.IsValid)
             {
                 MailService mailService = Mapper.Map<MailService>(mailServiceViewModel);
-                _mailServiceManager.Add(mailService);
-                return RedirectToAction("Index");
+                mailService.MailSendingDateTime=DateTime.Now;
+                mailService.From = "demowork9999@gmail.com";
+                var result = _mailServiceManager.Add(mailService);
+                if (result)
+                {
+                    try
+                    {
+                        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                        smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+                        smtpClient.EnableSsl = true;
+
+
+                        MailMessage mailMessage = new MailMessage();
+                        mailMessage.From = new MailAddress("demowork9999@gmail.com");
+                        mailMessage.To.Add(mailService.To);
+                        mailMessage.Subject = mailService.Subject;
+                        mailMessage.Body = mailService.Body;
+                        smtpClient.Send(mailMessage);
+
+                        TempData["msg"] = "Mail has been save and send successfully";
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["msg1"] = "Mail sending failed. The error message is -"+ "<br/>"+" [ " + ex.Message +" Helpline"+" ] ";
+
+                        return RedirectToAction("Index");
+                    }
+                   
+                }
+                
+                //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
+                return View(mailServiceViewModel);
+
             }
 
             ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
@@ -78,64 +111,64 @@ namespace RMS.App.Controllers
         }
 
         // GET: MailServices/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MailService mailService = _mailServiceManager.FindById((int) id);
-            if (mailService == null)
-            {
-                return HttpNotFound();
-            }
-            MailServiceViewModel mailServiceViewModel = Mapper.Map<MailServiceViewModel>(mailService);
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
-            return View(mailServiceViewModel);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    MailService mailService = _mailServiceManager.FindById((int) id);
+        //    if (mailService == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    MailServiceViewModel mailServiceViewModel = Mapper.Map<MailServiceViewModel>(mailService);
+        //    ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
+        //    return View(mailServiceViewModel);
+        //}
 
         // POST: MailServices/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,To,From,Subject,Body,MailSendingDateTime,RequisitionId")] MailServiceViewModel mailServiceViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                MailService mailService = Mapper.Map<MailService>(mailServiceViewModel);
-                _mailServiceManager.Update(mailService);
-                return RedirectToAction("Index");
-            }
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
-            return View(mailServiceViewModel);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,To,From,Subject,Body,MailSendingDateTime,RequisitionId")] MailServiceViewModel mailServiceViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        MailService mailService = Mapper.Map<MailService>(mailServiceViewModel);
+        //        _mailServiceManager.Update(mailService);
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
+        //    return View(mailServiceViewModel);
+        //}
 
         // GET: MailServices/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MailService mailService = _mailServiceManager.FindById((int) id);
-            if (mailService == null)
-            {
-                return HttpNotFound();
-            }
-            MailServiceViewModel mailServiceViewMode = Mapper.Map<MailServiceViewModel>(mailService);
-            return View(mailServiceViewMode);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    MailService mailService = _mailServiceManager.FindById((int) id);
+        //    if (mailService == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    MailServiceViewModel mailServiceViewMode = Mapper.Map<MailServiceViewModel>(mailService);
+        //    return View(mailServiceViewMode);
+        //}
 
         // POST: MailServices/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            MailService mailService = _mailServiceManager.FindById(id);
-            _mailServiceManager.Remove(mailService);
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    MailService mailService = _mailServiceManager.FindById(id);
+        //    _mailServiceManager.Remove(mailService);
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
