@@ -104,18 +104,14 @@ namespace RMS.App.Controllers
                     Department department = Mapper.Map<Department>(departmentViewMode);
 
                     var name = department.Name.Trim();
-                    var code = department.Code.Trim();
 
                     if (_departmentManager.GetAll().Count(o => o.Name == name) > 0)
                     {
                         ViewBag.Message1 = "Department name already exist.";
                     }
 
-                    if (_departmentManager.GetAll().Count(o => o.Code == code) > 0)
-                    {
-                        ViewBag.Message2 = "Department code already exist.";
-                    }
-                    if (ViewBag.Message1 == null && ViewBag.Message2 == null)
+                    
+                    if (ViewBag.Message1 == null)
                     {
                         _departmentManager.Add(department);
                         TempData["msg"] = "Information has been saved successfully";

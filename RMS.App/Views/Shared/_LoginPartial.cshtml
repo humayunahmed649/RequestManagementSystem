@@ -8,7 +8,7 @@
 
     <ul class="nav-menu float-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-outline-info bg-transparent text-white" })
+            @Html.ActionLink("Hello  " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-outline-info bg-transparent text-white" })
         </li>
         <li>
             <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
@@ -19,7 +19,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" , @class="btn btn-sm btn-outline-info bg-transparent text-white"})</li>
     </ul>
 }

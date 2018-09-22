@@ -135,14 +135,14 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses,Password,ConfirmPassword")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses,Password,ConfirmPassword,IsChecked")] EmployeeViewModel employeeViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
 
-                    if(employeeViewModel.EmployeeTypeId==1)
+                    if(employeeViewModel.EmployeeTypeId==1 && employeeViewModel.IsChecked==false)
                     {
                         Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
@@ -188,8 +188,7 @@ namespace RMS.App.Controllers
 
                         }
                     }
-
-                    if(employeeViewModel.EmployeeTypeId==2)
+                    if (employeeViewModel.IsChecked == true)
                     {
                         Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
@@ -223,13 +222,18 @@ namespace RMS.App.Controllers
                         if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null &&
                             ViewBag.Message4 == null)
                         {
-                                employee.AppUserId = null;
+
+                            var result = UserManager.AddControllerForEmployee(employee);
+                            if (result != 0)
+                            {
+                                employee.AppUserId = result;
                                 _employeeManager.Add(employee);
                                 TempData["msg"] = "Information has been saved successfully";
                                 return RedirectToAction("Index");
                             }
 
                         }
+                    }
                     }
                   
                  TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
@@ -317,9 +321,6 @@ namespace RMS.App.Controllers
                         if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null &&
                             ViewBag.Message4 == null)
                         {
-                            employee.Email = "none";
-                            employee.Password = "null";
-                            employee.ConfirmPassword = "null";
                             _employeeManager.Add(employee);
                             TempData["msg"] = "Information has been saved successfully";
                             return RedirectToAction("Index");
@@ -343,6 +344,9 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
             }
         }
+
+
+        
 
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)

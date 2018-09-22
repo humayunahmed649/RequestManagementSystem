@@ -85,6 +85,23 @@ namespace RMS.Models.Identity.IdentityConfig
             return 0;
         }
 
-        
+
+        public int AddControllerForEmployee(Employee employee)
+        {
+            var user = new AppUser()
+            {
+                UserName = employee.Email,
+                Email = employee.Email
+            };
+            //string defaultPassword = "Aa@123456";
+            var result = this.Create(user, employee.Password);
+            if (result.Succeeded)
+            {
+                var roleAdded = this.AddToRole(user.Id, "Controller");
+                int Id = user.Id;
+                return Id;
+            }
+            return 0;
+        }
     }
 }

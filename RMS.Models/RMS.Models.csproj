@@ -259,6 +259,14 @@
     <Compile Include="Migrations\201809220834132_Mail_Service_Model_Added.Designer.cs">
       <DependentUpon>201809220834132_Mail_Service_Model_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809220838053_EmployeeModelEmailChanged.cs" />
+    <Compile Include="Migrations\201809220838053_EmployeeModelEmailChanged.Designer.cs">
+      <DependentUpon>201809220838053_EmployeeModelEmailChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809220855061_DepartmentCodeInModelNullable.cs" />
+    <Compile Include="Migrations\201809220855061_DepartmentCodeInModelNullable.Designer.cs">
+      <DependentUpon>201809220855061_DepartmentCodeInModelNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\RequisitionSummaryReportVM.cs" />
@@ -374,6 +382,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809220834132_Mail_Service_Model_Added.resx">
       <DependentUpon>201809220834132_Mail_Service_Model_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809220838053_EmployeeModelEmailChanged.resx">
+      <DependentUpon>201809220838053_EmployeeModelEmailChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809220855061_DepartmentCodeInModelNullable.resx">
+      <DependentUpon>201809220855061_DepartmentCodeInModelNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

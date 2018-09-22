@@ -18,8 +18,7 @@ namespace RMS.Models.EntityModels
 
         [Required,StringLength(250)]
         public string FullName { get; set; }
-
-        [Required,StringLength(50)]
+        //[Required,StringLength(50)]
         public string Email { get; set; }
 
         [Required, StringLength(15)]
@@ -55,7 +54,6 @@ namespace RMS.Models.EntityModels
         public int? AppUserId { get; set; }
         public AppUser AppUser { get; set; }
         [NotMapped]
-        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
