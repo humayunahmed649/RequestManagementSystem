@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using AutoMapper;
+using IdentitySample.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RMS.App.Models;
+using RMS.App.ViewModels;
+using RMS.BLL.Contracts;
+using RMS.Models.EntityModels;
 using RMS.Models.EntityModels.Identity;
 using RMS.Models.Identity.IdentityConfig;
 
@@ -20,6 +25,12 @@ namespace RMS.App.Controllers
     {
         private AppUserManager _userManager;
         private AppSignInManager _signInManager;
+        private IEmployeeManager _employeeManager;
+
+        public AccountController(IEmployeeManager employeeManager)
+        {
+            this._employeeManager = employeeManager;
+        }
 
         private AppUserManager UserManager
         {
@@ -148,23 +159,97 @@ namespace RMS.App.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult CreateController(RegisterViewModel model)
+        // GET: /Manage/Index  Account/Change Password Index
+        public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            var user = new AppUser()
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+                : message == ManageMessageId.Error ? "An error has occurred."
+                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : "";
+
+            var userId = User.Identity.GetUserId();
+            var model = new IndexViewModel
             {
-                Email = model.Email,
-                UserName = model.Email
+                HasPassword = HasPassword(),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(Convert.ToInt32(userId)),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(Convert.ToInt32(userId)),
+                Logins = await UserManager.GetLoginsAsync(Convert.ToInt32(userId)),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
-            var result = UserManager.Create(user,model.Password);
+            if (userId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = _employeeManager.FindByLoginId(Convert.ToInt32(userId));
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
+            model.Model = employeeViewModel;
+            return View(model);
+        }
+
+
+        public ActionResult ChangePassword()
+        {
+            
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(Convert.ToInt32(User.Identity.GetUserId()), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
-                var roleAdded = UserManager.AddToRole(user.Id, "Controller");
+                var user = await UserManager.FindByIdAsync(Convert.ToInt32(User.Identity.GetUserId()));
                 
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
+            AddErrors(result);
+            return View(model);
+        }
+
+        public enum ManageMessageId
+        {
+            AddPhoneSuccess,
+            ChangePasswordSuccess,
+            SetTwoFactorSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+            RemovePhoneSuccess,
+            Error
+        }
+        private bool HasPassword()
+        {
+            var user = UserManager.FindById<AppUser,int>(Convert.ToInt32(User.Identity.GetUserId()));
+            if (user != null)
             {
-                //SignInManager.SignIn(user, false, false);
-                return RedirectToAction("Index", "Home");
+                return user.PasswordHash != null;
+            }
+            return false;
+        }
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
             }
         }
     }
