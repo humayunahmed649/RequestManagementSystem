@@ -103,8 +103,9 @@
                                         <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo6"><i class="fa fa-user" aria-hidden="true"></i> Employee</a><br />
                                     </div>
                                     <div id="demo6" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "Create", "Employees")<br />
-                                        @Html.ActionLink("List Of Employee", "Index", "Employees")
+                                        @Html.ActionLink("Create New", "Create", "Employees")<br/>
+                                        @Html.ActionLink("Employee List", "GetAllEmployee", "Employees")<br/>
+                                        @Html.ActionLink("Employee and Driver List", "Index", "Employees")
                                     </div>
                                 </div>
                                 <br/><br/>
@@ -114,7 +115,7 @@
                                     </div>
                                     <div id="demo7" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
                                         @Html.ActionLink("Create New", "CreateDriver", "Employees")<br />
-                                        @Html.ActionLink("List Of Driver", "Index", "Employees")
+                                        @Html.ActionLink("Driver List", "GetAllDriver", "Employees")
                                     </div>
                                 </div>
                                 <br /><br />
@@ -185,7 +186,7 @@
                                 <br /><br />
                                 <div class="col-md-12" style="font-size: 16px;">
                                     <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo10"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mail</a><br />
+                                        <a href="#" class="text-black font-weight-normal" data-toggle="collapse" data-target="#demo10"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mail</a><br />
                                     </div>
                                     <div id="demo10" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
                                         @Html.ActionLink("Send New", "Create", "MailServices")<br />
@@ -244,8 +245,23 @@
     <script src="~/Content/js/mail-script.js"></script>
     <script src="~/Scripts/chosenDD/chosen.jquery.min.js"></script>
     <script src="~/Content/js/main.js"></script>
-    
-    @RenderSection("scripts", required: false)
+
+    <!--Display an asterisk on required fields-->
+<script type="text/javascript">
+        $('input[type=text]').each(function () {
+            var req = $(this).attr('data-val-required');
+            if (undefined != req) {
+                var label = $('label[for="' + $(this).attr('id') + '"]');
+                var text = label.text();
+                if (text.length > 0) {
+                    label.append('<span style="color:red"> *</span>');
+                }
+            }
+        });
+    </script>
+
+
+@RenderSection("scripts", required: false)
     
 </body>
 </html>

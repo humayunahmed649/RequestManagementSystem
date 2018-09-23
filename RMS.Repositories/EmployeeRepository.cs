@@ -45,12 +45,14 @@ namespace RMS.Repositories
         }
         public ICollection<Employee> GetAllDriver()
         {
-            return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").Include(c=>c.Addresses).AsNoTracking().ToList();
+            return db.Set<Employee>().Include(c=>c.EmployeeType).Where(c => c.EmployeeType.Type == "Driver").Include(c=>c.Organization).Include(c=>c.Department).Include(c=>c.Designation)
+                .Include(c => c.Addresses.Select(d => d.Division)).Include(c => c.Addresses.Select(s => s.District)).Include(c => c.Addresses.Select(u => u.Upazila)).AsNoTracking().ToList();
         }
 
         public ICollection<Employee> GetAllEmployees()
         {
-            return db.Set<Employee>().Include(c => c.EmployeeType).Where(c => c.EmployeeType.Type == "Employee").AsNoTracking().ToList();
+            return db.Set<Employee>().Include(c => c.EmployeeType).Where(c => c.EmployeeType.Type == "Employee").Include(c => c.Organization).Include(c => c.Department).Include(c => c.Designation)
+               .Include(c => c.Addresses.Select(d => d.Division)).Include(c => c.Addresses.Select(s => s.District)).Include(c => c.Addresses.Select(u => u.Upazila)).AsNoTracking().ToList();
         }
 
         

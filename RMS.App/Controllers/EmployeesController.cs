@@ -57,9 +57,6 @@ namespace RMS.App.Controllers
             }
         }
 
-
-
-
         // GET: Employees
         public ActionResult Index(string searchText)
         {
@@ -84,7 +81,21 @@ namespace RMS.App.Controllers
             }
             
         }
+        //Get Only Employee
+        public ActionResult GetAllEmployee()
+        {
+            ICollection<Employee> employee = _employeeManager.GetAllEmployees();
+            IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
+            return View(employeeViewModels);
+        }
 
+        //Get Only Driver
+        public ActionResult GetAllDriver()
+        {
+            ICollection<Employee> employee = _employeeManager.GetAllDriver();
+            IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
+            return View(employeeViewModels);
+        }
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
@@ -135,7 +146,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses,Password,ConfirmPassword,IsChecked")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses,Password,ConfirmPassword,IsChecked")] EmployeeViewModel employeeViewModel)
         {
             try
             {

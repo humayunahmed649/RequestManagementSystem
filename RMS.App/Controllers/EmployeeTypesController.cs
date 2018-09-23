@@ -120,104 +120,104 @@ namespace RMS.App.Controllers
         }
 
         // GET: EmployeeTypes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
-                if (employeeType == null)
-                {
-                    return HttpNotFound();
-                }
-                EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
-                return View(employeeTypeViewModel);
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Edit"));
-            }
+        //public ActionResult Edit(int? id)
+        //{
+        //    try
+        //    {
+        //        if (id == null)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //        }
+        //        EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
+        //        if (employeeType == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
+        //        EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
+        //        return View(employeeTypeViewModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Edit"));
+        //    }
             
-        }
+        //}
 
         // POST: EmployeeTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type")] EmployeeTypeViewModel employeeTypeViewModel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
+        //public ActionResult Edit([Bind(Include = "Id,Type")] EmployeeTypeViewModel employeeTypeViewModel)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            EmployeeType employeeType = Mapper.Map<EmployeeType>(employeeTypeViewModel);
 
-                    if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type && o.Id != employeeType.Id) > 0)
-                    {
-                        ViewBag.Message = "Employee type name already exist.";
-                    }
-                    if (ViewBag.Message == null)
-                    {
-                        _employeeTypeManager.Update(employeeType);
-                        TempData["msg"] = "Information has been updated successfully";
-                        return RedirectToAction("Index");
-                    }
-                }
-                return View(employeeTypeViewModel);
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Edit"));
-            }
+        //            if (_employeeTypeManager.GetAll().Count(o => o.Type == employeeType.Type && o.Id != employeeType.Id) > 0)
+        //            {
+        //                ViewBag.Message = "Employee type name already exist.";
+        //            }
+        //            if (ViewBag.Message == null)
+        //            {
+        //                _employeeTypeManager.Update(employeeType);
+        //                TempData["msg"] = "Information has been updated successfully";
+        //                return RedirectToAction("Index");
+        //            }
+        //        }
+        //        return View(employeeTypeViewModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Edit"));
+        //    }
             
-        }
+        //}
 
         // GET: EmployeeTypes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
-                if (employeeType == null)
-                {
-                    return HttpNotFound();
-                }
-                EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
-                return View(employeeTypeViewModel);
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
-            }
+        //public ActionResult Delete(int? id)
+        //{
+        //    try
+        //    {
+        //        if (id == null)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //        }
+        //        EmployeeType employeeType = _employeeTypeManager.FindById((int)id);
+        //        if (employeeType == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
+        //        EmployeeTypeViewModel employeeTypeViewModel = Mapper.Map<EmployeeTypeViewModel>(employeeType);
+        //        return View(employeeTypeViewModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
+        //    }
             
-        }
+        //}
 
         // POST: EmployeeTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            try
-            {
-                EmployeeType employeeType = _employeeTypeManager.FindById(id);
-                _employeeTypeManager.Remove(employeeType);
-                TempData["msg"] = "Information has been deleted successfully";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
-            }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    try
+        //    {
+        //        EmployeeType employeeType = _employeeTypeManager.FindById(id);
+        //        _employeeTypeManager.Remove(employeeType);
+        //        TempData["msg"] = "Information has been deleted successfully";
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
+        //    }
             
-        }
+        //}
 
         protected override void Dispose(bool disposing)
         {

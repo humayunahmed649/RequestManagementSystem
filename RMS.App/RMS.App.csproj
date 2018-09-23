@@ -971,7 +971,6 @@
     <Content Include="Views\AssignRequisitions\Cancel.cshtml" />
     <Content Include="Views\AssignRequisitions\Edit.cshtml" />
     <Content Include="Views\Requisitions\Reply.cshtml" />
-    <Content Include="Views\Organizations\SearchIndex.cshtml" />
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
     <Content Include="Views\RequisitionQueue\Report.cshtml" />
     <Content Include="Views\Home\AboutDeveloper.cshtml" />
@@ -994,6 +993,8 @@
     <Content Include="Views\MailServices\Details.cshtml" />
     <Content Include="Views\MailServices\Edit.cshtml" />
     <Content Include="Views\MailServices\Index.cshtml" />
+    <Content Include="Views\Employees\GetAllEmployee.cshtml" />
+    <Content Include="Views\Employees\GetAllDriver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

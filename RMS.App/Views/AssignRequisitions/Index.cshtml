@@ -21,7 +21,12 @@
             @Html.Raw(TempData["msg"])
         </div>
     }
-
+@if (TempData["msg1"] != null)
+{
+    <div class="alert alert-info">
+        @Html.Raw(TempData["msg1"])
+    </div>
+}
     @*<div class="container">
         <div class="row align-items-center">
             <div class="col-lg-3 col-sm-3 col-3 text-left no-padding">
