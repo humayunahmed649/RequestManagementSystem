@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -12,7 +13,9 @@ using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
+using RMS.Models.Identity.IdentityConfig;
 using RMS.Repositories.Contracts;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace RMS.App.Controllers
 {
@@ -26,9 +29,10 @@ namespace RMS.App.Controllers
         private IRequisitionStatusManager _requisitionStatusManager;
         private IVehicleTypeManager _vehicleTypeManager;
         private INotificationManager _notificationManager;
+        private IMailServiceManager _mailServiceManager;
 
         public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager,
-            IVehicleTypeManager vehicleTypeManager, INotificationManager notificationManager)
+            IVehicleTypeManager vehicleTypeManager, INotificationManager notificationManager, IMailServiceManager mailServiceManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
@@ -37,8 +41,10 @@ namespace RMS.App.Controllers
             this._requisitionStatusManager = requisitionStatusManager;
             this._vehicleTypeManager = vehicleTypeManager;
             this._notificationManager = notificationManager;
-        }
+            this._mailServiceManager = mailServiceManager;
 
+        }
+        
         // GET: AssignRequisitions
         public ActionResult Index(string searchText)
         {
@@ -70,19 +76,17 @@ namespace RMS.App.Controllers
                 {
                     return HttpNotFound();
                 }
-                if (assignRequisition != null)
-                {
+
                     var requestDetails = _assignRequisitionManager.GetAllWithInformation();
                     AssignRequisitionViewModel assignRequisitionViewModel = Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
 
                     return View(assignRequisitionViewModel);
-                }
+
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Details"));
             }
-            return View("Error");
         }
 
         
@@ -143,25 +147,81 @@ namespace RMS.App.Controllers
                         status.StatusType = "Assigned";
                         _requisitionStatusManager.Update(status);
 
-                        //Get employee Id by user login id
-                        //var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-                        //var empId = _employeeManager.FindByLoginId(loginUserId);
+                        
 
-                        //Controller status change for assign requisition
+                        //Controller status change after assign requisition
                         Notification notificationUpdate=_notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
                         notificationUpdate.ControllerViewStatus = "Seen";
                         _notificationManager.Update(notificationUpdate);
 
 
+                        //Get employee by requisition Id
+                        var req = _requisitionManager.FindById(assignRequisition.RequisitionId);
+                        var employee = _employeeManager.FindByLoginId(req.EmployeeId);
 
-                        //Notification for assigned vehicle from Controlle
+                        //Get Driver by id
+                        var driver = _employeeManager.FindById(assignRequisition.EmployeeId);
+                        //Get Vehicle Type by id
+                        var vehicle = _vehicleManager.FindById(assignRequisition.VehicleId);
+
+                        //Assigned vehicle notification for employee by Controlle
                         Notification notification = new Notification();
                         notification.Text = "Your requisition has been assigned";
-                        notification.EmployeeId = assignRequisition.EmployeeId;
-                        notification.RequisitionId = status.RequisitionId;
+                        notification.EmployeeId = employee.Id;
+                        notification.RequisitionId = assignRequisition.RequisitionId;
                         notification.SenderViewStatus = "Unseen";
                         notification.NotifyDateTime=DateTime.Now;
                         _notificationManager.Add(notification);
+
+                        //Sending mail to employee for assigned vehicle
+                        var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                        var controller = _employeeManager.FindByLoginId(loginUserId);
+
+                        if (employee.Email != null)
+                        {
+                            var subject = "Assign a vehicle for your requisition no : " + assignRequisition.RequisitionNumber;
+                            var msgBody = "Dear " + employee.FullName + "," + " \n\r " + " \r\r\r\r\r\r "+ " On the basis of your request, assigned a vehicle. Your driver is " +
+                                driver.FullName + " Contect No : " + driver.ContactNo + ". Vehicle " + vehicle.VehicleType.Name +
+                                " and Reg No : " + vehicle.RegNo + ". "+" \n\r "+"Regards, "+" \n " +" \r\r\r\r\r\r "+ controller.FullName;
+
+                            MailService mailService = new MailService();
+                            mailService.To = employee.Email;
+                            mailService.From = "demowork9999@gmail.com";
+                            mailService.Subject = subject;
+                            mailService.Body = msgBody;
+                            mailService.MailSendingDateTime = DateTime.Now;
+                            mailService.RequisitionId = assignRequisition.RequisitionId;
+                        
+                            var result = _mailServiceManager.Add(mailService);
+
+                            if (result)
+                            {
+                                try
+                                {
+                                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                                    smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+                                    smtpClient.EnableSsl = true;
+
+
+                                    MailMessage mailMessage = new MailMessage();
+                                    mailMessage.From = new MailAddress("demowork9999@gmail.com");
+                                    mailMessage.To.Add(mailService.To);
+                                    mailMessage.Subject = mailService.Subject;
+                                    mailMessage.Body = mailService.Body;
+                                    smtpClient.Send(mailMessage);
+
+                                    TempData["msg"] = "Mail has been save and send successfully";
+                                    return RedirectToAction("Index");
+                                }
+                                catch (Exception ex)
+                                {
+                                    TempData["msg1"] = "Mail send failed. The error message is -" + "<br/>" + " [ " + ex.Message + " Helpline" + " ] ";
+
+                                    return RedirectToAction("Index");
+                                }
+
+                            }
+                        }
                         return RedirectToAction("Index");
                     }
                     
@@ -395,6 +455,10 @@ namespace RMS.App.Controllers
                 _employeeManager.Dispose();
                 _requisitionManager.Dispose();
                 _vehicleManager.Dispose();
+                _vehicleTypeManager.Dispose();
+                _requisitionStatusManager.Dispose();
+                _mailServiceManager.Dispose();
+                _notificationManager.Dispose();
             }
             base.Dispose(disposing);
         }

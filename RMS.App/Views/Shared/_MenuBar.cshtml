@@ -57,10 +57,11 @@
                                 </ul>
                             </li>
                         }
-                        @if (User.IsInRole("Administrator"))
+                        @*@if (User.IsInRole("Administrator"))
                         {
                             <li>@Html.ActionLink("Create Controller", "CreateController", "Account")</li>
-                        }
+                        }*@
+
                         @if (User.IsInRole("User"))
                         {
                             <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>

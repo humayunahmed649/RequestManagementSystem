@@ -53,18 +53,7 @@ namespace RMS.App.Controllers
 
         }
 
-        public ActionResult SearchIndex()
-        {
-            try
-            {
-
-                return View();
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "Organizations", "SearchIndex"));
-            }
-        }
+       
         [HttpPost]
         public ActionResult GetList()
         {
@@ -96,6 +85,7 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Organizations", "GetList"));
             }
         }
+
         // GET: Organizations/Details/5
         public ActionResult Details(int? id)
         {

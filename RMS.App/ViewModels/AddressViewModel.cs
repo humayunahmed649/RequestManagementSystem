@@ -42,7 +42,7 @@ namespace RMS.App.ViewModels
         public int DistrictId { get; set; }
         public District District { get; set; }
 
-        [Display(Name = "Upazila/Thana ")]
+        [Display(Name = "UPZ/PS ")]
         [Required(ErrorMessage = "Please select a upazila!")]
         public int UpazilaId { get; set; }
         public Upazila Upazila { get; set; }

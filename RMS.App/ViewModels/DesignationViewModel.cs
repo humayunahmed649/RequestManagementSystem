@@ -12,6 +12,7 @@ namespace RMS.App.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please provide a Title!")]
+        [Display(Name = "Designation")]
         public string Title { get; set; }
     }
 }
