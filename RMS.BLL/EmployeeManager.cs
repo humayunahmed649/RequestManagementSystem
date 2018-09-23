@@ -29,6 +29,9 @@ namespace RMS.BLL
         {
             return _employeeRepository.FindByLoginId(id);
         }
+
+        
+
         public ICollection<Employee> GetAllDriver()
         {
             return _employeeRepository.GetAllDriver();

@@ -1,0 +1,228 @@
+﻿@model RMS.App.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </dd>
+
+
+
+        @*
+            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+             Uncomment the following block after you have set up two-factor authentication
+        *@
+        @*
+            <dt>Phone Number:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "None") [
+                @if (Model.PhoneNumber != null)
+                {
+                    @Html.ActionLink("Change", "AddPhoneNumber")
+                    @: &nbsp;|&nbsp;
+                    @Html.ActionLink("Remove", "RemovePhoneNumber")
+                }
+                else
+                {
+                    @Html.ActionLink("Add", "AddPhoneNumber")
+                }
+                ]
+            </dd>
+        *@
+        @*@if (Model.TwoFactor)
+            {
+                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>Enabled
+                    <input type="submit" value="Disable" class="btn btn-link" />
+                    </text>
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>Disabled
+                    <input type="submit" value="Enable" class="btn btn-link" />
+                    </text>
+                }
+            }*@
+    </dl>
+
+    <div class="col-md-9">
+        <h3>Personal Information :</h3>
+        <br />
+        <table class="table table-bordered table-info table-striped" style="width: 100%">
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.FullName)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.FullName)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.EmployeeType.Type)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.EmployeeType.Type)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.ContactNo)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.ContactNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.Email)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.Email)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.NID)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.NID)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.DrivingLicence)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.DrivingLicence)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.BloodGroup)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.BloodGroup)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-12">
+        <h3>Office Information :</h3>
+        <br />
+        <table class="table table-bordered table-info table-striped">
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.Organization.Name)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.Organization.Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.Department.Name)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.Department.Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 20%">
+                    @Html.DisplayNameFor(model => model.Model.Designation.Title)
+                </td>
+                <td style="width: 80%">
+                    @Html.DisplayFor(model => model.Model.Designation.Title)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-12">
+        <h3>Address :</h3>
+        <br />
+        <div class="row border table-info">
+            <br />
+            <div class="col-md-6">
+                <div class="row">
+
+                    <div class="col-md-4 border col-md-2-custom">
+                        <br /><br /><br />
+                        @Html.DisplayName("Present Address")
+                    </div>
+                    <div class="col-md-8 border">
+                        <br />
+                        @foreach (var item in Model.Model.Addresses)
+                        {
+                            if (item.AddressType == "Present Address")
+                            {
+                                @Html.DisplayFor(modelItem => item.AddressLine1)<br />
+                                    @Html.DisplayFor(modelItem => item.AddressLine2)<br />
+                                    @Html.DisplayFor(modelItem => item.PostOffice)<br />
+                                    @Html.DisplayFor(modelItem => item.PostCode)<br />
+                                    @Html.DisplayFor(modelItem => item.Division.Name)<br />
+                                    @Html.DisplayFor(modelItem => item.District.Name)<br />
+                                    @Html.DisplayFor(modelItem => item.Upazila.Name)<br /><br />
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <br />
+                    <div class="col-md-4 border col-md-2-custom">
+                        <br /><br /><br />
+                        @Html.DisplayName("Permanent Address")
+                    </div>
+                    <div class="col-md-8 border">
+                        <br />
+                        @foreach (var item in Model.Model.Addresses)
+                        {
+                            if (item.AddressType == "Permanent Address")
+                            {
+                                @Html.DisplayFor(modelItem => item.AddressLine1)<br />
+                                    @Html.DisplayFor(modelItem => item.AddressLine2)<br />
+                                    @Html.DisplayFor(modelItem => item.PostOffice)<br />
+                                    @Html.DisplayFor(modelItem => item.PostCode)<br />
+                                    @Html.DisplayFor(modelItem => item.Division.Name)<br />
+                                    @Html.DisplayFor(modelItem => item.District.Name)<br />
+                                    @Html.DisplayFor(modelItem => item.Upazila.Name)<br /><br />
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
