@@ -261,8 +261,12 @@ namespace RMS.App.Controllers
             {
                 return null;
             }
-            var status = _assignRequisitionManager.GetAll().Where(c => c.VehicleId == vehicleId);
-            return Json(status, JsonRequestBehavior.AllowGet);
+            var status = _requisitionStatusManager.GetAll().Where(c => c.StatusType != "Completed" && c.StatusType != "New");
+            var vehicles = _assignRequisitionManager.GetAll().Where(c => c.VehicleId == vehicleId);
+            
+            
+            return Json(vehicles, JsonRequestBehavior.AllowGet);
+            
         }
 
         protected override void Dispose(bool disposing)

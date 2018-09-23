@@ -137,7 +137,7 @@ namespace RMS.App.Controllers
                     ViewBag.Notification = notification;
                     ViewBag.count = notificationCount;
                 }
-                ViewBag.Requisition = requisitionViewModels;
+                ViewBag.Requisition = _requisitionManager.GetAllRequisitionByEmployeeId(empId.Id);
 
                 return View();
             }

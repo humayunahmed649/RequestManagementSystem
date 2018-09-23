@@ -159,9 +159,18 @@
                             </div>
                         </div>
 
-                        <div id="mydata">
-                            <lable id="labelForStatus"></lable>
-                        </div>
+                        @*Vehicle Status div*@
+
+                        @*<div class="form-group row">
+                            @Html.Label("Vehicle Status", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+
+                                @Html.DropDownList("VehicleId", null, htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleStatusDD" })
+
+
+                            </div>
+                        </div>*@
+
 
                         <div class="form-group row">
                             @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new {@class = "control-label col-md-3"})

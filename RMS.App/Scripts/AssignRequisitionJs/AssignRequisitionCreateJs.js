@@ -32,17 +32,23 @@ $(document).ready(function() {
             url: "/Vehicles/GetVehicleStatusByVehicleId",
             data: data,
             type: "POST",
-            success: function (data) {
-                if (data.VehicleId == 1) {
-                    alert("This Vehicle Is Not Available");
-                } else {
-                    alert("This Vehicle Is Available");
-                }
-                //var result = {};
-                //result.VehicleId = data.VehicleId;
-                //result.BrandName = data.BrandName;
-                //$('#labelForStatus').html();
+            success: function (response) {
+                $.each(response,
+                    function (key, vehicle) {
+                        if (data.vehicleId == data.VehicleId) {
+                            alert("This vehicle is Available");
+                        }
+                        else {
+                            alert("This vehicle is not Available");
+                        }
+                        //$("#vehicleStatusDD").append("<option>Assigned</option>");
+                    });
+                //$("#vehicleStatusDD").append(options);
+                
             },
+            error: function (response) {
+                alert("Error");
+            }
         });
 
     });
