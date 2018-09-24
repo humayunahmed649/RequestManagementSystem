@@ -448,6 +448,38 @@ namespace RMS.App.Controllers
             
         }
 
+        public ActionResult CompleteRequest()
+        {
+            try
+            {
+                ICollection<RequisitionStatus> requisitions = _requisitionStatusManager.GetAll().Where(c => c.StatusType == "Completed").ToList();
+                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
+                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitions);
+                return View(requisitionStatusViewModels);
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "CompleteRequest"));
+            }
+        }
+
+        public ActionResult OnProcess()
+        {
+            try
+            {
+                ICollection<RequisitionStatus> requisitions = _requisitionStatusManager.GetAll().Where(c => c.StatusType == "OnExecute").ToList();
+                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
+                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitions);
+                return View(requisitionStatusViewModels);
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "OnProcess"));
+            }
+        }
+
         public ActionResult ReportIndex()
         {
             var reportData = _assignRequisitionManager.GetRequisitionSummaryReport();

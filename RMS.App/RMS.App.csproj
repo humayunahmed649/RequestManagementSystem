@@ -1014,6 +1014,8 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\AssignRequisitions\ReportIndex.cshtml" />
     <Content Include="Views\Shared\_LoadReport.cshtml" />
+    <Content Include="Views\AssignRequisitions\CompleteRequest.cshtml" />
+    <Content Include="Views\AssignRequisitions\OnProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
