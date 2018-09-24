@@ -127,7 +127,7 @@ namespace RMS.App.Controllers
                 ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
                 ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
+                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type",1);
                 EmployeeViewModel employeeViewModel = new EmployeeViewModel();
                 employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
                 ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
@@ -272,7 +272,7 @@ namespace RMS.App.Controllers
                 ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title");
                 ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name");
-                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type");
+                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type",2);
                 DriverViewModel driverViewModel = new DriverViewModel();
                 driverViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
                 ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");

@@ -5,8 +5,6 @@
 }
 
 
-
-
 <div class="container">
     @if (TempData["msg"] != null)
     {
@@ -32,12 +30,12 @@
                     </div>
 
                     <table class="table table-light table-active table-primary table-responsive nowrap">
-                        <tr>
-                            <td class="col-md-2-custom" style="width: 40%">@Html.DisplayName("Requisition No :")</td>
+                        @*<tr>
+                            <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requisition No :")</td>
                             <td>@data.RequisitionNumber</td>
-                        </tr>
+                        </tr>*@
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Requestor Name :")</td>
+                            <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requestor Name :")</td>
                             <td>@data.Employee.FullName</td>
                         </tr>
                         <tr>
@@ -66,11 +64,11 @@
 
                     <table class="table table-light table-active table-primary table-responsive nowrap">
                         <tr>
-                            <td class="col-md-2-custom" style="width: 40%">@Html.DisplayName("Journey Date Time :")</td>
+                            <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Journey Date And Time :")</td>
                             <td>@data.StartDateTime</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Return Date Time :")</td>
+                            <td class="col-md-2-custom" >@Html.DisplayName("Return Date And Time :")</td>
                             <td>@data.EndDateTime</td>
                         </tr>
                         <tr>
@@ -86,7 +84,7 @@
                             <td>@data.PassengerQty</td>
                         </tr>
                         <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Submited Time :")</td>
+                            <td class="col-md-2-custom">@Html.DisplayName("Submited Date And Time :")</td>
                             <td>@data.SubmitDateTime</td>
                         </tr>
                         <tr>

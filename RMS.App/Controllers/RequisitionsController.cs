@@ -213,7 +213,24 @@ namespace RMS.App.Controllers
                 IEnumerable<RequisitionViewModel> requisitionViewModels =
                     Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
                 ViewBag.Requisition = requisitionViewModels;
+
+                //Get employee Id by user login id
+                var loginUserId1 = Convert.ToInt32(User.Identity.GetUserId());
+                var empId1 = _employeeManager.FindByLoginId(loginUserId1);
+
+                //Notifications for assignd vehicle from controller
+                var notification1 = _notificationManager.GetNotificationsForSender("Unseen", empId1.Id);
+                var notificationCount = notification1.Count;
+
+                if (notification1 != null)
+                {
+                    ViewBag.Notification = notification1;
+                    ViewBag.count = notificationCount;
+                }
+
+                ViewBag.Requisition = _requisitionManager.GetAllRequisitionByEmployeeId(empId1.Id);
                 TempData["msg"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
+
                 return View();
             }
             catch (Exception ex)

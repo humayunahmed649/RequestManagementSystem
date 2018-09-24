@@ -179,7 +179,7 @@ namespace RMS.App.Controllers
 
                         if (employee.Email != null)
                         {
-                            var subject = "Assign a vehicle for your requisition no : " + assignRequisition.RequisitionNumber;
+                            var subject = "Assign a vehicle on your requisition no : " + assignRequisition.RequisitionNumber;
                             var msgBody = "Dear " + employee.FullName + "," + " \n\r " + " \r\r\r\r\r\r "+ " On the basis of your request, assigned a vehicle. Your driver is " +
                                 driver.FullName + " Contect No : " + driver.ContactNo + ". Vehicle " + vehicle.VehicleType.Name +
                                 " and Reg No : " + vehicle.RegNo + ". "+" \n\r "+"Regards, "+" \n " +" \r\r\r\r\r\r "+ controller.FullName;

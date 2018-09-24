@@ -31,7 +31,7 @@
         <div class="col-md-6">
             <br/>
             <div class="form-group row">
-                @Html.LabelFor(model => model.EmployeeTypeId, htmlAttributes: new {@class = "control-label col-md-3"})
+                @Html.LabelFor(model => model.EmployeeTypeId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                 <div class="col-md-9">
                     @Html.DropDownList("EmployeeTypeId", null, htmlAttributes: new {@class = "form-control", @id= "searchableDD1" })
                     @Html.ValidationMessageFor(model => model.EmployeeTypeId, "", new {@class = "text-danger"})
@@ -46,7 +46,7 @@
             </div>
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-3"})
+                @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-3 required" })
                 <div class="col-md-9">
                     @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Email" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
@@ -98,10 +98,10 @@
             <br/>
             <h3>Office info</h3>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <br/>
             <div class="form-group row">
-                @Html.LabelFor(model => model.OrganizationId, htmlAttributes: new {@class = "control-label col-md-3"})
+                @Html.LabelFor(model => model.OrganizationId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                 <div class="col-md-9">
                     @Html.DropDownList("OrganizationId", null, htmlAttributes: new {@class = "form-control", @id= "searchableDD2" })
                     @Html.ValidationMessageFor(model => model.OrganizationId, "", new {@class = "text-danger"})
@@ -109,7 +109,7 @@
             </div>
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new {@class = "control-label col-md-3"})
+                @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                 <div class="col-md-9">
                     @Html.DropDownList("DepartmentId", null, htmlAttributes: new {@class = "form-control", @id= "searchableDD3" })
                     @Html.ValidationMessageFor(model => model.DepartmentId, "", new {@class = "text-danger"})
@@ -117,7 +117,7 @@
             </div>
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.DesignationId, htmlAttributes: new {@class = "control-label col-md-3"})
+                @Html.LabelFor(model => model.DesignationId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                 <div class="col-md-9">
                     @Html.DropDownList("DesignationId", null, htmlAttributes: new {@class = "form-control",@id= "searchableDD4" })
                     @Html.ValidationMessageFor(model => model.DesignationId, "", new {@class = "text-danger"})
@@ -144,63 +144,63 @@
                             @Html.LabelFor(model=>model.AddressViewModel.EmployeeId,htmlAttributes:new {@class="control-label col-md-3"})
                             <div class="col-md-9">
                                 <input name="Addresses.Index" value="0" type="hidden" />
-                                @Html.TextBox("Addresses[0].Id", item.Id, new {@class = "form-control", @id = "addressId", @style = "width: 100%; max-width: 100%;"})<br/>
-                                @Html.TextBox("Addresses[0].EmployeeId", item.EmployeeId, new { @class = "form-control", @id = "employeeId", @style = "width: 100%; max-width: 100%;" })
+                                @Html.TextBox("Addresses[0].Id", item.Id, new {@class = "form-control", @id = "addressId"})<br/>
+                                @Html.TextBox("Addresses[0].EmployeeId", item.EmployeeId, new { @class = "form-control", @id = "employeeId" })
                             </div>
                         </div>
                         
                         <div class="form-group row" hidden="hidden">
                             @Html.LabelFor(model => model.AddressViewModel.AddressType, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[0].AddressType", item.AddressType, new {@class = "form-control", @style = "width: 100%; max-width: 100%;", @readOnly = "readonly", @id = "addressType"})
+                                @Html.TextBox("Addresses[0].AddressType", item.AddressType, new {@class = "form-control", @readOnly = "readonly", @id = "addressType"})
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.AddressViewModel.AddressLine1, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[0].AddressLine1", item.AddressLine1, new {@class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @style = "width: 100%; max-width: 100%;", @id = "addressLine1"})
+                                @Html.TextBox("Addresses[0].AddressLine1", item.AddressLine1, new {@class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @id = "addressLine1"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine1, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[0].AddressLine2", item.AddressLine2, new {@class = "form-control", @style = "width: 100%; max-width: 100%;", PlaceHolder = "Village: / Moholla:", @id = "addressLine2"})
+                                @Html.TextBox("Addresses[0].AddressLine2", item.AddressLine2, new {@class = "form-control", PlaceHolder = "Village: / Moholla:", @id = "addressLine2"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine2, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[0].PostOffice", item.PostOffice, new {@class = "form-control",@style = "width: 100%; max-width: 100%;", PlaceHolder = "Post Office", @id = "postOffice"})
+                                @Html.TextBox("Addresses[0].PostOffice", item.PostOffice, new {@class = "form-control", PlaceHolder = "Post Office", @id = "postOffice"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.PostOffice, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[0].PostCode", item.PostCode, new {@class = "form-control", @style = "width: 100%; max-width: 100%;", PlaceHolder = "Post Code", @id = "postCode"})
+                                @Html.TextBox("Addresses[0].PostCode", item.PostCode,  new {@class = "form-control", PlaceHolder = "Post Code", @id = "postCode"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.PostCode, "", new {@class = "text-danger"})
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
                                 @Html.DropDownList("Addresses[0].DivisionId", new SelectList(Model.DivisionList, "Id", "Name",item.DivisionId), "Select Division", htmlAttributes: new {@class = "form-control", @id = "divisionDD"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.DivisionId, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
                                 @Html.DropDownList("Addresses[0].DistrictId", new SelectList("",item.DistrictId),"Select District", htmlAttributes: new {@class = "form-control", @id = "districtDD"})
 
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
                                 @Html.DropDownList("Addresses[0].UpazilaId", new SelectList("",item.UpazilaId),"Select Upazila/Thana", htmlAttributes: new {@class = "form-control", @id = "upazilaDD"})
 
@@ -234,63 +234,63 @@
                             @Html.LabelFor(model => model.AddressViewModel.EmployeeId, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
                                 <input name="Addresses.Index" value="1" type="hidden" />
-                                @Html.TextBox("Addresses[1].Id", item.Id, new { @class = "form-control", @id = "addressIdp", @style = "width: 100%; max-width: 100%;" })<br />
-                                @Html.TextBox("Addresses[1].EmployeeId", item.EmployeeId, new { @class = "form-control", @id = "employeeIdp", @style = "width: 100%; max-width: 100%;" })
+                                @Html.TextBox("Addresses[1].Id", item.Id, new { @class = "form-control", @id = "addressIdp" })<br />
+                                @Html.TextBox("Addresses[1].EmployeeId", item.EmployeeId, new { @class = "form-control", @id = "employeeIdp"})
                             </div>
                         </div>
                         <div class="form-group row" hidden="hidden">
                             @Html.LabelFor(model => model.AddressViewModel.AddressType, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[1].AddressType",item.AddressType, new {@class = "form-control", @style = "width: 100%; max-width: 100%;", @readOnly = "readonly", @id="addressTypep"})
+                                @Html.TextBox("Addresses[1].AddressType",item.AddressType, new {@class = "form-control", @readOnly = "readonly", @id="addressTypep"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.AddressType, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.AddressViewModel.AddressLine1, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[1].AddressLine1", item.AddressLine1, new {@class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @style = "width: 100%; max-width: 100%;", @id = "addressLine1p"})
+                                @Html.TextBox("Addresses[1].AddressLine1", item.AddressLine1, new {@class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @id = "addressLine1p"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine1, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[1].AddressLine2", item.AddressLine2, new {@class = "form-control", PlaceHolder = "Village: / Moholla:", @style = "width: 100%; max-width: 100%;", @id = "addressLine2p"})
+                                @Html.TextBox("Addresses[1].AddressLine2", item.AddressLine2, new {@class = "form-control", PlaceHolder = "Village: / Moholla:", @id = "addressLine2p"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine2, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[1].PostOffice", item.PostOffice, new {@class = "form-control", PlaceHolder = "Post Office", @style = "width: 100%; max-width: 100%;", @id = "postOfficep"})
+                                @Html.TextBox("Addresses[1].PostOffice", item.PostOffice, new {@class = "form-control", PlaceHolder = "Post Office", @id = "postOfficep"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.PostOffice, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
-                                @Html.TextBox("Addresses[1].PostCode", item.PostCode, new {@class = "form-control", PlaceHolder = "Post Code", @style = "width: 100%; max-width: 100%;", @id = "postCodep"})
+                                @Html.TextBox("Addresses[1].PostCode", item.PostCode, new {@class = "form-control", PlaceHolder = "Post Code", @id = "postCodep"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.PostCode, "", new {@class = "text-danger"})
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
                                 @Html.DropDownList("Addresses[1].DivisionId", new SelectList(Model.DivisionList, "Id", "Name",item.DivisionId), "Select Division", htmlAttributes: new {@class = "form-control", @id = "divisionDDp"})
                                 @Html.ValidationMessageFor(model => model.AddressViewModel.DivisionId, "", new {@class = "text-danger"})
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
                                 @Html.DropDownList("Addresses[1].DistrictId", new SelectList(""), "Select District", htmlAttributes: new {@class = "form-control", @id = "districtDDp"})
 
                             </div>
                         </div>
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                             <div class="col-md-9">
                                 @Html.DropDownList("Addresses[1].UpazilaId", new SelectList(""), "Select Upazila/Thana", htmlAttributes: new {@class = "form-control", @id = "upazilaDDp"})
 
@@ -316,62 +316,62 @@
                     @Html.LabelFor(model => model.AddressViewModel.EmployeeId, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
                         <input name="Addresses.Index" value="0" type="hidden" />
-                        @Html.TextBox("Addresses[0].EmployeeId", Model.Id, new { @class = "form-control", @id = "employeeId", @style = "width: 100%; max-width: 100%;" })
+                        @Html.TextBox("Addresses[0].EmployeeId", Model.Id, new { @class = "form-control", @id = "employeeId"})
                     </div>
                 </div>
 
                 <div class="form-group row" hidden="hidden">
                     @Html.LabelFor(model => model.AddressViewModel.AddressType, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[0].AddressType", "Present Address", new { @class = "form-control", @style = "width: 100%; max-width: 100%;", @readOnly = "readonly", @id = "addressType" })
+                        @Html.TextBox("Addresses[0].AddressType", "Present Address", new { @class = "form-control", @readOnly = "readonly", @id = "addressType" })
                     </div>
                 </div>
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AddressViewModel.AddressLine1, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[0].AddressLine1", null, new { @class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @style = "width: 100%; max-width: 100%;", @id = "addressLine1" })
+                        @Html.TextBox("Addresses[0].AddressLine1", null, new { @class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @id = "addressLine1" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine1, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[0].AddressLine2", null, new { @class = "form-control", @style = "width: 100%; max-width: 100%;", PlaceHolder = "Village: / Moholla:", @id = "addressLine2" })
+                        @Html.TextBox("Addresses[0].AddressLine2", null, new { @class = "form-control", PlaceHolder = "Village: / Moholla:", @id = "addressLine2" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine2, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[0].PostOffice", null, new { @class = "form-control", PlaceHolder="Post Office" ,@style = "width: 100%; max-width: 100%;", @id = "postOffice" })
+                        @Html.TextBox("Addresses[0].PostOffice", null, new { @class = "form-control", PlaceHolder="Post Office" , @id = "postOffice" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.PostOffice, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[0].PostCode",null, new { @class = "form-control", PlaceHolder = "Post Code", @style = "width: 100%; max-width: 100%;", @id = "postCode" })
+                        @Html.TextBox("Addresses[0].PostCode",null, new { @class = "form-control", PlaceHolder = "Post Code", @id = "postCode" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.PostCode, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
                         @Html.DropDownList("Addresses[0].DivisionId", new SelectList(Model.DivisionList, "Id", "Name"), "Select Division", htmlAttributes: new { @class = "form-control", @id = "divisionDD" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.DivisionId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
                         @Html.DropDownList("Addresses[0].DistrictId", new SelectList(""),"Select District", htmlAttributes: new { @class = "form-control", @id = "districtDD" })
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
                         @Html.DropDownList("Addresses[0].UpazilaId", new SelectList(""),"Select Upazila/Thana", htmlAttributes: new { @class = "form-control", @id = "upazilaDD" })
 
@@ -404,61 +404,61 @@
                     @Html.LabelFor(model => model.AddressViewModel.EmployeeId, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
                         <input name="Addresses.Index" value="1" type="hidden" />
-                        @Html.TextBox("Addresses[1].EmployeeId", Model.Id, new { @class = "form-control", @id = "employeeIdp", @style = "width: 100%; max-width: 100%;" })
+                        @Html.TextBox("Addresses[1].EmployeeId", Model.Id, new { @class = "form-control", @id = "employeeIdp", })
                     </div>
                 </div>
                 <div class="form-group row" hidden="hidden">
                     @Html.LabelFor(model => model.AddressViewModel.AddressType, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[1].AddressType", "Permanent Address", new { @class = "form-control", @style = "width: 100%; max-width: 100%;", @readOnly = "readonly",@id="addressTypep" })
+                        @Html.TextBox("Addresses[1].AddressType", "Permanent Address", new { @class = "form-control", @readOnly = "readonly",@id="addressTypep" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.AddressType, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AddressViewModel.AddressLine1, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[1].AddressLine1", null, new { @class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @style = "width: 100%; max-width: 100%;", @id = "addressLine1p" })
+                        @Html.TextBox("Addresses[1].AddressLine1", null, new { @class = "form-control", PlaceHolder = "House No: , Flat No: , Road No:", @id = "addressLine1p" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine1, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.AddressLine2, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[1].AddressLine2", null, new { @class = "form-control", PlaceHolder = "Village: / Moholla:", @style = "width: 100%; max-width: 100%;", @id = "addressLine2p" })
+                        @Html.TextBox("Addresses[1].AddressLine2", null, new { @class = "form-control", PlaceHolder = "Village: / Moholla:", @id = "addressLine2p" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.AddressLine2, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.PostOffice, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[1].PostOffice", null, new { @class = "form-control", PlaceHolder = "Post Office", @style = "width: 100%; max-width: 100%;", @id = "postOfficep" })
+                        @Html.TextBox("Addresses[1].PostOffice", null, new { @class = "form-control", PlaceHolder = "Post Office",@id = "postOfficep" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.PostOffice, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.PostCode, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
-                        @Html.TextBox("Addresses[1].PostCode",null, new { @class = "form-control", PlaceHolder = "Post Code", @style = "width: 100%; max-width: 100%;", @id = "postCodep" })
+                        @Html.TextBox("Addresses[1].PostCode",null, new { @class = "form-control", PlaceHolder = "Post Code", @id = "postCodep" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.PostCode, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.DivisionId, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
                         @Html.DropDownList("Addresses[1].DivisionId", new SelectList(Model.DivisionList, "Id", "Name"), "Select Division", htmlAttributes: new { @class = "form-control", @id = "divisionDDp" })
                         @Html.ValidationMessageFor(model => model.AddressViewModel.DivisionId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.DistrictId, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
                         @Html.DropDownList("Addresses[1].DistrictId", new SelectList(""), "Select District", htmlAttributes: new { @class = "form-control", @id = "districtDDp" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.LabelFor(model => model.AddressViewModel.UpazilaId, htmlAttributes: new { @class = "control-label col-md-3 required" })
                     <div class="col-md-9">
                         @Html.DropDownList("Addresses[1].UpazilaId", new SelectList(""), "Select Upazila/Thana", htmlAttributes: new { @class = "form-control", @id = "upazilaDDp" })
 

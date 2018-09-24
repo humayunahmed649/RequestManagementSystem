@@ -22,12 +22,12 @@ namespace RMS.Repositories
 
         public override ICollection<Requisition> GetAll()
         {
-            return db.Set<Requisition>().Include(c => c.Employee).AsNoTracking().ToList();
+            return db.Set<Requisition>().Include(c => c.Employee).OrderByDescending(c=>c.Id).AsNoTracking().ToList();
         }
 
         public ICollection<Requisition> GetAllWithEmployee()
         {
-            return db.Set<Requisition>().Include(c=>c.Employee.Designation).AsNoTracking().ToList();
+            return db.Set<Requisition>().Include(c=>c.Employee.Designation).OrderByDescending(c=>c.Id).AsNoTracking().ToList();
         }
 
         public override Requisition FindById(int id)
@@ -46,7 +46,7 @@ namespace RMS.Repositories
             return
                 db.Set<Requisition>()
                     .Where(c => c.EmployeeId == id)
-                    .Include(d => d.Employee.Designation)
+                    .Include(d => d.Employee.Designation).OrderByDescending(c=>c.Id)
                     .AsNoTracking()
                     .ToList();
         }

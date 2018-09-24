@@ -15,19 +15,22 @@ namespace RMS.Repositories
         public RequisitionStatusRepository(DbContext db) : base(db)
         {
         }
-
+        public override ICollection<RequisitionStatus> GetAll()
+        {
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Include(c => c.Requisition.Employee).OrderByDescending(c => c.Id).AsNoTracking().ToList();
+        }
         public ICollection<RequisitionStatus> GetAllWithRequisitionDetails()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c=>c.StatusType=="Assigned").AsNoTracking().ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c=>c.StatusType=="Assigned").OrderByDescending(c=>c.Id).AsNoTracking().ToList();
         }
 
         public ICollection<RequisitionStatus> GetAllStatusNew()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition.Employee.Designation).Where(c => c.StatusType == "New").AsNoTracking().ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition.Employee.Designation).Where(c => c.StatusType == "New").OrderByDescending(c=>c.Id).AsNoTracking().ToList();
         }
         public ICollection<RequisitionStatus> GetAllStatusExecute()
         {
-            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "OnExecute").AsNoTracking().ToList();
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition).Where(c => c.StatusType == "OnExecute").OrderByDescending(c=>c.Id).AsNoTracking().ToList();
         }
 
         public ICollection<RequisitionStatus> SearchByRequisitionId(string searchText)
