@@ -261,8 +261,7 @@ namespace RMS.App.Controllers
             {
                 return null;
             }
-            var status = _requisitionStatusManager.GetAll().Where(c => c.StatusType != "Completed" && c.StatusType != "New");
-            var vehicles = _assignRequisitionManager.GetAll().Where(c => c.VehicleId == vehicleId);
+            var vehicles = _assignRequisitionManager.GetVehicleStatus((int)vehicleId);
             
             
             return Json(vehicles, JsonRequestBehavior.AllowGet);

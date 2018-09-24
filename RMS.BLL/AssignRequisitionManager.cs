@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.Report;
 using RMS.BLL.Base;
 using RMS.BLL.Contracts;
 using RMS.Models.EntityModels;
@@ -28,6 +29,14 @@ namespace RMS.BLL
             return _assignRequisitionRepository.SearchByText(searchByText);
         }
 
-       
+        public string GetVehicleStatus(int vehicleId)
+        {
+            return _assignRequisitionRepository.GetVehicleStatus(vehicleId);
+        }
+
+        public ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport()
+        {
+            return _assignRequisitionRepository.GetRequisitionSummaryReport();
+        }
     }
 }

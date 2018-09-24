@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.Report;
 using RMS.Models.EntityModels;
 
 namespace RMS.BLL.Contracts
@@ -11,5 +12,7 @@ namespace RMS.BLL.Contracts
     {
         ICollection<AssignRequisition> GetAllWithInformation();
         AssignRequisition SearchByName(string searchByText);
+        string GetVehicleStatus(int vehicleId);
+        ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport();
     }
 }

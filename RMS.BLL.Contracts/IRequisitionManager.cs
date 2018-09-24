@@ -11,7 +11,7 @@ namespace RMS.BLL.Contracts
     public interface IRequisitionManager:IManager<Requisition>
     {
         ICollection<Requisition> GetAllWithEmployee();
-        RequisitionSummaryReportVM GetRequisitionSummaryReport(int id);
+        
         ICollection<Requisition> GetAllRequisitionByEmployeeId(int id);
         
     }

@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.App.ViewModels.Report;
+using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
 using RMS.Repositories.Base;
 using RMS.Repositories.Contracts;
@@ -12,8 +14,10 @@ namespace RMS.Repositories
 {
     public class AssignRequisitionRepository:Repository<AssignRequisition>,IAssignRequisitionRepository
     {
-        public AssignRequisitionRepository(DbContext db) : base(db)
+        private RmsDbContext _db;
+        public AssignRequisitionRepository(RmsDbContext db) : base(db)
         {
+            _db = db;
         }
 
         public override ICollection<AssignRequisition> GetAll()
@@ -48,7 +52,34 @@ namespace RMS.Repositories
             return db.Set<AssignRequisition>().Include(c => c.Requisition).FirstOrDefault();
         }
 
-        
+        public string GetVehicleStatus(int vehicleId)
+        {
+            var vehicleStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
+                                 
+                join assignRequisition in db.Set<AssignRequisition>()
+                 
+                on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
+                where assignRequisition.VehicleId==vehicleId
+                select new
+                {
+                    RequisitionNumber = assignRequisition.RequisitionNumber,
+                    VehicleId = assignRequisition.VehicleId,
+                    DriverId = assignRequisition.Employee.EmployeeTypeId,
+                    Status = requisitionStatus.StatusType
+                }
+                ).ToList();
+            if (vehicleStatus.Count != 0)
+            {
+                return "This Vehicle Is Not Available";
+            }
+            return "This Vehicle is Available";
+        }
+
+        public ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport()
+        {
+            var report = _db.GetAssignRequisitionSummaryReport();
+            return report;
+        }
     }
     
 }

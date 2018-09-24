@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3A55305-D860-4B3C-A305-DB812C3B55AF}</ProjectGuid>
+    <ProjectGuid>{A4715D02-750E-4FAD-867B-6F3CE8D8E1A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RMS.Report</RootNamespace>
@@ -43,13 +43,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RequisitionSummaryReportRdlc.rdlc" />
+    <ProjectReference Include="..\RMS.Models\RMS.Models.csproj">
+      <Project>{ec92faca-b541-4cbe-8546-767d78b56d5b}</Project>
+      <Name>RMS.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RMS.App\RMS.App.csproj">
-      <Project>{a5b63db3-6c63-44c2-aa8e-ca137bcde042}</Project>
-      <Name>RMS.App</Name>
-    </ProjectReference>
+    <None Include="Properties\DataSources\RMS.App.ViewModels.Report.AssignRequisitionReportVM.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

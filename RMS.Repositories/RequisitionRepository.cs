@@ -35,11 +35,7 @@ namespace RMS.Repositories
             return db.Set<Requisition>().Where(c => c.Id == id).Include(c => c.Employee.Designation).AsNoTracking().SingleOrDefault();
         }
 
-        public RequisitionSummaryReportVM GetRequisitionSummaryReport(int id)
-        {
-            var report = _db.GetRequisitionSummaryReport();
-            return report.FirstOrDefault();
-        }
+        
 
         public ICollection<Requisition> GetAllRequisitionByEmployeeId(int id)
         {

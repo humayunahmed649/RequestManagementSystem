@@ -45,10 +45,10 @@ namespace RMS.Models.DatabaseContext
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.MailService> MailServices { get; set; }
 
 
-        public IQueryable<RequisitionSummaryReportVM> GetRequisitionSummaryReport()
+        public ICollection<AssignRequisitionReportVM> GetAssignRequisitionSummaryReport()
         {
-            var report=Database.SqlQuery<RequisitionSummaryReportVM>("Select * From RequisitionSummary");
-            return report.AsQueryable();
+            var report=Database.SqlQuery<AssignRequisitionReportVM>("Select * From AssignRequisitionReport");
+            return report.ToList();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

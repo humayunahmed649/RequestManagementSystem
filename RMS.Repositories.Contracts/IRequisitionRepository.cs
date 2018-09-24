@@ -11,7 +11,6 @@ namespace RMS.Repositories.Contracts
     public interface IRequisitionRepository:IRepository<Requisition>
     {
         ICollection<Requisition> GetAllWithEmployee();
-        RequisitionSummaryReportVM GetRequisitionSummaryReport(int id);
         ICollection<Requisition> GetAllRequisitionByEmployeeId(int id);
 
 

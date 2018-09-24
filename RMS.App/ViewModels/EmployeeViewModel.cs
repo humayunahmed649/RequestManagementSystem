@@ -63,7 +63,6 @@ namespace RMS.App.ViewModels
         public bool IsChecked { get; set; }
 
         [NotMapped]
-        [Required]
         public AddressViewModel AddressViewModel { get; set; }
 
         [NotMapped]

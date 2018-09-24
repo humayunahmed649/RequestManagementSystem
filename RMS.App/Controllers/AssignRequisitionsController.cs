@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using RMS.App.ViewModels;
@@ -16,6 +17,7 @@ using RMS.Models.EntityModels;
 using RMS.Models.Identity.IdentityConfig;
 using RMS.Repositories.Contracts;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Reporting.WebForms;
 
 namespace RMS.App.Controllers
 {
@@ -222,7 +224,7 @@ namespace RMS.App.Controllers
 
                             }
                         }
-                        return RedirectToAction("Index");
+                        //return RedirectToAction("AssignReport");
                     }
                     
                 }
@@ -445,7 +447,29 @@ namespace RMS.App.Controllers
             }
             
         }
-        
+
+        public ActionResult ReportIndex()
+        {
+            var reportData = _assignRequisitionManager.GetRequisitionSummaryReport();
+            var reportPath=Request.MapPath(Request.ApplicationPath)+ @"\Report\AssignRequisition\AssignRequisitionReportRdlc.rdlc";
+            ReportViewer reportViewer=new ReportViewer()
+            {
+                KeepSessionAlive    = true,
+                SizeToReportContent = true,
+                Width = Unit.Percentage(100),
+                ProcessingMode = ProcessingMode.Local
+            };
+            
+            reportViewer.LocalReport.ReportPath = reportPath;
+
+            ReportDataSource rds=new ReportDataSource("DS_AssignRequisitionSummary", reportData);
+
+            reportViewer.LocalReport.DataSources.Add(rds);
+            ViewBag.ReportViewer = reportViewer;
+            return View();
+
+        }
+
 
         protected override void Dispose(bool disposing)
         {

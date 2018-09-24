@@ -50,7 +50,6 @@ namespace RMS.App.ViewModels
         public EmployeeType EmployeeType { get; set; }
 
         [NotMapped]
-        [Required]
         public AddressViewModel AddressViewModel { get; set; }
 
         [NotMapped]
