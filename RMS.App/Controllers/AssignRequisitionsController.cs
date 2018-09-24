@@ -213,7 +213,7 @@ namespace RMS.App.Controllers
                                     smtpClient.Send(mailMessage);
 
                                     TempData["msg"] = "Mail has been save and send successfully";
-                                    return RedirectToAction("Index");
+                                    return RedirectToAction("Details","AssignRequisitions",new {id=assignRequisition.Id});
                                 }
                                 catch (Exception ex)
                                 {
@@ -224,7 +224,7 @@ namespace RMS.App.Controllers
 
                             }
                         }
-                        //return RedirectToAction("AssignReport");
+                        return RedirectToAction("Index");
                     }
                     
                 }
