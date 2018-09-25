@@ -55,24 +55,35 @@ namespace RMS.Repositories
         public string GetVehicleStatus(int vehicleId)
         {
             var vehicleStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
-                                 
+
                 join assignRequisition in db.Set<AssignRequisition>()
-                 
-                on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
-                where assignRequisition.VehicleId==vehicleId
+
+                    on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
+                orderby requisitionStatus.Requisition.EndDateTime descending
+                where assignRequisition.VehicleId == vehicleId
+
                 select new
                 {
                     RequisitionNumber = assignRequisition.RequisitionNumber,
                     VehicleId = assignRequisition.VehicleId,
-                    DriverId = assignRequisition.Employee.EmployeeTypeId,
+                    DriverId = assignRequisition.Employee.FullName,
                     Status = requisitionStatus.StatusType
                 }
-                ).ToList();
-            if (vehicleStatus.Count != 0)
+                ).FirstOrDefault();
+            if (vehicleStatus != null)
             {
-                return "This Vehicle Is Not Available";
+                if (vehicleStatus.Status == "Completed")
+                {
+
+                    return "This Vehicle Is  Available";
+                }
+                else
+                {
+                    string status = vehicleStatus.RequisitionNumber + "," + vehicleStatus.Status + "," + vehicleStatus.DriverId;
+                    return status;
+                }
             }
-            return "This Vehicle is Available";
+            return  "This Vehicle Is  Available";
         }
 
         public ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport()

@@ -53,10 +53,10 @@ namespace RMS.App.Controllers
             try
             {
 
-                ICollection<AssignRequisition> requisitions = _assignRequisitionManager.GetAll();
-                IEnumerable<AssignRequisitionViewModel> assignRequisitionViewModels =
-                    Mapper.Map<IEnumerable<AssignRequisitionViewModel>>(requisitions);
-                return View(assignRequisitionViewModels);
+                ICollection<RequisitionStatus> requisitionStatus = _requisitionStatusManager.GetAll().Where(c=>c.StatusType=="Assigned").ToList();
+                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModels =
+                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitionStatus);
+                return View(requisitionStatusViewModels);
             }
             catch (Exception ex)
             {

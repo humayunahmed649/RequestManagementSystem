@@ -33,18 +33,10 @@ $(document).ready(function() {
             data: data,
             type: "POST",
             success: function (response) {
-                $.each(response,
-                    function (key, vehicle) {
-                        if (data.vehicleId == data.VehicleId) {
-                            alert("This vehicle is Available");
-                        }
-                        else {
-                            alert("This vehicle is not Available");
-                        }
-                        //$("#vehicleStatusDD").append("<option>Assigned</option>");
-                    });
-                //$("#vehicleStatusDD").append(options);
+                var status = response.split(',');
                 
+                var statusInfo = "Requisition number: " + status[0] +"\n" +" Status: " + status[1] +"\n"+ " Driver Name: " + status[2];
+                $("#statusdiv").html(statusInfo);
             },
             error: function (response) {
                 alert("Error");
