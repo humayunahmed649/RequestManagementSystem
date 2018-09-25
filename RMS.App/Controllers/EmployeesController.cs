@@ -93,8 +93,8 @@ namespace RMS.App.Controllers
         public ActionResult GetAllDriver()
         {
             ICollection<Employee> employee = _employeeManager.GetAllDriver();
-            IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
-            return View(employeeViewModels);
+            IEnumerable<DriverViewModel> driverViewModels = Mapper.Map<IEnumerable<DriverViewModel>>(employee);
+            return View(driverViewModels);
         }
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
@@ -194,12 +194,12 @@ namespace RMS.App.Controllers
                                 employee.AppUserId = result;
                                 _employeeManager.Add(employee);
                                 TempData["msg"] = "Information has been saved successfully";
-                                return RedirectToAction("Index");
+                                return RedirectToAction("GetAllEmployee");
                             }
 
                         }
                     }
-                    if (employeeViewModel.IsChecked == true)
+                    if (employeeViewModel.EmployeeTypeId == 1 && employeeViewModel.IsChecked == true)
                     {
                         Employee employee = Mapper.Map<Employee>(employeeViewModel);
 
@@ -240,7 +240,7 @@ namespace RMS.App.Controllers
                                 employee.AppUserId = result;
                                 _employeeManager.Add(employee);
                                 TempData["msg"] = "Information has been saved successfully";
-                                return RedirectToAction("Index");
+                                return RedirectToAction("GetAllEmployee");
                             }
 
                         }
@@ -281,12 +281,12 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
+                return View("Error", new HandleErrorInfo(ex, "Employees", "CreateDriver"));
             }
         }
 
 
-        // POST: Employees/Create
+        // POST: Driver/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -301,16 +301,18 @@ namespace RMS.App.Controllers
                     if (driverViewModel.EmployeeTypeId == 2)
                     {
                         Employee employee = Mapper.Map<Employee>(driverViewModel);
-
-                        //var email = employee.Email.Trim();
+                        if (employee.Email!=null) 
+                        {
+                            var email = employee.Email.Trim();
+                            if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
+                            {
+                                ViewBag.Message1 = "Employee email already exist.";
+                            }
+                        }
+                        
                         var contactNo = employee.ContactNo.Trim();
                         var nid = employee.NID.Trim();
-
-                        //if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
-                        //{
-                        //    ViewBag.Message1 = "Employee email already exist.";
-                        //}
-
+                        var drivingLicence = employee.DrivingLicence.Trim();
                         if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo) > 0)
                         {
                             ViewBag.Message2 = "Employee contact no already exist.";
@@ -319,14 +321,10 @@ namespace RMS.App.Controllers
                         if (_employeeManager.GetAll().Count(o => o.NID == nid) > 0)
                         {
                             ViewBag.Message3 = "Employee NID already exist.";
-                        }
-                        if (employee.DrivingLicence != null)
+                        }                         
+                        if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence) > 0)
                         {
-                            var drivingLicence = employee.DrivingLicence.Trim();
-                            if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence) > 0)
-                            {
-                                ViewBag.Message4 = "Employee driving licence no already exist.";
-                            }
+                            ViewBag.Message4 = "Employee driving licence no already exist.";
                         }
 
                         if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null &&
@@ -334,7 +332,7 @@ namespace RMS.App.Controllers
                         {
                             _employeeManager.Add(employee);
                             TempData["msg"] = "Information has been saved successfully";
-                            return RedirectToAction("Index");
+                            return RedirectToAction("GetAllDriver");
                         }
 
                     }
@@ -352,7 +350,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
+                return View("Error", new HandleErrorInfo(ex, "Employees", "CreateDriver"));
             }
         }
 
@@ -377,11 +375,11 @@ namespace RMS.App.Controllers
                 ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employee.DesignationId);
                 ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employee.OrganizationId);
                 ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employee.EmployeeTypeId);
-                EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
-                employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                EmployeeEditViewModel employeeEditViewModel = Mapper.Map<EmployeeEditViewModel>(employee);
+                employeeEditViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
                 ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
                 ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                return View(employeeViewModel);
+                return View(employeeEditViewModel);
             }
             catch (Exception ex)
             {
@@ -394,13 +392,13 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] EmployeeViewModel employeeViewModel)
-        {
+        public ActionResult Edit([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] EmployeeEditViewModel employeeEditViewModel)
+       {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Employee employee = Mapper.Map<Employee>(employeeViewModel);
+                    Employee employee = Mapper.Map<Employee>(employeeEditViewModel);
 
                     var email = employee.Email.Trim();
                     var contactNo = employee.ContactNo.Trim();
@@ -431,25 +429,121 @@ namespace RMS.App.Controllers
                     {
                         _employeeManager.Update(employee);
                         TempData["msg"] = "Information has been updated successfully";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("GetAllEmployee");
                     }
                 }
 
                 TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
-                ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
-                ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeViewModel.DesignationId);
-                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeViewModel.OrganizationId);
-                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeViewModel.EmployeeTypeId);
-                employeeViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeEditViewModel.DepartmentId);
+                ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employeeEditViewModel.DesignationId);
+                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employeeEditViewModel.OrganizationId);
+                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employeeEditViewModel.EmployeeTypeId);
+                employeeEditViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
                 ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
                 ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
-                return View(employeeViewModel);
+                return View(employeeEditViewModel);
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Edit"));
             }
         }
+
+        // GET: Driver/Edit/5
+        public ActionResult EditDriver(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Employee employee = _employeeManager.FindById((int)id);
+                if (employee == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employee.DepartmentId);
+                ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", employee.DesignationId);
+                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", employee.OrganizationId);
+                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", employee.EmployeeTypeId);
+                DriverViewModel driverViewModel = Mapper.Map<DriverViewModel>(employee);
+                driverViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                return View(driverViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Employees", "EditDriver"));
+            }
+        }
+
+        // POST: Driver/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditDriver([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] DriverViewModel driverViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Employee employee = Mapper.Map<Employee>(driverViewModel);
+
+                    if (employee.Email != null)
+                    {
+                        var email = employee.Email.Trim();
+                        if (_employeeManager.GetAll().Count(o => o.Email == email && o.Id != employee.Id) > 0)
+                        {
+                            ViewBag.Message1 = "Employee email already exist.";
+                        }
+                    }
+
+                    var contactNo = employee.ContactNo.Trim();
+                    var nid = employee.NID.Trim();
+                    var drivingLicence = employee.DrivingLicence.Trim();
+
+                    if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo && o.Id != employee.Id) > 0)
+                    {
+                        ViewBag.Message2 = "Employee contact no already exist.";
+                    }
+                    if (_employeeManager.GetAll().Count(o => o.NID == nid && o.Id != employee.Id) > 0)
+                    {
+                        ViewBag.Message3 = "Employee NID already exist.";
+                    }   
+                    if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence && o.Id != employee.Id) > 0)
+
+                        {
+                            ViewBag.Message4 = "Employee driving licence no already exist.";
+                        }
+
+
+                    if (ViewBag.Message1 == null && ViewBag.Message2 == null && ViewBag.Message3 == null && ViewBag.Message4 == null)
+                    {
+                        _employeeManager.Update(employee);
+                        TempData["msg"] = "Information has been updated successfully";
+                        return RedirectToAction("GetAllDriver");
+                    }
+                }
+
+                TempData["msg"] = "Please Check Your Information! You have missed to give some information.";
+                ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", driverViewModel.DepartmentId);
+                ViewBag.DesignationId = new SelectList(_designationManager.GetAll(), "Id", "Title", driverViewModel.DesignationId);
+                ViewBag.OrganizationId = new SelectList(_organizationManager.GetAll(), "Id", "Name", driverViewModel.OrganizationId);
+                ViewBag.EmployeeTypeId = new SelectList(_employeeTypeManager.GetAll(), "Id", "Type", driverViewModel.EmployeeTypeId);
+                driverViewModel.DivisionList = (List<Division>)_divisionManager.GetAllDivisions();
+                ViewBag.DistrictDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select District" } }, "Value", "Text");
+                ViewBag.UpazilaDropDown = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Upazila" } }, "Value", "Text");
+                return View(driverViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Employees", "EditDriver"));
+            }
+        }
+
 
         // GET: Employees/Delete/5
         public ActionResult Delete(int? id)

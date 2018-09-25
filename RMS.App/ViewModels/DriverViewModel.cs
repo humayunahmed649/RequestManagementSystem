@@ -40,14 +40,20 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Please select a designation!")]
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
+
         [Required]
         [Display(Name = "Driving Licence")]
         public string DrivingLicence { get; set; }
+
+        [EmailAddress(ErrorMessage = "Email address is not valid!")]
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Please provide employee type!")]
         [Display(Name = "Employee Type")]
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
+
+        public List<Address> Addresses { get; set; }
 
         [NotMapped]
         public AddressViewModel AddressViewModel { get; set; }
@@ -55,7 +61,7 @@ namespace RMS.App.ViewModels
         [NotMapped]
         public List<Division> DivisionList { get; set; }
 
-        public List<Address> Addresses { get; set; }
+        
 
     }
 }

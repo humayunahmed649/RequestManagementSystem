@@ -13,14 +13,14 @@ using RMS.Models.EntityModels.Identity;
 
 namespace RMS.App.ViewModels
 {
-    public class EmployeeViewModel 
+    public class EmployeeEditViewModel 
     {
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please provide name!")]
         [Display(Name = "Name")]
         public string FullName { get; set; }
-        
+
         [Required(ErrorMessage = "Please provide an email!")]
         [EmailAddress(ErrorMessage = "Email address is not valid!")]
         public string Email { get; set; }
@@ -58,9 +58,12 @@ namespace RMS.App.ViewModels
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
 
+        public int? AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
+
         public List<Address> Addresses { get; set; }
 
-        [Required]
+        [NotMapped]
         public bool IsChecked { get; set; }
 
         [NotMapped]
@@ -71,18 +74,10 @@ namespace RMS.App.ViewModels
 
 
         [NotMapped]
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
 
         [NotMapped]
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
     }

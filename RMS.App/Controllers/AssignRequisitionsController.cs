@@ -168,7 +168,7 @@ namespace RMS.App.Controllers
 
                         //Assigned vehicle notification for employee by Controlle
                         Notification notification = new Notification();
-                        notification.Text = "Your requisition has been assigned";
+                        notification.Text = "Your vehicle has been assigned";
                         notification.EmployeeId = employee.Id;
                         notification.RequisitionId = assignRequisition.RequisitionId;
                         notification.SenderViewStatus = "Unseen";
@@ -212,12 +212,12 @@ namespace RMS.App.Controllers
                                     mailMessage.Body = mailService.Body;
                                     smtpClient.Send(mailMessage);
 
-                                    TempData["msg"] = "Mail has been save and send successfully";
+                                    TempData["msg"] = "Vehicle assigned and mail send successfully";
                                     return RedirectToAction("Details","AssignRequisitions",new {id=assignRequisition.Id});
                                 }
                                 catch (Exception ex)
                                 {
-                                    TempData["msg1"] = "Mail send failed. The error message is -" + "<br/>" + " [ " + ex.Message + " Helpline" + " ] ";
+                                    TempData["msg1"] = "Vehicle assigned but mail send failed. The error message is -" + "<br/>" + " [ " + ex.Message + " Helpline" + " ] ";
 
                                     return RedirectToAction("Index");
                                 }

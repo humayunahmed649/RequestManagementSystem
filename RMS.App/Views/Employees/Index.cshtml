@@ -23,9 +23,10 @@
     }
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-3 col-sm-3 col-3 text-left no-padding">
+            <div class="col-lg-5 col-sm-5 col-5 text-left no-padding">
                 <p>
-                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Create Employee", "Create", null, new { @class = "btn btn-success" }) &nbsp;
+                    @Html.ActionLink("Create Driver", "CreateDriver", null, new { @class = "btn btn-success" })
                 </p>
             </div>
 
@@ -53,6 +54,9 @@
                         @Html.DisplayNameFor(model => model.FullName)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.DesignationId)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.ContactNo)
                     </th>
                     <th>
@@ -61,9 +65,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.NID)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DesignationId)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.DepartmentId)
                     </th>
@@ -100,6 +102,9 @@
                                     @Html.DisplayFor(modelItem => item.FullName)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Designation.Title)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.ContactNo)
                                 </td>
                                 <td>
@@ -108,9 +113,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.NID)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Designation.Title)
-                                </td>
+                                
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Department.Name)
                                 </td>
@@ -127,7 +130,7 @@
                                     @Html.DisplayFor(modelItem => item.EmployeeType.Type)
                                 </td>
                                 <td class="text-right">
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })*@
                                     @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
 
                                 </td>
@@ -151,6 +154,9 @@
                         @Html.DisplayNameFor(model => model.FullName)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.DesignationId)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.ContactNo)
                     </th>
                     <th>
@@ -159,9 +165,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.NID)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DesignationId)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.DepartmentId)
                     </th>

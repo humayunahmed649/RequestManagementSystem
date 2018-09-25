@@ -268,6 +268,7 @@
     <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\AssignRequisitionViewModel.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
@@ -1016,6 +1017,7 @@
     <Content Include="Views\Shared\_LoadReport.cshtml" />
     <Content Include="Views\AssignRequisitions\CompleteRequest.cshtml" />
     <Content Include="Views\AssignRequisitions\OnProcess.cshtml" />
+    <Content Include="Views\Employees\EditDriver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,10 +1,10 @@
-﻿@model RMS.App.ViewModels.EmployeeEditViewModel
+﻿@model RMS.App.ViewModels.DriverViewModel
 
 @{
-    ViewBag.Title = "Update Employee";
+    ViewBag.Title = "Update Driver";
 }
 
-<h2>Update Employee</h2>
+<h2>Update Driver</h2>
 <hr/>
 
 @using (Html.BeginForm())
@@ -15,7 +15,6 @@
     
     @Html.ValidationSummary(true, "", new {@class = "text-danger"})
     @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model=>model.AppUserId)
 
         @if (TempData["msg"] != null)
         {
@@ -31,7 +30,6 @@
         </div>
         <div class="col-md-6">
             <br/>
-
             <div class="form-group row">
                 @Html.LabelFor(model => model.EmployeeTypeId, htmlAttributes: new {@class = "control-label col-md-3 required" })
                 <div class="col-md-9">
@@ -48,20 +46,20 @@
             </div>
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-3 required" })
+                @Html.LabelFor(model => model.ContactNo, htmlAttributes: new {@class = "control-label col-md-3"})
                 <div class="col-md-9">
-                    @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Email" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
-                    <p class="text-danger">@ViewBag.Message1</p>
+                    @Html.EditorFor(model => model.ContactNo, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Contact No"}})
+                    @Html.ValidationMessageFor(model => model.ContactNo, "", new {@class = "text-danger"})
+                    <p class="text-danger">@ViewBag.Message2</p>
                 </div>
             </div>
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.ContactNo, htmlAttributes: new {@class = "control-label col-md-3"})
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @Html.EditorFor(model => model.ContactNo, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Contact No" } })
-                    @Html.ValidationMessageFor(model => model.ContactNo, "", new {@class = "text-danger"})
-                    <p class="text-danger">@ViewBag.Message2</p>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <p class="text-danger">@ViewBag.Message1</p>
                 </div>
             </div>
         </div>
@@ -475,7 +473,7 @@
         <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
             <input type="submit" value="&nbsp; Update &nbsp;" class="btn btn-success" /> &nbsp;
-            @Html.ActionLink("Back to List", "GetAllEmployee", null, new {@class = "btn btn-info"})
+            @Html.ActionLink("Back to List", "GetAllDriver", null, new {@class = "btn btn-info"})
 
 
         </div>

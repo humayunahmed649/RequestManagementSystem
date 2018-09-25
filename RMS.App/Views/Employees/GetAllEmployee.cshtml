@@ -53,6 +53,9 @@
                         @Html.DisplayNameFor(model => model.FullName)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.DesignationId)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.ContactNo)
                     </th>
                     <th>
@@ -61,9 +64,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.NID)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DesignationId)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.DepartmentId)
                     </th>
@@ -100,6 +101,9 @@
                                     @Html.DisplayFor(modelItem => item.FullName)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Designation.Title)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.ContactNo)
                                 </td>
                                 <td>
@@ -108,9 +112,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.NID)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Designation.Title)
-                                </td>
+                                
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Department.Name)
                                 </td>
@@ -151,6 +153,9 @@
                         @Html.DisplayNameFor(model => model.FullName)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.DesignationId)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.ContactNo)
                     </th>
                     <th>
@@ -159,9 +164,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.NID)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DesignationId)
-                    </th>
+                   
                     <th>
                         @Html.DisplayNameFor(model => model.DepartmentId)
                     </th>

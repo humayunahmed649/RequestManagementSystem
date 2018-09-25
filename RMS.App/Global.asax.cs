@@ -33,6 +33,8 @@ namespace RMS.App
 
                 cfg.CreateMap<Employee, EmployeeViewModel>();
                 cfg.CreateMap<EmployeeViewModel, Employee>();
+                cfg.CreateMap<Employee, EmployeeEditViewModel>();
+                cfg.CreateMap<EmployeeEditViewModel, Employee>();
 
                 cfg.CreateMap<Address, AddressViewModel>();
                 cfg.CreateMap<AddressViewModel, Address>();
@@ -51,8 +53,10 @@ namespace RMS.App
 
                 cfg.CreateMap<RequisitionStatus, RequisitionStatusViewModel>();
                 cfg.CreateMap<RequisitionStatusViewModel, RequisitionStatus>();
+
                 cfg.CreateMap<Feedback, FeedbackViewModel>();
                 cfg.CreateMap<FeedbackViewModel,Feedback>();
+
                 cfg.CreateMap<Employee, DriverViewModel>();
                 cfg.CreateMap<DriverViewModel, Employee>().ForMember(c=>c.Password,opt=>opt.Ignore())
                                                           .ForMember(c=>c.ConfirmPassword,opt=>opt.Ignore())
