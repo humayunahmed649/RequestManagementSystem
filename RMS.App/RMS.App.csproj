@@ -960,7 +960,6 @@
     <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\Requisitions\CreateRequestForOther.cshtml" />
     <Content Include="Views\AssignRequisitions\Delete.cshtml" />
-    <Content Include="Views\AssignRequisitions\Index.cshtml" />
     <Content Include="Views\AssignRequisitions\Details.cshtml" />
     <Content Include="Views\AssignRequisitions\Create.cshtml" />
     <Content Include="Views\AssignRequisitions\ViewDetails.cshtml" />
@@ -1020,6 +1019,7 @@
     <Content Include="Views\AssignRequisitions\CompleteRequest.cshtml" />
     <Content Include="Views\AssignRequisitions\OnProcess.cshtml" />
     <Content Include="Views\Employees\EditDriver.cshtml" />
+    <Content Include="Views\AssignRequisitions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
