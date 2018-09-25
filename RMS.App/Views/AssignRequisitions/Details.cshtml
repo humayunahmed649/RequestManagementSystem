@@ -134,18 +134,8 @@
 
     <p>
 
-        <input type="button" id="btnPrint" value="Print this page" />
         @*@Html.ActionLink("Edit", "Edit", new { @id = Model.Id }, new { @class = "btn btn-warning" })*@ &nbsp;
         @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-info"})
     </p>
 </div>
-@section scripts
-{
-    <script>
-        $(function() {
-            $("#btnPrint").click(function() {
-                window.print();
-            });
-        });
-    </script>
-}
+

@@ -213,7 +213,7 @@ namespace RMS.App.Controllers
                                     smtpClient.Send(mailMessage);
 
                                     TempData["msg"] = "Vehicle assigned and mail send successfully";
-                                    return RedirectToAction("Details","AssignRequisitions",new {id=assignRequisition.Id});
+                                    return RedirectToAction("PrintDetails","AssignRequisitions",new {id=assignRequisition.Id});
                                 }
                                 catch (Exception ex)
                                 {
@@ -480,6 +480,8 @@ namespace RMS.App.Controllers
             }
         }
 
+       
+
         public ActionResult ReportIndex()
         {
             var reportData = _assignRequisitionManager.GetRequisitionSummaryReport();
@@ -501,7 +503,31 @@ namespace RMS.App.Controllers
             return View();
 
         }
+        public ActionResult PrintDetails(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
+                if (assignRequisition == null)
+                {
+                    return HttpNotFound();
+                }
 
+                var requestDetails = _assignRequisitionManager.GetAllWithInformation();
+                AssignRequisitionViewModel assignRequisitionViewModel = Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+
+                return View(assignRequisitionViewModel);
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "PrintDetails"));
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

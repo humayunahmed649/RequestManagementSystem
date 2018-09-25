@@ -1,0 +1,190 @@
+﻿@model RMS.App.ViewModels.AssignRequisitionViewModel
+
+@{
+    Layout = null;
+} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- load CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.css">
+</head>
+
+<body>
+
+
+<div class="container tm-container-2">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="float-left">
+                <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/bcc_logo.png" width="100" height="100" alt="Home Logo" title="Home BCC" /></a>
+                &nbsp; <strong style="font-size: 40px;" class="font-weight-bold" id="logotext">Bangladesh Computer Council</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- row -->
+    <hr>
+    <div class="row tm-section-mb tm-section-mt">
+        <div class="col-lg-6 col-md-6 col-sm-12 pr-lg-5 mb-md-0 mb-4">
+            <h3 class="mt-2 mb-3 tm-text-gray">Office Copy</h3>
+            <div>
+                Requestor Information
+            </div>
+            <div>
+                <table class="table table-light table-active table-primary dt-responsive nowrap">
+                    <tr>
+                        <td style="width: 35%">@Html.DisplayNameFor(model => model.Requisition.Employee.FullName)</td>
+                        <td>@Html.DisplayFor(model => model.Requisition.Employee.FullName)</td>
+                    </tr>
+                    <tr>
+
+                        <td style="width: 35%">@Html.DisplayNameFor(model => model.Requisition.Employee.Designation.Title)</td>
+                        <td>@Html.DisplayFor(model => model.Requisition.Employee.Designation.Title)</td>
+                    </tr>
+                </table>
+            </div>
+            <table class="table table-light table-active table-primary dt-responsive nowrap">
+                <tr>
+                    <td style="width: 25%">@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionNumber)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Driver Name")</td>
+                    <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
+                </tr>
+
+
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.FromPlace)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.FromPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.DestinationPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.Description)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.Description)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.RequisitionType)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.RequisitionType)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.VehicleType.Name)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.VehicleType.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.BrandName)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.BrandName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.RegNo)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.RegNo)</td>
+                </tr>
+            </table>
+        </div>
+        @*Driver Copy*@
+        <div class="col-lg-6 col-md-6 col-sm-12 pr-lg-5 mb-md-0 mb-4">
+            <h3 class="mt-2 mb-3 tm-text-gray">Driver Copy</h3>
+            <div>
+                Requestor Information
+            </div>
+            <div>
+                <table class="table table-light table-active table-primary dt-responsive nowrap">
+                    <tr>
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.Requisition.Employee.FullName)</td>
+                        <td>@Html.DisplayFor(model => model.Requisition.Employee.FullName)</td>
+                    </tr>
+                    <tr>
+
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.Requisition.Employee.Designation.Title)</td>
+                        <td>@Html.DisplayFor(model => model.Requisition.Employee.Designation.Title)</td>
+                    </tr>
+                </table>
+            </div>
+            <table class="table table-light table-active table-primary dt-responsive nowrap">
+                <tr>
+                    <td style="width: 25%">@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionNumber)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Driver Name")</td>
+                    <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
+                    <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
+                </tr>
+
+
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.FromPlace)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.FromPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.DestinationPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.Description)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.Description)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Requisition.RequisitionType)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.RequisitionType)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.VehicleType.Name)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.VehicleType.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.BrandName)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.BrandName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Vehicle.RegNo)</td>
+                    <td>@Html.DisplayFor(model => model.Vehicle.RegNo)</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <input type="button" id="btnPrint" value="Print this page" class="btn btn-info"/>
+    @Html.ActionLink("Back to List", "Index","AssignRequisitions", null, new { @class = "btn btn-info" })
+    <!-- Footer -->
+    <footer class="row mt-5 mb-5">
+        <div class="col-lg-12">
+            <p class="text-center tm-text-gray tm-copyright-text mb-0">
+                Copyright &copy;
+                <span class="tm-current-year">2018</span> Bangladesh Computer Council
+            </p>
+        </div>
+    </footer>
+</div>
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script>
+    $(function () {
+        $("#btnPrint").click(function () {
+            window.print();
+        });
+    });
+   </script>
+
+</body>
+
+</html>

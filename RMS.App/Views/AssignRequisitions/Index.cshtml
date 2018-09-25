@@ -37,6 +37,12 @@
                 SL
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.RequisitionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Requisition.FromPlace)
             </th>
             <th>
@@ -72,6 +78,12 @@
                         <td>
                             @sl
 
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequisitionNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Requisition.Employee.FullName)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Requisition.FromPlace)
@@ -114,7 +126,12 @@
             <th>
                 SL
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.RequisitionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Requisition.FromPlace)
             </th>

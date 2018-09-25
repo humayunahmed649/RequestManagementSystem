@@ -1018,6 +1018,7 @@
     <Content Include="Views\AssignRequisitions\OnProcess.cshtml" />
     <Content Include="Views\Employees\EditDriver.cshtml" />
     <Content Include="Views\AssignRequisitions\Index.cshtml" />
+    <Content Include="Views\AssignRequisitions\PrintDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

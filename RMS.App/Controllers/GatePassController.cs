@@ -90,24 +90,7 @@ namespace RMS.App.Controllers
 
         }
         [HttpGet]
-        public ActionResult CheckIn()
-        {
-            try
-            {
-                ICollection<RequisitionStatus> onExecuteRequisition = _requisitionStatusManager.GetAllStatusExecute();
-
-                IEnumerable<RequisitionStatusViewModel> requisitionStatusViewModel =
-                    Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(onExecuteRequisition);
-                return View(requisitionStatusViewModel);
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckIn"));
-            }
-
-        }
-        [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult CheckIn(int? id)
         {
             try
             {
@@ -126,12 +109,37 @@ namespace RMS.App.Controllers
                         Mapper.Map<RequisitionStatusViewModel>(requisitionStatus);
                     return View(requisitionStatusViewModel);
                 }
-                return View("Error");
+                return View();
             }
             catch (Exception ex)
             {
-                return View("Error", new HandleErrorInfo(ex, "GatePass", "Edit"));
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckIn"));
             }
+
+        }
+        
+
+        [HttpPost]
+        public ActionResult CheckIn([Bind(Include = "Id,StatusType,RequisitionNumber,RequisitionId")] RequisitionStatusViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
+                    requisitionStatus.StatusType = "Completed";
+                    _requisitionStatusManager.Update(requisitionStatus);
+                    return RedirectToAction("Index","Queue");
+                }
+
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckIn"));
+            }
+
         }
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,StatusType,RequisitionNumber,RequisitionId")] RequisitionStatusViewModel model)
