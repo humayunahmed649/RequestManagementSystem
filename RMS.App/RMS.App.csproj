@@ -883,6 +883,7 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\EmployeeCreate\EmployeeCreateJs.js" />
+    <Content Include="Scripts\ImageUploadJs\ImageUpload.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -899,6 +900,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\RequiredFieldsAsteriskJs\RequiredFieldAsterisk.js" />
     <Content Include="Scripts\RequisitionJs\RequisitionDataTime.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
