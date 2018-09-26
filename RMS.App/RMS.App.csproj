@@ -296,6 +296,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\chosenDD\chosen-sprite.png" />
     <Content Include="Content\chosenDD\chosen.min.css" />
+    <Content Include="Content\css\sb-admin.css" />
+    <Content Include="Content\css\sb-admin.min.css" />
+    <Content Include="Content\js\js\sb-admin-charts.js" />
+    <Content Include="Content\js\js\sb-admin-charts.min.js" />
+    <Content Include="Content\js\js\sb-admin-datatables.js" />
+    <Content Include="Content\js\js\sb-admin-datatables.min.js" />
+    <Content Include="Content\js\js\sb-admin.js" />
+    <Content Include="Content\js\js\sb-admin.min.js" />
     <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\chosenDD\chosen_DD.js" />
     <Content Include="Content\css\animate.min.css" />
@@ -1021,6 +1029,7 @@
     <Content Include="Views\Employees\EditDriver.cshtml" />
     <Content Include="Views\AssignRequisitions\Index.cshtml" />
     <Content Include="Views\AssignRequisitions\PrintDetails.cshtml" />
+    <Content Include="Views\Queue\RequisitionQueue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

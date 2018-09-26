@@ -99,7 +99,7 @@ namespace RMS.App.Controllers
             {
                 if (requisitionId == 0)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return View("Error");
                 }
                 Requisition requisition = _requisitionManager.FindById(requisitionId);
                 if (requisition == null)

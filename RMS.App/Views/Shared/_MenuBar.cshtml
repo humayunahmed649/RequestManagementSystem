@@ -45,7 +45,7 @@
                         }
                         @if (User.IsInRole("Controller") || User.IsInRole("Administrator"))
                         {
-                            <li>@Html.ActionLink("Requisition Queue", "Index", "Queue")</li>
+                            <li>@Html.ActionLink("Requisition Queue", "RequisitionQueue", "Queue")</li>
                             <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
 
                             @*<li class="menu-has-children">
