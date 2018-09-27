@@ -83,30 +83,31 @@ namespace RMS.App.Controllers
 
         public ActionResult ReplyMail(string email)
         {
-            if (!email.IsNullOrWhiteSpace())
+            try
             {
+                if (!email.IsNullOrWhiteSpace())
+                {
+                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                    smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+                    smtpClient.EnableSsl = true;
 
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
-                smtpClient.EnableSsl = true;
 
+                    MailMessage mailMessage = new MailMessage();
+                    mailMessage.From = new MailAddress("demowork9999@gmail.com");
+                    mailMessage.To.Add(new MailAddress(email));
+                    mailMessage.Subject = "Thanks for your message";
+                    mailMessage.Body = "We will try to improve our service";
+                    smtpClient.Send(mailMessage);
 
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("demowork9999@gmail.com");
-                mailMessage.To.Add(new MailAddress(email));
-                mailMessage.Subject = "Thanks for your message";
-                mailMessage.Body = "We will try to improve our service";
-                smtpClient.Send(mailMessage);
-
-                TempData["msg"] = "Mail has been send successfully";
-                return RedirectToAction("GetMessage");
+                    TempData["msg"] = "Mail has been send successfully";
+                    return RedirectToAction("GetMessage");
+                }
             }
-            
-
-                //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
-                return View();
-            
-        
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Queue", "GetMessage"));
+            }
+            return View();
         }
     }
 }
