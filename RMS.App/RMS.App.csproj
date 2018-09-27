@@ -244,6 +244,7 @@
     <Compile Include="Controllers\AssignRequisitionsController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DesignationsController.cs" />
+    <Compile Include="Controllers\EmployeeImagesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EmployeeTypesController.cs" />
     <Compile Include="Controllers\GatePassController.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="ViewModels\AssignRequisitionViewModel.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
     <Compile Include="ViewModels\EmployeeEditViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeImageViewModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
@@ -1021,9 +1023,16 @@
     <Content Include="Views\Employees\EditDriver.cshtml" />
     <Content Include="Views\AssignRequisitions\Index.cshtml" />
     <Content Include="Views\AssignRequisitions\PrintDetails.cshtml" />
+    <Content Include="Views\Shared\_ImageUpload.cshtml" />
+    <Content Include="Views\EmployeeImages\Create.cshtml" />
+    <Content Include="Views\EmployeeImages\Delete.cshtml" />
+    <Content Include="Views\EmployeeImages\Details.cshtml" />
+    <Content Include="Views\EmployeeImages\Edit.cshtml" />
+    <Content Include="Views\EmployeeImages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="EmployeeProfileImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

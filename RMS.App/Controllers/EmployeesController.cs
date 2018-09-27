@@ -146,7 +146,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include ="Id,FullName,Email,ContactNo,NID,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses,Password,ConfirmPassword,IsChecked")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,EmployeeImageId,Addresses,Password,ConfirmPassword,IsChecked")] EmployeeViewModel employeeViewModel)
         {
             try
             {
@@ -392,7 +392,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AppUserId,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] EmployeeEditViewModel employeeEditViewModel)
+        public ActionResult Edit([Bind(Include = "Id,AppUserId,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,EmployeeImageId,Addresses")] EmployeeEditViewModel employeeEditViewModel)
        {
             try
             {

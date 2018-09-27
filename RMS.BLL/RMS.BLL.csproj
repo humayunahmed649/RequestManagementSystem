@@ -47,6 +47,7 @@
     <Compile Include="DesignationManager.cs" />
     <Compile Include="DistrictManager.cs" />
     <Compile Include="DivisionManager.cs" />
+    <Compile Include="EmployeeImageManager.cs" />
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="FeedbackManager.cs" />
     <Compile Include="MailServiceManager.cs" />

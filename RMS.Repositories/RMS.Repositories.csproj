@@ -64,6 +64,7 @@
     <Compile Include="DesignationRepository.cs" />
     <Compile Include="DistrictRepository.cs" />
     <Compile Include="DivisionRepository.cs" />
+    <Compile Include="EmployeeImageRepository.cs" />
     <Compile Include="EmployeeRepository.cs" />
     <Compile Include="FeedbackRepository.cs" />
     <Compile Include="MailServiceRepository.cs" />

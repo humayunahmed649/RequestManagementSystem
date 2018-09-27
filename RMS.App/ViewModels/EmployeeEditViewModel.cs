@@ -61,6 +61,9 @@ namespace RMS.App.ViewModels
         public int? AppUserId { get; set; }
         public AppUser AppUser { get; set; }
 
+        public int? EmployeeImageId { get; set; }
+        public EmployeeImage EmployeeImage { get; set; }
+
         public List<Address> Addresses { get; set; }
 
         [NotMapped]

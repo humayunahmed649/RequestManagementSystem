@@ -74,7 +74,16 @@
         </div>
         <div class="col-md-3">
             <br /><br />
-            <img src="~/Content/img/EmpImg.gif" style="width: 150px; height: 180px !important; border: 1px solid #808080" />
+            @if (Model.EmployeeImageId>0)
+            {
+                <img src="@Url.Action("RetriveImage","EmployeeImages",new { @imgId = Model.EmployeeImageId})" class="img-responsive img-thumbnail" style="width: 150px; height: 150px !important;"/>
+            }
+            else
+            {
+                <img src="~/Content/img/EmpImg.gif" style="width: 150px; height: 150px !important; border: 1px solid #808080" />
+            }
+
+
         </div>
 
     </div>

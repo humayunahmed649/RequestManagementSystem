@@ -46,6 +46,7 @@
     <Compile Include="IDesignationRepository.cs" />
     <Compile Include="IDistrictRepository.cs" />
     <Compile Include="IDivisionRepository.cs" />
+    <Compile Include="IEmployeeImageRepository.cs" />
     <Compile Include="IEmployeeRepository.cs" />
     <Compile Include="IFeedbackRepository.cs" />
     <Compile Include="IMailServiceRepository.cs" />

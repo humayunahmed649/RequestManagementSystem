@@ -1,0 +1,27 @@
+﻿
+<div class="form-group row">
+    <div class="col-md-5">
+        <div class="btn btn-default">
+            <input type="file" id="imageBrowse"/>
+        </div>
+    </div>
+    
+    <div class="col-md-5">
+        <div id="imgPreview" class="thumb" style="display: none;">
+            <img class="img-responsive img-thumbnail" id="targetImg" style="width: 160px; height: 160px;"/>
+            <div class="caption">
+                <p id="imgDescription"></p>
+                <div class="row">
+                    <a href="#" onclick="ClearPreview()" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash-o"></i> Remove</a> &nbsp; &nbsp;
+                    <a href="#" onclick="UploadImage()" class="btn btn-sm btn-outline-info"><i class="fa fa-image"></i> Upload</a> 
+                </div>
+            </div>
+        </div>
+        <div id="uploadedImage" class="col-md-5 thumb">
+            
+            
+        </div>
+        <p id="successMsg" class="text-success"></p>
+    </div>
+
+</div>

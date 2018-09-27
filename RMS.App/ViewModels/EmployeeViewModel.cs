@@ -58,6 +58,9 @@ namespace RMS.App.ViewModels
         public int EmployeeTypeId { get; set; }
         public EmployeeType EmployeeType { get; set; }
 
+        public int? EmployeeImageId { get; set; }
+        public EmployeeImage EmployeeImage { get; set; }
+
         public List<Address> Addresses { get; set; }
 
         [Required]

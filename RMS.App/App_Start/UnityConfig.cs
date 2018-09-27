@@ -102,6 +102,10 @@ namespace RMS.App
             container.RegisterType<IMailServiceManager, MailServiceManager>();
             container.RegisterType<IMailServiceRepository, MailServiceRepository>();
 
+            container.RegisterType<IEmployeeImageManager, EmployeeImageManager>();
+            container.RegisterType<IEmployeeImageRepository, EmployeeImageRepository>();
+            
+
         }
     }
 }

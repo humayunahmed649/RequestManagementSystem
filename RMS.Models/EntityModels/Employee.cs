@@ -55,6 +55,10 @@ namespace RMS.Models.EntityModels
         public int? AppUserId { get; set; }
         public AppUser AppUser { get; set; }
 
+        [ForeignKey("EmployeeImage")]
+        public int? EmployeeImageId { get; set; }
+        public EmployeeImage EmployeeImage { get; set; }
+
         [NotMapped]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

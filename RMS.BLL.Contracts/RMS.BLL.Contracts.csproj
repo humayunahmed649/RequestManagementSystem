@@ -46,6 +46,7 @@
     <Compile Include="IDesignationManager.cs" />
     <Compile Include="IDistrictManager.cs" />
     <Compile Include="IDivisionManager.cs" />
+    <Compile Include="IEmployeeImageManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="IFeedbackManager.cs" />
     <Compile Include="IMailServiceManager.cs" />

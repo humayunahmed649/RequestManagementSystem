@@ -43,6 +43,7 @@ namespace RMS.Models.DatabaseContext
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.MailService> MailServices { get; set; }
+        public System.Data.Entity.DbSet<RMS.Models.EntityModels.EmployeeImage> EmployeeImages { get; set; } 
 
 
         public ICollection<AssignRequisitionReportVM> GetAssignRequisitionSummaryReport()
