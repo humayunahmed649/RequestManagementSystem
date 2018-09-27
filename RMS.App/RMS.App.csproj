@@ -268,6 +268,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\AssignRequisitionViewModel.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
     <Compile Include="ViewModels\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\EmployeeImageViewModel.cs" />
@@ -1031,16 +1032,15 @@
     <Content Include="Views\Employees\EditDriver.cshtml" />
     <Content Include="Views\AssignRequisitions\Index.cshtml" />
     <Content Include="Views\AssignRequisitions\PrintDetails.cshtml" />
-    
     <Content Include="Views\Shared\_ImageUpload.cshtml" />
     <Content Include="Views\EmployeeImages\Create.cshtml" />
     <Content Include="Views\EmployeeImages\Delete.cshtml" />
     <Content Include="Views\EmployeeImages\Details.cshtml" />
     <Content Include="Views\EmployeeImages\Edit.cshtml" />
     <Content Include="Views\EmployeeImages\Index.cshtml" />
-    
     <Content Include="Views\Queue\RequisitionQueue.cshtml" />
-
+    <Content Include="Views\Queue\GetMessage.cshtml" />
+    <Content Include="Views\Queue\ReplyMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

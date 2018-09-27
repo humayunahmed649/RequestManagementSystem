@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IAddressRepository.cs" />
     <Compile Include="IAssignRequisitionRepository.cs" />
+    <Compile Include="IContactRepository.cs" />
     <Compile Include="IDepartmentRepository.cs" />
     <Compile Include="IDesignationRepository.cs" />
     <Compile Include="IDistrictRepository.cs" />

@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using Microsoft.Ajax.Utilities;
+using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
+using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
@@ -18,8 +23,9 @@ namespace RMS.App.Controllers
         private IEmployeeManager _employeeManager;
         private IVehicleManager _vehicleManager;
         private IVehicleTypeManager _vehicleTypeManager;
+        private IContactManager _contactManager;
 
-        public QueueController(INotificationManager notificationManager,IRequisitionManager requisitionManager,IRequisitionStatusManager requisitionStatusManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IVehicleTypeManager vehicleTypeManager)
+        public QueueController(INotificationManager notificationManager,IRequisitionManager requisitionManager,IRequisitionStatusManager requisitionStatusManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IVehicleTypeManager vehicleTypeManager, IContactManager contactManager)
         {
             this._notificationManager = notificationManager;
             this._requisitionManager = requisitionManager;
@@ -27,6 +33,7 @@ namespace RMS.App.Controllers
             this._employeeManager = employeeManager;
             this._vehicleManager = vehicleManager;
             this._vehicleTypeManager = vehicleTypeManager;
+            this._contactManager = contactManager;
         }
 
         // GET: SetupAll
@@ -55,6 +62,51 @@ namespace RMS.App.Controllers
             ViewBag.VehicleCount = _vehicleManager.GetAll().Count;
             ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
             return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult GetMessage()
+        {
+            try
+            {
+                ICollection<ContactModel> Contact = _contactManager.GetAll();
+                IEnumerable<ContactViewModel> contactViewModels = Mapper.Map<IEnumerable<ContactViewModel>>(Contact);
+                return View(contactViewModels);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Queue", "GetMessage"));
+            }
+        }
+
+
+        public ActionResult ReplyMail(string email)
+        {
+            if (!email.IsNullOrWhiteSpace())
+            {
+
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+                smtpClient.EnableSsl = true;
+
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("demowork9999@gmail.com");
+                mailMessage.To.Add(new MailAddress(email));
+                mailMessage.Subject = "Thanks for your message";
+                mailMessage.Body = "We will try to improve our service";
+                smtpClient.Send(mailMessage);
+
+                TempData["msg"] = "Mail has been send successfully";
+                return RedirectToAction("GetMessage");
+            }
+            
+
+                //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
+                return View();
+            
+        
         }
     }
 }

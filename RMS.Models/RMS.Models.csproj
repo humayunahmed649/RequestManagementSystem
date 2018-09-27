@@ -88,6 +88,7 @@
     <Compile Include="DatabaseContext\RmsDbContext.cs" />
     <Compile Include="EntityModels\Address.cs" />
     <Compile Include="EntityModels\AssignRequisition.cs" />
+    <Compile Include="EntityModels\ContactModel.cs" />
     <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Designation.cs" />
     <Compile Include="EntityModels\District.cs" />
@@ -272,6 +273,10 @@
     <Compile Include="Migrations\201809260653254_EmployImage_class_added_And_FK_Relation_with_Employee.Designer.cs">
       <DependentUpon>201809260653254_EmployImage_class_added_And_FK_Relation_with_Employee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809270853489_ContactModelAdded.cs" />
+    <Compile Include="Migrations\201809270853489_ContactModelAdded.Designer.cs">
+      <DependentUpon>201809270853489_ContactModelAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\AssignRequisitionReportVM.cs" />
@@ -396,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809260653254_EmployImage_class_added_And_FK_Relation_with_Employee.resx">
       <DependentUpon>201809260653254_EmployImage_class_added_And_FK_Relation_with_Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809270853489_ContactModelAdded.resx">
+      <DependentUpon>201809270853489_ContactModelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -104,7 +104,9 @@ namespace RMS.App
 
             container.RegisterType<IEmployeeImageManager, EmployeeImageManager>();
             container.RegisterType<IEmployeeImageRepository, EmployeeImageRepository>();
-            
+
+            container.RegisterType<IContactManager, ContactManager>();
+            container.RegisterType<IContactRepository, ContactRepository>();
 
         }
     }

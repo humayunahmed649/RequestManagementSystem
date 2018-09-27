@@ -16,6 +16,9 @@
                         {
                             <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
                         }
+                        
+                        
+
                         @Html.Partial("_LoginPartial")
                     </p>
 
@@ -33,75 +36,70 @@
     </div>
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
-                <nav id="nav-menu-container" class="col-md-10">
-                    <ul class="nav-menu">
-                        <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <nav id="nav-menu-container" class="col-md-10">
+                <ul class="nav-menu">
+                    <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                        @if (User.IsInRole("Administrator"))
-                        {
-                            <li>@Html.ActionLink("Setup Queue", "Index", "Queue")</li>
-                        }
-                        @if (User.IsInRole("Controller") || User.IsInRole("Administrator"))
-                        {
-                            <li>@Html.ActionLink("Requisition Queue", "RequisitionQueue", "Queue")</li>
-                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Setup Queue", "Index", "Queue")</li>
+                    }
+                    @if (User.IsInRole("Controller") || User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Requisition Queue", "RequisitionQueue", "Queue")</li>
+                        <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+                        <li class="fa-mail-forward float-right">@Html.ActionLink("Message", "GetMessage", "Queue")</li>
+                    }
+                   
 
-                            @*<li class="menu-has-children">
-                                <a href="#">Gate Pass</a>
+                    @if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+                    }
 
-                                <ul>
-                                    <li>@Html.ActionLink("Check-Out", "Index", "GatePass")</li>
-                                    <li>@Html.ActionLink("Check-In", "CheckIn", "GatePass")</li>
-                                </ul>
-                            </li>*@
-                        }
-                        
-
-                        @if (User.IsInRole("User"))
-                        {
-                            <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
-                        }
-
-                    </ul>
+                </ul>
 
             </nav><!-- #nav-menu-container -->
 
-@if (User.IsInRole("Controller"))
-{
-    <nav id="" class="col-md-2">
-        <!--Notification-->
-        <ul>
-            <li class="dropdown">
-                @if (@ViewBag.count > 0)
-                {
-                    <button title="Unread notifications" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;"> &nbsp; &nbsp; @ViewBag.count</span></span></button>
-                }
-                else
-                {
-                    <button title="You have no unread notifications" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i> &nbsp; &nbsp; @ViewBag.count</span></button>
-                }
+            @if (User.IsInRole("Controller"))
+            {
+                <nav id="" class="col-md-2">
+                    <!--Notification-->
+                    <ul>
+                        <li class="dropdown">
+                            @if (@ViewBag.count > 0)
+                            {
+                                <button title="Unread notifications" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;"> &nbsp; &nbsp; @ViewBag.count</span></span></button>
+                            }
+                            else
+                            {
+                                <button title="You have no unread notifications" class="btn badge-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i> &nbsp; &nbsp; @ViewBag.count</span></button>
+                            }
 
-                <ul class="dropdown-menu">
-                    @if (ViewBag.Notification != null)
-                    {
-                        var data = ViewBag.Notification;
-                        foreach (var dt in data)
-                        {
-                            <li><a href="@Url.Action("Create","AssignRequisitions",new { requisitionId = dt.RequisitionId})" style="margin: 0 5px;"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; Req No:  @dt.Requisition.RequisitionNumber &nbsp;  @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
-                            <hr/>
-                        }
-                        <li class="text-center">New Requiest</li>
-                    }
+                            <ul class="dropdown-menu">
+                                @if (ViewBag.Notification != null)
+                                {
+                                    var data = ViewBag.Notification;
+                                    foreach (var dt in data)
+                                    {
+                                        <li><a href="@Url.Action("Create", "AssignRequisitions", new {requisitionId = dt.RequisitionId})" style="margin: 0 5px;"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; Req No: @dt.Requisition.RequisitionNumber &nbsp; @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
+                                        <hr/>
+                                    }
+                                    <li class="text-center">New Requiest</li>
+                                }
 
 
-                </ul>
-            </li>
-        </ul>
+                            </ul>
+                        </li>
+                    </ul>
 
-    </nav>
-}
+                </nav>
+            }
         </div>
     </div>
+
+    
+
 </header><!-- End header -->
