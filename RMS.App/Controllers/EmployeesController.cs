@@ -291,7 +291,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDriver([Bind(Include = "Id,FullName,ContactNo,NID,DrivingLicence,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,Addresses")] DriverViewModel driverViewModel)
+        public ActionResult CreateDriver([Bind(Include = "Id,FullName,ContactNo,NID,DrivingLicence,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,EmployeeImageId,Addresses")] DriverViewModel driverViewModel)
         {
             try
             {
@@ -484,7 +484,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditDriver([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,Addresses")] DriverViewModel driverViewModel)
+        public ActionResult EditDriver([Bind(Include = "Id,FullName,Email,ContactNo,NID,BloodGroup,OrganizationId,DepartmentId,DesignationId,DrivingLicence,EmployeeTypeId,EmployeeImageId,Addresses")] DriverViewModel driverViewModel)
         {
             try
             {

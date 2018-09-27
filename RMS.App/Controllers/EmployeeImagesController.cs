@@ -145,14 +145,14 @@ namespace RMS.App.Controllers
             int imgId = 0;
             if (file!=null)
             {
-                file.SaveAs(Server.MapPath("/EmployeeProfileImages/" + file.FileName));
+                //file.SaveAs(Server.MapPath("/EmployeeProfileImages/" + file.FileName));
                 BinaryReader reader=new BinaryReader(file.InputStream);
                 imageBytes = reader.ReadBytes(file.ContentLength);
 
                 EmployeeImage employeeImage=new EmployeeImage();
                 employeeImage.ImageByte =imageBytes;
                 employeeImage.ImageName = file.FileName;
-                employeeImage.ImagePath = "/EmployeeProfileImages/" + file.FileName;
+                employeeImage.ImagePath = null; /*"/EmployeeProfileImages/" + file.FileName;*/
 
                 _employeeImageManager.Add(employeeImage);
                 imgId = employeeImage.Id;

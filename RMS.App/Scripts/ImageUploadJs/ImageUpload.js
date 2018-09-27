@@ -22,10 +22,19 @@ var ReadImage= function(file) {
             var height = this.height;
             var width = this.width;
             var type = file.type;
-            var size = ~~(file.size / 1024) + " KB";
-            $("#targetImg").attr('src', _file.target.result);
-            $("#imgDescription").text(size + "  (" + height + " X "+" " + width+" px) "+" "+type);
-            $("#imgPreview").show();
+            var size = (file.size / 1024);
+
+                if (height <= 300 && width <= 300 && size <= 100 && type == "image/jpeg" || type == "image/jpg" || type == "image/png") {
+
+                    $("#targetImg").attr('src', _file.target.result);
+                    $("#imgDescription").text(size +" KB " +"  (" + height + " X " + " " + width + " px) " + " " + type);
+                    $("#imgPreview").show();
+                } else {
+                    alert("Your image not as required!");
+                }
+
+           
+            
         }
     }
 }
