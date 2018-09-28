@@ -69,15 +69,38 @@
             </div>
         </div>
         <div class="col-md-6">
+
             <div class="form-group row">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.LabelFor(model => model.RequisitionType, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+
+                        @Html.RadioButtonFor(model => model.RequisitionType, "Official", new { @checked = "checked" }) Official
+                        &nbsp; &nbsp; &nbsp;
+                        @Html.RadioButtonFor(model => model.RequisitionType, "Personal") Personal
+ 
+                    @Html.ValidationMessageFor(model => model.RequisitionType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-3"})
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
                 </div>
             </div>
 
-            <div class="form-group row">
+            @if (Model.RequestFor != "Own")
+            {
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.RequestFor, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-8">
+                        @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control searchableDD1" })
+                        @Html.ValidationMessageFor(model => model.EmployeeId, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            }
+            <div class="form-group row" hidden="hidden">
+
                 @Html.LabelFor(model => model.RequestFor, htmlAttributes: new {@class = "control-label col-md-3"})
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.RequestFor, new {htmlAttributes = new {@class = "form-control"}})
@@ -86,40 +109,36 @@
             </div>
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.PassengerQty, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                @Html.LabelFor(model => model.PassengerQty, htmlAttributes: new {@class = "control-label col-md-3"})
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.PassengerQty, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PassengerQty, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group row" hidden="hidden">
-                @Html.LabelFor(model => model.SubmitDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.SubmitDateTime, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
-                    @Html.ValidationMessageFor(model => model.SubmitDateTime, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group row">
-                @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.RequisitionNumber, new { htmlAttributes = new { @class = "form-control" ,@readOnly="readonly"} })
-                    @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.PassengerQty, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.PassengerQty, "", new {@class = "text-danger"})
                 </div>
             </div>
 
-            <div class="form-group row">
-                @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="form-group row" hidden="hidden">
+                @Html.LabelFor(model => model.StringSubmitDateTime, htmlAttributes: new {@class = "control-label col-md-3"})
                 <div class="col-md-8">
-                    @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.StringSubmitDateTime, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                    @Html.ValidationMessageFor(model => model.StringSubmitDateTime, "", new {@class = "text-danger"})
                 </div>
             </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-3"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.RequisitionNumber, new {htmlAttributes = new {@class = "form-control", @readOnly = "readonly"}})
+                    @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+
             <br/>
             <div class="form-group row">
                 <div class="col-md-3"></div>
                 <div class="col-md-8">
-                    <input type="submit" value="Update" class="btn btn-success" /> &nbsp;
-                    @Html.ActionLink("Back to List", "Create", null, new { @class = "btn btn-info" })
+                    <input type="submit" value="Update" class="btn btn-success"/> &nbsp;
+                    @Html.ActionLink("Back to List", "Create", null, new {@class = "btn btn-info"})
                 </div>
             </div>
         </div>
@@ -133,5 +152,5 @@
     <script src="~/Scripts/moment.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
     <script src="~/Scripts/RequisitionJs/RequisitionDataTime.js"></script>
-
+    <script src="~/Scripts/chosenDD/chosen_DD.js"></script>
 }

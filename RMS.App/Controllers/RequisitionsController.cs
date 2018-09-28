@@ -344,6 +344,7 @@ namespace RMS.App.Controllers
                 }
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
                 RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                requisitionViewModel.StringSubmitDateTime = Convert.ToString(requisition.SubmitDateTime);
                 return View(requisitionViewModel);
 
             }
@@ -357,7 +358,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,SubmitDateTime")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,RequisitionType,StringSubmitDateTime")] RequisitionViewModel requisitionViewModel)
         {
             try
             {
@@ -374,8 +375,12 @@ namespace RMS.App.Controllers
                     DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
                     requisitionViewModel.EndDateTime = endDateTime;
 
-                    DateTime submitedDateTime=requisitionViewModel.SubmitDateTime;
-
+                    DateTime submitedDateTime=Convert.ToDateTime(requisitionViewModel.StringSubmitDateTime);
+                    if (requisitionViewModel.RequestFor!="Own" && requisitionViewModel.EmployeeId!=null && requisitionViewModel.EmployeeId>0)
+                    {
+                        var emp = _employeeManager.FindById((int)requisitionViewModel.EmployeeId);
+                        requisitionViewModel.RequestFor = emp.FullName;
+                    }
                     //Get employee Id by user login id
                     var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
                     var empId = _employeeManager.FindByLoginId(loginUserId);
@@ -389,6 +394,7 @@ namespace RMS.App.Controllers
                     return RedirectToAction("Create");
                 }
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
+                TempData["msg1"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
                 return View(requisitionViewModel);
             }
             catch (Exception ex)
@@ -429,7 +435,7 @@ namespace RMS.App.Controllers
             try
             {
 
-                Requisition requisition = _requisitionManager.FindById((int)id);
+                Requisition requisition = _requisitionManager.FindById(id);
                 _requisitionManager.Remove(requisition);
                 TempData["msg"] = "Information has been deleted successfully";
                 return RedirectToAction("Index");
@@ -439,6 +445,8 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Delete"));
             }
         }
+
+        //Get: Requisitin Feedback
         [HttpGet]
         public ActionResult Feedback(int? requisitionId)
         {
@@ -461,6 +469,7 @@ namespace RMS.App.Controllers
             }
         }
 
+        //Post: Requisitin Feedback
         [HttpPost]
         public ActionResult Feedback([Bind(Include = "Id,RequisitionId,CommentText")]FeedbackViewModel feedbackViewModel)
         {
@@ -488,6 +497,7 @@ namespace RMS.App.Controllers
             }
         }
 
+        //Get: Requisitin Replay
         [HttpGet]
         public ActionResult Reply(int feedbackId)
         {
@@ -508,6 +518,8 @@ namespace RMS.App.Controllers
 
         }
 
+
+        //Post: Requisitin Reply
         [HttpPost]
         public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId")]FeedbackViewModel feedbackViewModel)
         {
