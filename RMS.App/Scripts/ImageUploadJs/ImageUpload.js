@@ -29,8 +29,10 @@ var ReadImage= function(file) {
                     $("#targetImg").attr('src', _file.target.result);
                     $("#imgDescription").text(size +" KB " +"  (" + height + " X " + " " + width + " px) " + " " + type);
                     $("#imgPreview").show();
+
                 } else {
-                    alert("Your image not as required!");
+                    //alert("Your image not as required!");
+                    $("#dialog").dialog("open");
                 }
 
            
@@ -75,3 +77,12 @@ var UploadImage = function () {
     });
 
 }
+
+$("#dialog").dialog({
+
+    draggable: false,
+    resizable: false,
+    closeOnEscape: false,
+    model: true,
+    autoOpen:false
+})

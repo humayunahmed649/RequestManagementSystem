@@ -353,8 +353,6 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Employees", "CreateDriver"));
             }
         }
-
-
         
 
         // GET: Employees/Edit/5
