@@ -120,8 +120,10 @@ namespace RMS.App.Controllers
             try
             {
 
-                //ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
+
                 ICollection<Requisition> requisitions = _requisitionManager.GetAll();
+
                 IEnumerable<RequisitionViewModel> requisitionViewModels =
                     Mapper.Map<IEnumerable<RequisitionViewModel>>(requisitions);
 
@@ -229,7 +231,7 @@ namespace RMS.App.Controllers
                 }
 
                 ViewBag.Requisition = _requisitionManager.GetAllRequisitionByEmployeeId(empId1.Id);
-                TempData["msg"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
+                TempData["msg1"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
 
                 return View();
             }
@@ -245,8 +247,6 @@ namespace RMS.App.Controllers
         {
             try
             {
-
-                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName");
                 return View();
             }
             catch (Exception ex)
@@ -258,7 +258,7 @@ namespace RMS.App.Controllers
         // POST: Requisitions/CreateRequestForOther
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor")] RequisitonForAnotherViewModel requisitonForAnother)
+        public ActionResult CreateRequestForOther([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequisitionType,EmployeeId")] RequisitonForAnotherViewModel requisitonForAnother)
         {
             try
             {
@@ -275,6 +275,12 @@ namespace RMS.App.Controllers
                     DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
                     requisitonForAnother.EndDateTime = endDateTime;
 
+                    if (requisitonForAnother.EmployeeId>0)
+                    {
+                        var emp = _employeeManager.FindById(requisitonForAnother.EmployeeId);
+                        requisitonForAnother.RequestFor = emp.FullName;
+                    }
+                   
                     requisitonForAnother.RequisitionNumber = requisitonForAnother.GetRequisitionNumber();
 
                     //Get employee Id by user login id
@@ -311,7 +317,8 @@ namespace RMS.App.Controllers
                 }
 
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName", requisitonForAnother.EmployeeId);
-                return View(requisitonForAnother);
+                TempData["msg1"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
+                return RedirectToAction("Create");
             }
             catch (Exception ex)
             {

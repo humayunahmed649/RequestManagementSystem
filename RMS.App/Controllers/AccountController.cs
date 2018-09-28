@@ -99,7 +99,6 @@ namespace RMS.App.Controllers
                 {
                     
                     var result = SignInManager.PasswordSignIn(model.Email, model.Password, model.RememberMe, false);
-                   
                     
                     if (result == SignInStatus.Success)
                     {
@@ -115,12 +114,11 @@ namespace RMS.App.Controllers
                         }
 
                         return RedirectToLocal(returnUrl);
-                    }else
-                    {
-                        ModelState.AddModelError("", "Invalid email or password!");
+                    }
+                        
                         ViewBag.ReturnUrl = returnUrl;
                         return View(model);
-                    }
+
                 }
                 
                 ViewBag.ReturnUrl = returnUrl;

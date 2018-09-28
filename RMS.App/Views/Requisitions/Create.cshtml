@@ -58,8 +58,14 @@
 <br/>
 @if (TempData["msg"] != null)
 {
-    <div class="alert alert-warning">
+    <div class="alert alert-success">
         @Html.Raw(TempData["msg"])
+    </div>
+}
+@if (TempData["msg1"] != null)
+{
+    <div class="alert alert-warning">
+        @Html.Raw(TempData["msg1"])
     </div>
 }
 <br/>
@@ -188,10 +194,23 @@
                         </div>
 
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.PassengerQty, htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.LabelFor(model => model.PassengerQty, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.PassengerQty, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.PassengerQty, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.PassengerQty, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.PassengerQty, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.RequisitionType, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                
+                                @Html.RadioButtonFor(model => model.RequisitionType, "Official", new { @checked = "checked" }) Official
+                                &nbsp; &nbsp; &nbsp;
+
+                                @Html.RadioButtonFor(model => model.RequisitionType, "Personal") Personal
+
+                                @Html.ValidationMessageFor(model => model.RequisitionType, "", new {@class = "text-danger"})
                             </div>
                         </div>
 
@@ -203,17 +222,7 @@
                             </div>
                         </div>
                         
-                        <div class="form-group row">
-                            @Html.LabelFor(model=>model.RequisitionType, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-                                    
-                                    @Html.RadioButtonFor(model => model.RequisitionType, "Personal")Personal
-                                &nbsp; &nbsp; &nbsp;
-                                    
-                                    @Html.RadioButtonFor(model => model.RequisitionType, "Official")Official;
-                                @Html.ValidationMessageFor(model => model.RequisitionType, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
+                        
 
                         <div class="form-group row">
                             <div class="col-md-3"></div>
@@ -275,6 +284,7 @@
     <script src="~/Scripts/moment.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
     <script src="~/Scripts/RequisitionJs/RequisitionDataTime.js"></script>
+    <script src="~/Scripts/chosenDD/chosen_DD.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>

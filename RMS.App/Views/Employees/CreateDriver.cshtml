@@ -366,19 +366,19 @@
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <input type="submit" value="Create Driver" class="btn btn-success"/> &nbsp;
+                        @Html.ActionLink("Back to List", "GetAllDriver", "Employees", null, new {@class = "btn btn-info"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <div class="col-md-3">
                         <ul class="nav nav-tabs border-0">
                             <li><a class="btn btn-dark" data-toggle="tab" href="#menu4">Provious</a></li>
 
                         </ul>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-6">
-                        <input type="submit" value="Save" class="btn btn-success" /> &nbsp;
-                        @Html.ActionLink("Back to List", "GetAllDriver", "Employees", null, new { @class = "btn btn-info" })
                     </div>
                 </div>
             </div>

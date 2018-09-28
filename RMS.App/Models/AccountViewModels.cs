@@ -48,12 +48,12 @@ namespace RMS.App.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Invalid Email Address")]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "Invalid Password")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

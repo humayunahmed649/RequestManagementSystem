@@ -48,12 +48,13 @@ namespace RMS.App.ViewModels
         public int PassengerQty { get; set; }
         
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Purpose")]
         public string Description { get; set; }
 
         [Display(Name = "Submitted Date Time")]
         public string SubmitDateTime { get; set; }
 
-        [Required(ErrorMessage = "Please provide a request for self or others!")]
+        //[Required(ErrorMessage = "Please provide a request for self or others!")]
         [Display(Name = "Request For")]
         public string RequestFor { get; set; }
 
@@ -61,7 +62,11 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Please select Employee!")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+
+        [Required(ErrorMessage = "Please select a requiest type!")]
+        [Display(Name = "Requiest Type")]
         public string RequisitionType { get; set; }
+
         public List<RequisitonForAnotherViewModel> RequisitionForAnotherViewModels { get; set; }
 
         public string GetRequisitionNumber()

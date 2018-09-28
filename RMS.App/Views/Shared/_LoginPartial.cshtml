@@ -4,11 +4,12 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "clear" }))
     {
-    @Html.AntiForgeryToken()
 
+    @Html.AntiForgeryToken()
+        
     <ul class="nav-menu float-right">
         <li>
-            @Html.ActionLink("Hello  " + User.Identity.GetUserName() + "!", "Index", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-outline-info bg-transparent text-white" })
+            @Html.ActionLink("  " + User.Identity.GetUserName() + "!", "Index", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-outline-info bg-transparent text-white" })
         </li>
         <li>
             <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
