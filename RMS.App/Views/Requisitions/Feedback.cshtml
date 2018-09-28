@@ -137,8 +137,11 @@
                                 <tr>
                                     <td style="width: 25%">Employee :<br/>@comment.Requisition.Employee.FullName</td>
                                     <td style="width: 65%">Comment :<br/>@comment.CommentText</td>
-                                    <td style="width: 10%">@Html.ActionLink("Reply", "Reply",new {feedbackId = @comment.Id }, new {@class = "btn btn-outline-primary btn-sm"})</td>
-
+                                    @if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
+                                    {
+                                        <td style="width: 10%">@Html.ActionLink("Reply", "Reply", new { feedbackId = @comment.Id }, new { @class = "btn btn-outline-primary btn-sm" })</td>
+                                    }
+                                    
                                 </tr>
                             }
                         </table>

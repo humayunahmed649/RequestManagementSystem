@@ -369,7 +369,7 @@ namespace RMS.App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,SubmitDateTime,RequisitionType")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,RequisitionType,SubmitDateTime")] RequisitionViewModel requisitionViewModel)
 
         {
             try
@@ -387,7 +387,7 @@ namespace RMS.App.Controllers
                     DateTime endDateTime = Convert.ToDateTime(endDate + " " + endTime);
                     requisitionViewModel.EndDateTime = endDateTime;
 
-                    DateTime submitedDateTime=Convert.ToDateTime(requisitionViewModel.StringSubmitDateTime);
+                    //DateTime submitedDateTime=Convert.ToDateTime(requisitionViewModel.StringSubmitDateTime);
                     if (requisitionViewModel.RequestFor!="Own" && requisitionViewModel.EmployeeId!=null && requisitionViewModel.EmployeeId>0)
                     {
                         var emp = _employeeManager.FindById((int)requisitionViewModel.EmployeeId);
@@ -399,7 +399,6 @@ namespace RMS.App.Controllers
                     requisitionViewModel.EmployeeId = empId.Id;
 
                     Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
-                    requisition.SubmitDateTime = submitedDateTime;
 
                     _requisitionManager.Update(requisition);
                     TempData["msg"] = "Information has been updated successfully";

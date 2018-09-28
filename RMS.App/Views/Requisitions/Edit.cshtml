@@ -71,17 +71,6 @@
         <div class="col-md-6">
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.RequisitionType, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-
-                        @Html.RadioButtonFor(model => model.RequisitionType, "Official", new { @checked = "checked" }) Official
-                        &nbsp; &nbsp; &nbsp;
-                        @Html.RadioButtonFor(model => model.RequisitionType, "Personal") Personal
- 
-                    @Html.ValidationMessageFor(model => model.RequisitionType, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group row">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-3"})
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control"}})
@@ -117,11 +106,11 @@
                 </div>
             </div>
 
-            <div class="form-group row" hidden="hidden">
-                @Html.LabelFor(model => model.StringSubmitDateTime, htmlAttributes: new {@class = "control-label col-md-3"})
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SubmitDateTime, htmlAttributes: new {@class = "control-label col-md-3"})
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.StringSubmitDateTime, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                    @Html.ValidationMessageFor(model => model.StringSubmitDateTime, "", new {@class = "text-danger"})
+                    @Html.EditorFor(model => model.SubmitDateTime, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                    @Html.ValidationMessageFor(model => model.SubmitDateTime, "", new {@class = "text-danger"})
                 </div>
             </div>
             <div class="form-group row">
