@@ -328,36 +328,45 @@ namespace RMS.App.Controllers
 
         // GET: Requisitions/Edit/5
         public ActionResult Edit(int? id)
-      {
+         {
             try
             {
-
+                RequisitionViewModel requisitionView=new RequisitionViewModel();
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                
-                Requisition requisition = _requisitionManager.FindById((int)id);
-                if (requisition == null)
+
+                var status = _requisitionStatusManager.FindByRequisitionId((int) id);
+                if (status.StatusType == "New")
                 {
-                    return HttpNotFound();
+                    Requisition requisition = _requisitionManager.FindById((int)id);
+
+                    if (requisition == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
+                    RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                    return View(requisitionViewModel);
                 }
-                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisition.EmployeeId);
-                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-                return View(requisitionViewModel);
+
+                TempData["EditMsg"] = "Your Requisition Already Done ...You Cant't Edit/Update This";
+                return RedirectToAction("Create");
 
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Edit"));
-            }        }
+            }
+            }
 
         // POST: Requisitions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,SubmitDateTime")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FromPlace,DestinationPlace,StartDateTime,StartTime,EndDateTime,EndTime,PassengerQty,Description,RequestFor,EmployeeId,RequisitionNumber,SubmitDateTime,RequisitionType")] RequisitionViewModel requisitionViewModel)
         {
             try
             {

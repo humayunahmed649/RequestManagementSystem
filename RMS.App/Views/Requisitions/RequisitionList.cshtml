@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
+﻿@using Microsoft.ReportingServices.Interfaces
+@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
 
 @{
     Layout = null;
@@ -9,6 +10,8 @@
         @Html.Raw(TempData["msg"])
     </div>
 }
+
+
 
 <div style="margin-left: 15px;">
     <p>
@@ -76,7 +79,7 @@
                             @Html.DisplayFor(modelItem => item.StatusType)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |
+                            @Html.ActionLink("Edit", "Edit", new { id = item.RequisitionId })|
                             @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}) |
                             @Html.ActionLink("Feedback", "Feedback", new {requisitionId = item.Id})
 

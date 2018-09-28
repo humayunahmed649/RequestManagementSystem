@@ -68,6 +68,13 @@
         @Html.Raw(TempData["msg1"])
     </div>
 }
+
+@if (TempData["EditMsg"] != null)
+{
+    <div class="alert alert-warning">
+        @Html.Raw(TempData["EditMsg"])
+    </div>
+}
 <br/>
 <div class="col-md-12">
     <table id="example" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">

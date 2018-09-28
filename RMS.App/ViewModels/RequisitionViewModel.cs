@@ -68,7 +68,7 @@ namespace RMS.App.ViewModels
         public AssignRequisitionViewModel AssignRequisitionViewModel { get; set; }
 
         [Required(ErrorMessage = "Please select a requiest type!")]
-        [Display(Name = "Requiest Type")]
+        [Display(Name = "Request Type")]
         public string RequisitionType { get; set; }
          
 
