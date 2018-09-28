@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -192,9 +193,32 @@ namespace RMS.App.Controllers
                             if (result != 0)
                             {
                                 employee.AppUserId = result;
-                                _employeeManager.Add(employee);
-                                TempData["msg"] = "Information has been saved successfully";
-                                return RedirectToAction("GetAllEmployee");
+                                bool save=_employeeManager.Add(employee);
+                                if (save == true)
+                                {
+                                    try
+                                    {
+
+                                        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                                        smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+                                        smtpClient.EnableSsl = true;
+
+
+                                        MailMessage mailMessage = new MailMessage();
+                                        mailMessage.From = new MailAddress("demowork9999@gmail.com");
+                                        mailMessage.To.Add(new MailAddress(email));
+                                        mailMessage.Subject = "Requisition Management System User Information";
+                                        mailMessage.Body = "Your Email Is: " + employee.Email + " " + "Your Password Is: " + employee.Password + " Login and update your password for your security Thanks";
+                                        smtpClient.Send(mailMessage);
+
+                                        TempData["msg"] = "Information has been saved and Send Email successfully";
+                                        return RedirectToAction("GetAllEmployee");
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
+                                    }
+                                }
                             }
 
                         }
@@ -238,9 +262,33 @@ namespace RMS.App.Controllers
                             if (result != 0)
                             {
                                 employee.AppUserId = result;
-                                _employeeManager.Add(employee);
-                                TempData["msg"] = "Information has been saved successfully";
-                                return RedirectToAction("GetAllEmployee");
+                                bool save = _employeeManager.Add(employee);
+                                if (save == true)
+                                {
+                                    try
+                                    {
+                                        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                                        smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+                                        smtpClient.EnableSsl = true;
+
+
+                                        MailMessage mailMessage = new MailMessage();
+                                        mailMessage.From = new MailAddress("demowork9999@gmail.com");
+                                        mailMessage.To.Add(new MailAddress(email));
+                                        mailMessage.Subject = "Requisition Management System User Information";
+                                        mailMessage.Body = "Your Email Is: " + employee.Email + " " + "Your Password Is: " + employee.Password;
+                                        smtpClient.Send(mailMessage);
+
+                                        TempData["msg"] = "Information has been saved and Send Email successfully";
+                                        return RedirectToAction("GetAllEmployee");
+                                    }
+                                    catch (Exception ex)
+                                    {
+
+                                        return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
+                                    }
+                                    
+                                }
                             }
 
                         }

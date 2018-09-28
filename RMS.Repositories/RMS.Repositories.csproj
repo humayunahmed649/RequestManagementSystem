@@ -60,6 +60,7 @@
     <Compile Include="AddressRepository.cs" />
     <Compile Include="AssignRequisitionRepository.cs" />
     <Compile Include="Base\Repository.cs" />
+    <Compile Include="ContactRepository.cs" />
     <Compile Include="DepartmentRepository.cs" />
     <Compile Include="DesignationRepository.cs" />
     <Compile Include="DistrictRepository.cs" />
