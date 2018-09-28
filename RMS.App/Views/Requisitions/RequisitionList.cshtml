@@ -6,14 +6,26 @@
 }
 @if (TempData["msg"] != null)
 {
-    <div class="alert alert-warning">
+    <div class="alert alert-success">
         @Html.Raw(TempData["msg"])
     </div>
 }
 
 
 
+
 <div style="margin-left: 15px;">
+
+@if (TempData["msg1"] != null)
+{
+    <div class="alert alert-warning">
+        @Html.Raw(TempData["msg1"])
+    </div>
+}
+
+    </div>
+<div style="margin-left: 15px;" class="responsive">
+
     <p>
         @Html.ActionLink("Create New", "Create", null, htmlAttributes: new {@class = "btn btn-success"})
     </p>
@@ -36,10 +48,14 @@
                 @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+                @Html.DisplayNameFor(model => model.StatusType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StatusType)
+                @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Requisition.RequisitionType)
             </th>
             <th>
                 Action
@@ -73,14 +89,20 @@
                             @Html.DisplayFor(modelItem => item.Requisition.EndDateTime)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.StatusType)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.RequisitionId })|
+                            @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Requisition.RequisitionType)
+                        </td>
+                        <td>
+
+                            @Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId})|
                             @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}) |
+
                             @Html.ActionLink("Feedback", "Feedback", new {requisitionId = item.Id})
 
                         </td>
@@ -100,7 +122,7 @@
             <th>
                 SL
             </th>
-            
+
             <th>
                 @Html.DisplayNameFor(model => model.Requisition.FromPlace)
             </th>
@@ -114,10 +136,14 @@
                 @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+                @Html.DisplayNameFor(model => model.StatusType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StatusType)
+                @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Requisition.RequisitionType)
             </th>
             <th>
                 Action
@@ -126,3 +152,4 @@
         </tfoot>
     </table>
 </div>
+    

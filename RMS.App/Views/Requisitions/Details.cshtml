@@ -9,35 +9,100 @@
 <hr/>
 
 <div class="row">
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.Employee.FullName)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.Employee.FullName)</div>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.RequisitionNumber)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.RequisitionNumber)</div>
+  <table class="table table-bordered table-info table-striped" style="width: 100%">
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.RequisitionNumber)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom" style="width: 30%">
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+                </td>
+                <td style="width: 70%">
+                    @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.FromPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.FromPlace)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.DestinationPlace)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.StartDateTime)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.EndDateTime)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.PassengerQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.PassengerQty)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.StatusType)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.StatusType)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.RequisitionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.RequisitionType)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.Description)
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-2-custom">
+                    @Html.DisplayNameFor(model => model.Requisition.RequestFor)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Requisition.RequestFor)
+                </td>
+            </tr>
+        </table>
 
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.FromPlace)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.FromPlace)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.DestinationPlace)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.DestinationPlace)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.StartDateTime)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.StartDateTime)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.EndDateTime)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.EndDateTime)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.PassengerQty)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.PassengerQty)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.Description)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.Description)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.Requisition.RequestFor)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Requisition.RequestFor)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.StatusType)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.StatusType)</div>
+        
 
     @{
         var data = ViewBag.Data;
@@ -60,15 +125,19 @@
         if (data == null)
         {
 
-            <div class="col-md-12">This is new Request which is not assigned...</div>
+            <div class="col-md-12"><strong class="font-weight-bold">This is new Request which is not assigned.</strong></div>
         }
     }
-    
+
 </div>
 <br/>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class="btn btn-warning"}) &nbsp;
+    @if (Model.StatusType == "New")
+    {
+        @Html.ActionLink(" Update ", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+    }
+     &nbsp;
     @Html.ActionLink("Back to List", "Create", null, new {@class = "btn btn-info"}) &nbsp;
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id },new {@class="btn btn-danger"})
-    @Html.ActionLink("Report", "Report","RequisitionQueue", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    @*@Html.ActionLink("Delete", "Delete", new {id = Model.Id}, new {@class = "btn btn-danger"})*@
+    @Html.ActionLink("Report", "Report", "RequisitionQueue", new {id = Model.Id}, new {@class = "btn btn-danger"})
 </p>
