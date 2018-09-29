@@ -48,7 +48,7 @@ namespace RMS.App.ViewModels
         public int PassengerQty { get; set; }
         
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Purpose")]
+        [Display(Name = "Purpose Of Visit")]
         public string Description { get; set; }
 
         [Display(Name = "Submitted Date Time")]

@@ -100,27 +100,27 @@ namespace RMS.App.Controllers
                     
                     var result = SignInManager.PasswordSignIn(model.Email, model.Password, model.RememberMe, false);
                     
-                    if (result == SignInStatus.Success)
+                    if (result == SignInStatus.Success && string.IsNullOrEmpty(returnUrl))
                     {
-
-                        if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
+                        var user = UserManager.Find(model.Email, model.Password);
+                        if (UserManager.IsInRole(user.Id, "Administrator") || UserManager.IsInRole(user.Id,"Controller"))
                         {
-                            return RedirectToAction("Index", "Queue");
+                            return RedirectToAction("RequisitionQueue", "Queue");
                         }
 
-                        if (User.IsInRole("User"))
+                        if (UserManager.IsInRole(user.Id,"User"))
                         {
                             return RedirectToAction("Create", "Requisitions");
                         }
 
                         return RedirectToLocal(returnUrl);
                     }
-                        
                         ViewBag.ReturnUrl = returnUrl;
                         return View(model);
 
                 }
-                
+
+                ModelState.AddModelError("", "Invalid username or password.");
                 ViewBag.ReturnUrl = returnUrl;
                 return View(model);
             }

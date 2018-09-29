@@ -55,7 +55,7 @@ namespace RMS.App.Controllers
             ViewBag.requisitionCount = _requisitionManager.GetAll().Count;
             ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;
             ViewBag.CompleteRequisition =
-                _requisitionStatusManager.GetAll().Where(c => c.StatusType == "Completed").Count();
+                _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
             ViewBag.OnProcessRequest = _requisitionStatusManager.GetAllStatusExecute().Count;
             ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
             ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;
@@ -70,8 +70,8 @@ namespace RMS.App.Controllers
         {
             try
             {
-                ICollection<ContactModel> Contact = _contactManager.GetAll();
-                IEnumerable<ContactViewModel> contactViewModels = Mapper.Map<IEnumerable<ContactViewModel>>(Contact);
+                ICollection<ContactModel> contact = _contactManager.GetAll();
+                IEnumerable<ContactViewModel> contactViewModels = Mapper.Map<IEnumerable<ContactViewModel>>(contact);
                 return View(contactViewModels);
             }
             catch (Exception ex)
