@@ -1,0 +1,96 @@
+﻿@model RMS.App.ViewModels.CancelRequisitionViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+
+            <br />
+            <h4>Journey Info :</h4>
+            <br />
+            <table class="table table-light table-active table-primary dt-responsive nowrap">
+                <tr>
+                    <td style="width: 35%">@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.StartDateTime)</td>
+                    <td>@Html.DisplayFor(model => model.Requisition.StartDateTime)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.EndDateTime)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.EndDateTime)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.FromPlace)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.FromPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.DestinationPlace)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.DestinationPlace)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.PassengerQty)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.PassengerQty)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.Description)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.Description)</td>
+                </tr>
+
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Reason)</td>
+                    <td>@Html.DisplayFor(model => model.Reason)</td>
+                </tr>
+
+            </table>
+
+
+        </div>
+
+        <div class="col-md-6">
+
+            <br />
+            <h4>Requestor Information :</h4>
+            <br />
+            <table class="table table-light table-active table-primary dt-responsive nowrap">
+
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.RequisitionNumber)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.RequisitionNumber)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Requestor Full Name")</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.Employee.FullName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayName("Designation")</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.Employee.Designation.Title)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.Employee.ContactNo)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.Employee.ContactNo)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.Employee.Email)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.Employee.Email)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.RequestFor)</td>
+                    <td>@Html.DisplayFor(model => model.RequisitionStatus.Requisition.RequestFor)</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        
+    <p>
+
+        @*@Html.ActionLink("Edit", "Edit", new { @id = Model.Id }, new { @class = "btn btn-warning" })*@ &nbsp;
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </p>
+</div>
+    </div>

@@ -108,6 +108,9 @@ namespace RMS.App
             container.RegisterType<IContactManager, ContactManager>();
             container.RegisterType<IContactRepository, ContactRepository>();
 
+
+            container.RegisterType<ICancelRequisitionManager, CancelRequisitionManager>();
+            container.RegisterType<ICancelRequisitionRepository, CancelRequisitionRepository>();
         }
     }
 }

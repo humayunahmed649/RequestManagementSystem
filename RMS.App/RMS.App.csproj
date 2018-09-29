@@ -242,6 +242,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AssignRequisitionsController.cs" />
+    <Compile Include="Controllers\CancelRequisitionController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DesignationsController.cs" />
     <Compile Include="Controllers\EmployeeImagesController.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\AssignRequisitionViewModel.cs" />
+    <Compile Include="ViewModels\CancelRequisitionViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
     <Compile Include="ViewModels\EmployeeEditViewModel.cs" />
@@ -998,7 +1000,6 @@
     <Content Include="Views\GatePass\Edit.cshtml" />
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
     <Content Include="Views\Requisitions\Feedback.cshtml" />
-    <Content Include="Views\AssignRequisitions\Cancel.cshtml" />
     <Content Include="Views\AssignRequisitions\Edit.cshtml" />
     <Content Include="Views\Requisitions\Reply.cshtml" />
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
@@ -1041,6 +1042,11 @@
     <Content Include="Views\Queue\RequisitionQueue.cshtml" />
     <Content Include="Views\Queue\GetMessage.cshtml" />
     <Content Include="Views\Queue\ReplyMail.cshtml" />
+    <Content Include="Views\CancelRequisition\Create.cshtml" />
+    <Content Include="Views\CancelRequisition\Delete.cshtml" />
+    <Content Include="Views\CancelRequisition\Details.cshtml" />
+    <Content Include="Views\CancelRequisition\Edit.cshtml" />
+    <Content Include="Views\CancelRequisition\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

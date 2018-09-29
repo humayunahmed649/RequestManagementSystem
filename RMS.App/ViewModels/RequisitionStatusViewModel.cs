@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using RMS.Models.EntityModels;
@@ -21,6 +22,9 @@ namespace RMS.App.ViewModels
         public int RequisitionId { get; set; }
         public RequisitionViewModel Requisition { get; set; }
 
-        public IEnumerable<RequisitionStatusViewModel> RequisitionStatusView { get; set; } 
+        public IEnumerable<RequisitionStatusViewModel> RequisitionStatusView { get; set; }
+        [NotMapped]
+        public string Reason { get; set; }
+         
     }
 }

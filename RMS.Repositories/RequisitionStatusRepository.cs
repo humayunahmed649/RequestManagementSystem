@@ -59,5 +59,14 @@ namespace RMS.Repositories
                     .Include(c => c.Requisition.Employee)
                     .FirstOrDefault();
         }
+
+        public override RequisitionStatus FindById(int id)
+        {
+            return
+                db.Set<RequisitionStatus>()
+                .Where(c => c.Id == id)
+                .Include(c => c.Requisition.Employee.Designation)
+                .FirstOrDefault();
+        }
     }
 }

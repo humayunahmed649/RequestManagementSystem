@@ -32,9 +32,10 @@ namespace RMS.App.Controllers
         private IVehicleTypeManager _vehicleTypeManager;
         private INotificationManager _notificationManager;
         private IMailServiceManager _mailServiceManager;
+        private ICancelRequisitionManager _cancelRequisitionManager;
 
         public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager,
-            IVehicleTypeManager vehicleTypeManager, INotificationManager notificationManager, IMailServiceManager mailServiceManager)
+            IVehicleTypeManager vehicleTypeManager, INotificationManager notificationManager, IMailServiceManager mailServiceManager,ICancelRequisitionManager cancelRequisitionManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
@@ -44,6 +45,7 @@ namespace RMS.App.Controllers
             this._vehicleTypeManager = vehicleTypeManager;
             this._notificationManager = notificationManager;
             this._mailServiceManager = mailServiceManager;
+            this._cancelRequisitionManager = cancelRequisitionManager;
 
         }
         
@@ -251,54 +253,6 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Create"));
             }
         }
-
-        [HttpGet]
-        public ActionResult Cancel(int statusId)
-        {
-            try
-            {
-                if (statusId == 0)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                RequisitionStatus requisition = _requisitionStatusManager.FindById(statusId);
-
-                if (requisition == null)
-                {
-                    return HttpNotFound();
-                }
-                RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
-                return View(requisitionStatusViewModel);
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Cancel"));
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Cancel([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber")]RequisitionStatusViewModel model)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
-                    requisitionStatus.Id = requisitionStatus.Id;
-                    requisitionStatus.RequisitionId = requisitionStatus.RequisitionId;
-                    requisitionStatus.StatusType = "Cancelled";
-                    _requisitionStatusManager.Update(requisitionStatus);
-                    return RedirectToAction("Index");
-                }
-                return View();
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Cancel"));
-            }
-
-        }
-
 
         // GET: AssignRequisitions/Edit/5
         public ActionResult Edit(int? id)

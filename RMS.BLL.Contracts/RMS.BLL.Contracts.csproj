@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IAddressManager.cs" />
     <Compile Include="IAssignRequisitionManager.cs" />
+    <Compile Include="ICancelRequisitionManager.cs" />
     <Compile Include="IContactManager.cs" />
     <Compile Include="IDepartmentManager.cs" />
     <Compile Include="IDesignationManager.cs" />

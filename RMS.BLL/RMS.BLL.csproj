@@ -43,6 +43,7 @@
     <Compile Include="AddressManager.cs" />
     <Compile Include="AssignRequisitionManager.cs" />
     <Compile Include="Base\Manager.cs" />
+    <Compile Include="CancelRequisitionManager.cs" />
     <Compile Include="ContactManager.cs" />
     <Compile Include="DepartmentManager.cs" />
     <Compile Include="DesignationManager.cs" />
