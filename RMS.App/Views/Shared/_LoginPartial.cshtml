@@ -6,15 +6,18 @@
     {
 
     @Html.AntiForgeryToken()
-        
-    <ul class="nav-menu float-right">
-        <li>
-            @Html.ActionLink("  " + User.Identity.GetUserName() + "!", "Index", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-outline-info bg-transparent text-white" })
-        </li>
-        <li>
-            <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
-        </li>
-    </ul>
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                @Html.ActionLink("  " + User.Identity.GetUserName() + "!", "Index", "Account", routeValues: null, htmlAttributes: new { title = User.Identity.GetUserName() })
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("My Profile", "Index", "Account")</li>
+                <li>@Html.ActionLink("My Requisition", "Create", "Requisitions")</li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+            </ul>
+        </div>
     }
 }
 else

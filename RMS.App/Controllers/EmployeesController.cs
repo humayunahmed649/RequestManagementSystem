@@ -147,7 +147,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,EmployeeImageId,Addresses,Password,ConfirmPassword,IsChecked")] EmployeeViewModel employeeViewModel)
+        public ActionResult Create([Bind(Include = "Id,FullName,Email,ContactNo,NID,DrivingLicence,BloodGroup,OrganizationId,DepartmentId,DesignationId,EmployeeTypeId,EmployeeImageId,Addresses,Password,ConfirmPassword,IsChecked")] EmployeeViewModel employeeViewModel)
         {
             try
             {
