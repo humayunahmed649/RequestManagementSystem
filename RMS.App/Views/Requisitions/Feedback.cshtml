@@ -131,17 +131,27 @@
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             @Html.Hidden("returnUrl", this.Request.RawUrl)
+
                             @foreach (var comment in data)
                             {
 
                                 <tr>
-                                    <td style="width: 25%">Employee :<br/>@comment.Requisition.Employee.FullName</td>
-                                    <td style="width: 65%">Comment :<br/>@comment.CommentText</td>
+                                    @if (comment.EmployeeId == null)
+                                    {
+                                        <td style="width: 30%" class="bold">Employee Name :<br />@comment.Requisition.Employee.FullName</td>
+
+                                    }
+                                    @if (comment.EmployeeId != null)
+                                    {
+                                        <td style="width: 30%">Employee Name:<br />@comment.Employee.FullName</td>
+
+                                    }
+                                    <td style="width: 55%">Comment :<br/>@comment.CommentText</td>
                                     @if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
                                     {
-                                        <td style="width: 10%">@Html.ActionLink("Reply", "Reply", new { feedbackId = @comment.Id }, new { @class = "btn btn-outline-primary btn-sm" })</td>
+                                        <td style="width: 10%">@Html.ActionLink("Reply", "Reply", new {feedbackId = @comment.Id}, new {@class = "btn btn-outline-primary btn-sm"})</td>
                                     }
-                                    
+
                                 </tr>
                             }
                         </table>

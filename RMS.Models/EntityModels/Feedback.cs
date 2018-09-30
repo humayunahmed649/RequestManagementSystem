@@ -15,11 +15,13 @@ namespace RMS.Models.EntityModels
         [Required]
         [StringLength(250)]
         public string CommentText { get; set; }
-
+        [Required]
         public int RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
 
         public int? FeedBackId { get; set; }
 
+        public int? EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }

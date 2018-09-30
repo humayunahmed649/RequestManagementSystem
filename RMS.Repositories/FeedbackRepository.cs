@@ -18,7 +18,7 @@ namespace RMS.Repositories
 
         public override ICollection<Feedback> GetAll()
         {
-            return db.Set<Feedback>().Include(c => c.Requisition.Employee).ToList();
+            return db.Set<Feedback>().Include(c => c.Employee.Designation).Include(d=>d.Requisition.Employee.Designation).ToList();
         }
     }
 }

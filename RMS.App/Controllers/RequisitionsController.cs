@@ -515,7 +515,7 @@ namespace RMS.App.Controllers
         }
 
         [Authorize(Roles = "Controller,Admin")]
-        //Get: Requisitin Replay
+        //Get: Requisitin Reply
         [HttpGet]
         public ActionResult Reply(int feedbackId)
         {
@@ -530,10 +530,11 @@ namespace RMS.App.Controllers
                 //Get employee Id by user login id
                 var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
                 var empId = _employeeManager.FindByLoginId(loginUserId);
-                FeedbackViewModel feedbackViewModel=new FeedbackViewModel();
+
+                FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
+
                 feedbackViewModel.EmployeeId = Convert.ToInt32(empId.Id);
 
-                feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
                 return View(feedbackViewModel);
             }
             catch (Exception ex)
@@ -550,18 +551,22 @@ namespace RMS.App.Controllers
         {
             try
             {
-                //Get employee Id by user login id
                 
                     if (ModelState.IsValid)
                     {
                         feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
                         Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
 
-                        _feedbackManager.Add(feedback);
-                        ViewBag.Msg = "Reply Has been saved successfully";
+                       bool IsSave= _feedbackManager.Add(feedback);
+                        if (IsSave)
+                        {
+                            ViewBag.Msg = "Reply Has been saved successfully";
+                            return RedirectToAction("Feedback",new { requisitionId =feedback.RequisitionId});
+                        }
+
                     }
-                    
-            
+
+
                 return View();
             }
             catch (Exception ex)

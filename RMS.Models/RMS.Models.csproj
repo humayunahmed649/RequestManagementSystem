@@ -282,6 +282,10 @@
     <Compile Include="Migrations\201809291018543_CancelRequisitionModelAdded.Designer.cs">
       <DependentUpon>201809291018543_CancelRequisitionModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809300908481_Feedback Model added Employee Id.cs" />
+    <Compile Include="Migrations\201809300908481_Feedback Model added Employee Id.Designer.cs">
+      <DependentUpon>201809300908481_Feedback Model added Employee Id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\AssignRequisitionReportVM.cs" />
@@ -412,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809291018543_CancelRequisitionModelAdded.resx">
       <DependentUpon>201809291018543_CancelRequisitionModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809300908481_Feedback Model added Employee Id.resx">
+      <DependentUpon>201809300908481_Feedback Model added Employee Id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
