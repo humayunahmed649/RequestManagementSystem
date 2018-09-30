@@ -303,6 +303,7 @@
     <Content Include="Content\chosenDD\chosen.min.css" />
     <Content Include="Content\css\sb-admin.css" />
     <Content Include="Content\css\sb-admin.min.css" />
+    <Content Include="Content\img\login_user.png" />
     <Content Include="Content\js\js\sb-admin-charts.js" />
     <Content Include="Content\js\js\sb-admin-charts.min.js" />
     <Content Include="Content\js\js\sb-admin-datatables.js" />
