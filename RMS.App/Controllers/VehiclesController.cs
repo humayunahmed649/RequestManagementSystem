@@ -101,14 +101,15 @@ namespace RMS.App.Controllers
 
                     var chassisNo = vehicle.ChassisNo.Trim();
                     var regNo = vehicle.RegNo.Trim();
-                    if (_vehicleManager.GetAll().Count(o => o.ChassisNo == chassisNo) > 0)
-                    {
-                        ViewBag.Message1 = "Vehicle chassis no already exist.";
-                    }
                     if (_vehicleManager.GetAll().Count(o => o.RegNo == regNo) > 0)
                     {
-                        ViewBag.Message2 = "Vehicle registration no already exist.";
+                        ViewBag.Message1 = "Vehicle registration no already exist.";
                     }
+                    if (_vehicleManager.GetAll().Count(o => o.ChassisNo == chassisNo) > 0)
+                    {
+                        ViewBag.Message2 = "Vehicle chassis no already exist.";
+                    }
+                    
                     if (ViewBag.Message1 == null && ViewBag.Message2 == null)
                     {
                         _vehicleManager.Add(vehicle);
@@ -166,15 +167,15 @@ namespace RMS.App.Controllers
 
                     var chassisNo = vehicle.ChassisNo.Trim();
                     var regNo = vehicle.RegNo.Trim();
-                    if (_vehicleManager.GetAll().Count(o => o.ChassisNo == chassisNo && o.Id != vehicle.Id) > 0)
-                    {
-                        ViewBag.Message1 = "Vehicle chassis no already exist.";
-                    }
-
                     if (_vehicleManager.GetAll().Count(o => o.RegNo == regNo && o.Id != vehicle.Id) > 0)
                     {
-                        ViewBag.Message2 = "Vehicle registration no already exist.";
+                        ViewBag.Message1 = "Vehicle registration no already exist.";
                     }
+                    if (_vehicleManager.GetAll().Count(o => o.ChassisNo == chassisNo && o.Id != vehicle.Id) > 0)
+                    {
+                        ViewBag.Message2 = "Vehicle chassis no already exist.";
+                    }
+                    
                     if (ViewBag.Message1 == null && ViewBag.Message2 == null)
                     {
                         _vehicleManager.Update(vehicle);

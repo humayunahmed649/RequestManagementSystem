@@ -1047,6 +1047,7 @@
     <Content Include="Views\CancelRequisition\Details.cshtml" />
     <Content Include="Views\CancelRequisition\Edit.cshtml" />
     <Content Include="Views\CancelRequisition\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutSetupAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

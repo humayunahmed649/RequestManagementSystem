@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Vehicle Details";
+    Layout = "~/Views/Shared/_LayoutSetupAll.cshtml";
 }
  
 <h2>Vehicle Details</h2>
@@ -29,6 +30,10 @@
 </div>
 <br/>
 <p>
-    @Html.ActionLink("Edit", "Edit","Vehicles", new { id = Model.Id },new {@class="btn btn-warning"}) &nbsp;
-    @Html.ActionLink("Back to List", "Index","Vehicles",null,new {@class="btn btn-info"})
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Edit", "Edit", "Vehicles", new {id = Model.Id}, new {@class = "btn btn-warning"})
+    } &nbsp;
+    
+    @Html.ActionLink("Back to List", "Index", "Vehicles", null, new {@class = "btn btn-info"})
 </p>

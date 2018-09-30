@@ -105,19 +105,13 @@
                         </td>
                         <td>
                             @*@Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |*@
-                            @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}, new { @class = "btn btn-primary" }) &nbsp;&nbsp;
-                            @Html.ActionLink("Print & Preview", "PrintDetails", new { id = item.Id }, new { @class = "btn btn-primary" })&nbsp;&nbsp;
+                            @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}, new { @class = "btn btn-primary" }) &nbsp; &nbsp;
+                            @Html.ActionLink("Print & Preview", "PrintDetails", new { id = item.Id }, new { @class = "btn btn-primary" }) &nbsp; &nbsp;
                             @Html.ActionLink("CheckOut", "CheckOut", "GatePass", new { id = item.Id }, new { @class = "btn btn-primary" })
 
                         </td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td class="text-center text-danger" colspan="10"> Data Not Found!</td>
-                </tr>
             }
         }
         </tbody>

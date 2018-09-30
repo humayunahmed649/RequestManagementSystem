@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Vehicle Type List";
+    Layout = "~/Views/Shared/_LayoutSetupAll.cshtml";
 }
 @section styles
 {
@@ -23,8 +24,10 @@
     <div class="row">
 
         <p>
-            
-            @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-success"})
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-success"})
+            }
         </p>
 
     </div>
@@ -59,18 +62,17 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td class="text-right">
-                            @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-warning btn-sm"})
-                            @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-primary btn-sm"})
-                            @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-outline-danger btn-sm" })
+
+                            @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-primary btn-sm"}) &nbsp;
+
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" }) <span> &nbsp;</span>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
+                            }
                         </td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td class="text-center text-danger" colspan="3"> Data Not Found!</td>
-                </tr>
             }
         }
         </tbody>

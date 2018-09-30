@@ -45,150 +45,54 @@
             <div class="col-md-12 bgnewcolor" style="padding: 20px 20px;">
                 <div class="row">
                     <div class="col-md-3">
-                        <!--Steup All-->
-                        @if (User.IsInRole("Administrator"))
+                        
+                        <!--Requisition Que-->
+                        @if (User.IsInRole("Controller") || User.IsInRole("Administrator"))
                         {
                             <div class="row" style="font-size: 16px;">
 
                                 <div class="col-md-12">
                                     <h3 class="text-dark">
-                                        <i class="fa fa-gear" aria-hidden="true"></i> Setup All
+                                        <i class="fa fa-gear" aria-hidden="true"></i> Queue Item
                                     </h3>
                                     <hr/>
                                 </div>
+                                <br/><br/>
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("Requests", "AssignRequisitions")"><i class="fa fa-car"></i> New Requisitions </a>
+                                </div>
+                                <br/><br/>
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "AssignRequisitions")"><i class="fa fa-car"></i> Assigned Requisitions </a>
+                                </div>
+                                <br/><br/>
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "CancelRequisition")"><i class="fa fa-car"></i> Cancelled Requisitions </a>
+                                </div>
+                                <br/><br/>
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("OnProcess", "AssignRequisitions")"><i class="fa fa-car"></i> OnProcess Requisitions </a>
+                                </div>
+                                <br/><br/>
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("CompleteRequest", "AssignRequisitions")"><i class="fa fa-car"></i> Complete Requisitions </a>
+                                </div>
+
+                                <br/><br/>
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "RequisitionStatus")"><i class="fa fa-car"></i> Requisitions Status </a>
+                                </div>
+                                <br/><br/>
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "Requisitions")"><i class="fa fa-car"></i> All Requisition</a>
+                                </div>
                                 <br/>
-                                <div class="col-md-12" style="font-size: 16px;">
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo1"><i class="fa fa-bank" aria-hidden="true"></i> Organization</a><br/>
-                                    </div>
-                                    <div id="demo1" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "Create", "Organizations")<br/>
-                                        @Html.ActionLink("Organization List", "Index", "Organizations")
-                                    </div>
-                                </div>
-                                <br/><br/>
 
-                                <div class="col-md-12" style="font-size: 16px;">
 
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo2"><i class="fa fa-briefcase" aria-hidden="true"></i> Department</a><br/>
-                                    </div>
-                                    <div id="demo2" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "Create", "Departments")<br/>
-                                        @Html.ActionLink("List Of Department", "Index", "Departments")
-                                    </div>
-                                </div>
-                                <br/><br/>
-                                <div class="col-md-12" style="font-size: 16px;">
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Designation</a><br/>
-                                    </div>
-                                    <div id="demo4" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "Create", "Designations")<br/>
-                                        @Html.ActionLink("Employee Designation List", "Index", "Designations")
-                                    </div>
-                                </div>
-                                <br/><br/>
-                                <div class="col-md-12" style="font-size: 16px;">
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo5"><i class="fa fa-user" aria-hidden="true"></i> Employee Type</a><br/>
-                                    </div>
-                                    <div id="demo5" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Employee Type List", "Index", "EmployeeTypes")
-                                    </div>
-                                </div>
-                                <br/><br/>
-                                <div class="col-md-12" style="font-size: 16px;">
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo6"><i class="fa fa-user" aria-hidden="true"></i> Employee</a><br />
-                                    </div>
-                                    <div id="demo6" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "Create", "Employees")<br/>
-                                        @Html.ActionLink("Employee List", "GetAllEmployee", "Employees")<br/>
-                                        @Html.ActionLink("Employee and Driver List", "Index", "Employees")
-                                    </div>
-                                </div>
-                                <br/><br/>
-                                <div class="col-md-12" style="font-size: 16px;">
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo7"><i class="fa fa-user" aria-hidden="true"></i> Driver</a><br />
-                                    </div>
-                                    <div id="demo7" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "CreateDriver", "Employees")<br />
-                                        @Html.ActionLink("Driver List", "GetAllDriver", "Employees")
-                                    </div>
-                                </div>
-                                <br/><br/>
-                                <div class="col-md-12" style="font-size: 16px;">
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo8"><i class="fa fa-car" aria-hidden="true"></i> Vehicle Type</a><br/>
-                                    </div>
-                                    <div id="demo8" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "Create", "VehicleTypes")<br/>
-                                        @Html.ActionLink("Vehile Type List", "Index", "VehicleTypes")
-                                    </div>
-                                </div>
-                                <br/><br/>
-                                <div class="col-md-12"style="font-size: 16px;">
-                                    <div class="col-md-12 col-12">
-                                        <a href="#" class="font-weight-light text-black" data-toggle="collapse" data-target="#demo9"><i class="fa fa-car" aria-hidden="true"></i> Vehicle</a><br/>
-                                    </div>
-                                    <div id="demo9" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Create New", "Create", "Vehicles")<br/>
-                                        @Html.ActionLink("Vehicle List", "Index", "Vehicles")
-                                    </div>
-                                </div>
-                               
                             </div>
-                            <br/>
                         }
-                            <!--Requisition Que-->
-                            @if (User.IsInRole("Controller")|| User.IsInRole("Administrator"))
-                            {
-                                <div class="row" style="font-size: 16px;">
-
-                                    <div class="col-md-12">
-                                        <h3 class="text-dark">
-                                            <i class="fa fa-gear" aria-hidden="true"></i> Queue Item
-                                        </h3>
-                                        <hr />
-                                    </div>
-                                    <br /><br />
-                                    <div class="col-md-12">
-                                        <a class="dropdown-item" href="@Url.Action("Requests", "AssignRequisitions")"><i class="fa fa-car"></i> New Requisitions </a>
-                                    </div>
-                                    <br /><br />
-                                    <div class="col-md-12">
-                                        <a class="dropdown-item" href="@Url.Action("Index", "AssignRequisitions")"><i class="fa fa-car"></i> Assigned Requisitions </a>
-                                    </div>
-                                    <br /><br />
-                                    <div class="col-md-12">
-                                        <a class="dropdown-item" href="@Url.Action("Index", "CancelRequisition")"><i class="fa fa-car"></i> Cancelled Requisitions </a>
-                                    </div>
-                                    <br /><br />
-                                    <div class="col-md-12">
-                                        <a class="dropdown-item" href="@Url.Action("OnProcess", "AssignRequisitions")"><i class="fa fa-car"></i> OnProcess Requisitions </a>
-                                    </div>
-                                    <br /><br />
-                                    <div class="col-md-12">
-                                        <a class="dropdown-item" href="@Url.Action("CompleteRequest", "AssignRequisitions")"><i class="fa fa-car"></i> Complete Requisitions </a>
-                                    </div>
-                                    
-                                    <br /><br />
-                                    <div class="col-md-12">
-                                        <a class="dropdown-item" href="@Url.Action("Index", "RequisitionStatus")"><i class="fa fa-car"></i> Requisitions Status </a>
-                                    </div>
-                                    <br /><br />
-                                    <div class="col-md-12">
-                                        <a class="dropdown-item" href="@Url.Action("Index", "Requisitions")"><i class="fa fa-car"></i> All Requisition</a>
-                                    </div>
-                                    <br/>
-                                    
-                                    
-                                </div>
-                            }
                         <!--Mail Service-->
-                        @if (User.IsInRole("Controller")) 
+                        @if (User.IsInRole("Controller"))
                         {
                             <br/><br/>
                             <div class="row">
@@ -196,23 +100,23 @@
                                     <h3 class="text-dark">
                                         <i class="fa fa-envelope-open" aria-hidden="true"></i> Mail Service
                                     </h3>
-                                    <hr />
+                                    <hr/>
                                 </div>
-                                <br /><br />
+                                <br/><br/>
                                 <div class="col-md-12" style="font-size: 16px;">
                                     <div class="col-md-12 col-12">
-                                        <a href="#" class="text-black font-weight-normal" data-toggle="collapse" data-target="#demo10"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mail</a><br />
+                                        <a href="#" class="text-black font-weight-normal" data-toggle="collapse" data-target="#demo10"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mail</a><br/>
                                     </div>
                                     <div id="demo10" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
-                                        @Html.ActionLink("Send New", "Create", "MailServices")<br />
+                                        @Html.ActionLink("Send New", "Create", "MailServices")<br/>
                                         @Html.ActionLink("List Of Mail", "Index", "MailServices")
                                     </div>
                                 </div>
                                 <br/><br/>
                             </div>
-                                
+
                         }
-                      </div>
+                    </div>
 
                     <div class="col-md-9">
                         @RenderBody()

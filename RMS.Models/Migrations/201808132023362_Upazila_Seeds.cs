@@ -8,7 +8,7 @@
         public override void Up()
         {
             Sql(@"DELETE FROM Upazilas;
-                   DBCC CHECKIDENT ('Upazilas', RESEED, 0)");
+                   DBCC CHECKIDENT('Upazilas', RESEED, 0");
 
             Sql(@"SET IDENTITY_INSERT [dbo].[Upazilas] ON 
 

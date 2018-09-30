@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Employee List";
+    Layout = "~/Views/Shared/_LayoutSetupAll.cshtml";
 }
 @section styles
 {
@@ -122,12 +123,7 @@
                             </tr>
                         }
                     }
-                    else
-                    {
-                        <tr>
-                            <td class="text-center text-danger" colspan="12"> Data Not Found!</td>
-                        </tr>
-                    }
+
                 }
             </tbody>
             <tfoot>
