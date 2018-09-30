@@ -56,6 +56,9 @@ namespace RMS.App.Controllers
             ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;
             ViewBag.CompleteRequisition =
                 _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
+            ViewBag.CancelRequisition =
+    _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Cancelled");
+
             ViewBag.OnProcessRequest = _requisitionStatusManager.GetAllStatusExecute().Count;
             ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
             ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;

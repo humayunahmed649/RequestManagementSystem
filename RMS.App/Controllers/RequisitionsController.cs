@@ -514,6 +514,7 @@ namespace RMS.App.Controllers
             }
         }
 
+        [Authorize(Roles = "Controller,Admin")]
         //Get: Requisitin Replay
         [HttpGet]
         public ActionResult Reply(int feedbackId)
@@ -525,7 +526,14 @@ namespace RMS.App.Controllers
                 {
                     return HttpNotFound();
                 }
-                FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
+
+                //Get employee Id by user login id
+                var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                var empId = _employeeManager.FindByLoginId(loginUserId);
+                FeedbackViewModel feedbackViewModel=new FeedbackViewModel();
+                feedbackViewModel.EmployeeId = Convert.ToInt32(empId.Id);
+
+                feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
                 return View(feedbackViewModel);
             }
             catch (Exception ex)
@@ -538,17 +546,22 @@ namespace RMS.App.Controllers
 
         //Post: Requisitin Reply
         [HttpPost]
-        public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId")]FeedbackViewModel feedbackViewModel)
+        public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId,EmployeeId")]FeedbackViewModel feedbackViewModel)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
+                //Get employee Id by user login id
+                
+                    if (ModelState.IsValid)
+                    {
+                        feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
+                        Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
 
-                    _feedbackManager.Add(feedback);
-                    ViewBag.Msg = "Reply Has been saved successfully";
-                }
+                        _feedbackManager.Add(feedback);
+                        ViewBag.Msg = "Reply Has been saved successfully";
+                    }
+                    
+            
                 return View();
             }
             catch (Exception ex)

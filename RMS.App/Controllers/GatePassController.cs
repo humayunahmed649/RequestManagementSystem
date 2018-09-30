@@ -129,7 +129,7 @@ namespace RMS.App.Controllers
                     RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
                     requisitionStatus.StatusType = "Completed";
                     _requisitionStatusManager.Update(requisitionStatus);
-                    return RedirectToAction("Index","Queue");
+                    return RedirectToAction("Index");
                 }
 
                 return View();

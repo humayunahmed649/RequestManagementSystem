@@ -24,5 +24,9 @@ namespace RMS.App.ViewModels
         [Display(Name = "Feedback")]
         public int FeedbackId { get; set; }
 
+        public int? EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+
+
     }
 }
