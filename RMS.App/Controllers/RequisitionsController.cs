@@ -27,9 +27,10 @@ namespace RMS.App.Controllers
         private IFeedbackManager _feedbackManager;
         private IAssignRequisitionManager _assignRequisitionManager;
         private INotificationManager _notificationManager;
+        private ICancelRequisitionManager _cancelRequisitionManager;
 
         public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager,IFeedbackManager feedbackManager,
-            IAssignRequisitionManager assignRequisitionManager, INotificationManager notificationManager)
+            IAssignRequisitionManager assignRequisitionManager, INotificationManager notificationManager,ICancelRequisitionManager cancelRequisitionManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
@@ -38,6 +39,7 @@ namespace RMS.App.Controllers
             this._feedbackManager = feedbackManager;
             this._assignRequisitionManager = assignRequisitionManager;
             this._notificationManager = notificationManager;
+            this._cancelRequisitionManager = cancelRequisitionManager;
         }
 
         // GET: Requisitions
@@ -100,6 +102,10 @@ namespace RMS.App.Controllers
                 if (requisition.StatusType != "New")
                 {
                     ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
+                    if (requisition.StatusType == "Cancelled")
+                    {
+                        ViewBag.CancelInfo = _cancelRequisitionManager.GetAll().FirstOrDefault(c=>c.RequisitionId==id);
+                    }
                 }
                         if (requisition == null)
                         {

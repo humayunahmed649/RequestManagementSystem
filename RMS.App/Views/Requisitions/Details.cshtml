@@ -10,7 +10,7 @@
 
 <div class="row">
 
-  <table class="table table-bordered table-info table-striped" style="width: 100%">
+  <table class="table table-bordered table-active table-striped" style="width: 100%">
             <tr>
                 <td class="col-md-2-custom">
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
@@ -72,7 +72,7 @@
                 <td class="col-md-2-custom">
                     @Html.DisplayNameFor(model => model.StatusType)
                 </td>
-                <td>
+                <td class="text-danger">
                     @Html.DisplayFor(model => model.StatusType)
                 </td>
             </tr>
@@ -102,7 +102,7 @@
             </tr>
         </table>
 
-        
+        @*Assigned Requisition Information*@
 
     @{
         var data = ViewBag.Data;
@@ -122,11 +122,22 @@
             <div class="col-md-2">@Html.DisplayName("Driver Contact No")</div>
             <div class="col-md-10">@data.Employee.ContactNo</div>
         }
-        if (data == null)
+       
+    }
+
+    @*Cancelled Requisition Information*@
+
+    @{
+        var cancelInformation = ViewBag.CancelInfo;
+        if (cancelInformation != null)
         {
 
-            <div class="col-md-12"><strong class="font-weight-bold">This is new Request which is not assigned.</strong></div>
+            <div class="col-md-2">@Html.DisplayName("Exaplanation")</div>
+            <div class="col-md-10">@cancelInformation.Reason</div>
+
+           
         }
+        
     }
 
 </div>
@@ -134,10 +145,12 @@
 <p>
     @if (Model.StatusType == "New")
     {
+            
+        <div class="col-md-12"><strong class="font-weight-bold">This is new Request which is not assigned.</strong></div>
+        
         @Html.ActionLink(" Update ", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
     }
      &nbsp;
     @Html.ActionLink("Back to List", "Create", null, new {@class = "btn btn-info"}) &nbsp;
     @*@Html.ActionLink("Delete", "Delete", new {id = Model.Id}, new {@class = "btn btn-danger"})*@
-    @Html.ActionLink("Report", "Report", "RequisitionQueue", new {id = Model.Id}, new {@class = "btn btn-danger"})
 </p>
