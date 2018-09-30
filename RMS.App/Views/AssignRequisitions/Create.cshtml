@@ -34,10 +34,25 @@
                             <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requisition No :")</td>
                             <td>@data.RequisitionNumber</td>
                         </tr>*@
-                        <tr>
-                            <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requestor Name :")</td>
-                            <td>@data.Employee.FullName</td>
-                        </tr>
+                        @if (data.RequestFor == "Own")
+                        {
+                            <tr>
+                                <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requestor Name :")</td>
+                                <td>@data.Employee.FullName</td>
+                            </tr>
+                        }
+                        @if (data.RequestFor != "Own")
+                        {
+                            <tr>
+                                <td class="col-md-2-custom">@Html.DisplayName("Requisition For :")</td>
+                                <td>@data.RequestFor</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requiest By :")</td>
+                                <td>@data.Employee.FullName</td>
+                            </tr>
+                        }
+
                         <tr>
                             <td class="col-md-2-custom">@Html.DisplayName("Designation :")</td>
                             <td>@data.Employee.Designation.Title</td>
@@ -50,10 +65,7 @@
                             <td class="col-md-2-custom">@Html.DisplayName("Email :")</td>
                             <td>@data.Employee.Email</td>
                         </tr>
-                        <tr>
-                            <td class="col-md-2-custom">@Html.DisplayName("Request For :")</td>
-                            <td>@data.RequestFor</td>
-                        </tr>
+                        
                     </table>
                 </div>
 
@@ -86,6 +98,10 @@
                         <tr>
                             <td class="col-md-2-custom">@Html.DisplayName("Submited Date And Time :")</td>
                             <td>@data.SubmitDateTime</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requisition Type :")</td>
+                            <td>@data.RequisitionType</td>
                         </tr>
                         <tr>
                             <td class="col-md-2-custom">@Html.DisplayName("Description :")</td>

@@ -52,8 +52,19 @@ namespace RMS.App.Controllers
 
         public ActionResult RequisitionQueue()
         {
+            //Notification Area
+            var notification = _notificationManager.GetNotificationsForController("Unseen");
+            var notificationCount = notification.Count;
+            if (notification != null)
+            {
+                ViewBag.Notification = notification;
+                ViewBag.count = notificationCount;
+            }
+
+            //Dash Board Area
             ViewBag.requisitionCount = _requisitionManager.GetAll().Count;
             ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;
+
             ViewBag.CompleteRequisition =
                 _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
             ViewBag.CancelRequisition =

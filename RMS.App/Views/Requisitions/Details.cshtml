@@ -10,24 +10,49 @@
 
 <div class="row">
 
-  <table class="table table-bordered table-active table-striped" style="width: 100%">
-            <tr>
-                <td class="col-md-2-custom">
-                    @Html.DisplayNameFor(model => model.RequisitionNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.RequisitionNumber)
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-2-custom" style="width: 30%">
-                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
-                </td>
-                <td style="width: 70%">
-                    @Html.DisplayFor(model => model.Requisition.Employee.FullName)
-                </td>
-            </tr>
-            
+  <table class="table table-bordered table-light table-striped" style="width: 100%">
+      <tr>
+          <td class="col-md-2-custom" style="width: 25%">
+              @Html.DisplayNameFor(model => model.RequisitionNumber)
+          </td>
+          <td style="width: 75%">
+              @Html.DisplayFor(model => model.RequisitionNumber)
+          </td>
+      </tr>
+
+      @if (Model.Requisition.RequestFor == "Own")
+      {
+        <tr>
+            <td class="col-md-2-custom">
+                @Html.DisplayNameFor(model => model.Requisition.EmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+            </td>
+        </tr>
+      }
+
+      @if (Model.Requisition.RequestFor != "Own")
+      {
+        <tr>
+            <td class="col-md-2-custom">
+                @Html.DisplayNameFor(model => model.Requisition.RequestFor)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Requisition.RequestFor)
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-2-custom">
+                @Html.DisplayName("Requiest By")
+            </td>
+            <td >
+                @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+            </td>
+        </tr>
+        
+      }
+ 
             <tr>
                 <td class="col-md-2-custom">
                     @Html.DisplayNameFor(model => model.Requisition.FromPlace)
@@ -46,7 +71,7 @@
             </tr>
             <tr>
                 <td class="col-md-2-custom">
-                    @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+                    @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Requisition.StartDateTime)
@@ -92,14 +117,7 @@
                     @Html.DisplayFor(model => model.Requisition.Description)
                 </td>
             </tr>
-            <tr>
-                <td class="col-md-2-custom">
-                    @Html.DisplayNameFor(model => model.Requisition.RequestFor)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Requisition.RequestFor)
-                </td>
-            </tr>
+            
         </table>
 
         @*Assigned Requisition Information*@
@@ -129,13 +147,12 @@
 
     @{
         var cancelInformation = ViewBag.CancelInfo;
+
         if (cancelInformation != null)
         {
-
             <div class="col-md-2">@Html.DisplayName("Exaplanation")</div>
             <div class="col-md-10 text-heading text-danger">@cancelInformation.Reason</div>
 
-           
         }
         
     }
