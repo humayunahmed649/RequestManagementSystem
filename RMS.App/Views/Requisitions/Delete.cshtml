@@ -11,9 +11,23 @@
 <hr/>
 
 <div class="row">
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.EmployeeId)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.Employee.FullName)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.RequisitionNumber)</div>
+    <div class="col-md-10">@Html.DisplayFor(model => model.RequisitionNumber)</div>
 
+    @if (Model.RequestFor == "Own")
+    {
+        <div class="col-md-2">@Html.DisplayNameFor(model => model.EmployeeId)</div>
+        <div class="col-md-10">@Html.DisplayFor(model => model.Employee.FullName)</div>
+    }
+
+    @if (Model.RequestFor != "Own")
+    {
+        <div class="col-md-2">@Html.DisplayNameFor(model => model.RequestFor)</div>
+        <div class="col-md-10">@Html.DisplayFor(model => model.RequestFor)</div>
+
+        <div class="col-md-2">@Html.DisplayName("Requiest By")</div>
+        <div class="col-md-10">@Html.DisplayFor(model => model.Employee.FullName)</div>
+    }
     <div class="col-md-2">@Html.DisplayNameFor(model => model.FromPlace)</div>
     <div class="col-md-10">@Html.DisplayFor(model => model.FromPlace)</div>
 
@@ -31,9 +45,6 @@
 
     <div class="col-md-2">@Html.DisplayNameFor(model => model.Description)</div>
     <div class="col-md-10">@Html.DisplayFor(model => model.Description)</div>
-
-    <div class="col-md-2">@Html.DisplayNameFor(model => model.RequestFor)</div>
-    <div class="col-md-10">@Html.DisplayFor(model => model.RequestFor)</div>
 
 </div>
 <br />

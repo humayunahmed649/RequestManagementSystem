@@ -29,12 +29,12 @@
             <li class="dropdown">
                 @if (@ViewBag.count > 0)
             {
-                    <button title="Unread notifications" class="btn badge-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">&nbsp; &nbsp; @ViewBag.count</span></span></button>
-            }
-            else
-            {
-                    <button title="You have no unread notifications" class="btn badge-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret badge"><i class="fa fa-bell"></i>&nbsp; &nbsp; @ViewBag.count</span></button>
-            }
+                    <a title="Unread notifications!"class="dropdown-toggle btn btn-outline-primary caret badge"  data-toggle="dropdown"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">@ViewBag.count</span></a>
+                }
+                else
+                {
+                    <a title="You have no unread notifications!" class="dropdown-toggle btn btn-outline-primary caret badge" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="font-weight-bold" style="font-size: 16px;">@ViewBag.count</span></a>
+                }
 
                 <ul class="dropdown-menu">
                     @if (ViewBag.Notification != null)
@@ -42,7 +42,7 @@
                     var notify = ViewBag.Notification;
                     foreach (var dt in notify)
                     {
-                            <li><a href="#"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; Req No:  @dt.Requisition.RequisitionNumber &nbsp; @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
+                            <li><a href="@Url.Action("Details","Requisitions",new {@id=dt.RequisitionId})"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; Req No:  @dt.Requisition.RequisitionNumber &nbsp; @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
                             <hr />
                         }
 

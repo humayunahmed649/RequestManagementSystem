@@ -10,23 +10,48 @@
 
 <div class="row">
 
-  <table class="table table-bordered table-info table-striped" style="width: 100%">
-            <tr>
-                <td class="col-md-2-custom">
-                    @Html.DisplayNameFor(model => model.RequisitionNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.RequisitionNumber)
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-2-custom" style="width: 30%">
-                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
-                </td>
-                <td style="width: 70%">
-                    @Html.DisplayFor(model => model.Requisition.Employee.FullName)
-                </td>
-            </tr>
+  <table class="table table-bordered table-light table-striped" style="width: 100%">
+      <tr>
+          <td class="col-md-2-custom" style="width: 25%">
+              @Html.DisplayNameFor(model => model.RequisitionNumber)
+          </td>
+          <td style="width: 75%">
+              @Html.DisplayFor(model => model.RequisitionNumber)
+          </td>
+      </tr>
+
+      @if (Model.Requisition.RequestFor == "Own")
+      {
+        <tr>
+            <td class="col-md-2-custom">
+                @Html.DisplayNameFor(model => model.Requisition.EmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+            </td>
+        </tr>
+      }
+      @if (Model.Requisition.RequestFor != "Own")
+      {
+        <tr>
+            <td class="col-md-2-custom">
+                @Html.DisplayNameFor(model => model.Requisition.RequestFor)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Requisition.RequestFor)
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-2-custom">
+                @Html.DisplayName("Requiest By")
+            </td>
+            <td >
+                @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+            </td>
+        </tr>
+        
+      }
+            
             
             <tr>
                 <td class="col-md-2-custom">
@@ -46,7 +71,7 @@
             </tr>
             <tr>
                 <td class="col-md-2-custom">
-                    @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+                    @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Requisition.StartDateTime)
@@ -92,14 +117,7 @@
                     @Html.DisplayFor(model => model.Requisition.Description)
                 </td>
             </tr>
-            <tr>
-                <td class="col-md-2-custom">
-                    @Html.DisplayNameFor(model => model.Requisition.RequestFor)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Requisition.RequestFor)
-                </td>
-            </tr>
+            
         </table>
 
         
@@ -125,7 +143,7 @@
         if (data == null)
         {
 
-            <div class="col-md-12"><strong class="font-weight-bold">This is new Request which is not assigned.</strong></div>
+            <div class="col-md-12"><p class="font-weight-bold">This is new Request which is not assigned.</p></div>
         }
     }
 

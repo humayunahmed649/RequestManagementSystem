@@ -165,6 +165,7 @@ namespace RMS.App.Controllers
 
                         //Get Driver by id
                         var driver = _employeeManager.FindById(assignRequisition.EmployeeId);
+
                         //Get Vehicle Type by id
                         var vehicle = _vehicleManager.FindById(assignRequisition.VehicleId);
 
