@@ -9,6 +9,6 @@ namespace RMS.Repositories.Contracts
 {
     public interface IEmployeeTypeRepository:IRepository<EmployeeType>
     {
-        ICollection<EmployeeType> SearchByText(string searchText);
+
     }
 }

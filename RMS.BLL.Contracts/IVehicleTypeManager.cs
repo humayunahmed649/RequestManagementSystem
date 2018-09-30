@@ -9,6 +9,6 @@ namespace RMS.BLL.Contracts
 {
     public interface IVehicleTypeManager:IManager<VehicleType>
     {
-        ICollection<VehicleType> SearchByText(string searchText);
+
     }
 }

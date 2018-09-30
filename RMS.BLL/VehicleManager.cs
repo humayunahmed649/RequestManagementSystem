@@ -18,9 +18,5 @@ namespace RMS.BLL
             this._vehicleRepository = repository;
         }
 
-        public ICollection<Vehicle> SearchByText(string searchText)
-        {
-            return _vehicleRepository.SearchByText(searchText);
-        }
     }
 }

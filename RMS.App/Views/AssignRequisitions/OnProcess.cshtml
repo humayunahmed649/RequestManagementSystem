@@ -14,7 +14,7 @@
 }
 <div class="container">
 <h2>On Process</h2>
-
+    <hr/>
     @if (TempData["msg"] != null)
     {
         <div class="alert alert-info">
@@ -28,7 +28,7 @@
         </div>
     }
 
-    <table id="example" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: auto">
+    <table id="example" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">
         <thead>
             <tr class="bg-info">
                 <th>
@@ -102,10 +102,9 @@
                                 @Html.DisplayFor(modelItem => item.StatusType, new { @class = "text-danger" })
                             </td>
                             <td>
-                                @*@Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |*@
-                                @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-primary" }) |
-                                @*@Html.ActionLink("Feedback", "Feedback", new {requisitionId = item.Id})*@
-                                @Html.ActionLink("CheckIn", "CheckIn", "GatePass", new { id = item.Id }, new { @class = "btn btn-primary" })
+
+                                @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("CheckIn", "CheckIn", "GatePass", new { id = item.Id }, new { @class = "btn btn-success" })
 
                             </td>
                         </tr>
@@ -114,7 +113,7 @@
                 else
                 {
                     <tr>
-                        <td class="text-center text-danger" colspan="7"> Data Not Found!</td>
+                        <td class="text-center text-danger" colspan="10"> Data Not Found!</td>
                     </tr>
                 }
             }

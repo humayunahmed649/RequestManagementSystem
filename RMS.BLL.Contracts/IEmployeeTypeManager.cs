@@ -9,6 +9,5 @@ namespace RMS.BLL.Contracts
 {
     public interface IEmployeeTypeManager:IManager<EmployeeType>
     {
-        ICollection<EmployeeType> SearchByText(string searchText);
     }
 }

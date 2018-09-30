@@ -10,6 +10,6 @@ namespace RMS.BLL.Contracts
 {
     public interface IOrganizationManager:IManager<Organization>
     {
-        ICollection<Organization> SearchByText(string searchText);
+
     }
 }

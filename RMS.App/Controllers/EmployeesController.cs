@@ -59,22 +59,14 @@ namespace RMS.App.Controllers
         }
 
         // GET: Employees
-        public ActionResult Index(string searchText)
+        public ActionResult Index()
         {
             try
             {
-                if (searchText != null)
-                {
-                    ICollection<Employee> employees = _employeeManager.SearchByText(searchText);
-                    IEnumerable<EmployeeViewModel> employeeViewModel = Mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
-                    return View(employeeViewModel);
-                }
-                else
-                {
                     ICollection<Employee> employee = _employeeManager.GetAll();
                     IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
                     return View(employeeViewModels);
-                }
+
             }
             catch (Exception ex)
             {

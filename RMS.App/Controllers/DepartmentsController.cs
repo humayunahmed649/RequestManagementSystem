@@ -28,22 +28,13 @@ namespace RMS.App.Controllers
         }
 
         // GET: Departments
-        public ActionResult Index(string searchText)
+        public ActionResult Index()
         {
             try
             {
-                if (searchText != null)
-                {
-                    ICollection<Department> departments = _departmentManager.SearchByText(searchText);
-                    IEnumerable<DepartmentViewModel> departmentViewModels = Mapper.Map<IEnumerable<DepartmentViewModel>>(departments);
-                    return View(departmentViewModels);
-                }
-                else
-                {
                     ICollection<Department> department = (ICollection<Department>)_departmentManager.GetAll();
                     IEnumerable<DepartmentViewModel> departmentViewModes = Mapper.Map<IEnumerable<DepartmentViewModel>>(department);
                     return View(departmentViewModes);
-                }
             }
             catch (Exception ex)
             {

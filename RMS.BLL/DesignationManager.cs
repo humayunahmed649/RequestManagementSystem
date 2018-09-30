@@ -18,9 +18,5 @@ namespace RMS.BLL
             this._designationRepository = repository;
         }
 
-        public ICollection<Designation> SearchByText(string searchText)
-        {
-            return _designationRepository.SearchByText(searchText);
-        }
     }
 }

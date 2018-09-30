@@ -16,11 +16,8 @@ namespace RMS.Repositories
         
         public DesignationRepository(DbContext db) : base(db)
         {
+
         }
 
-        public ICollection<Designation> SearchByText(string searchText)
-        {
-            return db.Set<Designation>().Where(c => c.Title.StartsWith(searchText)).ToList();
-        }
     }
 }

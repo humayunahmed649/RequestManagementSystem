@@ -32,23 +32,15 @@ namespace RMS.App.Controllers
 
 
         // GET: Vehicles
-        public ActionResult Index(string searchText)
+        public ActionResult Index()
         {
 
             try
             {
-                if (searchText != null)
-                {
-                    ICollection<Vehicle> vehicles = _vehicleManager.SearchByText(searchText);
-                    IEnumerable<VehicleViewModel> vehicleViewModels = Mapper.Map<IEnumerable<VehicleViewModel>>(vehicles);
-                    return View(vehicleViewModels);
-                }
-                else
-                {
                     ICollection<Vehicle> vehicles = _vehicleManager.GetAll();
                     IEnumerable<VehicleViewModel> vehicleViewModels = Mapper.Map<IEnumerable<VehicleViewModel>>(vehicles);
                     return View(vehicleViewModels);
-                }
+
             }
             catch (Exception ex)
             {

@@ -18,11 +18,5 @@ namespace RMS.BLL
             this._departmentRepository = repository;
         }
 
-        
-
-        public ICollection<Department> SearchByText(string searchText)
-        {
-            return _departmentRepository.SearchByText(searchText);
-        }
     }
 }

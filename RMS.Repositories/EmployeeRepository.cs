@@ -24,16 +24,6 @@ namespace RMS.Repositories
                 .Include(c => c.Addresses.Select(d => d.Division)).Include(c => c.Addresses.Select(s => s.District)).Include(c => c.Addresses.Select(u => u.Upazila)).AsNoTracking().ToList();
         }
 
-        public ICollection<Employee> SearchByText(string searchText)
-        {
-            return
-                db.Set<Employee>()
-                    .Include(c => c.Organization).Include(c => c.Department).Include(c => c.Designation).Include(c=>c.EmployeeType).Include(c=>c.Addresses)
-                    .Where(c => c.FullName.StartsWith(searchText)||c.ContactNo.StartsWith(searchText)||c.NID.StartsWith(searchText)
-                    ||c.BloodGroup.StartsWith(searchText)||c.DrivingLicence.StartsWith(searchText)||c.Organization.Name.StartsWith(searchText)
-                    ||c.Department.Name.StartsWith(searchText)||c.Designation.Title.StartsWith(searchText)||c.Email.StartsWith(searchText)
-                    ||c.EmployeeType.Type.StartsWith(searchText)).ToList();
-        }
         public override Employee FindById(int id)
         {
             return db.Set<Employee>().Where(c => c.Id == id).Include(c => c.EmployeeType).Include(c=>c.Organization)

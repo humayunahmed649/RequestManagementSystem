@@ -28,63 +28,21 @@ namespace RMS.App.Controllers
         }
 
         // GET: Organizations
-        public ActionResult Index(string searchText)
+        public ActionResult Index()
         {
             try
             {
-                if (searchText != null)
-                {
-                    ICollection<Organization> organization = _organizationManager.SearchByText(searchText);
-                    IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
-                    return View(organizationViewModels);
-                }
-                else
-                {
                     ICollection<Organization> organization = _organizationManager.GetAll();
                     IEnumerable<OrganizationViewModel> organizationViewModels = Mapper.Map<IEnumerable<OrganizationViewModel>>(organization);
                     return View(organizationViewModels);
-                }
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Organizations", "Index"));
             }
 
-
         }
 
-       
-        [HttpPost]
-        public ActionResult GetList()
-        {
-            try
-            {
-
-                int start = Convert.ToInt32(Request["start"]);
-                int length = Convert.ToInt32(Request["length"]);
-                string searchValue = Request["search[value]"];
-                string shortingColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
-                string sortDirection = Request["order[0][dir]"];
-
-                List<Organization> organizations = (List<Organization>)_organizationManager.GetAll();
-                int totalRows = organizations.Count();
-                if (!string.IsNullOrEmpty(searchValue))
-                {
-                    organizations = organizations.Where(x => x.Name.ToLower().Contains(searchValue.ToLower())).ToList<Organization>();
-                }
-                //Shorting.....
-                int dataAfterFiltering = organizations.Count();
-                organizations = organizations.OrderBy(shortingColumnName + " " + sortDirection).ToList<Organization>();
-                //Paging.....
-                organizations = organizations.Skip(start).Take(length).ToList<Organization>();
-
-                return Json(new { data = organizations, draw = Request["draw"], recordsTotal = totalRows, recordsFiltered = dataAfterFiltering }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "Organizations", "GetList"));
-            }
-        }
 
         // GET: Organizations/Details/5
         public ActionResult Details(int? id)

@@ -25,10 +25,6 @@ namespace RMS.Repositories
         {
         }
 
-        public ICollection<Department> SearchByText(string searchText)
-        {
-            return db.Set<Department>().Include(c=>c.Organization).Where(c => c.Name.StartsWith(searchText)||c.Code.StartsWith(searchText)||c.Organization.Name.StartsWith(searchText)).ToList();
-        }
 
         public override ICollection<Department> GetAll()
         {

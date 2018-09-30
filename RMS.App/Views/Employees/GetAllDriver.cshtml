@@ -21,25 +21,13 @@
             @Html.Raw(TempData["msg"])
         </div>
     }
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-3 col-sm-3 col-3 text-left no-padding">
-                <p>
-                    @Html.ActionLink("Create New", "CreateDriver", null, new { @class = "btn btn-success" })
-                </p>
-            </div>
+    <div class="row">
 
-            @*<div class="col-lg-9 col-sm-9 col-9 text-right no-padding">
-                <p>
-                    @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
-                    {
-                        <b>Search by (Name/Contact/NID/Mail/Type) </b>
-                        @Html.TextBox("searchText")
-                        <input type="submit" value="Search" />
-                    }
-                </p>
-            </div>*@
-        </div>
+        <p>
+            
+            @Html.ActionLink("Create New", "CreateDriver", null, new {@class = "btn btn-success"})
+        </p>
+
     </div>
     <br/>
 
@@ -138,7 +126,7 @@
                     else
                     {
                         <tr>
-                            <td class="text-center text-danger" colspan="8"> Data Not Found!</td>
+                            <td class="text-center text-danger" colspan="12"> Data Not Found!</td>
                         </tr>
                     }
                 }
@@ -185,8 +173,7 @@
             </tfoot>
 
         </table>
-
-    
+   
 </div>
 
 @section scripts

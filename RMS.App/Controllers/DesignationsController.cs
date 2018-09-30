@@ -25,23 +25,15 @@ namespace RMS.App.Controllers
         }
 
         // GET: Designations
-        public ActionResult Index(string searchText)
+        public ActionResult Index()
         {
             try
             {
-                if (searchText != null)
-                {
-                    ICollection<Designation> designations = _designationManager.SearchByText(searchText);
-                    IEnumerable<DesignationViewModel> designationViewModel = Mapper.Map<IEnumerable<DesignationViewModel>>(designations);
-                    return View(designationViewModel);
-                }
-                else
-                {
 
                     ICollection<Designation> designation = _designationManager.GetAll();
                     IEnumerable<DesignationViewModel> designationViewModels = Mapper.Map<IEnumerable<DesignationViewModel>>(designation);
                     return View(designationViewModels);
-                }
+
             }
             catch (Exception ex)
             {

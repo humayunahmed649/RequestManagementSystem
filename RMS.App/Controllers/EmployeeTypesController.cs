@@ -24,23 +24,14 @@ namespace RMS.App.Controllers
             this._employeeTypeManager = employeeTypeManager;
         }
         // GET: EmployeeTypes
-        public ActionResult Index(string searchText)
+        public ActionResult Index()
         {
             try
             {
-
-                if (searchText != null)
-                {
-                    ICollection<EmployeeType> employeeTypes = _employeeTypeManager.SearchByText(searchText);
-                    IEnumerable<EmployeeTypeViewModel> employeeTypeViewModels = Mapper.Map<IEnumerable<EmployeeTypeViewModel>>(employeeTypes);
-                    return View(employeeTypeViewModels);
-                }
-                else
-                {
                     ICollection<EmployeeType> employeeTypes = _employeeTypeManager.GetAll();
                     IEnumerable<EmployeeTypeViewModel> employeeTypeViewModels = Mapper.Map<IEnumerable<EmployeeTypeViewModel>>(employeeTypes);
                     return View(employeeTypeViewModels);
-                }
+
             }
             catch (Exception ex)
             {

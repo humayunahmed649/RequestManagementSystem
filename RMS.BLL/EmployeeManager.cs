@@ -20,10 +20,6 @@ namespace RMS.BLL
             this._addressManager = addressManager;
         }
 
-        public ICollection<Employee> SearchByText(string searchText)
-        {
-            return _employeeRepository.SearchByText(searchText);
-        }
 
         public Employee FindByLoginId(int id)
         {

@@ -18,9 +18,5 @@ namespace RMS.Repositories
         {
         }
 
-        public ICollection<VehicleType> SearchByText(string searchText)
-        {
-            return db.Set<VehicleType>().Where(c => c.Name.StartsWith(searchText)).ToList();
-        }
     }
 }

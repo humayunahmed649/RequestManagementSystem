@@ -18,9 +18,5 @@ namespace RMS.Repositories
         {
         }
 
-        public ICollection<EmployeeType> SearchByText(string searchText)
-        {
-            return db.Set<EmployeeType>().Where(c => c.Type.StartsWith(searchText)).ToList();
-        }
     }
 }
