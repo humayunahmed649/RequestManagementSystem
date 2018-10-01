@@ -10,17 +10,24 @@ namespace RMS.Models.EntityModels
     public class Notification
     {
         public int Id { get; set; }
-        public string Text { get; set; }
 
         [ForeignKey("Employee")]
         public int? EmployeeId { get; set; }
         public Employee Employee { get; set; }
 
         [ForeignKey("Requisition")]
-        public int? RequisitionId  { get; set; }
+        public int? RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
-        public DateTime NotifyDateTime { get; set; }
+
+        public string SenderText { get; set; }
         public string SenderViewStatus { get; set; }
+        public DateTime SenderNotifyDateTime { get; set; }
+        
+
+        public string ControllerText { get; set; }
         public string ControllerViewStatus { get; set; }
+        public DateTime ControllerNotifyDateTime { get; set; }
+
+
     }
 }

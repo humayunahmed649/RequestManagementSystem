@@ -42,7 +42,7 @@
                     var notify = ViewBag.Notification;
                     foreach (var dt in notify)
                     {
-                            <li><a href="@Url.Action("Details","Requisitions",new {@id=dt.RequisitionId})"> @dt.Employee.FullName &nbsp; @dt.Text &nbsp; Req No:  @dt.Requisition.RequisitionNumber &nbsp; @dt.NotifyDateTime.ToString("hh:mm tt")</a></li>
+                            <li><a href="@Url.Action("Details","Requisitions",new {@id=dt.RequisitionId})"> @dt.Employee.FullName &nbsp; @dt.SenderText &nbsp; Req No:  @dt.Requisition.RequisitionNumber &nbsp; @dt.SenderNotifyDateTime.ToString("hh:mm tt")</a></li>
                             <hr />
                         }
 

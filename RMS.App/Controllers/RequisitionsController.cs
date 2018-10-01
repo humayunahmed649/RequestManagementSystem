@@ -99,20 +99,30 @@ namespace RMS.App.Controllers
                 //ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
 
                 RequisitionStatus requisition = _requisitionStatusManager.FindByRequisitionId((int)id);
+
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+
                 if (requisition.StatusType != "New")
                 {
                     ViewBag.Data = _assignRequisitionManager.GetAll().FirstOrDefault(c => c.RequisitionId == id);
+
                     if (requisition.StatusType == "Cancelled")
                     {
                         ViewBag.CancelInfo = _cancelRequisitionManager.GetAll().FirstOrDefault(c=>c.RequisitionId==id);
                     }
                 }
-                        if (requisition == null)
-                        {
-                            return HttpNotFound();
-                        }
-                      RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
-                    return View(requisitionStatusViewModel);
+
+                //Employee notification status updated.
+                Notification notificationUpdate = _notificationManager.FindByRequisitionId(requisition.RequisitionId);
+                notificationUpdate.SenderViewStatus = "Seen";
+                _notificationManager.Update(notificationUpdate);
+
+                RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
+
+                return View(requisitionStatusViewModel);
             }
             catch (Exception ex)
             {
@@ -197,20 +207,22 @@ namespace RMS.App.Controllers
                     {
                         RequisitionStatus status = new RequisitionStatus();
                         status.RequisitionNumber = requisition.RequisitionNumber;
-
                         status.RequisitionId = requisition.Id;
                         status.StatusType = "New";
                         _requisitionStatusManager.Add(status);
 
                         // Notification Status Save
                         Notification notification = new Notification();
-                        notification.Text = "Request for a vehicle";
-                        notification.EmployeeId = empId.Id;
-                        notification.ControllerViewStatus = "Unseen";
+
                         notification.RequisitionId = requisition.Id;
-                        notification.NotifyDateTime=DateTime.Now;
+                        notification.EmployeeId = empId.Id;
+                        notification.ControllerText = "Request for a vehicle";
+                        notification.ControllerViewStatus = "Unseen";
+                        notification.ControllerNotifyDateTime=DateTime.Now;
+                        notification.SenderNotifyDateTime=DateTime.Now;
                         _notificationManager.Add(notification);
-                        TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
+
+                        TempData["msg"] = "Requisition has been Send successfully! Please wait for Response! Thanks";
                         return RedirectToAction("Create");
                     }
 
@@ -226,7 +238,7 @@ namespace RMS.App.Controllers
                 var loginUserId1 = Convert.ToInt32(User.Identity.GetUserId());
                 var empId1 = _employeeManager.FindByLoginId(loginUserId1);
 
-                //Notifications for assignd vehicle from controller
+                //Notifications for previous assigned vehicle By controller
                 var notification1 = _notificationManager.GetNotificationsForSender("Unseen", empId1.Id);
                 var notificationCount = notification1.Count;
 
@@ -237,7 +249,8 @@ namespace RMS.App.Controllers
                 }
 
                 ViewBag.Requisition = _requisitionManager.GetAllRequisitionByEmployeeId(empId1.Id);
-                TempData["msg1"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
+
+                TempData["msg1"] = " Requisition send failed! You are missing to input proper value. Please check and try again! ";
 
                 return View();
             }
@@ -310,20 +323,22 @@ namespace RMS.App.Controllers
 
                         // Notification Status Save
                         Notification notification = new Notification();
-                        notification.Text = "Request for a vehicle";
-                        notification.EmployeeId = empId.Id;
-                        notification.ControllerViewStatus = "Unseen";
                         notification.RequisitionId = requisition.Id;
-                        notification.NotifyDateTime = DateTime.Now;
+                        notification.EmployeeId = empId.Id;
+                        notification.ControllerText = "Request for a vehicle";
+                        notification.ControllerViewStatus = "Unseen";
+                        notification.ControllerNotifyDateTime = DateTime.Now;
                         _notificationManager.Add(notification);
 
-                        TempData["msg"] = "Requisition has been Send successfully....! Please Wait For Response..........Thanks";
+                        TempData["msg"] = " Requisition has been Send successfully! Please wait for Response! Thanks ";
                         return RedirectToAction("Create");
                     }
                 }
 
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllEmployees(), "Id", "FullName", requisitonForAnother.EmployeeId);
-                TempData["msg1"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
+
+                TempData["msg1"] = " Requisition send failed! You are missing to input proper value. Please check and try again! ";
+
                 return RedirectToAction("Create");
             }
             catch (Exception ex)
@@ -358,7 +373,8 @@ namespace RMS.App.Controllers
                 }
 
 
-                TempData["EditMsg"] = "Your Requisition Already Done ...You Cant't Edit/Update This";
+                TempData["EditMsg"] = " Your requisition already assigned or completed. You Cant't Edid or Update. ";
+
                 return RedirectToAction("Create");
 
 
@@ -407,11 +423,16 @@ namespace RMS.App.Controllers
                     Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
 
                     _requisitionManager.Update(requisition);
-                    TempData["msg"] = "Information has been updated successfully";
+
+                    TempData["msg"] = " Information has been updated successfully! ";
+
                     return RedirectToAction("Create");
                 }
+
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", requisitionViewModel.EmployeeId);
+
                 TempData["msg1"] = "Requisition send failed! You are missing to input proper value. Please check and try again!";
+
                 return View(requisitionViewModel);
             }
             catch (Exception ex)
