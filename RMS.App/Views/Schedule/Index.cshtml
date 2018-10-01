@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Assigned Schedule </h2>
+<br/>
+<div id="calendar">
+
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 class="modal-title"><span id="requisitionNumber"></span></h4>
+            </div>
+
+            <div class="modal-body">
+                <p id="description"></p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print">
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var events = [];
+
+            $.ajax({
+                type: "GET",
+                url: "/Schedule/GetAssignRequisition",
+                success: function(data) {
+                    $.each(data, function(key, value) {
+                        events.push({
+                            title: value.RequisitionNumber,
+                            description: value.Requisition.Description,
+                            start: moment(value.Requisition.StartDateTime),
+                            end: value.Requisition.EndDateTime != null ? moment(value.Requisition.EndDateTime) : null,
+                            color: "red",
+                            textColor:"white"
+
+                        });
+                    });
+                    GenerateCalendar(events);
+                },
+                error:function(error) {
+                    alert("Failed");
+                }
+
+            });
+
+            function GenerateCalendar(events) {
+                $('#calendar').fullCalendar("destroy");
+                $('#calendar').fullCalendar({
+                    contentHeight: 400,
+                    defaultDate: new Date(),
+                    timeFormat: 'h(:mm)a',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay,agenda'
+                    },
+
+                    eventLimit: true,
+                    eventColor: "green",
+                    allDay:false,
+
+                    events: events,
+                    eventClick:function(calEvent, jsEvent, view) {
+                        $('#myModal #requisitionNumber').text(calEvent.title);
+                        var $description = $('<div/>');
+                        $description.append($('<p>').html('<b>StartDateTime:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                        if (calEvent.end != null) {
+                            $description.append($('<p>').html('<b>EndDateTime:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                            
+                        }
+
+                        $description.append($('<p>').html('<b>Description:</b>' + calEvent.description));
+                        $('#myModal #description').empty().html($description);
+                        $('#myModal').modal();
+                    }
+            });
+            }
+        });
+    </script>
+}
