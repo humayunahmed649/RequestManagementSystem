@@ -227,7 +227,7 @@ namespace RMS.App.Controllers
                        
                         TempData["msg1"] = "Vehicle assigned but mail and notification send failed. Please contact with your service provider or developer! ";
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.Id });
                     
                     
                 }

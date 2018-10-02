@@ -94,6 +94,11 @@ namespace RMS.Repositories
             return assignRequisitionInfo;
 
 
-        } 
+        }
+
+        public ICollection<RequisitionStatus> GetAllCheckOutCheckIn()
+        {
+            return db.Set<RequisitionStatus>().Include(c => c.Requisition.Employee).Where(c => c.StatusType == "Assigned" || c.StatusType=="OnExecute").OrderByDescending(c => c.Id).AsNoTracking().ToList();
+        }
     }
 }

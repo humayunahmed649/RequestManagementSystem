@@ -52,5 +52,10 @@ namespace RMS.BLL
         {
             return _requisitionStatusRepository.GetAllAssignRequisitions();
         }
+
+        public ICollection<RequisitionStatus> GetAllCheckOutCheckIn()
+        {
+            return _requisitionStatusRepository.GetAllCheckOutCheckIn();
+        }
     }
 }

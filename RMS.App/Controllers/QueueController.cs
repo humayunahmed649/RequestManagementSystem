@@ -101,7 +101,7 @@ namespace RMS.App.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult GetMessage()
         {

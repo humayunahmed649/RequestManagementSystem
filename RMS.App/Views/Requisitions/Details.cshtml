@@ -129,19 +129,26 @@
                 <br />
                 <h4>Vehicle and Driver Info!</h4>
                 <hr/>
+                <table class="table table-bordered table-light table-striped" style="width: 100%">
+                <tr>
+                    <td>Vehicle Registration No:</td>
+                    <td>@data.Vehicle.RegNo</td>
+                </tr>
+                <tr>
+                    <td>Driver Name:</td>
+                    <td>@data.Employee.FullName</td>
+                </tr>
+                    <tr>
+                        <td>Vehicle Brand Name:</td>
+                        <td>@data.Vehicle.BrandName</td>
+                    </tr>
+                    <tr>
+                        <td>Driver Contact No:</td>
+                        <td>@data.Employee.ContactNo</td>
+                    </tr>
 
-                <div class="col-md-2">@Html.DisplayName("Vehicle Registration No")</div>
-                <div class="col-md-10">@data.Vehicle.RegNo</div>
-
-                <div class="col-md-2">@Html.DisplayName("Vehicle Brand Name")</div>
-                <div class="col-md-10">@data.Vehicle.BrandName</div>
-
-                <div class="col-md-2">@Html.DisplayName("Driver Name")</div>
-                <div class="col-md-10">@data.Employee.FullName</div>
-
-
-                <div class="col-md-2">@Html.DisplayName("Driver Contact No")</div>
-                <div class="col-md-10">@data.Employee.ContactNo</div>
+                </table>
+                
             }
 
         }

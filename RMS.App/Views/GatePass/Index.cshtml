@@ -11,7 +11,7 @@
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet"/>
 
 }
-<h2>Check-Out List</h2>
+<h2>Check-OUT Check-IN</h2>
 <hr/>
 <br/>
 <table id="example1" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">
@@ -20,17 +20,16 @@
             <th>
                 SL
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StatusType)
             </th>
+            
             <th>
-                @Html.DisplayNameFor(model => model.RequisitionId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
+                @Html.DisplayName("For Whom")
             </th>
 
             <th class="text-center">
@@ -51,21 +50,27 @@
                         @sl
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
+                        @Html.DisplayFor(modelItem => item.Requisition.RequisitionNumber)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.StatusType)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RequisitionId)
+                        @Html.DisplayFor(modelItem => item.Requisition.Employee.FullName)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Requisition.RequisitionNumber)
-                    </td>
-
+                    
+                    @if (item.StatusType == "Assigned")
+                    {
+                        <td class="text-right">
+                            @Html.ActionLink("Check-Out", "CheckOut", new { id = item.Id }, new { @class = "btn btn-success" })
+                        </td>
+                    }
+                   @if (item.StatusType == "OnExecute")
+                    {
                     <td class="text-right">
-                        @Html.ActionLink("Check-Out", "CheckOut", new { id = item.Id },new {@class="btn btn-success"})
+                        @Html.ActionLink("Check-In", "CheckIn", new { id = item.Id }, new { @class = "btn btn-success" })
                     </td>
+                   }
                 </tr>
             }
         }
@@ -77,17 +82,15 @@
                 SL
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StatusType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RequisitionId)
+                @Html.DisplayName("For Whom")
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
-            </th>
+            
 
             <th class="text-center">
                 Action
