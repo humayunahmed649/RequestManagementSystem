@@ -318,6 +318,8 @@ namespace RMS.App.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                var reqId = _assignRequisitionManager.FindById((int) id);
+                
                 AssignRequisition assignRequisition = _assignRequisitionManager.FindById((int)id);
                 if (assignRequisition == null)
                 {
@@ -472,7 +474,7 @@ namespace RMS.App.Controllers
                     return HttpNotFound();
                 }
 
-                var requestDetails = _assignRequisitionManager.GetAllWithInformation();
+                //var requestDetails = _assignRequisitionManager.GetAllWithInformation();
                 AssignRequisitionViewModel assignRequisitionViewModel = Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
 
                 return View(assignRequisitionViewModel);
