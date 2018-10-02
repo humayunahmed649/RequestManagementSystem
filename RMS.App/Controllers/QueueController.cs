@@ -24,8 +24,14 @@ namespace RMS.App.Controllers
         private IVehicleManager _vehicleManager;
         private IVehicleTypeManager _vehicleTypeManager;
         private IContactManager _contactManager;
+        private IOrganizationManager _organizationManager;
+        private IDepartmentManager _departmentManager;
+        private IDesignationManager _designationManager;
+        private IEmployeeTypeManager _employeeTypeManager;
 
-        public QueueController(INotificationManager notificationManager,IRequisitionManager requisitionManager,IRequisitionStatusManager requisitionStatusManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IVehicleTypeManager vehicleTypeManager, IContactManager contactManager)
+        public QueueController(INotificationManager notificationManager,IRequisitionManager requisitionManager,IRequisitionStatusManager requisitionStatusManager,
+            IEmployeeManager employeeManager,IVehicleManager vehicleManager,IVehicleTypeManager vehicleTypeManager, IContactManager contactManager,
+            IOrganizationManager organizationManager, IDepartmentManager departmentManager, IDesignationManager designationManager, IEmployeeTypeManager employeeTypeManager)
         {
             this._notificationManager = notificationManager;
             this._requisitionManager = requisitionManager;
@@ -34,6 +40,11 @@ namespace RMS.App.Controllers
             this._vehicleManager = vehicleManager;
             this._vehicleTypeManager = vehicleTypeManager;
             this._contactManager = contactManager;
+            this._organizationManager = organizationManager;
+            this._departmentManager = departmentManager;
+            this._designationManager = designationManager;
+            this._employeeTypeManager = employeeTypeManager;
+
         }
 
         // GET: SetupAll
@@ -50,6 +61,18 @@ namespace RMS.App.Controllers
             return View();
         }
 
+        public ActionResult SetupQueue()
+        {
+            ViewBag.OrganizationCount = _organizationManager.GetAll().Count;
+            ViewBag.DepartmentCount = _departmentManager.GetAll().Count;
+            ViewBag.DesignationCount = _designationManager.GetAll().Count;
+            ViewBag.EmployeeTypeCount = _employeeTypeManager.GetAll().Count;
+            ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
+            ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;
+            ViewBag.VehicleCount = _vehicleManager.GetAll().Count;
+            ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
+            return View();
+        }
         public ActionResult RequisitionQueue()
         {
             //Notification Area

@@ -18,10 +18,12 @@ namespace RMS.App.Controllers
     {
         private ICancelRequisitionManager _cancelRequisitionManager;
         private IRequisitionStatusManager _requisitionStatusManager;
-        public CancelRequisitionController(ICancelRequisitionManager cancelRequisitionManager,IRequisitionStatusManager requisitionStatusManager)
+        private INotificationManager _notificationManager;
+        public CancelRequisitionController(ICancelRequisitionManager cancelRequisitionManager,IRequisitionStatusManager requisitionStatusManager, INotificationManager notificationManager)
         {
             this._cancelRequisitionManager = cancelRequisitionManager;
             this._requisitionStatusManager = requisitionStatusManager;
+            this._notificationManager = notificationManager;
         }
 
         // GET: CancelRequisitionViewModels
@@ -111,7 +113,16 @@ namespace RMS.App.Controllers
                         CancelRequisition cancelRequisition = Mapper.Map<CancelRequisition>(cancelRequisitionViewModel);
                         _cancelRequisitionManager.Add(cancelRequisition);
                     }
-
+                    //Notifaication status change after assign requisition
+                    Notification notificationUpdate = _notificationManager.FindByRequisitionId(requisitionStatus.RequisitionId);
+                    if (notificationUpdate != null)
+                    {
+                        notificationUpdate.ControllerViewStatus = "Seen";
+                        notificationUpdate.SenderViewStatus = "Unseen";
+                        notificationUpdate.SenderText = "Your requisition has been canceled.";
+                        notificationUpdate.SenderNotifyDateTime = DateTime.Now;
+                        var updateResult = _notificationManager.Update(notificationUpdate);
+                    }
                     return RedirectToAction("Index");
                 }
                 return View();

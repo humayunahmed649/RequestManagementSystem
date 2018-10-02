@@ -65,7 +65,18 @@
                     @Html.DisplayNameFor(model => model.Requisition.EndTime)
 
                 </th>
-                
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.FromPlace)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Description)
+
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
@@ -106,13 +117,21 @@
                         <td>
                             @Html.DisplayFor(model => item.Requisition.EndDateTime)
                         </td>
-                        
+                        <td>
+                            @Html.DisplayFor(model => item.Requisition.FromPlace)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Requisition.DestinationPlace)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Requisition.Description)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
                         </td>
                         <td class="text-right">
-                            @Html.ActionLink("Assign Requisition", "Create", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-primary btn-sm" })
-                            @Html.ActionLink("View", "ViewDetails", new { id = item.RequisitionId }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Assign Requisition", "Create", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-primary btn-sm" }) &nbsp;
+                            @Html.ActionLink("View", "ViewDetails", new { id = item.RequisitionId }, new { @class = "btn btn-info btn-sm" }) &nbsp;
                             @Html.ActionLink("Cancel Requisition", "Create","CancelRequisition", new { statusId = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
 
                         </td>
@@ -150,7 +169,18 @@
                     @Html.DisplayNameFor(model => model.Requisition.EndTime)
 
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.FromPlace)
 
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Description)
+
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
