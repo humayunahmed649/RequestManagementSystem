@@ -100,8 +100,7 @@ namespace RMS.App.Controllers
             ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
             return View();
         }
-
-        [Authorize(Roles = "Administrator")]
+        
         [HttpGet]
         public ActionResult GetMessage()
         {
@@ -117,34 +116,49 @@ namespace RMS.App.Controllers
             }
         }
 
-
+        [HttpGet]
         public ActionResult ReplyMail(string email)
         {
             try
             {
-                if (!email.IsNullOrWhiteSpace())
-                {
-                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                    smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
-                    smtpClient.EnableSsl = true;
+
+                MailServiceViewModel mailModel = new MailServiceViewModel();
+                ViewBag.Email = email;
+                return View(mailModel);
 
 
-                    MailMessage mailMessage = new MailMessage();
-                    mailMessage.From = new MailAddress("demowork9999@gmail.com");
-                    mailMessage.To.Add(new MailAddress(email));
-                    mailMessage.Subject = "Thanks for your message";
-                    mailMessage.Body = "We will try to improve our service";
-                    smtpClient.Send(mailMessage);
-
-                    TempData["msg"] = "Mail has been send successfully";
-                    return RedirectToAction("GetMessage");
-                }
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Queue", "GetMessage"));
             }
-            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ReplyMail(MailServiceViewModel mailModel,string email)
+        {
+            try
+            {
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+            smtpClient.EnableSsl = true;
+
+
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress(mailModel.From);
+            mailMessage.To.Add(new MailAddress(email));
+            mailMessage.Subject = mailModel.Subject;
+            mailMessage.Body = mailModel.Body;
+            smtpClient.Send(mailMessage);
+
+            TempData["msg"] = "Mail has been send successfully";
+            return RedirectToAction("GetMessage");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Queue", "ReplyMail"));
+            }
+
         }
     }
 }
