@@ -10,10 +10,12 @@ namespace RMS.App.Controllers
     public class ScheduleController : Controller
     {
         private IAssignRequisitionManager _assignRequisitionManager;
+        private IRequisitionStatusManager _requisitionStatusManager;
 
-        public ScheduleController(IAssignRequisitionManager assignRequisitionManager)
+        public ScheduleController(IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager)
         {
             this._assignRequisitionManager = assignRequisitionManager;
+            this._requisitionStatusManager = requisitionStatusManager;
         }
 
         // GET: Schedule
@@ -24,7 +26,7 @@ namespace RMS.App.Controllers
 
         public JsonResult GetAssignRequisition()
         {
-            var requisitions = _assignRequisitionManager.GetAll().ToList();
+            var requisitions = _requisitionStatusManager.GetAllAssignRequisitions();
             return new JsonResult() {Data = requisitions,JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
     }

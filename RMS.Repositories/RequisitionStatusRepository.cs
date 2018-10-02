@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
 using RMS.Repositories.Base;
 using RMS.Repositories.Contracts;
@@ -12,8 +15,10 @@ namespace RMS.Repositories
 {
     public class RequisitionStatusRepository:Repository<RequisitionStatus>,IRequisitionStatusRepository
     {
-        public RequisitionStatusRepository(DbContext db) : base(db)
+        private RmsDbContext _db;
+        public RequisitionStatusRepository(RmsDbContext db) : base(db)
         {
+            _db = db;
         }
         public override ICollection<RequisitionStatus> GetAll()
         {
@@ -68,5 +73,27 @@ namespace RMS.Repositories
                 .Include(c => c.Requisition.Employee.Designation)
                 .FirstOrDefault();
         }
+
+        public IQueryable GetAllAssignRequisitions()
+        {
+            IQueryable assignRequisitionInfo = (from requisitionStatus in db.Set<RequisitionStatus>()
+                join assignRequisition in db.Set<AssignRequisition>()
+                    on requisitionStatus.Id equals assignRequisition.RequisitionStatusId
+                where requisitionStatus.StatusType == "Assigned"
+                select new
+                {
+                    requisitionNumber=assignRequisition.RequisitionNumber,
+                    employeeName=assignRequisition.Requisition.Employee.FullName,
+                    startTime=assignRequisition.Requisition.StartDateTime,
+                    endTime=assignRequisition.Requisition.EndDateTime,
+                    vehicle=assignRequisition.Vehicle.RegNo,
+                    driver=assignRequisition.Employee.FullName,
+                    description=assignRequisition.Requisition.Description
+                    
+                }).AsQueryable();
+            return assignRequisitionInfo;
+
+
+        } 
     }
 }

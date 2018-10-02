@@ -46,10 +46,13 @@
                 success: function(data) {
                     $.each(data, function(key, value) {
                         events.push({
-                            title: value.RequisitionNumber,
-                            description: value.Requisition.Description,
-                            start: moment(value.Requisition.StartDateTime),
-                            end: value.Requisition.EndDateTime != null ? moment(value.Requisition.EndDateTime) : null,
+                            title: value.requisitionNumber,
+                            employee: value.employeeName,
+                            description: value.description,
+                            start: moment(value.startTime),
+                            end: value.endTime != null ? moment(value.endTime) : null,
+                            driver: value.driver,
+                            vehicle:value.vehicle,
                             color: "red",
                             textColor:"white"
 
@@ -83,13 +86,17 @@
                     eventClick:function(calEvent, jsEvent, view) {
                         $('#myModal #requisitionNumber').text(calEvent.title);
                         var $description = $('<div/>');
-                        $description.append($('<p>').html('<b>StartDateTime:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+
+                        $description.append($('<p>').html('<b>Employee Name :</b>' + calEvent.employee));
+                        $description.append($('<p>').html('<b>Driver Name :</b>' + calEvent.driver));
+                        $description.append($('<p>').html('<b>Description :</b>' + calEvent.description));
+                        $description.append($('<p>').html('<b>Vehicle Reg NO :</b>' + calEvent.vehicle));
+                        $description.append($('<p>').html('<b>Start Date Time:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
                         if (calEvent.end != null) {
                             $description.append($('<p>').html('<b>EndDateTime:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                             
                         }
 
-                        $description.append($('<p>').html('<b>Description:</b>' + calEvent.description));
                         $('#myModal #description').empty().html($description);
                         $('#myModal').modal();
                     }

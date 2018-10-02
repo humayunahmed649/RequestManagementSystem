@@ -47,5 +47,10 @@ namespace RMS.BLL
         {
             return _requisitionStatusRepository.FindByRequisitionId(id);
         }
+
+        public IQueryable GetAllAssignRequisitions()
+        {
+            return _requisitionStatusRepository.GetAllAssignRequisitions();
+        }
     }
 }
