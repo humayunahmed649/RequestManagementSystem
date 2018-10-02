@@ -117,8 +117,12 @@ namespace RMS.App.Controllers
 
                 //Employee notification status updated.
                 Notification notificationUpdate = _notificationManager.FindByRequisitionId(requisition.RequisitionId);
-                notificationUpdate.SenderViewStatus = "Seen";
-                _notificationManager.Update(notificationUpdate);
+                if (notificationUpdate!=null) 
+                {
+                    notificationUpdate.SenderViewStatus = "Seen";
+                    _notificationManager.Update(notificationUpdate);
+                }
+                
 
                 RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
 
@@ -328,6 +332,7 @@ namespace RMS.App.Controllers
                         notification.ControllerText = "Request for a vehicle";
                         notification.ControllerViewStatus = "Unseen";
                         notification.ControllerNotifyDateTime = DateTime.Now;
+                        notification.SenderNotifyDateTime=DateTime.Now;
                         _notificationManager.Add(notification);
 
                         TempData["msg"] = " Requisition has been Send successfully! Please wait for Response! Thanks ";

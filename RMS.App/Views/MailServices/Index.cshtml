@@ -39,12 +39,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.To)
                 </th>
-                
+
                 <th>
                     @Html.DisplayNameFor(model => model.Subject)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Body)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.From)
@@ -52,6 +49,10 @@
                 <th>
                     @Html.DisplayNameFor(model => model.MailSendingDateTime)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Body)
+                </th>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
                 </th>
@@ -77,12 +78,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.To)
                             </td>
-                            
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.Subject)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Body)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.From)
@@ -90,6 +88,11 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.MailSendingDateTime)
                             </td>
+                            <td>
+                                <span style="white-space: pre-line">@Html.DisplayFor(modelItem => item.Body)</span>
+
+                            </td>
+                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.Requisition.RequisitionNumber)
                             </td>
@@ -111,12 +114,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.To)
                 </th>
-                
+
                 <th>
                     @Html.DisplayNameFor(model => model.Subject)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Body)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.From)
@@ -124,6 +124,10 @@
                 <th>
                     @Html.DisplayNameFor(model => model.MailSendingDateTime)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Body)
+                 </th>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
                 </th>

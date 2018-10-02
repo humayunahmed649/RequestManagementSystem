@@ -33,7 +33,7 @@
                 }
                 else
                 {
-                    <a title="You have no unread notifications!" class="dropdown-toggle btn btn-outline-primary caret badge" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="font-weight-bold" style="font-size: 16px;">@ViewBag.count</span></a>
+                    <a title="You have no unread notifications!" class="dropdown-toggle btn btn-outline-primary caret badge" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="font-weight-bold" style="font-size: 16px;"></span></a>
                 }
 
                 <ul class="dropdown-menu">
@@ -249,28 +249,33 @@
 </div>
 
 <!--My request Request -->
-<div class="modal fade" id="myRequest">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header table-info">
-                <h3 class="modal-title">My Requisition</h3>
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-            </div>
-            <div class="modal-body table-light">
-                <div class="table table-responsive nowrap" style="width: auto">
-                    @Html.Action("RequisitionList", "Requisitions")
+@if (@ViewBag.Requisition != null)
+{
+    <div class="modal fade" id="myRequest">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header table-info">
+                    <h3 class="modal-title">My Requisition</h3>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
                 </div>
-                
-            </div>
-            <div class="col-md-12 text-right">
-                <br/>
-                <p><a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
-                </p>
-                <br/>
+                <div class="modal-body table-light">
+                    <div class="table table-responsive nowrap" style="width: auto">
+                        @Html.Action("RequisitionList", "Requisitions")
+                    </div>
+
+                </div>
+                <div class="col-md-12 text-right">
+                    <br />
+                    <p>
+                        <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
+                    </p>
+                    <br />
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+
 
 <!--Request for other-->
 <div class="modal fade" id="forRequest">

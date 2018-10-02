@@ -111,7 +111,6 @@ namespace RMS.App.Controllers
 
                 RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(ViewBag.Requisition = requisition);
 
-
                 AssignRequisitionViewModel assignRequisitionViewModel = new AssignRequisitionViewModel();
                 assignRequisitionViewModel.RequisitionId = requisitionId;
                 assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
@@ -150,19 +149,17 @@ namespace RMS.App.Controllers
                         status.RequisitionNumber = assignRequisition.RequisitionNumber;
                         status.StatusType = "Assigned";
                         _requisitionStatusManager.Update(status);
+                    }
 
-                        
-
-                        //Notifaication status change after assign requisition
-                        Notification notificationUpdate=_notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
+                    //Notifaication status change after assign requisition
+                    Notification notificationUpdate=_notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
+                    if (notificationUpdate!=null) 
+                    {
                         notificationUpdate.ControllerViewStatus = "Seen";
                         notificationUpdate.SenderViewStatus = "Unseen";
                         notificationUpdate.SenderText = "Your vehicle has been assigned";
                         notificationUpdate.SenderNotifyDateTime = DateTime.Now;
-                        var updateResult=_notificationManager.Update(notificationUpdate);
-
-
-                        
+                        var updateResult = _notificationManager.Update(notificationUpdate);
 
                         //Sending mail to employee for assigned vehicle
                         if (updateResult)
@@ -183,9 +180,9 @@ namespace RMS.App.Controllers
                             //Mail service section
                             var subject = "Assign a vehicle on your requisition no : " + assignRequisition.RequisitionNumber;
 
-                            var msgBody = "Dear " + req.Employee.FullName + "," + " \n\r " + "On the basis of your request, assigned a vehicle."+"\n"+ "Your driver is " +
-                                driver.FullName + " Contect No : " + driver.ContactNo +"\n" +"Vehicle " + vehicle.VehicleType.Name +
-                                " and Reg No : " + vehicle.RegNo +" \n "+"Regards, "+" \n\r " + controller.FullName;
+                            var msgBody = "Dear " + req.Employee.FullName + "," + Environment.NewLine + "On the basis of your request, assigned a vehicle." + Environment.NewLine + "Your driver is :" +
+                                driver.FullName + " Contect No : " + driver.ContactNo + Environment.NewLine + "Vehicle :" + vehicle.VehicleType.Name +
+                                " and Reg No : " + vehicle.RegNo + Environment.NewLine + "Regards, " + Environment.NewLine + controller.FullName;
 
                             MailService mailService = new MailService();
                             mailService.To = req.Employee.Email;
@@ -194,10 +191,10 @@ namespace RMS.App.Controllers
                             mailService.Body = msgBody;
                             mailService.MailSendingDateTime = DateTime.Now;
                             mailService.RequisitionId = req.Id;
-                        
+
                             var result = _mailServiceManager.Add(mailService);
 
-                            if (result && req.Employee.Email!=null)
+                            if (result && req.Employee.Email != null)
                             {
                                 try
                                 {
@@ -215,7 +212,7 @@ namespace RMS.App.Controllers
 
                                     TempData["msg"] = "Vehicle assigned and mail send successfully";
 
-                                    return RedirectToAction("PrintDetails","AssignRequisitions",new {id=assignRequisition.Id});
+                                    return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.Id });
                                 }
                                 catch (Exception ex)
                                 {
@@ -226,10 +223,12 @@ namespace RMS.App.Controllers
 
                             }
                         }
+                    }
+                       
                         TempData["msg1"] = "Vehicle assigned but mail and notification send failed. Please contact with your service provider or developer! ";
 
                         return RedirectToAction("Index");
-                    }
+                    
                     
                 }
 

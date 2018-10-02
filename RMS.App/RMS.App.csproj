@@ -1059,6 +1059,7 @@
     <Content Include="Views\CancelRequisition\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutSetupAll.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Queue\SetupQueue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

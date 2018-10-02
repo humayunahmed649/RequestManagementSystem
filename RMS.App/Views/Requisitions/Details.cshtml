@@ -9,7 +9,7 @@
 <hr/>
 
 <div class="row">
-
+<div class="col-md-8 col-lg-8 col-8">
   <table class="table table-bordered table-light table-striped" style="width: 100%">
       <tr>
           <td class="col-md-2-custom" style="width: 25%">
@@ -119,43 +119,51 @@
             </tr>
             
         </table>
+    </div>
+     @*Assigned Requisition Information*@
+    <div class="col-md-4 col-lg-4 col-4 border">
+        @{
+            var data = ViewBag.Data;
+            if (data != null)
+            {
+                <br />
+                <h4>Vehicle and Driver Info!</h4>
+                <hr/>
 
-        @*Assigned Requisition Information*@
+                <div class="col-md-2">@Html.DisplayName("Vehicle Registration No")</div>
+                <div class="col-md-10">@data.Vehicle.RegNo</div>
 
-    @{
-        var data = ViewBag.Data;
-        if (data != null)
-        {
+                <div class="col-md-2">@Html.DisplayName("Vehicle Brand Name")</div>
+                <div class="col-md-10">@data.Vehicle.BrandName</div>
 
-            <div class="col-md-2">@Html.DisplayName("Vehicle Registration No")</div>
-            <div class="col-md-10">@data.Vehicle.RegNo</div>
-
-            <div class="col-md-2">@Html.DisplayName("Vehicle Brand Name")</div>
-            <div class="col-md-10">@data.Vehicle.BrandName</div>
-
-            <div class="col-md-2">@Html.DisplayName("Driver Name")</div>
-            <div class="col-md-10">@data.Employee.FullName</div>
+                <div class="col-md-2">@Html.DisplayName("Driver Name")</div>
+                <div class="col-md-10">@data.Employee.FullName</div>
 
 
-            <div class="col-md-2">@Html.DisplayName("Driver Contact No")</div>
-            <div class="col-md-10">@data.Employee.ContactNo</div>
-        }
-       
-    }
-
-    @*Cancelled Requisition Information*@
-
-    @{
-        var cancelInformation = ViewBag.CancelInfo;
-
-        if (cancelInformation != null)
-        {
-            <div class="col-md-2">@Html.DisplayName("Exaplanation")</div>
-            <div class="col-md-10 text-heading text-danger">@cancelInformation.Reason</div>
+                <div class="col-md-2">@Html.DisplayName("Driver Contact No")</div>
+                <div class="col-md-10">@data.Employee.ContactNo</div>
+            }
 
         }
-        
-    }
+
+        @*Cancelled Requisition Information*@
+
+        @{
+            var cancelInformation = ViewBag.CancelInfo;
+
+            if (cancelInformation != null)
+            {
+                <br/>
+                <h4>Reason of Cancle!</h4>
+                <hr/>
+                @*<div class="col-md-2">@Html.DisplayName("Exaplanation")</div>*@
+                <div class="col-md-10 text-danger">@cancelInformation.Reason</div>
+
+            }
+
+        }
+    </div>
+    
 
 </div>
 <br/>
