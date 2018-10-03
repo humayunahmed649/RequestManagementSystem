@@ -15,6 +15,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator,User")]
     public class EmployeeImagesController : Controller
     {
         private IEmployeeImageManager _employeeImageManager;

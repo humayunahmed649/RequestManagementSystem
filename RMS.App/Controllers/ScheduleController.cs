@@ -7,6 +7,7 @@ using RMS.BLL.Contracts;
 
 namespace RMS.App.Controllers
 {
+    [Authorize(Roles = "Controller,Administrator")]
     public class ScheduleController : Controller
     {
         private IAssignRequisitionManager _assignRequisitionManager;

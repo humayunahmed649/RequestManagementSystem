@@ -13,9 +13,10 @@
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 class="modal-title"><span id="requisitionNumber"></span></h4>
+            <div class="modal-header bg-info">
+
+                <h4 class="modal-title"> Requisition No : <span id="requisitionNumber"></span></h4>
+                <a href="#" class="close" title="Close" data-dismiss="modal"> &times; </a>
             </div>
 
             <div class="modal-body">
@@ -23,7 +24,7 @@
             </div>
 
             <div class="modal-footer">
-                <a href="#" class="btn btn-warning" data-dismiss="modal">Close</a>
+                <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
             </div>
         </div>
     </div>
@@ -33,75 +34,11 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print">
 
 @section scripts{
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script src="~/Scripts/ScheduleCalendarJs/schedule-calendar.js"></script>
     <script>
-        $(document).ready(function () {
-
-            var events = [];
-
-            $.ajax({
-                type: "GET",
-                url: "/Schedule/GetAssignRequisition",
-                success: function(data) {
-                    $.each(data, function(key, value) {
-                        events.push({
-                            title: value.requisitionNumber,
-                            employee: value.employeeName,
-                            description: value.description,
-                            start: moment(value.startTime),
-                            end: value.endTime != null ? moment(value.endTime) : null,
-                            driver: value.driver,
-                            vehicle:value.vehicle,
-                            color: "red",
-                            textColor:"white"
-
-                        });
-                    });
-                    GenerateCalendar(events);
-                },
-                error:function(error) {
-                    alert("Failed");
-                }
-
-            });
-
-            function GenerateCalendar(events) {
-                $('#calendar').fullCalendar("destroy");
-                $('#calendar').fullCalendar({
-                    contentHeight: 400,
-                    defaultDate: new Date(),
-                    timeFormat: 'h(:mm)a',
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,basicWeek,basicDay,agenda'
-                    },
-
-                    eventLimit: true,
-                    eventColor: "green",
-                    allDay:false,
-
-                    events: events,
-                    eventClick:function(calEvent, jsEvent, view) {
-                        $('#myModal #requisitionNumber').text(calEvent.title);
-                        var $description = $('<div/>');
-
-                        $description.append($('<p>').html('<b>Employee Name :</b>' + calEvent.employee));
-                        $description.append($('<p>').html('<b>Driver Name :</b>' + calEvent.driver));
-                        $description.append($('<p>').html('<b>Description :</b>' + calEvent.description));
-                        $description.append($('<p>').html('<b>Vehicle Reg NO :</b>' + calEvent.vehicle));
-                        $description.append($('<p>').html('<b>Start Date Time:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
-                        if (calEvent.end != null) {
-                            $description.append($('<p>').html('<b>EndDateTime:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
-                            
-                        }
-
-                        $('#myModal #description').empty().html($description);
-                        $('#myModal').modal();
-                    }
-            });
-            }
-        });
+        
     </script>
 }
