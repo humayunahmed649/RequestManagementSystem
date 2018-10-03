@@ -390,13 +390,11 @@ namespace RMS.App.Controllers
                 {
                     return HttpNotFound();
                 }
-                if (requisition != null)
-                {
-                    RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
 
-                    return View(requisitionViewModel);
-                }
-                return View("Error");
+                 RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+
+                 return View(requisitionViewModel);
+
             }
             catch (Exception ex)
             {

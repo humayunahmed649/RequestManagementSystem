@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
@@ -11,7 +12,7 @@ using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.EntityModels;
 
-namespace RMS.App.Controllers
+namespace RMS.App.Controllers 
 {
     [Authorize(Roles = "Controller,Administrator")]
 
@@ -85,19 +86,18 @@ namespace RMS.App.Controllers
             }
 
             //Dash Board Area
-            ViewBag.requisitionCount = _requisitionManager.GetAll().Count;
             ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;
-
-            ViewBag.CompleteRequisition =
-                _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
-            ViewBag.CancelRequisition =
-    _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Cancelled");
-
+            ViewBag.AssignedRequisition = _requisitionStatusManager.GetAllAssignRequisitions().Count();
+            ViewBag.AllRequisitionCount = _requisitionManager.GetAll().Count;
             ViewBag.OnProcessRequest = _requisitionStatusManager.GetAllStatusExecute().Count;
+            ViewBag.CompleteRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
+            ViewBag.CancelRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Cancelled");
+
             ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
             ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;
             ViewBag.VehicleCount = _vehicleManager.GetAll().Count;
             ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
+
             return View();
         }
         

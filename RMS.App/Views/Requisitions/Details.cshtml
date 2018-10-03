@@ -9,50 +9,51 @@
 <hr/>
 
 <div class="row">
-<div class="col-md-8 col-lg-8 col-8">
-  <table class="table table-bordered table-light table-striped" style="width: 100%">
-      <tr>
-          <td class="col-md-2-custom" style="width: 25%">
-              @Html.DisplayNameFor(model => model.RequisitionNumber)
-          </td>
-          <td style="width: 75%">
-              @Html.DisplayFor(model => model.RequisitionNumber)
-          </td>
-      </tr>
+    <!--REquisition Details-->
+    <div class="col-md-8 col-lg-8 col-8">
+        <table class="table table-bordered table-light table-striped" style="width: 100%">
+            <tr>
+                <td class="col-md-2-custom" style="width: 25%">
+                    @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </td>
+                <td style="width: 75%">
+                    @Html.DisplayFor(model => model.RequisitionNumber)
+                </td>
+            </tr>
 
-      @if (Model.Requisition.RequestFor == "Own")
-      {
-        <tr>
-            <td class="col-md-2-custom">
-                @Html.DisplayNameFor(model => model.Requisition.EmployeeId)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Requisition.Employee.FullName)
-            </td>
-        </tr>
-      }
+            @if (Model.Requisition.RequestFor == "Own")
+            {
+                <tr>
+                    <td class="col-md-2-custom">
+                        @Html.DisplayNameFor(model => model.Requisition.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+                    </td>
+                </tr>
+            }
 
-      @if (Model.Requisition.RequestFor != "Own")
-      {
-        <tr>
-            <td class="col-md-2-custom">
-                @Html.DisplayNameFor(model => model.Requisition.RequestFor)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Requisition.RequestFor)
-            </td>
-        </tr>
-        <tr>
-            <td class="col-md-2-custom">
-                @Html.DisplayName("Requiest By")
-            </td>
-            <td >
-                @Html.DisplayFor(model => model.Requisition.Employee.FullName)
-            </td>
-        </tr>
-        
-      }
- 
+            @if (Model.Requisition.RequestFor != "Own")
+            {
+                <tr>
+                    <td class="col-md-2-custom">
+                        @Html.DisplayNameFor(model => model.Requisition.RequestFor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Requisition.RequestFor)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-2-custom">
+                        @Html.DisplayName("Requiest By")
+                    </td>
+                    <td >
+                        @Html.DisplayFor(model => model.Requisition.Employee.FullName)
+                    </td>
+                </tr>
+
+            }
+
             <tr>
                 <td class="col-md-2-custom">
                     @Html.DisplayNameFor(model => model.Requisition.FromPlace)
@@ -117,69 +118,78 @@
                     @Html.DisplayFor(model => model.Requisition.Description)
                 </td>
             </tr>
-            
+
         </table>
     </div>
-     @*Assigned Requisition Information*@
-    <div class="col-md-4 col-lg-4 col-4 border">
-        @{
-            var data = ViewBag.Data;
-            if (data != null)
-            {
-                <br />
-                <h4>Vehicle and Driver Info!</h4>
-                <hr/>
-                <table class="table table-bordered table-light table-striped" style="width: 100%">
-                <tr>
-                    <td>Vehicle Registration No:</td>
-                    <td>@data.Vehicle.RegNo</td>
-                </tr>
-                <tr>
-                    <td>Driver Name:</td>
-                    <td>@data.Employee.FullName</td>
-                </tr>
-                    <tr>
-                        <td>Vehicle Brand Name:</td>
-                        <td>@data.Vehicle.BrandName</td>
-                    </tr>
-                    <tr>
-                        <td>Driver Contact No:</td>
-                        <td>@data.Employee.ContactNo</td>
-                    </tr>
 
-                </table>
-                
+    <!--Assigned Requisition Information-->
+    <div class="col-md-4 col-lg-4 col-4">
+        <div class="border container">
+            @{
+                var data = ViewBag.Data;
+                if (data != null)
+                {
+                    <br/>
+                    <h4>Vehicle and Driver Info!</h4>
+                    <hr/>
+                    <table class="table table-bordered table-light table-striped" style="width: 100%">
+                        <tr>
+                            <td>Vehicle Registration No:</td>
+                            <td>@data.Vehicle.RegNo</td>
+                        </tr>
+                        <tr>
+                            <td>Driver Name:</td>
+                            <td>@data.Employee.FullName</td>
+                        </tr>
+                        <tr>
+                            <td>Vehicle Brand Name:</td>
+                            <td>@data.Vehicle.BrandName</td>
+                        </tr>
+                        <tr>
+                            <td>Driver Contact No:</td>
+                            <td>@data.Employee.ContactNo</td>
+                        </tr>
+
+                    </table>
+
+                }
+
             }
 
-        }
+            @*Cancelled Requisition Information*@
 
-        @*Cancelled Requisition Information*@
+            @{
+                var cancelInformation = ViewBag.CancelInfo;
 
-        @{
-            var cancelInformation = ViewBag.CancelInfo;
+                if (cancelInformation != null)
+                {
+                    <br/>
+                    <h4>Reason of Cancle!</h4>
+                    <hr/>
+                    @*<div class="col-md-2">@Html.DisplayName("Exaplanation")</div>*@
+                    <div class="col-md-10 text-danger">@cancelInformation.Reason</div>
 
-            if (cancelInformation != null)
+                }
+
+            }
+            <!--New requisition status-->
+            @if (Model.StatusType == "New")
             {
                 <br/>
-                <h4>Reason of Cancle!</h4>
+                <h4>Rquiest status: </h4>
                 <hr/>
-                @*<div class="col-md-2">@Html.DisplayName("Exaplanation")</div>*@
-                <div class="col-md-10 text-danger">@cancelInformation.Reason</div>
-
+                <div class="col-md-10">
+                    <span class="font-weight-normal">This is new Request. Which is not assigned.</span>
+                </div>
             }
+            <br/><br/>
+        </div>
 
-        }
     </div>
-    
-
 </div>
-<br/>
 <p>
     @if (Model.StatusType == "New")
     {
-            
-        <div class="col-md-12"><strong class="font-weight-bold">This is new Request which is not assigned.</strong></div>
-        
         @Html.ActionLink(" Update ", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
     }
      &nbsp;

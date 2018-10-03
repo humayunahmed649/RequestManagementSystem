@@ -1,3 +1,5 @@
+USE RMSDb;
+GO
 create view AssignRequisitionReport
 as
 select 
