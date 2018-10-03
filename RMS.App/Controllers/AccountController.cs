@@ -103,11 +103,16 @@ namespace RMS.App.Controllers
                     if (result == SignInStatus.Success && string.IsNullOrEmpty(returnUrl))
                     {
                         var user = UserManager.Find(model.Email, model.Password);
-                        if (UserManager.IsInRole(user.Id, "Administrator") || UserManager.IsInRole(user.Id,"Controller"))
+                        if (UserManager.IsInRole(user.Id, "Administrator"))
+                        {
+                            return RedirectToAction("SetupQueue", "Queue");
+                        }
+
+                        if (UserManager.IsInRole(user.Id,"Controller"))
                         {
                             return RedirectToAction("RequisitionQueue", "Queue");
                         }
-
+                        
                         if (UserManager.IsInRole(user.Id,"User"))
                         {
                             return RedirectToAction("Create", "Requisitions");

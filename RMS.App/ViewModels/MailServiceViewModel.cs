@@ -31,5 +31,6 @@ namespace RMS.App.ViewModels
         [Display(Name = "Requisition Id")]
         public int? RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
+
     }
 }

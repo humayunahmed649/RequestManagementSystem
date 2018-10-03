@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
@@ -66,17 +68,19 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,To,Subject,Body")] MailServiceViewModel mailServiceViewModel)
+        public ActionResult Create([Bind(Include = "Id,To,Subject,Body")] MailServiceViewModel mailServiceViewModel, HttpPostedFileBase uploadFile)
         {
             if (ModelState.IsValid)
             {
                 MailService mailService = Mapper.Map<MailService>(mailServiceViewModel);
-                mailService.MailSendingDateTime=DateTime.Now;
+                mailService.MailSendingDateTime = DateTime.Now;
                 mailService.From = "demowork9999@gmail.com";
-                var result = _mailServiceManager.Add(mailService);
-                if (result)
-                {
-                    try
+
+                //var result = _mailServiceManager.Add(mailService);
+                //if (result)
+                //{
+
+                try
                     {
                         SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                         smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
@@ -88,6 +92,12 @@ namespace RMS.App.Controllers
                         mailMessage.To.Add(mailService.To);
                         mailMessage.Subject = mailService.Subject;
                         mailMessage.Body = mailService.Body;
+                        if (uploadFile != null) 
+                        {
+                            string fileName = Path.GetFileName(uploadFile.FileName);
+
+                            mailMessage.Attachments.Add(new Attachment(uploadFile.InputStream, fileName));
+                        }
                         smtpClient.Send(mailMessage);
 
                         TempData["msg"] = "Mail has been save and send successfully";
@@ -100,14 +110,14 @@ namespace RMS.App.Controllers
                         return RedirectToAction("Index");
                     }
                    
-                }
                 
+                //}
                 //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
-                return View(mailServiceViewModel);
+                //return View(mailServiceViewModel);
 
             }
 
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
+            //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
             return View(mailServiceViewModel);
         }
 
