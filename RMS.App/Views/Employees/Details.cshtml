@@ -9,8 +9,9 @@
 <hr/>
 
 <div class="container">
+    <!--Personal Info-->
     <div class="row">
-        
+
         <div class="col-md-9">
             <h3>Personal Information :</h3>
             <br/>
@@ -74,20 +75,21 @@
             </table>
         </div>
         <div class="col-md-3">
-            <br /><br />
-            @if (Model.EmployeeImageId>0)
+            <br/><br/>
+            @if (Model.EmployeeImageId > 0)
             {
-                <img src="@Url.Action("RetriveImage","EmployeeImages",new { @imgId = Model.EmployeeImageId})" class="img-responsive img-thumbnail" style="width: 150px; height: 150px !important;"/>
+                <img src="@Url.Action("RetriveImage", "EmployeeImages", new {@imgId = Model.EmployeeImageId})" class="img-responsive img-thumbnail" style="width: 150px; height: 150px !important;"/>
             }
             else
             {
-                <img src="~/Content/img/EmpImg.gif" style="width: 150px; height: 150px !important; border: 1px solid #808080" />
+                <img src="~/Content/img/EmpImg.gif" style="width: 150px; height: 150px !important; border: 1px solid #808080"/>
             }
 
 
         </div>
 
     </div>
+    <!--Office Info-->
     <div class="row">
         <div class="col-md-12">
             <h3>Office Information :</h3>
@@ -120,6 +122,7 @@
             </table>
         </div>
     </div>
+    <!--Address Info-->
     <div class="row" style="margin: 0 4px">
         <div class="col-md-12">
             <h3>Address :</h3>
@@ -128,24 +131,25 @@
                 <br/>
                 <div class="col-md-6">
                     <div class="row">
-                        
+
                         <div class="col-md-4 border col-md-2-custom">
-                            <br /><br /><br/>
+                            <br/><br/><br/>
                             @Html.DisplayName("Present Address")
                         </div>
                         <div class="col-md-8 border">
-                            <br />
+                            <br/>
                             @foreach (var item in Model.Addresses)
                             {
                                 if (item.AddressType == "Present Address")
                                 {
-                                    @Html.DisplayFor(modelItem => item.AddressLine1)<br/>
-                                    @Html.DisplayFor(modelItem => item.AddressLine2)<br/>
-                                    @Html.DisplayFor(modelItem => item.PostOffice)<br/>
-                                    @Html.DisplayFor(modelItem => item.PostCode)<br/>
-                                    @Html.DisplayFor(modelItem => item.Division.Name)<br/>
-                                    @Html.DisplayFor(modelItem => item.District.Name)<br/>
-                                    @Html.DisplayFor(modelItem => item.Upazila.Name)<br/><br/>
+
+                                <b>House/Road No : </b>@Html.DisplayFor(modelItem => item.AddressLine1)<br/>
+                                <b>Village/Moholla : </b>@Html.DisplayFor(modelItem => item.AddressLine2)<br/>
+                                <b>Post Office : </b>@Html.DisplayFor(modelItem => item.PostOffice)<br/>
+                                <b>Post Code : </b>@Html.DisplayFor(modelItem => item.PostCode)<br/>
+                                <b>Division : </b>@Html.DisplayFor(modelItem => item.Division.Name)<br/>
+                                <b>District : </b>@Html.DisplayFor(modelItem => item.District.Name)<br/>
+                                <b>Upz/Thana : </b>@Html.DisplayFor(modelItem => item.Upazila.Name)<br/><br/>
                                 }
                             }
                         </div>
@@ -164,13 +168,13 @@
                             {
                                 if (item.AddressType == "Permanent Address")
                                 {
-                                    @Html.DisplayFor(modelItem => item.AddressLine1)<br/>
-                                    @Html.DisplayFor(modelItem => item.AddressLine2)<br/>
-                                    @Html.DisplayFor(modelItem => item.PostOffice)<br/>
-                                    @Html.DisplayFor(modelItem => item.PostCode)<br/>
-                                    @Html.DisplayFor(modelItem => item.Division.Name)<br/>
-                                    @Html.DisplayFor(modelItem => item.District.Name)<br/>
-                                    @Html.DisplayFor(modelItem => item.Upazila.Name)<br/><br/>
+                                    <b>House/Road No : </b>@Html.DisplayFor(modelItem => item.AddressLine1)<br />
+                                    <b>Village/Moholla : </b>@Html.DisplayFor(modelItem => item.AddressLine2)<br />
+                                    <b>Post Office : </b>@Html.DisplayFor(modelItem => item.PostOffice)<br />
+                                    <b>Post Code : </b>@Html.DisplayFor(modelItem => item.PostCode)<br />
+                                    <b>Division : </b>@Html.DisplayFor(modelItem => item.Division.Name)<br />
+                                    <b>District : </b>@Html.DisplayFor(modelItem => item.District.Name)<br />
+                                    <b>Upz/Thana : </b>@Html.DisplayFor(modelItem => item.Upazila.Name)<br /><br />
                                 }
                             }
                         </div>

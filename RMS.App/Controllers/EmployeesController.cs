@@ -341,27 +341,30 @@ namespace RMS.App.Controllers
                     if (driverViewModel.EmployeeTypeId == 2)
                     {
                         Employee employee = Mapper.Map<Employee>(driverViewModel);
-                        if (employee.Email!=null) 
-                        {
-                            var email = employee.Email.Trim();
-                            if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
-                            {
-                                ViewBag.Message1 = "Employee email already exist.";
-                            }
-                        }
+                        
                         
                         var contactNo = employee.ContactNo.Trim();
                         var nid = employee.NID.Trim();
                         var drivingLicence = employee.DrivingLicence.Trim();
+
                         if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo) > 0)
                         {
-                            ViewBag.Message2 = "Employee contact no already exist.";
+                            ViewBag.Message1 = "Employee contact no already exist.";
+                        }
+                        if (employee.Email != null)
+                        {
+                            var email = employee.Email.Trim();
+                            if (_employeeManager.GetAll().Count(o => o.Email == email) > 0)
+                            {
+                                ViewBag.Message2 = "Employee email already exist.";
+                            }
                         }
 
                         if (_employeeManager.GetAll().Count(o => o.NID == nid) > 0)
                         {
                             ViewBag.Message3 = "Employee NID already exist.";
-                        }                         
+                        }   
+                                              
                         if (_employeeManager.GetAll().Count(o => o.DrivingLicence == drivingLicence) > 0)
                         {
                             ViewBag.Message4 = "Employee driving licence no already exist.";
@@ -530,23 +533,24 @@ namespace RMS.App.Controllers
                 {
                     Employee employee = Mapper.Map<Employee>(driverViewModel);
 
-                    if (employee.Email != null)
-                    {
-                        var email = employee.Email.Trim();
-                        if (_employeeManager.GetAll().Count(o => o.Email == email && o.Id != employee.Id) > 0)
-                        {
-                            ViewBag.Message1 = "Employee email already exist.";
-                        }
-                    }
-
                     var contactNo = employee.ContactNo.Trim();
                     var nid = employee.NID.Trim();
                     var drivingLicence = employee.DrivingLicence.Trim();
 
                     if (_employeeManager.GetAll().Count(o => o.ContactNo == contactNo && o.Id != employee.Id) > 0)
                     {
-                        ViewBag.Message2 = "Employee contact no already exist.";
+                        ViewBag.Message1 = "Employee contact no already exist.";
                     }
+
+                    if (employee.Email != null)
+                    {
+                        var email = employee.Email.Trim();
+                        if (_employeeManager.GetAll().Count(o => o.Email == email && o.Id != employee.Id) > 0)
+                        {
+                            ViewBag.Message2 = "Employee email already exist.";
+                        }
+                    }
+
                     if (_employeeManager.GetAll().Count(o => o.NID == nid && o.Id != employee.Id) > 0)
                     {
                         ViewBag.Message3 = "Employee NID already exist.";

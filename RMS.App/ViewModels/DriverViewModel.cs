@@ -41,7 +41,7 @@ namespace RMS.App.ViewModels
         public int DesignationId { get; set; }
         public Designation Designation { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please provide driving licence!")]
         [Display(Name = "Driving Licence")]
         public string DrivingLicence { get; set; }
 
