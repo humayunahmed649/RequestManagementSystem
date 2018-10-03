@@ -86,7 +86,11 @@
                                 <div class="col-md-12">
                                     <a class="dropdown-item" href="@Url.Action("Index", "Requisitions")"><i class="fa fa-car"></i> All Requisition</a>
                                 </div>
-                                <br/>
+                                <br /><br />
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "Schedule")"><i class="fa fa-car"></i> ScheduleCalendar</a>
+                                </div>
+                                <br />
 
 
                             </div>
@@ -114,6 +118,9 @@
                                 </div>
                                 <br/><br/>
                             </div>
+                           
+
+                            <!----Report Menu-->
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4 class="text-dark">
@@ -132,6 +139,29 @@
                                     </div>
                                 </div>
                                 <br/><br/>
+                            </div>
+                        }
+                        @if (User.IsInRole("Controller"))
+                        {
+                             <!-------Message Menu-->
+                            <br /><br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="text-dark">
+                                        <i class="fa fa-envelope-open" aria-hidden="true"></i> Message Service
+                                    </h4>
+                                    <hr />
+                                </div>
+                                <br /><br />
+                                <div class="col-md-12" style="font-size: 16px;">
+                                    <div class="col-md-12 col-12">
+                                        <a href="#" class="text-black font-weight-normal" data-toggle="collapse" data-target="#message"><i class="fa fa-envelope-o" aria-hidden="true"></i> Message</a><br />
+                                    </div>
+                                    <div id="message" class="col-md-12 col-12 collapse clearfix" style="margin-left: 35px;">
+                                        @Html.ActionLink("Message", "GetMessage", "Queue")<br />
+                                    </div>
+                                </div>
+                                <br /><br />
                             </div>
                         }
                     </div>
@@ -161,10 +191,10 @@
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
                 <div class="col-lg-4 col-sm-12 footer-social">
-                    <a href="https://www.facebook.com/chittoranjan.sarker"><i class="fa fa-facebook"></i></a>
-                    <a href="https://twitter.com/chittoranjan"><i class="fa fa-twitter"></i></a>
-                    <a href="https://plus.google.com/u/0/+ChittoRanjanSarker"><i class="fa fa-google-plus"></i></a>
-                    <a href="https://www.linkedin.com/in/chitto-ranjan-sarker-94646557/"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
             </div>
         </div>

@@ -39,10 +39,11 @@ namespace RMS.Repositories
         {
             return
                 db.Set<AssignRequisition>()
-                    .Include(c => c.Requisition.Employee.Designation)
-                    .Include(c=>c.Employee.Designation)
+                    .Where(c=>c.RequisitionId==id)
                     .Include(c => c.Vehicle.VehicleType)
+                    .Include(c=>c.Requisition.Employee.Designation)
                     .Include(c => c.RequisitionStatus)
+                    .Include(c=>c.Employee)
                     .AsNoTracking()
                     .FirstOrDefault();
         }

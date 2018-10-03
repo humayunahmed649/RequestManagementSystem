@@ -17,6 +17,7 @@ namespace RMS.App.Controllers
     {
         private IAssignRequisitionManager _assignRequisitionManager;
         private IRequisitionManager _requisitionManager;
+
         private IRequisitionStatusManager _requisitionStatusManager;
         public GatePassController(IAssignRequisitionManager assignRequisitionManager,IRequisitionManager requisitionManager,IRequisitionStatusManager statusManager)
         {
@@ -30,7 +31,7 @@ namespace RMS.App.Controllers
             try
             {
 
-                ICollection<RequisitionStatus> requisitionStatus = _requisitionStatusManager.GetAllWithRequisitionDetails();
+                ICollection<RequisitionStatus> requisitionStatus = _requisitionStatusManager.GetAllCheckOutCheckIn();
                 IEnumerable<RequisitionStatusViewModel> assignRequisitionView = Mapper.Map<IEnumerable<RequisitionStatusViewModel>>(requisitionStatus);
                 return View(assignRequisitionView);
             }
@@ -39,6 +40,9 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "GatePass", "Index"));
             }
         }
+
+
+       
         [HttpGet]
         public ActionResult CheckOut(int? id)
         {
