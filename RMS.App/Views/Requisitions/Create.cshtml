@@ -6,6 +6,7 @@
     ViewBag.Title = "Vehicle Requisition";
     Layout = "~/Views/Shared/_LayoutLogIn.cshtml";
 }
+
 @section styles{
 
     <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet"/>
@@ -21,8 +22,8 @@
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ownRequest">Request For Me</a> &nbsp;
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a> &nbsp;
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a> &nbsp;
-        @*<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#notification">Notification</a>*@
     </div>
+
     <div class="col-md-4">
         <ul>
 
@@ -37,18 +38,16 @@
                 }
 
                 <ul class="dropdown-menu">
+                    
                     @if (ViewBag.Notification != null)
-                {
-                    var notify = ViewBag.Notification;
-                    foreach (var dt in notify)
                     {
-                            <li><a href="@Url.Action("Details","Requisitions",new {@id=dt.RequisitionId})"> @dt.Employee.FullName &nbsp; @dt.SenderText &nbsp; Req No:  @dt.Requisition.RequisitionNumber &nbsp; @dt.SenderNotifyDateTime.ToString("hh:mm tt")</a></li>
-                            <hr />
+                        var notify = ViewBag.Notification;
+                        foreach (var dt in notify)
+                        {
+                            <li><a href="@Url.Action("Details", "Requisitions", new {@id = dt.RequisitionId})"> @dt.Employee.FullName &nbsp; @dt.SenderText &nbsp; Req No: @dt.Requisition.RequisitionNumber &nbsp; @dt.SenderNotifyDateTime.ToString("hh:mm tt")</a></li>
+                            <hr/>
                         }
-
-
                     }
-
 
                 </ul>
             </li>
@@ -82,6 +81,7 @@
         <thead>
         <tr class="bg-info">
             <th>SL</th>
+            <th>Action</th>
             <th>From Place</th>
             <th>Destination Place</th>
             <th>Journey Date Time</th>
@@ -91,7 +91,7 @@
             <th>Requisition Type</th>
             <th>Request For : </th>
             <th>Purpose Of Visit : </th>
-            <th>Action</th>
+            
         </tr>
         </thead>
         <tbody>
@@ -110,17 +110,8 @@
                         <td>
                             @sl
                         </td>
-                        <td>@item.Requisition.FromPlace</td>
-                        <td>@item.Requisition.DestinationPlace</td>
-                        <td>@item.Requisition.StartDateTime</td>
-                        <td>@item.Requisition.EndDateTime</td>
-                        <td class="text-danger">@item.StatusType</td>
-                        <td>@item.Requisition.SubmitDateTime</td>
-                        <td>@item.Requisition.RequisitionType</td>
-                        <td>@item.Requisition.RequestFor</td>
-                        <td>@item.Requisition.Description</td>
                         <td>
-                            @if(@item.StatusType == "New")
+                            @if (@item.StatusType == "New")
                             {
                                 @Html.ActionLink("Edit", "Edit", new { id = item.RequisitionId }, new { @class = "btn btn-warning btn-sm" })<span> </span>
                             }
@@ -130,6 +121,16 @@
                             @Html.ActionLink("Feedback", "Feedback", new { requisitionId = item.Id }, new { @class = "btn btn-info btn-sm" })
 
                         </td>
+                        <td>@item.Requisition.FromPlace</td>
+                        <td>@item.Requisition.DestinationPlace</td>
+                        <td>@item.Requisition.StartDateTime</td>
+                        <td>@item.Requisition.EndDateTime</td>
+                        <td class="text-danger">@item.StatusType</td>
+                        <td>@item.Requisition.SubmitDateTime</td>
+                        <td>@item.Requisition.RequisitionType</td>
+                        <td>@item.Requisition.RequestFor</td>
+                        <td>@item.Requisition.Description</td>
+                        
                     </tr>
                 }
             }
@@ -139,6 +140,7 @@
         <tfoot>
             <tr class="bg-secondary text-white">
                 <th>SL</th>
+                <th>Action</th>
                 <th>From Place</th>
                 <th>Destination Place</th>
                 <th>Journey Date Time</th>
@@ -148,7 +150,7 @@
                 <th>Requisition Type</th>
                 <th>Request For</th>
                 <th>Description</th>
-                <th>Action</th>
+               
         </tr>
         </tfoot>
     </table>
@@ -245,8 +247,6 @@
                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
-                        
 
                         <div class="form-group row">
                             <div class="col-md-3"></div>
