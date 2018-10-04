@@ -51,54 +51,82 @@ namespace RMS.App.Controllers
         // GET: SetupAll
         public ActionResult Index()
         {
-            var notification = _notificationManager.GetNotificationsForController("Unseen");
-            var notificationCount = notification.Count;
-            if (notification!=null)
+            try
             {
-                ViewBag.Notification = notification;
-                ViewBag.count = notificationCount;
+                var notification = _notificationManager.GetNotificationsForController("Unseen");
+                var notificationCount = notification.Count;
+                if (notification != null)
+                {
+                    ViewBag.Notification = notification;
+                    ViewBag.count = notificationCount;
+                }
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex,"Queue", "Index"));
             }
             
-            return View();
         }
 
         public ActionResult SetupQueue()
         {
-            ViewBag.OrganizationCount = _organizationManager.GetAll().Count;
-            ViewBag.DepartmentCount = _departmentManager.GetAll().Count;
-            ViewBag.DesignationCount = _designationManager.GetAll().Count;
-            ViewBag.EmployeeTypeCount = _employeeTypeManager.GetAll().Count;
-            ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
-            ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;
-            ViewBag.VehicleCount = _vehicleManager.GetAll().Count;
-            ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
-            return View();
+            try
+            {
+                ViewBag.OrganizationCount = _organizationManager.GetAll().Count;
+                ViewBag.DepartmentCount = _departmentManager.GetAll().Count;
+                ViewBag.DesignationCount = _designationManager.GetAll().Count;
+                ViewBag.EmployeeTypeCount = _employeeTypeManager.GetAll().Count;
+                ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
+                ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;
+                ViewBag.VehicleCount = _vehicleManager.GetAll().Count;
+                ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Queue", "SetupQueue"));
+            }
+            
         }
         public ActionResult RequisitionQueue()
         {
-            //Notification Area
-            var notification = _notificationManager.GetNotificationsForController("Unseen");
-            var notificationCount = notification.Count;
-            if (notification != null)
+            try
             {
-                ViewBag.Notification = notification;
-                ViewBag.count = notificationCount;
+                //Notification Area
+                var notification = _notificationManager.GetNotificationsForController("Unseen");
+                var notificationCount = notification.Count;
+                if (notification != null)
+                {
+                    ViewBag.Notification = notification;
+                    ViewBag.count = notificationCount;
+                }
+
+                //Dash Board Area
+                ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;
+                ViewBag.AssignedRequisition = _requisitionStatusManager.GetAllAssignRequisitions().Count();
+                ViewBag.AllRequisitionCount = _requisitionManager.GetAll().Count;
+                ViewBag.OnProcessRequest = _requisitionStatusManager.GetAllStatusExecute().Count;
+                ViewBag.CompleteRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
+                ViewBag.CancelRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Cancelled");
+
+                ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
+                ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;
+                ViewBag.VehicleCount = _vehicleManager.GetAll().Count;
+                ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
+
+                return View();
             }
-
-            //Dash Board Area
-            ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;
-            ViewBag.AssignedRequisition = _requisitionStatusManager.GetAllAssignRequisitions().Count();
-            ViewBag.AllRequisitionCount = _requisitionManager.GetAll().Count;
-            ViewBag.OnProcessRequest = _requisitionStatusManager.GetAllStatusExecute().Count;
-            ViewBag.CompleteRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
-            ViewBag.CancelRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Cancelled");
-
-            ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
-            ViewBag.DriverCount = _employeeManager.GetAllDriver().Count;
-            ViewBag.VehicleCount = _vehicleManager.GetAll().Count;
-            ViewBag.VehicleTypeCount = _vehicleTypeManager.GetAll().Count;
-
-            return View();
+            catch (Exception ex)
+            {
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Queue", "RequisitionQueue"));
+            }
+            
         }
         
         [HttpGet]
@@ -112,6 +140,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Queue", "GetMessage"));
             }
         }
@@ -130,6 +159,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Queue", "GetMessage"));
             }
         }
@@ -156,9 +186,27 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Queue", "ReplyMail"));
             }
 
+        }
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
+
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
         }
     }
 }

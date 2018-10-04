@@ -35,6 +35,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error",new HandleErrorInfo(ex,"EmployeeTypes","Index"));
             }
         }
@@ -58,6 +59,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Details"));
             }
         }
@@ -72,6 +74,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Create"));
             }
         }
@@ -105,6 +108,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Create"));
             }
             
@@ -164,7 +168,7 @@ namespace RMS.App.Controllers
         //    {
         //        return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Edit"));
         //    }
-            
+
         //}
 
         // GET: EmployeeTypes/Delete/5
@@ -188,7 +192,7 @@ namespace RMS.App.Controllers
         //    {
         //        return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
         //    }
-            
+
         //}
 
         // POST: EmployeeTypes/Delete/5
@@ -207,9 +211,25 @@ namespace RMS.App.Controllers
         //    {
         //        return View("Error", new HandleErrorInfo(ex, "EmployeeTypes", "Delete"));
         //    }
-            
-        //}
 
+        //}
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
+
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

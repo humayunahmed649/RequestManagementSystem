@@ -70,6 +70,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Index"));
             }
             
@@ -77,17 +78,36 @@ namespace RMS.App.Controllers
         //Get Only Employee
         public ActionResult GetAllEmployee()
         {
-            ICollection<Employee> employee = _employeeManager.GetAllEmployees();
-            IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
-            return View(employeeViewModels);
+            try
+            {
+                ICollection<Employee> employee = _employeeManager.GetAllEmployees();
+                IEnumerable<EmployeeViewModel> employeeViewModels = Mapper.Map<IEnumerable<EmployeeViewModel>>(employee);
+                return View(employeeViewModels);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage(ex);
+               return View("Error",new HandleErrorInfo(ex,"Employees","GetAllEmployee"));
+            }
+            
         }
 
         //Get Only Driver
         public ActionResult GetAllDriver()
         {
-            ICollection<Employee> employee = _employeeManager.GetAllDriver();
-            IEnumerable<DriverViewModel> driverViewModels = Mapper.Map<IEnumerable<DriverViewModel>>(employee);
-            return View(driverViewModels);
+            try
+            {
+                ICollection<Employee> employee = _employeeManager.GetAllDriver();
+                IEnumerable<DriverViewModel> driverViewModels = Mapper.Map<IEnumerable<DriverViewModel>>(employee);
+                return View(driverViewModels);
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Employees", "GetAllDriver"));
+            }
+            
         }
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
@@ -108,6 +128,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Details"));
             }
         }
@@ -129,6 +150,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
             }
         }
@@ -299,6 +321,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
             }
          }
@@ -321,6 +344,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "CreateDriver"));
             }
         }
@@ -393,6 +417,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "CreateDriver"));
             }
         }
@@ -424,6 +449,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Edit"));
             }
         }
@@ -485,7 +511,7 @@ namespace RMS.App.Controllers
                 return View(employeeEditViewModel);
             }
             catch (Exception ex)
-            {
+            { ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Edit"));
             }
         }
@@ -516,6 +542,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "EditDriver"));
             }
         }
@@ -582,6 +609,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "EditDriver"));
             }
         }
@@ -606,6 +634,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Delete"));
             }
             
@@ -625,12 +654,15 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Employees", "Delete"));
             }
         }
 
         public JsonResult GetDistrictsByDivisionId(int? divisionId)
         {
+            try
+            {
                 if (divisionId == null)
                 {
                     return null;
@@ -638,17 +670,51 @@ namespace RMS.App.Controllers
 
                 var districts = _districtManager.GetDistrictsById((int)divisionId);
                 return Json(districts, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return null;
+            }
+                
             
         }
         public JsonResult GetUpazilaByDistrictId(int? districtId)
         {
-            if (districtId == null)
+            try
             {
+                if (districtId == null)
+                {
+                    return null;
+                }
+
+                var upazilas = _upazilaManager.GetUpazilasById((int)districtId);
+                return Json(upazilas, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage(ex);
                 return null;
             }
+            
+        }
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
 
-            var upazilas = _upazilaManager.GetUpazilasById((int)districtId);
-            return Json(upazilas, JsonRequestBehavior.AllowGet);
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
         }
         protected override void Dispose(bool disposing)
         {

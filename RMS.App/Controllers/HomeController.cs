@@ -50,8 +50,6 @@ namespace RMS.App.Controllers
         {
             try
             {
-
-                ViewBag.Message = "Your contact page.";
                 ViewBag.MessageCount = _contactManager.GetAll().Count;
                 return View();
             }
@@ -86,9 +84,6 @@ namespace RMS.App.Controllers
         {
             try
             {
-
-                ViewBag.Message = "Developer page.";
-
                 return View();
             }
             catch (Exception ex)
@@ -102,8 +97,6 @@ namespace RMS.App.Controllers
         {
             try
             {
-
-                ViewBag.Message = "Help page.";
 
                 return View();
             }

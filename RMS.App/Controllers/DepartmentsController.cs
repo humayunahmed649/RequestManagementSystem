@@ -38,10 +38,9 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Index"));
-            }
-            
-            
+            }     
         }
 
         // GET: Departments/Details/5
@@ -63,6 +62,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Details"));
             }
         }
@@ -77,6 +77,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Create"));
             }
         }
@@ -115,6 +116,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Create"));
             }
         }
@@ -139,6 +141,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Edit"));
             }
         }
@@ -178,6 +181,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Edit"));
             }
         }
@@ -201,6 +205,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Delete"));
             }
         }
@@ -213,17 +218,34 @@ namespace RMS.App.Controllers
             try
             {
 
-                Department department = _departmentManager.FindById((int)id);
+                Department department = _departmentManager.FindById(id);
                 _departmentManager.Remove(department);
                 TempData["msg"] = "Information has been deleted successfully";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Departments", "Delete"));
             }
         }
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
 
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

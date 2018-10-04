@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_LayoutLogIn.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
+@*<h2>@ViewBag.Title</h2>*@
 
 <div class="row">
 
@@ -64,25 +64,32 @@
             }
         </section>
     </div>
-    <div class="col-md-12">
-        <h4>Login Secret</h4><br/>
-        <p class="text-danger">
-            Enter your Email and password, then click login. First time browser will be asked to Save account information by your browser.
-            If you are Indifferent as like as simply click this butto which you help to remember the email and password...
-            By clicking login if you are valid user you can find different action which is helpful for your work....Thanks...
-        </p>
-        <p>
-            To maintain a secure account, you should change your password often.
-        </p>
-        <h4>Log Out</h4><br/>
-        <p>
-            If you have not manually clicked on Logout from within NetDocuments, you will be logged out automatically when your activity has been idle for 90 minutes.
-             You are also logged out officially if you just close your browser session rather than clicking the Logout link. 
-        </p>
-    </div>
-  
 
 </div>
+<div class="container">
+
+    <h3>Login Secret</h3>
+    <br/>
+    <p>
+        Enter your Email and password, then click login. First time browser will be asked to Save account information by your browser.
+        If you are Indifferent as like as simply click this butto which you help to remember the email and password.
+        By clicking login if you are valid user you can find different action which is helpful for your work.
+    </p>
+    <p>
+        To maintain a secure account, you should change your password often.
+    </p>
+
+</div>
+
+<div class="container">
+    <h3>Log Out</h3>
+    <br/>
+    <p>
+        If you have not manually clicked on Logout from within NetDocuments, you will be logged out automatically when your activity has been idle for 90 minutes.
+        You are also logged out officially if you just close your browser session rather than clicking the Logout link.
+    </p>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

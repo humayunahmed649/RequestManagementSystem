@@ -4,8 +4,8 @@
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>@ViewBag.Title</h2>
+<hr/><br/>
 <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -82,7 +82,6 @@
 
         </div>
 
-
         <div class="form-group row">
 
             @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -97,7 +96,6 @@
             <div class="control-label col-md-2 "></div>
             <div class="col-md-6 ">
                 <input type="submit" value="Send" class="btn btn-success" /> &nbsp;
-                @*@Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })*@
 
             </div>
         </div>

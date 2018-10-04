@@ -904,6 +904,7 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Content\fonts\OpenSans-Regular.ttf" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\EmployeeCreate\EmployeeCreateJs.js" />
     <Content Include="Scripts\ImageUploadJs\ImageUpload.js" />
@@ -942,7 +943,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -1061,6 +1061,7 @@
     <Content Include="Views\Shared\_LayoutSetupAll.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Queue\SetupQueue.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

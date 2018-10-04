@@ -1,13 +1,42 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <hgroup>
-        <h2>Error.</h2>
-        <h3>An error occurred while processing your request.</h3>
-    </hgroup>
-</body>
-</html>
+﻿@{
+    ViewBag.Title = "Error Message";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<hgroup>
+    <h2>Error</h2>
+    <h3>An error occurred while processing your request.</h3>
+</hgroup>
+
+@if (@ViewBag.ErrorMsg != null)
+{
+    <br/>
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Show Error</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Error Message :</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <p class="text-danger" style="white-space: pre-line">@ViewBag.ErrorMsg</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+    
+
+
+
