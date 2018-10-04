@@ -62,13 +62,13 @@
                     @if (item.StatusType == "Assigned")
                     {
                         <td class="text-right">
-                            @Html.ActionLink("Check-Out", "CheckOut", new { id = item.Id }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Check-In", "CheckIn", new { id = item.Id }, new { @class = "btn btn-success" })
                         </td>
                     }
                    @if (item.StatusType == "OnExecute")
                     {
                     <td class="text-right">
-                        @Html.ActionLink("Check-In", "CheckIn", new { id = item.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Check-Out", "CheckOut", new { id = item.Id }, new { @class = "btn btn-success" })
                     </td>
                    }
                 </tr>

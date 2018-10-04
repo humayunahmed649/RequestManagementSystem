@@ -1006,9 +1006,7 @@
     <Content Include="Views\EmployeeTypes\Details.cshtml" />
     <Content Include="Views\EmployeeTypes\Edit.cshtml" />
     <Content Include="Views\EmployeeTypes\Index.cshtml" />
-    <Content Include="Views\GatePass\CheckOut.cshtml" />
     <Content Include="Views\AssignRequisitions\Requests.cshtml" />
-    <Content Include="Views\GatePass\CheckIn.cshtml" />
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
     <Content Include="Views\Requisitions\Feedback.cshtml" />
     <Content Include="Views\AssignRequisitions\Edit.cshtml" />
@@ -1062,6 +1060,8 @@
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Queue\SetupQueue.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\GatePass\CheckOut.cshtml" />
+    <Content Include="Views\GatePass\CheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

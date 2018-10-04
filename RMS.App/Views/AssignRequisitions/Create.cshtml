@@ -122,6 +122,13 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
+
+                        @if (TempData["StatusMsg"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @Html.Raw(TempData["StatusMsg"])
+                            </div>
+                        }
                         <br/>
                         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
@@ -129,7 +136,7 @@
 
                             @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly" })
+                                @Html.TextBox("RequisitionId", null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
                                 @Html.ValidationMessage("RequisitionId", "", new {@class = "text-danger"})
                             </div>
                         </div>
@@ -157,7 +164,7 @@
                             <div class="col-md-9">
                                 @if (Model != null)
                                 {
-                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleTypeDD" })
+                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleTypeDD"})
                                 }
                             </div>
                         </div>
@@ -173,17 +180,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group row text-danger" id="statusdiv">
-                            
-                        </div>
 
                         <div class="form-group row">
                             @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new {@class = "control-label col-md-3"})
                             <div class="col-md-9">
-                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control", @id= "searchableDD3" })
+                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control", @id = "searchableDD3"})
                                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new {@class = "text-danger"})
                             </div>
                         </div>
+
+
 
                         <div class="form-group row">
                             <div class="col-md-3"></div>
@@ -202,7 +208,54 @@
 
 
 
- @section Scripts {
+
+@*Popup Modal For Driver Status*@
+<div id="driverStatusdiv" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+
+                <h4 class="modal-title"> Driver Availability </h4>
+                <a href="#" class="close" title="Close" data-dismiss="modal"> &times; </a>
+            </div>
+
+            <div class="modal-body">
+                <p id="details"></p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*Popup Modal For Vehicle Status*@
+<div id="vehicleStatusdiv" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+
+                <h4 class="modal-title"> Vehicle Availability </h4>
+                <a href="#" class="close" title="Close" data-dismiss="modal"> &times; </a>
+            </div>
+
+            <div class="modal-body">
+                <p id="vehicleDetails"></p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
      @Scripts.Render("~/bundles/jqueryval")
      <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
     <script src="~/Scripts/chosenDD/chosen_DD.js"></script>

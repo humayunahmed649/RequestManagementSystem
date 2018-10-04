@@ -138,18 +138,33 @@ namespace RMS.App.Controllers
                 {
 
                     AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
-                    bool isSave=_assignRequisitionManager.Add(assignRequisition);
-
-                    if (isSave)
+                    var vehicleStatus = _assignRequisitionManager.GetVehicleStatus(assignRequisition.VehicleId);
+                    if (vehicleStatus.Contains("RQ"))
                     {
-                        //Requisition status information
-                        RequisitionStatus status = new RequisitionStatus();
-                        status.Id = assignRequisition.RequisitionStatusId;
-                        status.RequisitionId = assignRequisition.RequisitionId;
-                        status.RequisitionNumber = assignRequisition.RequisitionNumber;
-                        status.StatusType = "Assigned";
-                        _requisitionStatusManager.Update(status);
+
+                        ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
+                        ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select Vehicle" } };
+                        ViewBag.RequisitionNumber = assignRequisition.RequisitionNumber;
+                        ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
+                        TempData["StatusMsg"] ="You Cannot Assigned a vehicle/Driver which is not Available...Select Another Vehicle";
+                        return RedirectToAction("Create",new { requisitionId =assignRequisition.RequisitionId});
                     }
+                    else
+                    {
+                        bool isSave = _assignRequisitionManager.Add(assignRequisition);
+
+                        if (isSave)
+                        {
+                            //Requisition status information
+                            RequisitionStatus status = new RequisitionStatus();
+                            status.Id = assignRequisition.RequisitionStatusId;
+                            status.RequisitionId = assignRequisition.RequisitionId;
+                            status.RequisitionNumber = assignRequisition.RequisitionNumber;
+                            status.StatusType = "Assigned";
+                            _requisitionStatusManager.Update(status);
+                        }
+                    }
+                    
 
                     //Notifaication status change after assign requisition
                     Notification notificationUpdate=_notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
@@ -484,6 +499,35 @@ namespace RMS.App.Controllers
             }
         }
 
+        //Get Vehicle Status By Json Result
+        public JsonResult GetVehicleStatusByVehicleId(int? vehicleId)
+        {
+            if (vehicleId == null)
+            {
+                return null;
+            }
+            var vehicles = _assignRequisitionManager.GetVehicleStatus((int)vehicleId);
+
+
+            return Json(vehicles, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+        //Get Driver Status By Json Result
+        public JsonResult GetDriverStatusByDriverId(int? driverId)
+        {
+            if (driverId == null)
+            {
+                return null;
+            }
+            var drivers = _assignRequisitionManager.GetDriverStatus((int)driverId);
+
+
+            return Json(drivers, JsonRequestBehavior.AllowGet);
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

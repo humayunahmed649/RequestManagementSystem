@@ -13,6 +13,7 @@ namespace RMS.Repositories.Contracts
         ICollection<AssignRequisition> GetAllWithInformation();
         AssignRequisition  SearchByText(string searchByText);
         string GetVehicleStatus(int vehicleId);
+        string GetDriverStatus(int driverId);
         ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport();
     }
 }

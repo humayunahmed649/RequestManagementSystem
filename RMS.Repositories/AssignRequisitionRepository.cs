@@ -53,6 +53,7 @@ namespace RMS.Repositories
             return db.Set<AssignRequisition>().Include(c => c.Requisition).FirstOrDefault();
         }
 
+        //Get Vehicle Status
         public string GetVehicleStatus(int vehicleId)
         {
             var vehicleStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
@@ -84,8 +85,44 @@ namespace RMS.Repositories
                     return status;
                 }
             }
-            return  "This Vehicle Is  Available";
+            return "Available";
         }
+        //Get Driver Status
+
+        public string GetDriverStatus(int driverId)
+        {
+            var driverStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
+
+                                 join assignRequisition in db.Set<AssignRequisition>()
+
+                                     on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
+                                 orderby requisitionStatus.Requisition.EndDateTime descending
+                                 where assignRequisition.VehicleId == driverId
+
+                                 select new
+                                 {
+                                     RequisitionNumber = assignRequisition.RequisitionNumber,
+                                     VehicleId = assignRequisition.VehicleId,
+                                     DriverId = assignRequisition.Employee.FullName,
+                                     Status = requisitionStatus.StatusType
+                                 }
+                ).FirstOrDefault();
+            if (driverStatus != null)
+            {
+                if (driverStatus.Status == "Completed")
+                {
+
+                    return "This Driver Is  Available";
+                }
+                else
+                {
+                    string status = driverStatus.DriverId+"," +driverStatus.RequisitionNumber + "," + driverStatus.Status;
+                    return status;
+                }
+            }
+            return "Available";
+        }
+
 
         public ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport()
         {

@@ -251,23 +251,11 @@ namespace RMS.App.Controllers
 
                 var vehicles = _vehicleManager.GetAll().Where(c => c.VehicleTypeId == vehicleTypeId).ToList();
 
-                return Json(vehicles, JsonRequestBehavior.AllowGet);
-            
+                return Json(vehicles, JsonRequestBehavior.AllowGet); 
 
         }
 
-        public JsonResult GetVehicleStatusByVehicleId(int? vehicleId)
-        {
-            if (vehicleId == null)
-            {
-                return null;
-            }
-            var vehicles = _assignRequisitionManager.GetVehicleStatus((int)vehicleId);
-            
-            
-            return Json(vehicles, JsonRequestBehavior.AllowGet);
-            
-        }
+        
         private void ExceptionMessage(Exception ex)
         {
             ViewBag.ErrorMsg = ex.Message;

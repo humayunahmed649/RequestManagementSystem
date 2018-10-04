@@ -34,6 +34,11 @@ namespace RMS.BLL
             return _assignRequisitionRepository.GetVehicleStatus(vehicleId);
         }
 
+        public string GetDriverStatus(int driverId)
+        {
+            return _assignRequisitionRepository.GetDriverStatus(driverId);
+        }
+
         public ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport()
         {
             return _assignRequisitionRepository.GetRequisitionSummaryReport();
