@@ -75,7 +75,8 @@
         @Html.Raw(TempData["EditMsg"])
     </div>
 }
-<br/>
+<br/><br/>
+<!----Recent Request-->
 <div class="col-md-12">
     <table id="example" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">
         <thead>
@@ -85,11 +86,12 @@
             <th>Destination Place</th>
             <th>Journey Date Time</th>
             <th>Return Date Time</th>
-            <th>Passenger Qty</th>
+            <th>Status</th>
             <th>Submited Date Time</th>
             <th>Requisition Type</th>
-            <th>Request For</th>
-            <th>Description</th>
+            <th>Request For : </th>
+            <th>Purpose Of Visit : </th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -108,15 +110,26 @@
                         <td>
                             @sl
                         </td>
-                        <td>@item.FromPlace</td>
-                        <td>@item.DestinationPlace</td>
-                        <td>@item.StartDateTime</td>
-                        <td>@item.EndDateTime</td>
-                        <td>@item.PassengerQty</td>
-                        <td>@item.SubmitDateTime</td>
-                        <td>@item.RequisitionType</td>
-                        <td>@item.RequestFor</td>
-                        <td>@item.Description</td>
+                        <td>@item.Requisition.FromPlace</td>
+                        <td>@item.Requisition.DestinationPlace</td>
+                        <td>@item.Requisition.StartDateTime</td>
+                        <td>@item.Requisition.EndDateTime</td>
+                        <td class="text-danger">@item.StatusType</td>
+                        <td>@item.Requisition.SubmitDateTime</td>
+                        <td>@item.Requisition.RequisitionType</td>
+                        <td>@item.Requisition.RequestFor</td>
+                        <td>@item.Requisition.Description</td>
+                        <td>
+                            @if(@item.StatusType == "New")
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.RequisitionId }, new { @class = "btn btn-warning btn-sm" })<span> </span>
+                            }
+
+                            @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-success btn-sm" }) <span> </span>
+
+                            @Html.ActionLink("Feedback", "Feedback", new { requisitionId = item.Id }, new { @class = "btn btn-info btn-sm" })
+
+                        </td>
                     </tr>
                 }
             }
@@ -124,17 +137,18 @@
         
         </tbody>
         <tfoot>
-        <tr class="bg-secondary text-white">
-            <th>SL</th>
-            <th>From Place</th>
-            <th>Destination Place</th>
-            <th>Journey Date Time</th>
-            <th>Return Date Time</th>
-            <th>Passenger Qty</th>
-            <th>Submited Date Time</th>
-            <th>Requisition Type</th>
-            <th>Request For</th>
-            <th>Description</th>
+            <tr class="bg-secondary text-white">
+                <th>SL</th>
+                <th>From Place</th>
+                <th>Destination Place</th>
+                <th>Journey Date Time</th>
+                <th>Return Date Time</th>
+                <th>Status</th>
+                <th>Submited Date Time</th>
+                <th>Requisition Type</th>
+                <th>Request For</th>
+                <th>Description</th>
+                <th>Action</th>
         </tr>
         </tfoot>
     </table>
@@ -311,13 +325,13 @@
     <script>
         
         $(document).ready(function () {
-            $('#example').DataTable();
+            $('#example').DataTable({ responsive: true, "autoWidth": false });
+        
         });
 
         $(document).ready(function () {
             $('#example1').DataTable({ responsive: true, "autoWidth": false });
             
         });
-        
     </script>
 }

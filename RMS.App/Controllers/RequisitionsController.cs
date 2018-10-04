@@ -159,7 +159,7 @@ namespace RMS.App.Controllers
                     ViewBag.Notification = notification;
                     ViewBag.count = notificationCount;
                 }
-                ViewBag.Requisition = _requisitionManager.GetAllRequisitionByEmployeeId(empId.Id);
+                ViewBag.Requisition = _requisitionStatusManager.GetAllById(empId.Id);
 
                 return View();
             }
@@ -500,7 +500,7 @@ namespace RMS.App.Controllers
                 {
                     return HttpNotFound();
                 }
-                RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                //RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
                 FeedbackViewModel feedbackViewModel = new FeedbackViewModel();
                 feedbackViewModel.Requisition = requisition;
                 ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == requisitionId);
@@ -580,6 +580,10 @@ namespace RMS.App.Controllers
                 
                     if (ModelState.IsValid)
                     {
+
+                    //Get employee Id by user login id
+                        var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                        var empId = _employeeManager.FindByLoginId(loginUserId);
                         feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
                         Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
 

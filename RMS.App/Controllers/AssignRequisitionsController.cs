@@ -212,7 +212,7 @@ namespace RMS.App.Controllers
 
                                     TempData["msg"] = "Vehicle assigned and mail send successfully";
 
-                                    return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.Id });
+                                    return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.RequisitionId });
                                 }
                                 catch (Exception ex)
                                 {
@@ -227,7 +227,7 @@ namespace RMS.App.Controllers
                        
                         TempData["msg1"] = "Vehicle assigned but mail and notification send failed. Please contact with your service provider or developer! ";
 
-                        return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.Id });
+                        return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.RequisitionId });
                     
                     
                 }
