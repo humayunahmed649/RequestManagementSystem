@@ -55,6 +55,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Index"));
 
             }
@@ -82,6 +83,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "RequisitionList"));
             }
         }
@@ -130,6 +132,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Details"));
             }
         }
@@ -165,6 +168,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Create"));
             }
             
@@ -260,6 +264,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Create"));
             }
         }
@@ -274,6 +279,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "CreateRequestForOther"));
             }
         }
@@ -348,6 +354,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "CreateRequestForOther"));
             }
         }
@@ -377,18 +384,16 @@ namespace RMS.App.Controllers
                     return View(requisitionViewModel);
                 }
 
-
                 TempData["EditMsg"] = " Your requisition already assigned or completed. You Cant't Edid or Update. ";
-
                 return RedirectToAction("Create");
-
 
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Edit"));
             }
-            }
+   }
 
         // POST: Requisitions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -442,6 +447,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Edit"));
             }
         }
@@ -465,6 +471,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Delete"));
             }
             
@@ -485,6 +492,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Delete"));
             }
         }
@@ -508,6 +516,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
             }
         }
@@ -535,6 +544,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
 
             }
@@ -565,6 +575,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Reply"));
             }
 
@@ -577,10 +588,8 @@ namespace RMS.App.Controllers
         {
             try
             {
-                
                     if (ModelState.IsValid)
                     {
-
                     //Get employee Id by user login id
                         var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
                         var empId = _employeeManager.FindByLoginId(loginUserId);
@@ -593,19 +602,34 @@ namespace RMS.App.Controllers
                             ViewBag.Msg = "Reply Has been saved successfully";
                             return RedirectToAction("Feedback",new { requisitionId =feedback.RequisitionId});
                         }
-
                     }
-
 
                 return View();
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
 
             }
         }
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
 
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
