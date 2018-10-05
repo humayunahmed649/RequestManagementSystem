@@ -62,6 +62,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Index"));
             }
         }
@@ -89,6 +90,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Details"));
             }
         }
@@ -123,6 +125,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Create"));
             }
         }
@@ -266,6 +269,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Create"));
             }
         }
@@ -293,6 +297,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Edit"));
             }
         }
@@ -319,7 +324,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
-
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Edit"));
             }
         }
@@ -346,6 +351,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Delete"));
             }
         }
@@ -363,6 +369,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Delete"));
             }
         }
@@ -388,6 +395,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Requests"));
             }
         }
@@ -413,6 +421,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ViewDetails"));
             }
             
@@ -430,6 +439,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "CompleteRequest"));
             }
         }
@@ -446,6 +456,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "OnProcess"));
             }
         }
@@ -454,23 +465,33 @@ namespace RMS.App.Controllers
 
         public ActionResult ReportIndex()
         {
-            var reportData = _assignRequisitionManager.GetRequisitionSummaryReport();
-            var reportPath=Request.MapPath(Request.ApplicationPath)+ @"\Report\AssignRequisition\AssignRequisitionReportRdlc.rdlc";
-            ReportViewer reportViewer=new ReportViewer()
+            try
             {
-                KeepSessionAlive    = true,
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Local
-            };
+                var reportData = _assignRequisitionManager.GetRequisitionSummaryReport();
+                var reportPath = Request.MapPath(Request.ApplicationPath) + @"\Report\AssignRequisition\AssignRequisitionReportRdlc.rdlc";
+                ReportViewer reportViewer = new ReportViewer()
+                {
+                    KeepSessionAlive = true,
+                    SizeToReportContent = true,
+                    Width = Unit.Percentage(100),
+                    ProcessingMode = ProcessingMode.Local
+                };
+
+                reportViewer.LocalReport.ReportPath = reportPath;
+
+                ReportDataSource rds = new ReportDataSource("DS_AssignRequisitionSummary", reportData);
+
+                reportViewer.LocalReport.DataSources.Add(rds);
+                ViewBag.ReportViewer = reportViewer;
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ReportIndex"));
+            }
             
-            reportViewer.LocalReport.ReportPath = reportPath;
-
-            ReportDataSource rds=new ReportDataSource("DS_AssignRequisitionSummary", reportData);
-
-            reportViewer.LocalReport.DataSources.Add(rds);
-            ViewBag.ReportViewer = reportViewer;
-            return View();
 
         }
         public ActionResult PrintDetails(int? id)
@@ -495,6 +516,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "PrintDetails"));
             }
         }
@@ -513,8 +535,6 @@ namespace RMS.App.Controllers
 
         }
 
-
-
         //Get Driver Status By Json Result
         public JsonResult GetDriverStatusByDriverId(int? driverId)
         {
@@ -527,6 +547,24 @@ namespace RMS.App.Controllers
 
             return Json(drivers, JsonRequestBehavior.AllowGet);
 
+        }
+
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
+
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
         }
         protected override void Dispose(bool disposing)
         {

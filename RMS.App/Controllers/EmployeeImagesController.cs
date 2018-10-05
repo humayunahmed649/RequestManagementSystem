@@ -163,8 +163,36 @@ namespace RMS.App.Controllers
 
         public ActionResult RetriveImage(int imgId )
         {
-            var empImg=_employeeImageManager.FindById(imgId);
-            return File(empImg.ImageByte, "image/jpg");
+            try
+            {
+                var empImg = _employeeImageManager.FindById(imgId);
+                return File(empImg.ImageByte, "image/jpg");
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Employees", "Create"));
+            }
+            
+        }
+
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
+
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
         }
         protected override void Dispose(bool disposing)
         {

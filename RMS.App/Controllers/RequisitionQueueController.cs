@@ -32,10 +32,27 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "RequisitionStatus", "Index"));
             }
         }
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
 
-       
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
+        }
+
     }
 }

@@ -39,7 +39,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
-
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "CancelRequisition", "Index"));
             }
         }
@@ -47,19 +47,29 @@ namespace RMS.App.Controllers
         // GET: CancelRequisitionViewModels/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CancelRequisition cancelRequisition = _cancelRequisitionManager.FindById((int)id);
+
+                if (cancelRequisition == null)
+                {
+                    return HttpNotFound();
+                }
+                CancelRequisitionViewModel cancelRequisitionViewModel =
+                   Mapper.Map<CancelRequisitionViewModel>(cancelRequisition);
+                return View(cancelRequisitionViewModel);
             }
-            CancelRequisition cancelRequisition = _cancelRequisitionManager.FindById((int)id);
-           
-            if (cancelRequisition == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "CancelRequisition", "Details"));
             }
-            CancelRequisitionViewModel cancelRequisitionViewModel =
-               Mapper.Map<CancelRequisitionViewModel>(cancelRequisition);
-            return View(cancelRequisitionViewModel);
+            
         }
 
         // GET: CancelRequisitionViewModels/Create
@@ -83,6 +93,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "CancelRequisition", "Create"));
             }
         }
@@ -130,6 +141,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Cancel"));
             }
 
@@ -198,6 +210,23 @@ namespace RMS.App.Controllers
         //    return RedirectToAction("Index");
         //}
 
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
+
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

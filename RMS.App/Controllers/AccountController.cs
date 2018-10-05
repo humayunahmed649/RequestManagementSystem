@@ -131,6 +131,7 @@ namespace RMS.App.Controllers
             }
             catch (Exception ex)
             {
+                ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex ,"Account", "Login"));
             }
         }
@@ -248,11 +249,30 @@ namespace RMS.App.Controllers
             }
             return false;
         }
+
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
+            }
+        }
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
+
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
             }
         }
     }
