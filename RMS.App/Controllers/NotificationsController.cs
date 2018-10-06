@@ -32,33 +32,63 @@ namespace RMS.App.Controllers
         // GET: Notifications
         public ActionResult Index()
         {
-            ICollection<Notification> notifications = _notificationManager.GetAll();
-            IEnumerable< NotificationViewModel > notificationViewModels = Mapper.Map<IEnumerable<NotificationViewModel>>(notifications);
-            return View(notificationViewModels);
+            try
+            {
+                ICollection<Notification> notifications = _notificationManager.GetAll();
+                IEnumerable<NotificationViewModel> notificationViewModels = Mapper.Map<IEnumerable<NotificationViewModel>>(notifications);
+                return View(notificationViewModels);
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Index"));
+            }
+            
         }
 
         // GET: Notifications/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Notification notification = _notificationManager.FindById((int)id);
+                if (notification == null)
+                {
+                    return HttpNotFound();
+                }
+                NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
+                return View(notificationViewModel);
             }
-            Notification notification = _notificationManager.FindById((int) id);
-            if (notification == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Details"));
             }
-            NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
-            return View(notificationViewModel);
+            
         }
 
         // GET: Notifications/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName");
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber");
-            return View();
+            try
+            {
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName");
+                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber");
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Create"));
+            }
+            
         }
 
         // POST: Notifications/Create
@@ -68,32 +98,52 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Text,EmployeeId,RequisitionId,NotifyDateTime,SenderViewStatus,ControllerViewStatus")] NotificationViewModel notificationViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Notification notification = Mapper.Map<Notification>(notificationViewModel);
-                _notificationManager.Add(notification);
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    Notification notification = Mapper.Map<Notification>(notificationViewModel);
+                    _notificationManager.Add(notification);
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", notificationViewModel.EmployeeId);
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", notificationViewModel.RequisitionId);
-            return View(notificationViewModel);
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", notificationViewModel.EmployeeId);
+                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", notificationViewModel.RequisitionId);
+                return View(notificationViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Create"));
+            }
+            
         }
 
         // GET: Notifications/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Notification notification = _notificationManager.FindById((int)id);
+                if (notification == null)
+                {
+                    return HttpNotFound();
+                }
+                NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
+                return View(notificationViewModel);
             }
-            Notification notification = _notificationManager.FindById((int)id);
-            if (notification == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Edit"));
             }
-            NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
-            return View(notificationViewModel);
+            
         }
 
         // POST: Notifications/Edit/5
@@ -103,32 +153,52 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Text,EmployeeId,RequisitionId,NotifyDateTime,SenderViewStatus,ControllerViewStatus")] NotificationViewModel notificationViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Notification notification = Mapper.Map<Notification>(notificationViewModel);
-                _notificationManager.Update(notification);
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    Notification notification = Mapper.Map<Notification>(notificationViewModel);
+                    _notificationManager.Update(notification);
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", notificationViewModel.EmployeeId);
-            ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", notificationViewModel.RequisitionId);
-            return View(notificationViewModel);
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAll(), "Id", "FullName", notificationViewModel.EmployeeId);
+                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "RequisitionNumber", notificationViewModel.RequisitionId);
+                return View(notificationViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Edit"));
+            }
+            
         }
 
         // GET: Notifications/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Notification notification = _notificationManager.FindById((int)id);
+                if (notification == null)
+                {
+                    return HttpNotFound();
+                }
+                NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
+                return View(notificationViewModel);
             }
-            Notification notification = _notificationManager.FindById((int)id);
-            if (notification == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Delete"));
             }
-            NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
-            return View(notificationViewModel);
+            
         }
 
         // POST: Notifications/Delete/5
@@ -136,11 +206,38 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Notification notification = _notificationManager.FindById((int) id);
-            _notificationManager.Remove(notification);
-            return RedirectToAction("Index");
+            try
+            {
+                Notification notification = _notificationManager.FindById((int)id);
+                _notificationManager.Remove(notification);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "Delete"));
+            }
+            
         }
 
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
+
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

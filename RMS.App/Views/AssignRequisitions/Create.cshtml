@@ -29,7 +29,7 @@
                         <h4>Requisitor Info :</h4><br/>
                     </div>
 
-                    <table class="table table-light table-active table-primary table-responsive nowrap">
+                    <table class="table table-bordered">
                         @*<tr>
                             <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requisition No :")</td>
                             <td>@data.RequisitionNumber</td>
@@ -74,14 +74,14 @@
                         <h4>Journey Info :</h4><br/>
                     </div>
 
-                    <table class="table table-light table-active table-primary table-responsive nowrap">
+                    <table class="table table-bordered">
                         <tr>
                             <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Journey Date And Time ")</td>
-                            <td>@data.StartDateTime</td>
+                            <td>@data.StartDateTime.ToString("dd MMM yyyy hh:mm tt")</td>
                         </tr>
                         <tr>
                             <td class="col-md-2-custom" >@Html.DisplayName("Return Date And Time ")</td>
-                            <td>@data.EndDateTime</td>
+                            <td>@data.EndDateTime.ToString("dd MMM yyyy hh:mm tt")</td>
                         </tr>
                         <tr>
                             <td class="col-md-2-custom">@Html.DisplayName("From Place ")</td>
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-2-custom">@Html.DisplayName("Submited Date And Time ")</td>
-                            <td>@data.SubmitDateTime</td>
+                            <td>@data.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")</td>
                         </tr>
                         <tr>
                             <td class="col-md-2-custom" style="width: 45%">@Html.DisplayName("Requisition Type ")</td>
@@ -256,6 +256,7 @@
 
 
 @section Scripts {
+
      @Scripts.Render("~/bundles/jqueryval")
      <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
     <script src="~/Scripts/chosenDD/chosen_DD.js"></script>

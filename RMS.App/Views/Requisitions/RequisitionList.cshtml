@@ -95,34 +95,48 @@
 
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.FromPlace)
+                            @item.Requisition.FromPlace
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.DestinationPlace)
+                            @item.Requisition.DestinationPlace
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.StartDateTime)
+                            @item.Requisition.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.EndDateTime)
+                            @item.Requisition.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
                         </td>
-                        <td class="text-lg-center text-danger">
-                            @Html.DisplayFor(modelItem => item.StatusType)
-                        </td>
+
+                        @if (@item.StatusType == "New")
+                        {
+                            <td class="text-primary">@item.StatusType</td>
+                        }
+                        @if (@item.StatusType == "Cancelled")
+                        {
+                            <td class="text-danger">@item.StatusType</td>
+                        }
+                        @if (@item.StatusType == "Completed")
+                        {
+                            <td class="text-success">@item.StatusType</td>
+                        }
+                        @if (@item.StatusType == "OnExecute")
+                        {
+                            <td class="text-info">@item.StatusType</td>
+                        }
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
+                            @item.Requisition.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")
                         </td>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.RequisitionType)
+                            @item.Requisition.RequisitionType
                         </td>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.RequestFor)
+                            @item.Requisition.RequestFor
                         </td>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.Description)
+                            @item.Requisition.Description
                         </td>
                         
                     </tr>

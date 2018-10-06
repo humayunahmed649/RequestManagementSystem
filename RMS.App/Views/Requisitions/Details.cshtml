@@ -75,7 +75,7 @@
                     @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Requisition.StartDateTime)
+                    @Model.Requisition.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
                 </td>
             </tr>
             <tr>
@@ -83,7 +83,7 @@
                     @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Requisition.EndDateTime)
+                    @Model.Requisition.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
                 </td>
             </tr>
             <tr>
@@ -98,9 +98,23 @@
                 <td class="col-md-2-custom">
                     @Html.DisplayNameFor(model => model.StatusType)
                 </td>
-                <td class="text-danger">
-                    @Html.DisplayFor(model => model.StatusType)
-                </td>
+                @if (@Model.StatusType == "New")
+                {
+                    <td class="text-primary">@Model.StatusType</td>
+                }
+                @if (@Model.StatusType == "Cancelled")
+                {
+                    <td class="text-danger">@Model.StatusType</td>
+                }
+                @if (@Model.StatusType == "Completed")
+                {
+                    <td class="text-success">@Model.StatusType</td>
+                }
+                @if (@Model.StatusType == "OnExecute")
+                {
+                    <td class="text-info">@Model.StatusType</td>
+                }
+
             </tr>
             <tr>
                 <td class="col-md-2-custom">

@@ -28,7 +28,6 @@ namespace RMS.App.ViewModels
         [RequisitionDateTimeValidationCheckForOwn]
         [Required(ErrorMessage = "Please provide a journey start date and time!")]
         [Display(Name = "Journey Date")]
-        
         public DateTime StartDateTime { get; set; }
         
         [Display(Name = "Journey Time")]

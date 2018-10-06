@@ -34,26 +34,45 @@ namespace RMS.App.Controllers
         // GET: MailServices
         public ActionResult Index()
         {
-            ICollection<MailService> mailServices = _mailServiceManager.GetAll();
-            IEnumerable<MailServiceViewModel> mailServiceViewModels =
-                Mapper.Map<IEnumerable<MailServiceViewModel>>(mailServices);
-            return View(mailServiceViewModels);
+            try
+            {
+                ICollection<MailService> mailServices = _mailServiceManager.GetAll();
+                IEnumerable<MailServiceViewModel> mailServiceViewModels =
+                    Mapper.Map<IEnumerable<MailServiceViewModel>>(mailServices);
+                return View(mailServiceViewModels);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "MailServices", "Index"));
+            }
+            
         }
 
         // GET: MailServices/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                MailService mailService = _mailServiceManager.FindById((int)id);
+                if (mailService == null)
+                {
+                    return HttpNotFound();
+                }
+                MailServiceViewModel mailServiceViewModel = Mapper.Map<MailServiceViewModel>(mailService);
+                return View(mailServiceViewModel);
             }
-            MailService mailService = _mailServiceManager.FindById((int)id);
-            if (mailService == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "MailServices", "Details"));
             }
-            MailServiceViewModel mailServiceViewModel = Mapper.Map<MailServiceViewModel>(mailService);
-            return View(mailServiceViewModel);
+            
         }
 
         // GET: MailServices/Create
@@ -70,18 +89,17 @@ namespace RMS.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,To,Subject,Body")] MailServiceViewModel mailServiceViewModel, HttpPostedFileBase uploadFile)
         {
-            if (ModelState.IsValid)
+            try
             {
-                MailService mailService = Mapper.Map<MailService>(mailServiceViewModel);
-                mailService.MailSendingDateTime = DateTime.Now;
-                mailService.From = "demowork9999@gmail.com";
+                if (ModelState.IsValid)
+                {
+                    MailService mailService = Mapper.Map<MailService>(mailServiceViewModel);
+                    mailService.MailSendingDateTime = DateTime.Now;
+                    mailService.From = "demowork9999@gmail.com";
 
-                //var result = _mailServiceManager.Add(mailService);
-                //if (result)
-                //{
-
-                try
-                    {
+                    //var result = _mailServiceManager.Add(mailService);
+                    //if (result)
+                    //{
                         SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                         smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
                         smtpClient.EnableSsl = true;
@@ -92,7 +110,7 @@ namespace RMS.App.Controllers
                         mailMessage.To.Add(mailService.To);
                         mailMessage.Subject = mailService.Subject;
                         mailMessage.Body = mailService.Body;
-                        if (uploadFile != null) 
+                        if (uploadFile != null)
                         {
                             string fileName = Path.GetFileName(uploadFile.FileName);
 
@@ -102,23 +120,23 @@ namespace RMS.App.Controllers
 
                         TempData["msg"] = "Mail has been save and send successfully";
                         return RedirectToAction("Index");
-                    }
-                    catch (Exception ex)
-                    {
-                        TempData["msg1"] = "Mail sending failed. The error message is -"+ "<br/>"+" [ " + ex.Message +" Helpline"+" ] ";
 
-                        return RedirectToAction("Index");
-                    }
-                   
-                
-                //}
+                    //}
+                    //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
+                    //return View(mailServiceViewModel);
+
+                }
+
                 //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
-                //return View(mailServiceViewModel);
-
+                return View(mailServiceViewModel);
             }
+            catch (Exception ex)
+            {
 
-            //ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAllWithEmployee(), "Id", "RequisitionNumber", mailServiceViewModel.RequisitionId);
-            return View(mailServiceViewModel);
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "MailServices", "Create"));
+            }
+            
         }
 
         // GET: MailServices/Edit/5
@@ -180,7 +198,23 @@ namespace RMS.App.Controllers
         //    _mailServiceManager.Remove(mailService);
         //    return RedirectToAction("Index");
         //}
+        private void ExceptionMessage(Exception ex)
+        {
+            ViewBag.ErrorMsg = ex.Message;
 
+            if (ex.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.Message;
+            }
+            if (ex.InnerException?.InnerException?.InnerException != null)
+            {
+                ViewBag.ErrorMsg = ex.InnerException.InnerException.InnerException.Message;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

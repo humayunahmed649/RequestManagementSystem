@@ -8,57 +8,83 @@
 <h2>Requisition Details</h2>
 <hr/>
 
-<div class="container">
-    <table class="table table-light table-active table-primary dt-responsive nowrap">
-        <tr>
-            <td style="width: 25%">@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
-            <td>@Html.DisplayFor(model => model.RequisitionNumber)</td>
-        </tr>
+<table class="table table-bordered">
+    <tr>
+        <td style="width: 25%">@Html.DisplayNameFor(model => model.RequisitionNumber)</td>
+        <td>@Html.DisplayFor(model => model.RequisitionNumber)</td>
+    </tr>
+    @if (@Model.RequestFor == "Own")
+    {
         <tr>
             <td>@Html.DisplayNameFor(model => model.Employee.FullName)</td>
             <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
         </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Employee.Designation.Title)</td>
-            <td>@Html.DisplayFor(model => model.Employee.Designation.Title)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Employee.Email)</td>
-            <td>@Html.DisplayFor(model => model.Employee.Email)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
-            <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
-        </tr>
-        
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.FromPlace)</td>
-            <td>@Html.DisplayFor(model => model.FromPlace)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.DestinationPlace)</td>
-            <td>@Html.DisplayFor(model => model.DestinationPlace)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.PassengerQty)</td>
-            <td>@Html.DisplayFor(model => model.PassengerQty)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Description)</td>
-            <td>@Html.DisplayFor(model => model.Description)</td>
-        </tr>
+    }
+    @if (@Model.RequestFor != "Own")
+    {
         <tr>
             <td>@Html.DisplayNameFor(model => model.RequestFor)</td>
             <td>@Html.DisplayFor(model => model.RequestFor)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.RequisitionType)</td>
-            <td>@Html.DisplayFor(model => model.RequisitionType)</td>
+            <td>@Html.DisplayName("Request By")</td>
+            <td>@Html.DisplayFor(model => model.Employee.FullName)</td>
         </tr>
-        
-    </table>
-    <p>
-        @Html.ActionLink("Back to List", "Requests", null, new { @class = "btn btn-info" })
-    </p>
-</div>
+    }
+
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Employee.Designation)</td>
+        <td>@Html.DisplayFor(model => model.Employee.Designation.Title)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Employee.Email)</td>
+        <td>@Html.DisplayFor(model => model.Employee.Email)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Employee.ContactNo)</td>
+        <td>@Html.DisplayFor(model => model.Employee.ContactNo)</td>
+    </tr>
+
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.FromPlace)</td>
+        <td>@Html.DisplayFor(model => model.FromPlace)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.DestinationPlace)</td>
+        <td>@Html.DisplayFor(model => model.DestinationPlace)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.StartDateTime)</td>
+        <td>@Model.StartDateTime.ToString("dd MMM yyyy hh:mm tt")</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.EndDateTime)</td>
+        <td>@Model.EndDateTime.ToString("dd MMM yyyy hh:mm tt")</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.PassengerQty)</td>
+        <td>@Html.DisplayFor(model => model.PassengerQty)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.RequisitionType)</td>
+        <td>@Html.DisplayFor(model => model.RequisitionType)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Description)</td>
+        <td>@Html.DisplayFor(model => model.Description)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.SubmitDateTime)</td>
+        <td>@Model.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")</td>
+    </tr>
+
+
+
+</table>
+
+<p>
+    
+    @Html.ActionLink("Back to List", "Requests", null, new {@class = "btn btn-info"})
+</p>
+
 
