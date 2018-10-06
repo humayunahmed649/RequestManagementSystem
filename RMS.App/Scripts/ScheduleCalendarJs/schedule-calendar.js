@@ -105,16 +105,7 @@ function GenerateCalendar(events) {
         eventLimit: true,
         eventColor: "green",
         allDay: false,
-        eventAfterRender: function (event, $el, view) {
-            var formattedTime = $.fullCalendar.formatDates(event.start, event.end, "HH:mm { - HH:mm}");
-            // If FullCalendar has removed the title div, then add the title to the time div like FullCalendar would do
-            if ($el.find(".fc-event-title").length === 0) {
-                $el.find(".fc-event-time").text(formattedTime + " - " + event.title);
-            }
-            else {
-                $el.find(".fc-event-time").text(formattedTime);
-            }
-        },
+    
       
 
         events: events,

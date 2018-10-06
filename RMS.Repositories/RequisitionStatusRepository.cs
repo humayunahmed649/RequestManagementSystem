@@ -76,6 +76,7 @@ namespace RMS.Repositories
 
         public IQueryable GetAllAssignRequisitions()
         {
+           
             IQueryable assignRequisitionInfo = (from requisitionStatus in db.Set<RequisitionStatus>()
                 join assignRequisition in db.Set<AssignRequisition>()
                     on requisitionStatus.Id equals assignRequisition.RequisitionStatusId
