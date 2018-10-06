@@ -528,6 +528,24 @@ namespace RMS.App.Controllers
             return Json(drivers, JsonRequestBehavior.AllowGet);
 
         }
+
+        //Check In assign Request by json 
+        //[HttpPost]
+        //public JsonResult CheckIn(RequisitionStatusViewModel requisitionStatusViewModel)
+        //{
+        //    var status = false;
+        //    if (ModelState.IsValid)
+        //    {
+        //        RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(requisitionStatusViewModel);
+        //        requisitionStatus.StatusType = "OnExecute";
+        //        bool IsUpdate=_requisitionStatusManager.Update(requisitionStatus);
+        //        if (IsUpdate)
+        //        {
+        //            status = true;
+        //        }
+        //    }
+        //    return new JsonResult {Data = new {status=status}};
+        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)

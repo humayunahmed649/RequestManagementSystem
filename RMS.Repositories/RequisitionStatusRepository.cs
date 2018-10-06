@@ -82,7 +82,10 @@ namespace RMS.Repositories
                 where requisitionStatus.StatusType == "Assigned"
                 select new
                 {
-                    requisitionNumber=assignRequisition.RequisitionNumber,
+                    statusId=requisitionStatus.Id,
+                    RequisitionId=requisitionStatus.RequisitionId,
+                    StatusType=requisitionStatus.StatusType,
+                    requisitionNumber =assignRequisition.RequisitionNumber,
                     employeeName=assignRequisition.Requisition.Employee.FullName,
                     startTime=assignRequisition.Requisition.StartDateTime,
                     endTime=assignRequisition.Requisition.EndDateTime,

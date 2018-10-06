@@ -9,7 +9,7 @@
 <div id="calendar">
 
 </div>
-
+<!----Assigned Requisition Show modal----->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,7 +20,54 @@
             </div>
 
             <div class="modal-body">
+              
+
+
                 <p id="description"></p>
+            </div>
+
+            <div class="modal-footer">
+                <button id="btnCheckIn" class="btn btn-success pull-right">
+                    <span class="glyphicon glyphicon-ok"></span>Check In
+                </button>
+                <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------Check In Modal-->
+@*<div id="checkInModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+
+                <h4 class="modal-title"> Requisition No : <span id="requisitionNumber"></span></h4>
+                <a href="#" class="close" title="Close" data-dismiss="modal"> &times; </a>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" id="statusId" value="0"/>
+                    <div class="form-group">
+                        <label>Requisition Number</label>
+                        <input type="text" id="txtRqNo" class="form-control" readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <label>Requisition Id</label>
+                        <input type="text" id="txtRqId" class="form-control" readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <label>Status Type</label>
+                        <input type="text" id="txtStatus" class="form-control" readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" id="btnCheckedIn">
+                            <span class="glyphicon glyphicon-ok"></span>Check In
+                        </button>
+                    </div>
+
+                </form>
             </div>
 
             <div class="modal-footer">
@@ -28,17 +75,16 @@
             </div>
         </div>
     </div>
-</div>
-
+</div>*@
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet">
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print">
-
 @section scripts{
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script src="~/Scripts/ScheduleCalendarJs/schedule-calendar.js"></script>
     <script>
-        
+
     </script>
+   
 }
