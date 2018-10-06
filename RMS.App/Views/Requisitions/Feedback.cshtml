@@ -118,7 +118,8 @@
             {
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="text-center" style="font-size: 16px;"><strong>Comment Box</strong></p>
+                        <p class="text-center" style="font-size: 16px;"><strong>Comment Box</strong>
+                        </p>
                     </div>
                     <div class="col-md-12">
                         <table class="table table-bordered">
@@ -141,93 +142,56 @@
                                     <td style="width: 55%">@comment.CommentText</td>
                                     @if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
                                     {
+
+                                        @*<td><a href="@Url.Action("Reply", "Requisitions", new { feedbackId = @comment.Id})" class="btn btn-primary" data-toggle="modal" data-target="#replyModal">Reply</a></td>*@
+
                                         <td style="width: 10%">@Html.ActionLink("Reply", "Reply", new { feedbackId = @comment.Id})</td>
-                                        @*<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#replyModal" data-url="@Url.Action("Reply","Requisitions", new {feedbackId = @comment.Id})">Reply</button></td>*@
+
                                     }
 
                                 </tr>
                             }
+
+
+
                         </table>
-                        </div>
+                    </div>
                 </div>
-            }
 
-            <!--------------Comment Reply Section Start-->
-                @*<div class="modal fade" id="replyModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header table-info">
-                            <h3 class="modal-title">@Html.EditorFor(model => model.Requisition.RequisitionNumber, new { htmlAttributes = new { @class = "form-control", @readOnly = "readonly" } })</h3>
-                            <a href="#" class="close" data-dismiss="modal">&times;</a>
-                        </div>
-                        <div class="modal-body table-light">
-                            
-                            @using (Html.BeginForm("Reply", "Requisitions", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <div class="form-horizontal">
-
-                                    @Html.HiddenFor(model => model.Id)
-                                    @Html.HiddenFor(model => model.RequisitionId)
-                                    @Html.Hidden("returnUrl", this.Request.RawUrl)
-                                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-
-                                    <div class="form-group row">
-                                        @if (ViewBag.Msg != null)
-                                        {
-                                            <div>@ViewBag.Msg</div>
-                                        }
-                                    </div>
-                                    <div class="form-group row">
-                                        @Html.LabelFor(model => model.CommentText, htmlAttributes: new {@class = "control-label col-md-12"})
-                                        <div class="col-md-12">
-                                            @Html.EditorFor(model => model.CommentText, new {htmlAttributes = new {@class = "form-control"}})
-                                            @Html.ValidationMessageFor(model => model.CommentText, "", new {@class = "text-danger"})
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group row" hidden="hidden">
-                                        @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new {@class = "control-label col-md-12"})
-                                        <div class="col-md-3">
-                                            @Html.EditorFor(model => model.EmployeeId, new {htmlAttributes = new {@class = "form-control"}})
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-md-5">
-                                            <input type="submit" value="Reply" class="btn btn-primary"/> &nbsp;
-                                            @Html.ActionLink("Back to List", "RequisitionList", "Requisitions", null, new {@class = "btn btn-info"})*@
-                                        @*</div>
-                                    </div>
-                                </div>*@
-                            @*}*@
-
-
-
-
-<!----------
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
+                  <!--------------Comment Reply Section Start-->
+                <div class="modal fade" id="replyModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header table-info">
+                                <h3 class="modal-title">@Html.EditorFor(model => model.Requisition.RequisitionNumber, new { htmlAttributes = new { @class = "form-control", @readOnly = "readonly" } })</h3>
+                                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                            </div>
+                            <div class="modal-body table-light">
+                                @Html.Partial("Reply")
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>-->
-                
-                
-               <!-------------Comment Reply Section End-->
+
+
+                            <!-------------Comment Reply Section End-->
+            }
+
+            
         </div>
     </div>
     <br/>
 </div>
 <div class=""><p></p></div>
-
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
 
- 
+
+   
+      
 
 }
