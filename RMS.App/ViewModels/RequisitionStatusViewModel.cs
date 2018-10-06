@@ -21,12 +21,11 @@ namespace RMS.App.ViewModels
         [Display(Name = "Requisition Id")]
         public int RequisitionId { get; set; }
         public RequisitionViewModel Requisition { get; set; }
-
+        [NotMapped]
         public IEnumerable<RequisitionStatusViewModel> RequisitionStatusView { get; set; }
 
         [NotMapped]
         [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Please write a note for cancellation!")]
         public string Reason { get; set; }
          
     }

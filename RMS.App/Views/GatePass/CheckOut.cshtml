@@ -7,7 +7,7 @@
 <h2>Check-Out</h2>
 <hr />
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CheckOut","GatePass",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.StatusType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.StatusType, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.StatusType, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.RequisitionNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -36,7 +36,7 @@
             @Html.LabelFor(model => model.Requisition.Employee.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.Requisition.Employee.FullName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Requisition.Employee.FullName, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -44,15 +44,14 @@
             @Html.LabelFor(model => model.Requisition.Employee.Designation.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.Requisition.Employee.Designation.Title, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Requisition.Employee.Designation.Title, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
         <div class="form-group row">
             @Html.LabelFor(model => model.Requisition.FromPlace, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
-                @Html.EditorFor(model => model.Requisition.FromPlace, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Requisition.FromPlace, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Requisition.FromPlace, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             </div>
         </div>
 
@@ -60,7 +59,6 @@
             @Html.LabelFor(model => model.Requisition.DestinationPlace, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.Requisition.DestinationPlace, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Requisition.DestinationPlace, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -68,7 +66,7 @@
             @Html.LabelFor(model => model.Requisition.RequisitionType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.Requisition.RequisitionType, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Requisition.RequisitionType, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -76,7 +74,7 @@
             @Html.LabelFor(model => model.Requisition.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.Requisition.Description, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Requisition.Description, "", new { @class = "text-danger" })
+               
             </div>
         </div>
 
@@ -85,7 +83,7 @@
             @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.RequisitionId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RequisitionId, "", new { @class = "text-danger" })
+   
             </div>
         </div>
 
@@ -103,5 +101,5 @@
 
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
 }
