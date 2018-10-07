@@ -580,9 +580,27 @@ namespace RMS.App.Controllers
             }
 
         }
+        //public JsonResult GetReplyInformation(int feedbackId)
+        //{
+        //    Feedback feedback = _feedbackManager.FindById((int)feedbackId);
+        //    if (feedback == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    //Get employee Id by user login id
+        //    var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+        //    var empId = _employeeManager.FindByLoginId(loginUserId);
+
+        //    FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
+
+        //    feedbackViewModel.EmployeeId = Convert.ToInt32(empId.Id);
+        //    return Json(feedbackViewModel, JsonRequestBehavior.AllowGet);
+
+        //}
 
 
-        //Post: Requisitin Reply
+        //Post: Requisition Reply
         [HttpPost]
         public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId,EmployeeId")]FeedbackViewModel feedbackViewModel)
         {

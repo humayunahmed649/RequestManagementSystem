@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Reply";
-    Layout = "~/Views/Shared/_LayoutLogIn.cshtml";
+    //Layout = "~/Views/Shared/_LayoutLogIn.cshtml";
 }
 
 <h2>Reply</h2>
@@ -25,11 +25,13 @@
                 <div>@ViewBag.Msg</div>
             }
         </div>
+
+
         <div class="form-group row">
-            @Html.LabelFor(model => model.CommentText, htmlAttributes: new {@class = "control-label col-md-12"})
-            <div class="col-md-3">
-                @Html.EditorFor(model => model.CommentText, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.CommentText, "", new {@class = "text-danger"})
+            @Html.Label("Put your reply here", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.CommentText, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CommentText, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -44,7 +46,7 @@
         <div class="form-group row">
             <div class="col-md-5">
                 <input type="submit" value="Reply" class="btn btn-primary"/> &nbsp;
-                @Html.ActionLink("Back to List", "RequisitionList", "Requisitions", null, new {@class = "btn btn-info"})
+                @Html.ActionLink("Back to List", "Create","Requisitions",new {@class="btn btn-primary"})
             </div>
         </div>
     </div>

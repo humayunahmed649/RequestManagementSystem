@@ -7,7 +7,7 @@
 <h2>Check-Out</h2>
 <hr />
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CheckOut","GatePass",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

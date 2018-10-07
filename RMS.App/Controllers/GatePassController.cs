@@ -85,6 +85,14 @@ namespace RMS.App.Controllers
                     _requisitionStatusManager.Update(requisitionStatus);
                     return RedirectToAction("Index");
                 }
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .Select(x => new { x.Key, x.Value.Errors })
+                    .ToArray();
+                }
+            
 
                 return View();
 
@@ -92,7 +100,7 @@ namespace RMS.App.Controllers
             catch (Exception ex)
             {
                 ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckIn"));
+                return View("Error", new HandleErrorInfo(ex, "GatePass", "CheckOut"));
             }
 
         }
