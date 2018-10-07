@@ -14,7 +14,6 @@
 }
 
 
-<div class="container">
     <h2>All Requisitions</h2>
     <hr />
 
@@ -43,6 +42,9 @@
                     SL
                 </th>
                 <th>
+                    Action
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
                 </th>
                 <th>
@@ -63,9 +65,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.EndDateTime)
                 </th>
-                <th>
-                    Action
-                </th>
+                
             </tr>
             </thead>
             <tbody>
@@ -79,6 +79,12 @@
                         <tr>
                             <td>
                                 @sl
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })*@
+                                @Html.ActionLink("Feedback", "Feedback", new { requisitionId = item.Id }, new { @class = "btn btn-outline-success btn-sm" })
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.RequisitionNumber)
@@ -96,18 +102,11 @@
                                 @Html.DisplayFor(modelItem => item.DestinationPlace)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.StartDateTime)
+                                @item.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.EndDateTime)
+                                @item.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
-
-                            <td>
-                                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
-                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })*@
-                                @Html.ActionLink("Feedback", "Feedback", new { requisitionId = item.Id },new {@class="btn btn-outline-success"})
-                             </td>
 
                         </tr>
                     }
@@ -118,6 +117,9 @@
             <tr class="bg-secondary text-white">
                 <th>
                     SL
+                </th>
+                <th>
+                    Action
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
@@ -140,14 +142,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.EndDateTime)
                 </th>
-                <th>
-                    Action
-                </th>
+                
             </tr>
             </tfoot>
         </table>
 
-</div>
 
 
 @section scripts

@@ -36,6 +36,13 @@
                     SL
                 </th>
                 <th>
+                    Action
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusType)
+                </th>
+                
+                <th>
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
                 </th>
                 <th>
@@ -56,12 +63,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StatusType)
-                </th>
-                <th>
-                    Action
-                </th>
+                
             </tr>
 
         </thead>
@@ -78,6 +80,13 @@
                                 @sl
 
                             </td>
+
+                            <td>
+                                @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}, new {@class = "btn btn-primary btn-sm"})
+                            </td>
+                            <td class="text-success">
+                                @Html.DisplayFor(modelItem => item.StatusType)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.RequisitionNumber)
                             </td>
@@ -91,20 +100,15 @@
                                 @Html.DisplayFor(modelItem => item.Requisition.DestinationPlace)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Requisition.StartDateTime)
+                                @item.Requisition.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Requisition.EndDateTime)
+                                @item.Requisition.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
+                                @item.Requisition.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StatusType, new { @class = "text-danger" })
-                            </td>
-                            <td>
-                                @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-primary" })
-                            </td>
+                            
                         </tr>
                     }
                 }
@@ -114,6 +118,13 @@
             <tr class="bg-secondary text-white">
                 <th>
                     SL
+                </th>
+
+                <th>
+                    Action
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusType)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
@@ -136,12 +147,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StatusType)
-                </th>
-                <th>
-                    Action
-                </th>
+                
             </tr>
         </tfoot>
     </table>

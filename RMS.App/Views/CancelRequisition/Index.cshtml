@@ -21,6 +21,9 @@
             SL
         </th>
         <th>
+            Action
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.RequisitionNumber)
         </th>
         <th>
@@ -47,9 +50,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Reason)
         </th>
-        <th>
-            Action
-        </th>
+        
     </tr>
 
     </thead>
@@ -67,6 +68,12 @@
 
                     </td>
                     <td>
+                        @*@Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |*@
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                        @*@Html.ActionLink("Feedback", "Feedback", new {requisitionId = item.Id})*@
+
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.RequisitionStatus.Requisition.RequisitionNumber)
                     </td>
                     <td>
@@ -79,13 +86,13 @@
                         @Html.DisplayFor(modelItem => item.RequisitionStatus.Requisition.DestinationPlace)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RequisitionStatus.Requisition.StartDateTime)
+                        @item.RequisitionStatus.Requisition.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RequisitionStatus.Requisition.EndDateTime)
+                        @item.RequisitionStatus.Requisition.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RequisitionStatus.Requisition.SubmitDateTime)
+                        @item.RequisitionStatus.Requisition.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RequisitionStatus.StatusType, new {@class = "text-danger"})
@@ -93,12 +100,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Reason, new {@class = "text-danger"})
                     </td>
-                    <td>
-                        @*@Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |*@
-                        @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-primary"}) 
-                        @*@Html.ActionLink("Feedback", "Feedback", new {requisitionId = item.Id})*@
-
-                    </td>
+                    
                 </tr>
             }
         }
@@ -108,6 +110,9 @@
     <tr class="bg-secondary text-white">
         <th>
             SL
+        </th>
+        <th>
+            Action
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RequisitionStatus.Requisition.RequisitionNumber)
@@ -136,9 +141,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Reason)
         </th>
-        <th>
-            Action
-        </th>
+        
     </tr>
     </tfoot>
 </table>
