@@ -12,6 +12,8 @@ namespace RMS.Repositories.Contracts
         ICollection<Notification> GetNotificationsForController(string controllerViewStatus);
         ICollection<Notification> GetNotificationsForSender(string senderViewstatus,int id);
         Notification FindByRequisitionId(int id);
+        ICollection<Notification> GetAllNotificationByEmployeeId(int empId );
+        ICollection<Notification> GetAllNotificationForController();
     }
    
 }

@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
@@ -34,7 +35,11 @@ namespace RMS.App.Controllers
         {
             try
             {
-                ICollection<Notification> notifications = _notificationManager.GetAll();
+                //Get employee Id by user login id
+                var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                var empId = _employeeManager.FindByLoginId(loginUserId);
+
+                ICollection<Notification> notifications = _notificationManager.GetAllNotificationByEmployeeId(empId.Id);
                 IEnumerable<NotificationViewModel> notificationViewModels = Mapper.Map<IEnumerable<NotificationViewModel>>(notifications);
                 return View(notificationViewModels);
             }
@@ -45,6 +50,23 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Notifications", "Index"));
             }
             
+        }
+        //GET: Notifications all For Employee
+        public ActionResult AllNotification()
+        {
+            try
+            {
+
+                ICollection<Notification> notifications = _notificationManager.GetAllNotificationForController();
+                IEnumerable<NotificationViewModel> notificationViewModels = Mapper.Map<IEnumerable<NotificationViewModel>>(notifications);
+                return View(notificationViewModels);
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "Notifications", "AllNotification"));
+            }
         }
 
         // GET: Notifications/Details/5

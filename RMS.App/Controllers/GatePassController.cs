@@ -83,10 +83,11 @@ namespace RMS.App.Controllers
                     RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
                     requisitionStatus.StatusType = "Completed";
                     _requisitionStatusManager.Update(requisitionStatus);
+
                     return RedirectToAction("Index");
-                }
                 
-            
+                }
+              
 
                 return View();
 
@@ -98,6 +99,7 @@ namespace RMS.App.Controllers
             }
 
         }
+
         [HttpGet]
         public ActionResult CheckIn(int? id)
         {
@@ -139,7 +141,7 @@ namespace RMS.App.Controllers
                     RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
                     requisitionStatus.StatusType = "OnExecute";
                     _requisitionStatusManager.Update(requisitionStatus);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("OnProcess","AssignRequisitions");
                 }
 
                 return View();

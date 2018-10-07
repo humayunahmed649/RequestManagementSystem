@@ -23,36 +23,6 @@
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#forRequest">Request For Other</a> &nbsp;
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRequest">My Request</a> &nbsp;
     </div>
-
-    <div class="col-md-4">
-        <ul>
-
-            <li class="dropdown">
-                @if (@ViewBag.count > 0)
-            {
-                    <a title="Unread notifications!"class="dropdown-toggle btn btn-outline-primary caret badge"  data-toggle="dropdown"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">@ViewBag.count</span></a>
-                }
-                else
-                {
-                    <a title="You have no unread notifications!" class="dropdown-toggle btn btn-outline-primary caret badge" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="font-weight-bold" style="font-size: 16px;"></span></a>
-                }
-
-                <ul class="dropdown-menu">
-                    
-                    @if (ViewBag.Notification != null)
-                    {
-                        var notify = ViewBag.Notification;
-                        foreach (var dt in notify)
-                        {
-                            <li><a href="@Url.Action("Details", "Requisitions", new {@id = dt.RequisitionId})">Mr. @dt.Employee.FullName &nbsp; @dt.SenderText &nbsp; Req No: @dt.Requisition.RequisitionNumber &nbsp; @dt.SenderNotifyDateTime.ToString("hh:mm tt")</a></li>
-                            <hr/>
-                        }
-                    }
-
-                </ul>
-            </li>
-        </ul>
-    </div>
 </div>
 <br/>
 @if (TempData["msg"] != null)

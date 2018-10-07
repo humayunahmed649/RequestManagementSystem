@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<RMS.App.ViewModels.NotificationViewModel>
 
 @{
-    ViewBag.Title = "Your Notifications";
+    ViewBag.Title = "All Notifications";
     Layout = "~/Views/Shared/_LayoutLogIn.cshtml";
 }
 @section styles
@@ -12,7 +12,7 @@
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet" />
 
 }
-<h2>Your Notifications</h2>
+<h2>All Notifications</h2>
 <br/>
 <div class="container">
     <table id="example1" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">
@@ -38,8 +38,8 @@
                     <td>
                         @sl
                     </td>
-                    <td>
-                        <a href="@Url.Action("Details", "Requisitions", new {@id = item.RequisitionId})" class="text-black">Mr. @item.Employee.FullName &nbsp; @item.SenderText &nbsp; Req No: @item.Requisition.RequisitionNumber &nbsp; @item.SenderNotifyDateTime.ToString("hh:mm tt")</a>
+                    <td >
+                        <a href="@Url.Action("Details", "AssignRequisitions", new {id = item.RequisitionId})" class="text-black"> Mr. @item.Employee.FullName &nbsp; @item.ControllerText &nbsp; Req No: @item.Requisition.RequisitionNumber &nbsp; @item.ControllerNotifyDateTime.ToString("hh:mm tt")</a>
                     </td>
 
                 </tr>

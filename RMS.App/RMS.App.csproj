@@ -1078,6 +1078,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\GatePass\CheckOut.cshtml" />
     <Content Include="Views\GatePass\CheckIn.cshtml" />
+    <Content Include="Views\Notifications\AllNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

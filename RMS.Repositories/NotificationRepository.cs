@@ -42,5 +42,15 @@ namespace RMS.Repositories
                     .AsNoTracking()
                     .FirstOrDefault();
         }
+
+        public ICollection<Notification> GetAllNotificationByEmployeeId(int empId)
+        {
+            return db.Set<Notification>().Where(s=>s.EmployeeId == empId).Include(c => c.Employee).Include(c => c.Requisition).OrderByDescending(c => c.Id).AsNoTracking().ToList();
+        }
+
+        public ICollection<Notification> GetAllNotificationForController()
+        {
+            return db.Set<Notification>().Include(c => c.Employee).Include(c => c.Requisition).OrderByDescending(c => c.Id).AsNoTracking().ToList();
+        }
     }
 }
