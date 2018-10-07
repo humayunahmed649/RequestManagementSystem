@@ -12,9 +12,11 @@
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet" />
 
 }
-<div class="container">
+
+
 <h2>On Process</h2>
-    <hr/>
+<hr/>
+
     @if (TempData["msg"] != null)
     {
         <div class="alert alert-info">
@@ -35,7 +37,13 @@
                     SL
                 </th>
                 <th>
+                    Action
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusType)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
@@ -55,12 +63,8 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StatusType)
-                </th>
-                <th>
-                    Action
-                </th>
+                
+                
             </tr>
 
         </thead>
@@ -78,7 +82,14 @@
 
                             </td>
                             <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("CheckOut", "CheckOut", "GatePass", new { id = item.Id }, new { @class = "btn btn-success" })
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.RequisitionNumber)
+                            </td>
+                            <td class="text-info bold">
+                                @Html.DisplayFor(modelItem => item.StatusType)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Requisition.Employee.FullName)
@@ -90,22 +101,13 @@
                                 @Html.DisplayFor(modelItem => item.Requisition.DestinationPlace)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Requisition.StartDateTime)
+                                @item.Requisition.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Requisition.EndDateTime)
+                                @item.Requisition.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
-                            </td>
-                            <td class="text-danger bold">
-                                @Html.DisplayFor(modelItem => item.StatusType)
-                            </td>
-                            <td>
-
-                                @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("CheckOut", "CheckOut", "GatePass", new { id = item.Id }, new { @class = "btn btn-success" })
-
+                                @item.Requisition.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")
                             </td>
                         </tr>
                     }
@@ -118,7 +120,13 @@
                     SL
                 </th>
                 <th>
+                    Action
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusType)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
@@ -138,16 +146,10 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StatusType)
-                </th>
-                <th>
-                    Action
-                </th>
             </tr>
         </tfoot>
     </table>
-</div>
+
 
 @section scripts
 {

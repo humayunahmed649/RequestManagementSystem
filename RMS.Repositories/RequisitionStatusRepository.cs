@@ -52,7 +52,7 @@ namespace RMS.Repositories
             return
                 db.Set<RequisitionStatus>()
                     .Where(c => c.Requisition.Employee.Id == id)
-                    .Include(c => c.Requisition.Employee)
+                    .Include(c => c.Requisition.Employee).OrderByDescending(c=>c.Id)
                     .ToList();
         }
 

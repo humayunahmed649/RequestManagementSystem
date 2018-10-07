@@ -22,7 +22,7 @@ namespace RMS.Repositories
 
         public override ICollection<AssignRequisition> GetAll()
         {
-            return db.Set<AssignRequisition>().Include(c => c.Employee).Include(c => c.Requisition).Include(c => c.Vehicle).AsNoTracking().ToList();
+            return db.Set<AssignRequisition>().Include(c => c.Employee).Include(c => c.Requisition).Include(c => c.Vehicle).Include(c=>c.Vehicle.VehicleType).AsNoTracking().ToList();
         }
 
         public ICollection<AssignRequisition> GetAllWithInformation()

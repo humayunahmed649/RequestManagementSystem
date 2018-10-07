@@ -142,7 +142,7 @@ namespace RMS.App.Controllers
             catch (Exception ex)
             {
                 ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Cancel"));
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Requests"));
             }
 
         }
