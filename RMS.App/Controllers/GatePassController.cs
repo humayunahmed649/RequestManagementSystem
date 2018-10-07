@@ -83,15 +83,9 @@ namespace RMS.App.Controllers
                     RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
                     requisitionStatus.StatusType = "Completed";
                     _requisitionStatusManager.Update(requisitionStatus);
-                    return RedirectToAction("CheckOut");
+                    return RedirectToAction("Index");
                 }
-                if (!ModelState.IsValid)
-                {
-                    var errors = ModelState
-                    .Where(x => x.Value.Errors.Count > 0)
-                    .Select(x => new { x.Key, x.Value.Errors })
-                    .ToArray();
-                }
+                
             
 
                 return View();

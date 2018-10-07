@@ -55,6 +55,7 @@
     <Compile Include="INotificationRepository.cs" />
     <Compile Include="IOrganizationRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRequisitionHistoryRepository.cs" />
     <Compile Include="IRequisitionRepository.cs" />
     <Compile Include="IRequisitionStatusRepository.cs" />
     <Compile Include="IUpazilaRepository.cs" />

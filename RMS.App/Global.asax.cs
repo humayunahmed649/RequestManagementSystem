@@ -62,6 +62,9 @@ namespace RMS.App
 
                 cfg.CreateMap<CancelRequisition, CancelRequisitionViewModel>();
                 cfg.CreateMap<CancelRequisitionViewModel, CancelRequisition>();
+
+                cfg.CreateMap<RequisitionHistory, RequisitionHistoryViewModel>();
+                cfg.CreateMap<RequisitionHistoryViewModel, RequisitionHistory>();
             });
             
         }

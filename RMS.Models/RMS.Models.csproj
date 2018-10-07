@@ -107,6 +107,7 @@
     <Compile Include="EntityModels\Notification.cs" />
     <Compile Include="EntityModels\Organization.cs" />
     <Compile Include="EntityModels\Requisition.cs" />
+    <Compile Include="EntityModels\RequisitionHistory.cs" />
     <Compile Include="EntityModels\RequisitionStatus.cs" />
     <Compile Include="EntityModels\Upazila.cs" />
     <Compile Include="EntityModels\Vehicle.cs" />
@@ -290,6 +291,10 @@
     <Compile Include="Migrations\201810010859307_Notification_table_changed.Designer.cs">
       <DependentUpon>201810010859307_Notification_table_changed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810071252106_RequisitionHistoryModelAdded.cs" />
+    <Compile Include="Migrations\201810071252106_RequisitionHistoryModelAdded.Designer.cs">
+      <DependentUpon>201810071252106_RequisitionHistoryModelAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\AssignRequisitionReportVM.cs" />
@@ -426,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810010859307_Notification_table_changed.resx">
       <DependentUpon>201810010859307_Notification_table_changed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810071252106_RequisitionHistoryModelAdded.resx">
+      <DependentUpon>201810071252106_RequisitionHistoryModelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

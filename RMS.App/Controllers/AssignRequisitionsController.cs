@@ -33,9 +33,10 @@ namespace RMS.App.Controllers
         private INotificationManager _notificationManager;
         private IMailServiceManager _mailServiceManager;
         private ICancelRequisitionManager _cancelRequisitionManager;
+        private IRequisitionHistoryManager _requisitionHistoryManager;
 
         public AssignRequisitionsController(IRequisitionManager requisitionManager,IVehicleManager vehicleManager,IEmployeeManager employeeManager,IAssignRequisitionManager assignRequisitionManager,IRequisitionStatusManager requisitionStatusManager,
-            IVehicleTypeManager vehicleTypeManager, INotificationManager notificationManager, IMailServiceManager mailServiceManager,ICancelRequisitionManager cancelRequisitionManager)
+            IVehicleTypeManager vehicleTypeManager, INotificationManager notificationManager, IMailServiceManager mailServiceManager,ICancelRequisitionManager cancelRequisitionManager,IRequisitionHistoryManager requisitionHistoryManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
@@ -46,6 +47,7 @@ namespace RMS.App.Controllers
             this._notificationManager = notificationManager;
             this._mailServiceManager = mailServiceManager;
             this._cancelRequisitionManager = cancelRequisitionManager;
+            this._requisitionHistoryManager = requisitionHistoryManager;
 
         }
         
@@ -164,7 +166,15 @@ namespace RMS.App.Controllers
                             status.RequisitionId = assignRequisition.RequisitionId;
                             status.RequisitionNumber = assignRequisition.RequisitionNumber;
                             status.StatusType = "Assigned";
-                            _requisitionStatusManager.Update(status);
+                            bool Saved=_requisitionStatusManager.Update(status);
+                            if (Saved)
+                            {
+                                RequisitionHistory history = new RequisitionHistory();
+                                history.Status = "Assigned";
+                                history.RequisitionId = assignRequisition.RequisitionId;
+                                history.SubmitDateTime = DateTime.Now;
+                                _requisitionHistoryManager.Add(history);
+                            }
                         }
                     }
                     
@@ -314,7 +324,17 @@ namespace RMS.App.Controllers
                 if (ModelState.IsValid)
                 {
                     AssignRequisition requisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
-                    _assignRequisitionManager.Update(requisition);
+                    bool IsSaved=_assignRequisitionManager.Update(requisition);
+                    if (IsSaved)
+                    {
+                        var historyId = _requisitionHistoryManager.FindByRequisitionId(requisition.Id);
+
+                        historyId.Id = historyId.Id;
+                        historyId.Status = "Assigned";
+                        historyId.RequisitionId = requisition.Id;
+                        historyId.UpdateDateTime = DateTime.Now;
+                        _requisitionHistoryManager.Update(historyId);
+                    }
                     return RedirectToAction("Index");
                 }
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName", assignRequisitionViewModel.EmployeeId);

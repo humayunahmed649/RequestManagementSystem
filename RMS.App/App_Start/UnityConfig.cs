@@ -111,6 +111,10 @@ namespace RMS.App
 
             container.RegisterType<ICancelRequisitionManager, CancelRequisitionManager>();
             container.RegisterType<ICancelRequisitionRepository, CancelRequisitionRepository>();
+
+
+            container.RegisterType<IRequisitionHistoryManager, RequisitionHistoryManager>();
+            container.RegisterType<IRequisitionHistoryRepository, RequisitionHistoryRepository>();
         }
     }
 }

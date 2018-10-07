@@ -28,9 +28,10 @@ namespace RMS.App.Controllers
         private IAssignRequisitionManager _assignRequisitionManager;
         private INotificationManager _notificationManager;
         private ICancelRequisitionManager _cancelRequisitionManager;
+        private IRequisitionHistoryManager _requisitionHistoryManager;
 
         public RequisitionsController(IRequisitionManager requisitionManager,IEmployeeManager employeeManager,IVehicleManager vehicleManager,IRequisitionStatusManager requisitionStatusManager,IFeedbackManager feedbackManager,
-            IAssignRequisitionManager assignRequisitionManager, INotificationManager notificationManager,ICancelRequisitionManager cancelRequisitionManager)
+            IAssignRequisitionManager assignRequisitionManager, INotificationManager notificationManager,ICancelRequisitionManager cancelRequisitionManager,IRequisitionHistoryManager requisitionHistoryManager)
         {
             this._requisitionManager = requisitionManager;
             this._employeeManager = employeeManager;
@@ -40,6 +41,7 @@ namespace RMS.App.Controllers
             this._assignRequisitionManager = assignRequisitionManager;
             this._notificationManager = notificationManager;
             this._cancelRequisitionManager = cancelRequisitionManager;
+            this._requisitionHistoryManager = requisitionHistoryManager;
         }
 
         // GET: Requisitions
@@ -217,7 +219,16 @@ namespace RMS.App.Controllers
                         status.RequisitionNumber = requisition.RequisitionNumber;
                         status.RequisitionId = requisition.Id;
                         status.StatusType = "New";
-                        _requisitionStatusManager.Add(status);
+                        bool Saved=_requisitionStatusManager.Add(status);
+                        if (Saved)
+                        {
+                            RequisitionHistory history=new RequisitionHistory();
+                            history.Status = "New";
+                            history.RequisitionId = requisition.Id;
+                            history.SubmitDateTime=DateTime.Now;
+                            _requisitionHistoryManager.Add(history);
+                        }
+
 
                         // Notification Status Save
                         Notification notification = new Notification();
@@ -329,8 +340,15 @@ namespace RMS.App.Controllers
 
                         status.RequisitionId = requisition.Id;
                         status.StatusType = "New";
-                        _requisitionStatusManager.Add(status);
-
+                        bool Saved=_requisitionStatusManager.Add(status);
+                        if (Saved)
+                        {
+                            RequisitionHistory history = new RequisitionHistory();
+                            history.Status = "New";
+                            history.RequisitionId = requisition.Id;
+                            history.SubmitDateTime = DateTime.Now;
+                            _requisitionHistoryManager.Add(history);
+                        }
                         // Notification Status Save
                         Notification notification = new Notification();
                         notification.RequisitionId = requisition.Id;
@@ -432,8 +450,18 @@ namespace RMS.App.Controllers
 
                     Requisition requisition = Mapper.Map<Requisition>(requisitionViewModel);
 
-                    _requisitionManager.Update(requisition);
+                    bool IsUpdated=_requisitionManager.Update(requisition);
+                    if (IsUpdated)
+                    {
 
+                        var historyId = _requisitionHistoryManager.FindByRequisitionId(requisition.Id);
+                        
+                        historyId.Id = historyId.Id;
+                        historyId.Status = "New";
+                        historyId.RequisitionId = requisition.Id;
+                        historyId.UpdateDateTime = DateTime.Now;
+                        _requisitionHistoryManager.Update(historyId);
+                    }
                     TempData["msg"] = " Information has been updated successfully! ";
 
                     return RedirectToAction("Create");
@@ -486,7 +514,15 @@ namespace RMS.App.Controllers
             {
 
                 Requisition requisition = _requisitionManager.FindById(id);
-                _requisitionManager.Remove(requisition);
+                bool IsDeleted=_requisitionManager.Remove(requisition);
+                if (IsDeleted)
+                {
+                    RequisitionHistory history = new RequisitionHistory();
+                    history.Status = "New";
+                    history.RequisitionId = requisition.Id;
+                    history.DeletedDateTime = DateTime.Now;
+                    _requisitionHistoryManager.Update(history);
+                }
                 TempData["msg"] = "Information has been deleted successfully";
                 return RedirectToAction("Index");
             }
