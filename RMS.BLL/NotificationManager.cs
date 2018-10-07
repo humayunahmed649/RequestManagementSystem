@@ -32,5 +32,15 @@ namespace RMS.BLL
         {
             return _notificationRepository.FindByRequisitionId(id);
         }
+
+        public ICollection<Notification> GetAllNotificationByEmployeeId(int empId)
+        {
+            return _notificationRepository.GetAllNotificationByEmployeeId(empId);
+        }
+
+        public ICollection<Notification> GetAllNotificationForController()
+        {
+            return _notificationRepository.GetAllNotificationForController();
+        }
     }
 }
