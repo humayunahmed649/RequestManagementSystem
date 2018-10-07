@@ -19,7 +19,10 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">@ViewBag.RequisitionStatusCount New Requisition!</div>
+                <div class="mr-5">
+                    <h3>@ViewBag.RequisitionStatusCount</h3>
+                     New Requisition
+                </div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="@Url.Action("Requests", "AssignRequisitions",new {requisitionId=0})">
                 <span class="float-left">View Details</span>
@@ -36,7 +39,10 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">@ViewBag.AssignedRequisition Assigned Requisition</div>
+                <div class="mr-5">
+                    <h3>@ViewBag.AssignedRequisition</h3>
+                    Assigned Requisition
+                </div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="@Url.Action("Index", "AssignRequisitions")">
                 <span class="float-left">View Details</span>
@@ -52,7 +58,10 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-support"></i>
                 </div>
-                <div class="mr-5">@ViewBag.OnProcessRequest On Process Request!</div>
+                <div class="mr-5">
+                    <h3>@ViewBag.OnProcessRequest</h3> 
+                    On Process Request
+                </div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="@Url.Action("OnProcess", "AssignRequisitions")">
                 <span class="float-left">View Details</span>
@@ -68,7 +77,10 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">@ViewBag.CompleteRequisition Completed Requisition!</div>
+                <div class="mr-5">
+                    <h3>@ViewBag.CompleteRequisition</h3>
+                    Today's Completed Requisition
+                </div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="@Url.Action("CompleteRequest", "AssignRequisitions")">
                 <span class="float-left">View Details</span>
@@ -103,7 +115,10 @@
                     <div class="card-body-icon">
                         <i class="fa fa-car" aria-hidden="true"></i>
                     </div>
-                    <div class="mr-5">Total @ViewBag.VehicleCount Vehicle are Registered</div>
+                    <div class="mr-5">
+                        <h3>@ViewBag.VehicleCount</h3> 
+                        Total registered vehicle
+                    </div>
                 </div>
 
                 <a class="card-footer text-white clearfix small z-1" href="@Url.Action("Index", "Vehicles")">
@@ -120,7 +135,10 @@
                     <div class="card-body-icon">
                         <i class="fa fa-car"></i>
                     </div>
-                    <div class="mr-5">@ViewBag.VehicleTypeCount Total Vehicle Type!</div>
+                    <div class="mr-5">
+                        <h3 >@ViewBag.VehicleTypeCount</h3> 
+                        Total Vehicle Type
+                    </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="@Url.Action("Index", "VehicleTypes")">
                     <span class="float-left">View Details</span>
@@ -137,7 +155,10 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-support"></i>
                 </div>
-                <div class="mr-5">@ViewBag.AllRequisitionCount  Totla Requisition</div>
+                <div class="mr-5">
+                    <h3>@ViewBag.AllRequisitionCount</h3> 
+                    Totla Requisition
+                </div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="@Url.Action("Index", "Requisitions")">
                 <span class="float-left">View Details</span>
@@ -153,7 +174,10 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">@ViewBag.CancelRequisition Cancelled Requisition!</div>
+                <div class="mr-5">
+                    <h3>@ViewBag.CancelRequisition</h3> 
+                    Cancelled Requisition
+                </div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="@Url.Action("Index", "CancelRequisition")">
                 <span class="float-left">View Details</span>

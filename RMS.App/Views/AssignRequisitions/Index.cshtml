@@ -37,7 +37,13 @@
                 SL
             </th>
             <th>
+                Action
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.RequisitionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
@@ -57,12 +63,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusType)
-            </th>
-            <th>
-                Action
-            </th>
+            
+            
         </tr>
 
         </thead>
@@ -80,7 +82,17 @@
 
                         </td>
                         <td>
+                            @*@Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |*@
+                            @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-outline-info btn-sm" })
+                            @Html.ActionLink("Print & Preview", "PrintDetails", new { id = item.RequisitionId }, new { @class = "btn btn-outline-primary btn-sm" })
+                            @Html.ActionLink("CheckIn", "CheckIn", "GatePass", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-success" })
+
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.RequisitionNumber)
+                        </td>
+                        <td class = "text-success">
+                            @Html.DisplayFor(modelItem => item.StatusType)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Requisition.Employee.FullName)
@@ -92,24 +104,15 @@
                             @Html.DisplayFor(modelItem => item.Requisition.DestinationPlace)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.StartDateTime)
+                            @item.Requisition.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.EndDateTime)
+                            @item.Requisition.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Requisition.SubmitDateTime)
+                            @item.Requisition.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StatusType,new {@class= "text-danger" })
-                        </td>
-                        <td>
-                            @*@Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}) |*@
-                            @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}, new { @class = "btn btn-primary" }) &nbsp; &nbsp;
-                            @Html.ActionLink("Print & Preview", "PrintDetails", new { id = item.RequisitionId }, new { @class = "btn btn-primary" }) &nbsp; &nbsp;
-                            @Html.ActionLink("CheckIn", "CheckIn", "GatePass", new { id = item.Id }, new { @class = "btn btn-primary" })
-
-                        </td>
+                    
                     </tr>
                 }
             }
@@ -121,7 +124,13 @@
                 SL
             </th>
             <th>
+                Action
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.RequisitionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
@@ -141,12 +150,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusType)
-            </th>
-            <th>
-                Action
-            </th>
+            
+            
         </tr>
         </tfoot>
     </table>

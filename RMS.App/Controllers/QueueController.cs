@@ -111,7 +111,7 @@ namespace RMS.App.Controllers
                 ViewBag.AssignedRequisition = _requisitionStatusManager.GetAllAssignRequisitions().Count();
                 ViewBag.AllRequisitionCount = _requisitionManager.GetAll().Count;
                 ViewBag.OnProcessRequest = _requisitionStatusManager.GetAllStatusExecute().Count;
-                ViewBag.CompleteRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");
+                ViewBag.CompleteRequisition = _requisitionStatusManager.GetAll().Where(c=>c.Requisition.StartDateTime==DateTime.Today).Count(c => c.StatusType == "Completed");
                 ViewBag.CancelRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Cancelled");
 
                 ViewBag.EmployeeCount = _employeeManager.GetAllEmployees().Count;
