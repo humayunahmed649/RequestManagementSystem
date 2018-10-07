@@ -17,13 +17,14 @@ namespace RMS.App.Controllers
     {
         private IAssignRequisitionManager _assignRequisitionManager;
         private IRequisitionManager _requisitionManager;
-
+        private IRequisitionHistoryManager _requisitionHistoryManager;
         private IRequisitionStatusManager _requisitionStatusManager;
-        public GatePassController(IAssignRequisitionManager assignRequisitionManager,IRequisitionManager requisitionManager,IRequisitionStatusManager statusManager)
+        public GatePassController(IAssignRequisitionManager assignRequisitionManager,IRequisitionManager requisitionManager,IRequisitionStatusManager statusManager,IRequisitionHistoryManager requisitionHistoryManager)
         {
             this._assignRequisitionManager = assignRequisitionManager;
             this._requisitionManager = requisitionManager;
             this._requisitionStatusManager = statusManager;
+            this._requisitionHistoryManager = requisitionHistoryManager;
         }
         // GET: GatePass
         public ActionResult Index()
@@ -82,8 +83,15 @@ namespace RMS.App.Controllers
                 {
                     RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
                     requisitionStatus.StatusType = "Completed";
-                    _requisitionStatusManager.Update(requisitionStatus);
-
+                    bool IsSaved=_requisitionStatusManager.Update(requisitionStatus);
+                    if (IsSaved)
+                    {
+                        RequisitionHistory history = new RequisitionHistory();
+                        history.Status = "Completed";
+                        history.RequisitionId = requisitionStatus.RequisitionId;
+                        history.SubmitDateTime = DateTime.Now;
+                        _requisitionHistoryManager.Add(history);
+                    }
                     return RedirectToAction("Index");
                 
                 }
@@ -140,7 +148,15 @@ namespace RMS.App.Controllers
                 {
                     RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
                     requisitionStatus.StatusType = "OnExecute";
-                    _requisitionStatusManager.Update(requisitionStatus);
+                    bool IsSaved=_requisitionStatusManager.Update(requisitionStatus);
+                    if (IsSaved)
+                    {
+                        RequisitionHistory history = new RequisitionHistory();
+                        history.Status = "OnExecute";
+                        history.RequisitionId = requisitionStatus.RequisitionId;
+                        history.SubmitDateTime = DateTime.Now;
+                        _requisitionHistoryManager.Add(history);
+                    }
                     return RedirectToAction("OnProcess","AssignRequisitions");
                 }
 

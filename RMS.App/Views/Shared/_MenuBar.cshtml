@@ -1,4 +1,4 @@
-﻿@using RMS.App.Controllers
+﻿
 
 <header id="header" id="home">
     <!-- Start header -->
@@ -10,10 +10,26 @@
                         <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/bcc_logo.png" width="40" height="40" alt="Home Logo" title="Home BCC"/></a>
                         &nbsp; <strong style="font-size: 20px;" class="font-weight-bold" id="logotext">Bangladesh Computer Council</strong>
                     </p>
+                    
                 </div>
                 <div class="col-lg-8 col-sm-8 col-8 header-top-right no-padding">
+                    @if (!User.IsInRole("Controller") && (!User.IsInRole("User") &&(!User.IsInRole("Administrator"))))
+                    {
+                        <div class="dropdown float-right ">
+                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                @Html.ActionLink("Language", "Index", "Language")
+                            </button>
+                            <ul class="dropdown-menu">
+
+                                <li class="btn btn - sm btn - outline - info bg - transparent text - white fa fa - user">@Html.ActionLink("English", "ChangeLanguage", "Language", new { LanguageAbbrevation = "en" }, null)</li>
+                                <li class="btn btn - sm btn - outline - info bg - transparent text - white fa fa - user">@Html.ActionLink("বাংলা", "ChangeLanguage", "Language", new { LanguageAbbrevation = "bn" }, null)</li>
+                            </ul>
+                        </div>
+                    }
+                    
                     <p class="float-right">
-                        @if (User.IsInRole("User")|| User.IsInRole("Administrator")|| User.IsInRole("Controller"))
+
+                        @if (User.IsInRole("User") || User.IsInRole("Administrator") || User.IsInRole("Controller"))
                         {
                             <a class="btn btn-sm btn-outline-info bg-transparent text-white" href="@Url.Action("Help", "Home")" title="Need user help!" target="_blank"><i class="fa fa-info"></i> Help!</a>
                         }
@@ -37,10 +53,9 @@
         <div class="row align-items-center justify-content-between d-flex">
             <nav id="nav-menu-container" class="col-md-9">
                 <ul class="nav-menu">
-                    <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
+                    <li class="menu-active">@Html.ActionLink(@Resources.HomeText.Home, "Index", "Home")</li>
+                    <li>@Html.ActionLink(@Resources.HomeText.About, "About", "Home")</li>
+                    <li>@Html.ActionLink(@Resources.HomeText.Contact, "Contact", "Home")</li>
                     @if (User.IsInRole("Administrator"))
                     {
                         <li>@Html.ActionLink("Setup Queue", "SetupQueue", "Queue")</li>

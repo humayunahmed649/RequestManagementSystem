@@ -258,6 +258,7 @@
     <Compile Include="Controllers\EmployeeTypesController.cs" />
     <Compile Include="Controllers\GatePassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\MailServicesController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
@@ -1079,6 +1080,7 @@
     <Content Include="Views\GatePass\CheckOut.cshtml" />
     <Content Include="Views\GatePass\CheckIn.cshtml" />
     <Content Include="Views\Notifications\AllNotification.cshtml" />
+    <Content Include="Views\Language\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
