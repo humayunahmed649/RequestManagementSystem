@@ -18,6 +18,7 @@ using RMS.Models.Identity.IdentityConfig;
 using RMS.Repositories.Contracts;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Reporting.WebForms;
+using WebGrease.Css.Extensions;
 
 namespace RMS.App.Controllers
 {
@@ -141,7 +142,12 @@ namespace RMS.App.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                    var requestStatus = _requisitionStatusManager.FindByRequisitionId(assignRequisitionViewModel.RequisitionId);
+                    if(requestStatus.StatusType== "Cancelled")
+                    {
+                        TempData["StatusMsg"] = "This is Cancelled Request try another one...Thanks";
+                        return  RedirectToAction("Create", new { requisitionId = assignRequisitionViewModel.RequisitionId });
+                    }
                     AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
                     var vehicleStatus = _assignRequisitionManager.GetVehicleStatus(assignRequisition.VehicleId);
                     if (vehicleStatus.Contains("RQ"))

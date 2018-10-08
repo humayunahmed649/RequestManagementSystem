@@ -15,7 +15,7 @@
                 <div class="col-lg-8 col-sm-8 col-8 header-top-right no-padding">
                     @if (!User.IsInRole("Controller") && (!User.IsInRole("User") &&(!User.IsInRole("Administrator"))))
                     {
-                        <div class="dropdown float-right ">
+                        <div class="dropdown btn btn-sm btn-outline-info bg-transparent text-white ">
                             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
                                 @Html.ActionLink("Language", "Index", "Language")
                             </button>
