@@ -97,13 +97,13 @@ namespace RMS.Repositories
 
                                      on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
                                  orderby requisitionStatus.Requisition.EndDateTime descending
-                                 where assignRequisition.VehicleId == driverId
+                                 where assignRequisition.EmployeeId == driverId
 
                                  select new
                                  {
                                      RequisitionNumber = assignRequisition.RequisitionNumber,
-                                     VehicleId = assignRequisition.VehicleId,
-                                     DriverId = assignRequisition.Employee.FullName,
+                                     DriverId = assignRequisition.EmployeeId,
+                                     DriverName = assignRequisition.Employee.FullName,
                                      Status = requisitionStatus.StatusType
                                  }
                 ).FirstOrDefault();
@@ -116,7 +116,7 @@ namespace RMS.Repositories
                 }
                 else
                 {
-                    string status = driverStatus.DriverId+"," +driverStatus.RequisitionNumber + "," + driverStatus.Status;
+                    string status = driverStatus.DriverName+"," +driverStatus.RequisitionNumber + "," + driverStatus.Status;
                     return status;
                 }
             }
