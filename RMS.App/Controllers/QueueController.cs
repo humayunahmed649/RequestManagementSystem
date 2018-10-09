@@ -48,28 +48,7 @@ namespace RMS.App.Controllers
 
         }
 
-        // GET: SetupAll
-        public ActionResult Index()
-        {
-            try
-            {
-                var notification = _notificationManager.GetNotificationsForController("Unseen");
-                var notificationCount = notification.Count;
-                if (notification != null)
-                {
-                    ViewBag.Notification = notification;
-                    ViewBag.count = notificationCount;
-                }
-
-                return View();
-            }
-            catch (Exception ex)
-            {
-                ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex,"Queue", "Index"));
-            }
-            
-        }
+        // GET: Setup All Queue
 
         public ActionResult SetupQueue()
         {
@@ -93,18 +72,20 @@ namespace RMS.App.Controllers
             }
             
         }
+
+        // GET: Requisition Queue
         public ActionResult RequisitionQueue()
         {
             try
             {
                 //Notification Area
-                var notification = _notificationManager.GetNotificationsForController("Unseen");
-                var notificationCount = notification.Count;
-                if (notification != null)
-                {
-                    ViewBag.Notification = notification;
-                    ViewBag.count = notificationCount;
-                }
+                //var notification = _notificationManager.GetNotificationsForController("Unseen");
+                //var notificationCount = notification.Count;
+                //if (notification != null)
+                //{
+                //    ViewBag.Notification = notification;
+                //    ViewBag.count = notificationCount;
+                //}
 
                 //Dash Board Area
                 ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;

@@ -157,13 +157,13 @@ namespace RMS.App.Controllers
                 var empId = _employeeManager.FindByLoginId(loginUserId);
 
                 //Notifications for assignd vehicle from controller
-                var notification = _notificationManager.GetNotificationsForSender("Unseen",empId.Id);
-                var notificationCount = notification.Count;
-                if (notification != null)
-                {
-                    ViewBag.Notification = notification;
-                    ViewBag.count = notificationCount;
-                }
+                //var notification = _notificationManager.GetNotificationsForSender("Unseen",empId.Id);
+                //var notificationCount = notification.Count;
+                //if (notification != null)
+                //{
+                //    ViewBag.Notification = notification;
+                //    ViewBag.count = notificationCount;
+                //}
                 ViewBag.Requisition = _requisitionStatusManager.GetAllById(empId.Id);
 
                 return View();

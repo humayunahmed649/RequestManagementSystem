@@ -95,6 +95,40 @@ namespace RMS.App.Controllers
             
         }
 
+
+        //Load Notification for controller
+        public ActionResult ControllerNotify()
+        {
+            var notification = _notificationManager.GetNotificationsForController("Unseen");
+            var notificationCount = notification.Count;
+            if (notification != null)
+            {
+                ViewBag.Notification = notification;
+                ViewBag.count = notificationCount;
+            }
+            return View("_ControllerNotification");
+        }
+
+
+        //Load Notification for Employee
+        public ActionResult EmployeeNotify()
+        {
+            //Get employee Id by user login id
+            var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+            var empId = _employeeManager.FindByLoginId(loginUserId);
+            
+            //Notification for employee
+            var notification = _notificationManager.GetNotificationsForSender("Unseen", empId.Id);
+            var notificationCount = notification.Count;
+            if (notification != null)
+            {
+                ViewBag.Notification = notification;
+                ViewBag.count = notificationCount;
+            }
+            return View("_EmployeeNotification");
+        }
+
+
         // GET: Notifications/Create
         public ActionResult Create()
         {

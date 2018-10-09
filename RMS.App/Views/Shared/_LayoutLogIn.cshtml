@@ -89,6 +89,22 @@
     <script src="~/Content/js/main.js"></script>
     
     @RenderSection("scripts", required: false)
-    
+    <script>
+
+   //Controller Notification Load......
+    var url = '@Url.Action("ControllerNotify", "Notifications")';
+    var notifications = $("#loadNotification");
+    setInterval(function () {
+        notifications.load(url);
+    }, 5000);
+
+    //Employee Notification Load......
+    var url1 = '@Url.Action("EmployeeNotify","Notifications")';
+    var empNotifications = $("#loadEmpNtification");
+    setInterval(function () {
+        empNotifications.load(url1);
+    }, 5000);
+
+    </script>
 </body>
 </html>
