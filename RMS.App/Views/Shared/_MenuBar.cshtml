@@ -13,19 +13,7 @@
                     
                 </div>
                 <div class="col-lg-8 col-sm-8 col-8 header-top-right no-padding">
-                    @if (!User.IsInRole("Controller") && (!User.IsInRole("User") &&(!User.IsInRole("Administrator"))))
-                    {
-                        <div class="dropdown btn btn-sm btn-outline-info bg-transparent text-white ">
-                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                @Html.ActionLink("Language", "Index", "Language")
-                            </button>
-                            <ul class="dropdown-menu">
-
-                                <li class="btn btn-sm btn-outline- info bg-transparent text-white fa fa-user">@Html.ActionLink("English", "ChangeLanguage", "Language", new { LanguageAbbrevation = "en" }, null)</li>
-                                <li class="btn btn-sm btn-outline- info bg-transparent text-white fa fa-user">@Html.ActionLink("বাংলা", "ChangeLanguage", "Language", new { LanguageAbbrevation = "bn" }, null)</li>
-                            </ul>
-                        </div>
-                    }
+                   
                     
                     <p class="float-right">
 
@@ -41,10 +29,27 @@
             </div>
             <div class="row clear">
                 <div class="col-lg-12 col-sm-12 col-12 header-top-right no-padding ">
-                    <p class="text-right no-padding no-margin">
-                        <a class="bg-transparent text-white" href="#" title="Contact"><i class="fa fa-phone"></i> +88 01234 567 890</a>
-                        <a class="bg-transparent text-white" href="mailto:support@bcc.gov.bd" title="Support mail"><i class="fa fa-envelope-o"></i> support@bcc.gov.bd</a>
+                    <p class="text-right">
+                        
+                        <ul>
+                            <li class="dropdown">
+                                <a class="bg-transparent text-white" href="#" title="Contact"><i class="fa fa-phone"></i> +88 01234 567 890</a>
+                                <a class="bg-transparent text-white" href="mailto:support@bcc.gov.bd" title="Support mail"><i class="fa fa-envelope-o"></i> support@bcc.gov.bd</a>
+                                @if (!User.IsInRole("Controller") && (!User.IsInRole("User") && (!User.IsInRole("Administrator"))))
+                                {
+                                    <a title="Change Language!" class="bg-transparent text-white" data-toggle="dropdown" href="#"><i class="fa fa-language"></i> Lang</a>
+
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Eng", "ChangeLanguage", "Language", new {LanguageAbbrevation = "en"}, new {@class = "bg-transparent"})</li>
+                                        <li>@Html.ActionLink("বাংলা", "ChangeLanguage", "Language", new { LanguageAbbrevation = "bn" }, new {@class="bg-transparent"})</li>
+                                    </ul>
+
+                                }
+                            </li>
+                        </ul>
+                         
                     </p>
+                   
                 </div>
             </div>
         </div>
