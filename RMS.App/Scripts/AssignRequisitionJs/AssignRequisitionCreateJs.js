@@ -49,8 +49,9 @@ $(document).ready(function() {
 
     //Driver Status
 
-    $("#searchableDD3").change(function () {
-        var selectedDriverId = $("#searchableDD3").val();
+    $("#driverDD").change(function () {
+
+        var selectedDriverId = $("#driverDD").val();
         var data = { driverId: selectedDriverId };
         $.ajax(
         {
@@ -62,6 +63,7 @@ $(document).ready(function() {
                 $('#driverStatusdiv').modal();
                 var statusInfo = "Driver Name: " + status[0] + "\n" + " Requisition No: " + status[1] + "\n" + " Status: " + status[2];
                 $("#details").html(statusInfo);
+                selectedDriverId.empty;
                 //var status = response.split(',');
 
                 //var statusInfo = "Driver Name: " + status[0] + "\n" + " Requisition No: " + status[1] + "\n" + " Status: " + status[2];

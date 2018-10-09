@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
+﻿@using System.Globalization
+@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
 
 @{
     ViewBag.Title = "New Requests List";
@@ -64,17 +65,24 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
-                
+
+                <th>
+                    @Html.DisplayName("Requested Time ")
+                </th>
+
             </tr>
         </thead>
         <tbody>
         @{
             var sl = 0;
+
             if (Model.Count() != 0)
             {
                 foreach (var item in Model)
                 {
                     sl++;
+                    TimeSpan time =DateTime.Now - @item.Requisition.SubmitDateTime;
+                    string formattedTime = string.Format(CultureInfo.CurrentCulture,"{0} days, {1} hours, {2} minutes, {3} seconds",time.Days,time.Hours,time.Minutes,time.Seconds);
                     <tr>
                         <td>
                             @sl
@@ -116,6 +124,9 @@
                         </td>
                         <td>
                             @item.Requisition.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")
+                        </td>
+                        <td class="text-danger font-weight-bold">
+                            @formattedTime
                         </td>
                         
                     </tr>
@@ -170,7 +181,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
                 </th>
-                
+                <th>
+                    @Html.DisplayName("Time")
+                </th>
             </tr>
         </tfoot>
     </table>

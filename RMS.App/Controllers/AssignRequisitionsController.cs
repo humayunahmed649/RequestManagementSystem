@@ -166,8 +166,15 @@ namespace RMS.App.Controllers
 
                         if (isSave)
                         {
+                            //Requisition History Save
+                            RequisitionHistory history = new RequisitionHistory();
+                            history.Status = "Assigned";
+                            history.RequisitionId = assignRequisition.RequisitionId;
+                            history.SubmitDateTime = DateTime.Now;
+                            _requisitionHistoryManager.Add(history);
+
                             //Requisition status information
-                            RequisitionStatus status = new RequisitionStatus();
+                            var status = _requisitionStatusManager.FindByRequisitionId(assignRequisition.RequisitionId);
                             status.Id = assignRequisition.RequisitionStatusId;
                             status.RequisitionId = assignRequisition.RequisitionId;
                             status.RequisitionNumber = assignRequisition.RequisitionNumber;
@@ -175,90 +182,86 @@ namespace RMS.App.Controllers
                             bool Saved=_requisitionStatusManager.Update(status);
                             if (Saved)
                             {
-                                RequisitionHistory history = new RequisitionHistory();
-                                history.Status = "Assigned";
-                                history.RequisitionId = assignRequisition.RequisitionId;
-                                history.SubmitDateTime = DateTime.Now;
-                                _requisitionHistoryManager.Add(history);
+                                //Notifaication status change after assign requisition
+                                Notification notificationUpdate = _notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
+                                if (notificationUpdate != null)
+                                {
+                                    notificationUpdate.ControllerViewStatus = "Seen";
+                                    notificationUpdate.SenderViewStatus = "Unseen";
+                                    notificationUpdate.SenderText = "Your vehicle has been assigned";
+                                    notificationUpdate.SenderNotifyDateTime = DateTime.Now;
+                                    var updateResult = _notificationManager.Update(notificationUpdate);
+
+                                    //Sending mail to employee for assigned vehicle
+                                    if (updateResult)
+                                    {
+                                        //Get employee by requisition Id
+                                        var req = _requisitionManager.FindById(assignRequisition.RequisitionId);
+
+                                        //Get Driver by id
+                                        var driver = _employeeManager.FindById(assignRequisition.EmployeeId);
+
+                                        //Get Vehicle Type by id
+                                        var vehicle = _vehicleManager.FindById(assignRequisition.VehicleId);
+
+                                        //Get controller info
+                                        var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                                        var controller = _employeeManager.FindByLoginId(loginUserId);
+
+                                        //Mail service section
+                                        var subject = "Assign a vehicle on your requisition no : " + assignRequisition.RequisitionNumber;
+
+                                        var msgBody = "Dear " + req.Employee.FullName + "," + Environment.NewLine + "On the basis of your request, assigned a vehicle." + Environment.NewLine + "Your driver is :" +
+                                            driver.FullName + " Contect No : " + driver.ContactNo + Environment.NewLine + "Vehicle :" + vehicle.VehicleType.Name +
+                                            " and Reg No : " + vehicle.RegNo + Environment.NewLine + "Regards, " + Environment.NewLine + controller.FullName;
+
+                                        MailService mailService = new MailService();
+                                        mailService.To = req.Employee.Email;
+                                        mailService.From = "demowork9999@gmail.com";
+                                        mailService.Subject = subject;
+                                        mailService.Body = msgBody;
+                                        mailService.MailSendingDateTime = DateTime.Now;
+                                        mailService.RequisitionId = req.Id;
+
+                                        var result = _mailServiceManager.Add(mailService);
+
+                                        if (result && req.Employee.Email != null)
+                                        {
+                                            try
+                                            {
+                                                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                                                smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
+                                                smtpClient.EnableSsl = true;
+
+
+                                                MailMessage mailMessage = new MailMessage();
+                                                mailMessage.From = new MailAddress("demowork9999@gmail.com");
+                                                mailMessage.To.Add(mailService.To);
+                                                mailMessage.Subject = mailService.Subject;
+                                                mailMessage.Body = mailService.Body;
+                                                smtpClient.Send(mailMessage);
+
+                                                TempData["msg"] = "Vehicle assigned and mail send successfully";
+
+                                                return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.RequisitionId });
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                TempData["msg1"] = "Vehicle assigned and notification send successfully. Mail send failed. The error message is -" + "<br/>" + " [ " + ex.Message + " Helpline" + " ] ";
+
+                                                return RedirectToAction("Index");
+                                            }
+
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
                     
 
-                    //Notifaication status change after assign requisition
-                    Notification notificationUpdate=_notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
-                    if (notificationUpdate!=null) 
-                    {
-                        notificationUpdate.ControllerViewStatus = "Seen";
-                        notificationUpdate.SenderViewStatus = "Unseen";
-                        notificationUpdate.SenderText = "Your vehicle has been assigned";
-                        notificationUpdate.SenderNotifyDateTime = DateTime.Now;
-                        var updateResult = _notificationManager.Update(notificationUpdate);
-
-                        //Sending mail to employee for assigned vehicle
-                        if (updateResult)
-                        {
-                            //Get employee by requisition Id
-                            var req = _requisitionManager.FindById(assignRequisition.RequisitionId);
-
-                            //Get Driver by id
-                            var driver = _employeeManager.FindById(assignRequisition.EmployeeId);
-
-                            //Get Vehicle Type by id
-                            var vehicle = _vehicleManager.FindById(assignRequisition.VehicleId);
-
-                            //Get controller info
-                            var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-                            var controller = _employeeManager.FindByLoginId(loginUserId);
-
-                            //Mail service section
-                            var subject = "Assign a vehicle on your requisition no : " + assignRequisition.RequisitionNumber;
-
-                            var msgBody = "Dear " + req.Employee.FullName + "," + Environment.NewLine + "On the basis of your request, assigned a vehicle." + Environment.NewLine + "Your driver is :" +
-                                driver.FullName + " Contect No : " + driver.ContactNo + Environment.NewLine + "Vehicle :" + vehicle.VehicleType.Name +
-                                " and Reg No : " + vehicle.RegNo + Environment.NewLine + "Regards, " + Environment.NewLine + controller.FullName;
-
-                            MailService mailService = new MailService();
-                            mailService.To = req.Employee.Email;
-                            mailService.From = "demowork9999@gmail.com";
-                            mailService.Subject = subject;
-                            mailService.Body = msgBody;
-                            mailService.MailSendingDateTime = DateTime.Now;
-                            mailService.RequisitionId = req.Id;
-
-                            var result = _mailServiceManager.Add(mailService);
-
-                            if (result && req.Employee.Email != null)
-                            {
-                                try
-                                {
-                                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                                    smtpClient.Credentials = new NetworkCredential("demowork9999@gmail.com", "~Aa123456");
-                                    smtpClient.EnableSsl = true;
-
-
-                                    MailMessage mailMessage = new MailMessage();
-                                    mailMessage.From = new MailAddress("demowork9999@gmail.com");
-                                    mailMessage.To.Add(mailService.To);
-                                    mailMessage.Subject = mailService.Subject;
-                                    mailMessage.Body = mailService.Body;
-                                    smtpClient.Send(mailMessage);
-
-                                    TempData["msg"] = "Vehicle assigned and mail send successfully";
-
-                                    return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.RequisitionId });
-                                }
-                                catch (Exception ex)
-                                {
-                                    TempData["msg1"] = "Vehicle assigned and notification send successfully. Mail send failed. The error message is -" + "<br/>" + " [ " + ex.Message + " Helpline" + " ] ";
-
-                                    return RedirectToAction("Index");
-                                }
-
-                            }
-                        }
-                    }
-                       
+                         
                         TempData["msg1"] = "Vehicle assigned but mail and notification send failed. Please contact with your service provider or developer! ";
 
                         return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisition.RequisitionId });
