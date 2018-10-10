@@ -120,13 +120,79 @@
   <data name="About" xml:space="preserve">
     <value>আমাদের সম্পর্কে</value>
   </data>
+  <data name="AssignRequisitions" xml:space="preserve">
+    <value>অ্যাসাইন রিকুইজিশন</value>
+  </data>
+  <data name="BangladeshComputerCouncil" xml:space="preserve">
+    <value>বাংলাদেশ কম্পিউটার কাউন্সিল</value>
+  </data>
+  <data name="CancelRequisition" xml:space="preserve">
+    <value>কেন্সেল রিকুইজিশন</value>
+  </data>
+  <data name="CompleteRequest" xml:space="preserve">
+    <value>কমপ্লিটেড রিকুইজিশন</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>যোগাযোগ</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>ফিডবেক</value>
+  </data>
+  <data name="GatePass" xml:space="preserve">
+    <value>গেইট পাস</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>হোম</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>ভাষা</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>লগ ইন করুন</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>লগ আউট</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>আমার প্রফোইল</value>
+  </data>
+  <data name="MyRequest" xml:space="preserve">
+    <value>আমার রিকুয়েস্ট</value>
+  </data>
+  <data name="NewRequisition" xml:space="preserve">
+    <value>নিউ রিকুইজিশন</value>
+  </data>
+  <data name="OnProcess" xml:space="preserve">
+    <value>ওন প্রসেস রিকুজিশন</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>রিপোর্ট</value>
+  </data>
+  <data name="RequestForMe" xml:space="preserve">
+    <value>আমার জন্য রিকুয়েস্ট</value>
+  </data>
+  <data name="RequestForOther" xml:space="preserve">
+    <value>অন্যের জন্য রিকুয়েস্ট</value>
+  </data>
+  <data name="RequisitionQueue" xml:space="preserve">
+    <value> অনুরোধ সারি</value>
+  </data>
+  <data name="RequisitionsStatus" xml:space="preserve">
+    <value>রিকুইজিশন এর বর্তমান অবস্থা</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>শিডিউল ক্যালেন্ডার</value>
+  </data>
+  <data name="SendRequisition" xml:space="preserve">
+    <value>রিকুইজিশন পাঠান</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>সার্ভিস</value>
+  </data>
+  <data name="SetupQueue" xml:space="preserve">
+    <value>সেট আপ কিউ</value>
+  </data>
+  <data name="TotalRequisition" xml:space="preserve">
+    <value>সর্বমোট রিকুইজিশন</value>
   </data>
 </root>

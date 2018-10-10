@@ -8,7 +8,7 @@
 <h2>Cancel Requisition</h2>
 <hr />
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","CancelRequisition",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

@@ -13,11 +13,11 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li>@Html.ActionLink("My Profile", "Index", "Account")</li>
+                <li>@Html.ActionLink(@Resources.HomeText.MyProfile, "Index", "Account")</li>
                
-                    <li>@Html.ActionLink("My Requisition", "Create", "Requisitions")</li>
+                    <li>@Html.ActionLink(@Resources.HomeText.MyRequest, "Create", "Requisitions")</li>
              
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">@Resources.HomeText.LogOut</a></li>
             </ul>
         </div>
     }
@@ -25,7 +25,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("  Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-sm btn-outline-info bg-transparent text-white fa fa-user" })</li>
+        <li>@Html.ActionLink(  @Resources.HomeText.LogIn, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-sm btn-outline-info bg-transparent text-white fa fa-user" })</li>
 
     </ul>
 

@@ -120,13 +120,79 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="AssignRequisitions" xml:space="preserve">
+    <value>Assign Requisitions</value>
+  </data>
+  <data name="BangladeshComputerCouncil" xml:space="preserve">
+    <value>Bangladesh Computer Council</value>
+  </data>
+  <data name="CancelRequisition" xml:space="preserve">
+    <value>Cancel Requisition</value>
+  </data>
+  <data name="CompleteRequest" xml:space="preserve">
+    <value>Completed Requisition</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="GatePass" xml:space="preserve">
+    <value>Gate Pass</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="MyRequest" xml:space="preserve">
+    <value>My Request</value>
+  </data>
+  <data name="NewRequisition" xml:space="preserve">
+    <value>New Requisition</value>
+  </data>
+  <data name="OnProcess" xml:space="preserve">
+    <value>On Process</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="RequestForMe" xml:space="preserve">
+    <value>Request For Me</value>
+  </data>
+  <data name="RequestForOther" xml:space="preserve">
+    <value>Request For Other</value>
+  </data>
+  <data name="RequisitionQueue" xml:space="preserve">
+    <value>Requisition Queue</value>
+  </data>
+  <data name="RequisitionsStatus" xml:space="preserve">
+    <value>Requisition Status</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule Calendar</value>
+  </data>
+  <data name="SendRequisition" xml:space="preserve">
+    <value>Send Requisition</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="SetupQueue" xml:space="preserve">
+    <value>Setup Queue</value>
+  </data>
+  <data name="TotalRequisition" xml:space="preserve">
+    <value>Total Requisition</value>
   </data>
 </root>

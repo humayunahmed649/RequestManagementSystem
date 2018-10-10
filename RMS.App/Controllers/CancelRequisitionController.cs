@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.Ajax.Utilities;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
@@ -110,32 +111,39 @@ namespace RMS.App.Controllers
                 if (ModelState.IsValid)
                 {
 
-
-                    RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
-                    requisitionStatus.Id = requisitionStatus.Id;
-                    requisitionStatus.RequisitionId = requisitionStatus.RequisitionId;
-                    requisitionStatus.StatusType = "Cancelled";
-                    bool IsSaved = _requisitionStatusManager.Update(requisitionStatus);
-                    if (IsSaved)
+                    if (model.Reason != null)
                     {
-                        CancelRequisitionViewModel cancelRequisitionViewModel = new CancelRequisitionViewModel();
-                        cancelRequisitionViewModel.RequisitionStatusId = requisitionStatus.Id;
-                        cancelRequisitionViewModel.RequisitionId = requisitionStatus.RequisitionId;
-                        cancelRequisitionViewModel.Reason = model.Reason;
-                        CancelRequisition cancelRequisition = Mapper.Map<CancelRequisition>(cancelRequisitionViewModel);
-                        _cancelRequisitionManager.Add(cancelRequisition);
+                        RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
+                        requisitionStatus.Id = requisitionStatus.Id;
+                        requisitionStatus.RequisitionId = requisitionStatus.RequisitionId;
+                        requisitionStatus.StatusType = "Cancelled";
+                        bool IsSaved = _requisitionStatusManager.Update(requisitionStatus);
+                        if (IsSaved)
+                        {
+                            CancelRequisitionViewModel cancelRequisitionViewModel = new CancelRequisitionViewModel();
+                            cancelRequisitionViewModel.RequisitionStatusId = requisitionStatus.Id;
+                            cancelRequisitionViewModel.RequisitionId = requisitionStatus.RequisitionId;
+                            cancelRequisitionViewModel.Reason = model.Reason;
+                            CancelRequisition cancelRequisition = Mapper.Map<CancelRequisition>(cancelRequisitionViewModel);
+                            _cancelRequisitionManager.Add(cancelRequisition);
+                        }
+                        //Notifaication status change after assign requisition
+                        Notification notificationUpdate = _notificationManager.FindByRequisitionId(requisitionStatus.RequisitionId);
+                        if (notificationUpdate != null)
+                        {
+                            notificationUpdate.ControllerViewStatus = "Seen";
+                            notificationUpdate.SenderViewStatus = "Unseen";
+                            notificationUpdate.SenderText = "Your requisition has been canceled.";
+                            notificationUpdate.SenderNotifyDateTime = DateTime.Now;
+                            var updateResult = _notificationManager.Update(notificationUpdate);
+                        }
+                        return RedirectToAction("Index");
                     }
-                    //Notifaication status change after assign requisition
-                    Notification notificationUpdate = _notificationManager.FindByRequisitionId(requisitionStatus.RequisitionId);
-                    if (notificationUpdate != null)
+                    if (model.Reason.IsNullOrWhiteSpace())
                     {
-                        notificationUpdate.ControllerViewStatus = "Seen";
-                        notificationUpdate.SenderViewStatus = "Unseen";
-                        notificationUpdate.SenderText = "Your requisition has been canceled.";
-                        notificationUpdate.SenderNotifyDateTime = DateTime.Now;
-                        var updateResult = _notificationManager.Update(notificationUpdate);
+                        return View("Error");
                     }
-                    return RedirectToAction("Index");
+                    
                 }
                 return View();
             }

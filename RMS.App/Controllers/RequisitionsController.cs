@@ -266,8 +266,8 @@ namespace RMS.App.Controllers
                     ViewBag.Notification = notification1;
                     ViewBag.count = notificationCount;
                 }
-
-                ViewBag.Requisition = _requisitionManager.GetAllRequisitionByEmployeeId(empId1.Id);
+                ViewBag.Requisition =_requisitionStatusManager.GetAllById(empId1.Id);
+                //ViewBag.Requisition = _requisitionManager.GetAllRequisitionByEmployeeId(empId1.Id);
 
                 TempData["msg1"] = " Requisition send failed! You are missing to input proper value. Please check and try again! ";
 

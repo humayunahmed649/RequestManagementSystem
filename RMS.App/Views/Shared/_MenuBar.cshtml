@@ -8,7 +8,7 @@
                 <div class="col-lg-4 col-sm-4 col-4 header-top-left no-padding">
                     <p class="float-left">
                         <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/bcc_logo.png" width="40" height="40" alt="Home Logo" title="Home BCC"/></a>
-                        &nbsp; <strong style="font-size: 20px;" class="font-weight-bold" id="logotext">Bangladesh Computer Council</strong>
+                        &nbsp; <strong style="font-size: 20px;" class="font-weight-bold" id="logotext">@Resources.HomeText.BangladeshComputerCouncil</strong>
                     </p>
                     
                 </div>
@@ -63,21 +63,21 @@
                     <li>@Html.ActionLink(@Resources.HomeText.Contact, "Contact", "Home")</li>
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("Setup Queue", "SetupQueue", "Queue")</li>
+                        <li>@Html.ActionLink(@Resources.HomeText.SetupQueue, "SetupQueue", "Queue")</li>
                     }
                     @if (User.IsInRole("Controller") || User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("Requisition Queue", "RequisitionQueue", "Queue")</li>
-                        <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
-                        <li>@Html.ActionLink("GatePass", "Index", "GatePass")</li>
-                        <li>@Html.ActionLink("Feedback", "Index", "Requisitions" )<i class="fa fa-comment"></i></li>
+                        <li>@Html.ActionLink(@Resources.HomeText.RequisitionQueue, "RequisitionQueue", "Queue")</li>
+                        <li>@Html.ActionLink(@Resources.HomeText.SendRequisition, "Create", "Requisitions")</li>
+                        <li>@Html.ActionLink(@Resources.HomeText.GatePass, "Index", "GatePass")</li>
+                        <li>@Html.ActionLink(@Resources.HomeText.Feedback, "Index", "Requisitions" )<i class="fa fa-comment"></i></li>
 
                     }
                    
 
                     @if (User.IsInRole("User"))
                     {
-                        <li>@Html.ActionLink("Send Request", "Create", "Requisitions")</li>
+                        <li>@Html.ActionLink(@Resources.HomeText.SendRequisition, "Create", "Requisitions")</li>
                     }
 
                 </ul>
