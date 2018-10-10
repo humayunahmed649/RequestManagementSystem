@@ -1,29 +1,33 @@
-﻿
+﻿var url = $("#RedirectTo").val();
 
-var selectedEvent = null;
 $(document).ready(function () {
-
     var events = [];
+    var selectedRequisition = null;
     FetchEventAndRenderCalendar();
+
     function FetchEventAndRenderCalendar() {
         events = [];
         $.ajax({
             type: "GET",
-            url: "/Schedule/GetAssignRequisition",
-            success: function (data) {
-                $.each(data, function (key, value) {
+            url: "/Schedule/GetAllRequisition",
+            success: function(data) {
+                $.each(data, function(key, value) {
                     events.push({
-                        requisitionStatusId: value.statusId,
+                        requisitionStatusId: value.Id,
                         reqId: value.RequisitionId,
                         status: value.StatusType,
-                        title: value.requisitionNumber,
-                        employee: value.employeeName,
-                        description: value.description,
-                        start: moment(value.startTime),
-                        end: moment(value.endTime),
-                        endTime: value.endTime != null ? moment(value.endTime) : null,
-                        driver: value.driver,
-                        vehicle: value.vehicle,
+                        title: value.Requisition.RequisitionNumber,
+                        employee: value.Requisition.Employee.FullName,
+                        employeeDesignation: value.Requisition.Employee.Designation.Title,
+                        employeeEmail: value.Requisition.Employee.Email,
+                        employeeContact: value.Requisition.Employee.ContactNo,
+                        destinationPlace: value.Requisition.DestinationPlace,
+                        fromPlace: value.Requisition.FromPlace,
+                        description: value.Requisition.Description,
+                        start: value.Requisition.StartDateTime,
+                        end: value.Requisition.EndDateTime,
+                        endTime: value.Requisition.EndDateTime != null ? value.Requisition.EndDateTime : null,
+
                         color: "purpel",
                         textColor: "white"
 
@@ -31,105 +35,99 @@ $(document).ready(function () {
                 });
                 GenerateCalendar(events);
             },
-            error: function (error) {
+            error: function(error) {
                 alert("Failed");
             }
 
         });
     }
 
-    $("#btnCheckIn").click(function () {
-        //Open Modal for Check in
-        //OpenCheckInForm();
-        window.location = "http://localhost:1651/GatePass/CheckIn/" + selectedEvent.requisitionStatusId;
 
+    function GenerateCalendar(events) {
+        $('#calendar').fullCalendar("destroy");
+        $('#calendar').fullCalendar({
+            contentHeight: 400,
+            defaultDate: new Date(),
+            timeFormat: 'h(:mm)a',
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay,agenda'
+
+            },
+
+            eventLimit: true,
+            eventColor: '#378006',
+            events: events,
+            eventClick: function(calEvent, jsEvent, view) {
+                selectedRequisition = calEvent;
+                $('#myModal #requisitionNumber').text(calEvent.title);
+
+                $("#status").append($('<p>').html('<b>Status : </b>' + calEvent.status));
+                var $description = $('<div/>');
+
+                $description.append($('<p>').html('<b>Employee Name : </b>' + calEvent.employee));
+                $description.append($('<p>').html('<b>Designation : </b>' + calEvent.employeeDesignation));
+                $description.append($('<p>').html('<b>Requestor Email : </b>' + calEvent.employeeEmail));
+                $description.append($('<p>').html('<b>Contact No : </b>' + calEvent.employeeContact));
+                $description.append($('<p>').html('<b>Description : </b>' + calEvent.description));
+                $description.append($('<p>').html('<b>From Place : </b>' + calEvent.fromPlace));
+                $description.append($('<p>').html('<b>Destination Place : </b>' + calEvent.destinationPlace));
+
+                $description.append($('<p>').html('<b>Start Date Time : </b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                if (calEvent.end != null) {
+                    $description.append($('<p>').html('<b>EndDateTime : </b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                }
+
+                $('#myModal #description').empty().html($description);
+                if (calEvent.status == "New") {
+                    $("#btnAssign").show();
+                    $("#btnCancel").show();
+                    $("#btnCheckIn").hide();
+                    $("#btnCheckOut").hide();
+
+                }
+                if (calEvent.status == "Assigned") {
+                    $("#btnCheckIn").show();
+                    $("#btnAssign").hide();
+                    $("#btnCheckOut").hide();
+                    $("#btnCancel").hide();
+                }
+                if (calEvent.status == "OnExecute") {
+                    $("#myModal #btnCheckOut").show();
+                    $("#btnAssign").hide();
+                    $("#btnCheckIn").hide();
+                    $("#btnCancel").hide();
+
+                }
+                $('#myModal').modal();
+            }
+
+        });
+    }
+
+    $('#btnAssign').click(function() {
+        if (selectedRequisition != null && confirm('Are you sure?')) {
+            var json = { requistionId: selectedRequisition.reqId };
+
+
+            $.ajax({
+                type: "GET",
+                url: "/Schedule/Create",
+                data: json,
+                success: function (data) {
+                    alert("response Success");
+                    window.location.href = data.redirect;
+                },
+                error: function() {
+                    alert('Failed');
+                }
+            });
+        }
     });
-
-
-
-
-
-    //$("#btnCheckedIn").click(function () {
-    //    //call function for submit data to the server
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/AssginRequisitions/CheckIn",
-
-    //        success: function (data) {
-    //            if (data.status) {
-    //                //Refresh the calendar
-    //                FetchEventAndRenderCalendar();
-    //                $('#checkInModal').modal('hide');
-    //            }
-
-    //        },
-    //        error: function () {
-    //            alert("Failed");
-    //        }
-
-
-    //    });
-    //});
-
-
-    //function OpenCheckInForm() {
-    //    if (selectedEvent != null) {
-    //        $("#requisitionNumber").val(selectedEvent.title);
-    //        $("#statusId").val(selectedEvent.requisitionStatusId);
-    //        $("#txtRqNo").val(selectedEvent.title);
-    //        $("#txtRqId").val(selectedEvent.reqId);
-    //        $("#txtStatus").val(selectedEvent.status);
-    //    }
-    //    $("#myModal").modal("hide");
-    //    $('#checkInModal').modal();
-    //}
-
-
 
 });
 
 
-function GenerateCalendar(events) {
-    $('#calendar').fullCalendar("destroy");
-    $('#calendar').fullCalendar({
-        contentHeight: 400,
-        defaultDate: new Date(),
-        timeFormat: 'h(:mm)a',
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay,agenda'
-           
-        },
-
-        eventLimit: true,
-        eventColor: "green",
-        allDay: false,
-    
-      
-
-        events: events,
-        eventClick: function (calEvent, jsEvent, view) {
-            $('#myModal #requisitionNumber').text(calEvent.title);
-            var $description = $('<div/>');
-
-            $description.append($('<p>').html('<b>Employee Name : </b>' + calEvent.employee));
-            $description.append($('<p>').html('<b>Driver Name : </b>' + calEvent.driver));
-            $description.append($('<p>').html('<b>Description : </b>' + calEvent.description));
-            $description.append($('<p>').html('<b>Vehicle Reg NO : </b>' + calEvent.vehicle));
-            $description.append($('<p>').html('<b>Start Date Time : </b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
-            if (calEvent.end != null) {
-                $description.append($('<p>').html('<b>EndDateTime : </b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
-
-            }
-
-            $('#myModal #description').empty().html($description);
-            $('#myModal').modal();
-        }
 
 
-
-    });
-
-
-}

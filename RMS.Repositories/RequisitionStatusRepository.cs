@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
@@ -74,30 +75,12 @@ namespace RMS.Repositories
                 .FirstOrDefault();
         }
 
-        public IQueryable GetAllAssignRequisitions()
+        public ICollection<RequisitionStatus> GetAllRequisitions()
         {
-           
-            IQueryable assignRequisitionInfo = (from requisitionStatus in db.Set<RequisitionStatus>()
-                join assignRequisition in db.Set<AssignRequisition>()
-                    on requisitionStatus.Id equals assignRequisition.RequisitionStatusId
-                where requisitionStatus.StatusType == "Assigned"
-                select new
-                {
-                    statusId=requisitionStatus.Id,
-                    RequisitionId=requisitionStatus.RequisitionId,
-                    StatusType=requisitionStatus.StatusType,
-                    requisitionNumber =assignRequisition.RequisitionNumber,
-                    employeeName=assignRequisition.Requisition.Employee.FullName,
-                    startTime=assignRequisition.Requisition.StartDateTime,
-                    endTime=assignRequisition.Requisition.EndDateTime,
-                    vehicle=assignRequisition.Vehicle.RegNo,
-                    driver=assignRequisition.Employee.FullName,
-                    description=assignRequisition.Requisition.Description
-                    
-                }).AsQueryable();
-            return assignRequisitionInfo;
-
-
+            return
+                db.Set<RequisitionStatus>()
+                    .Include(c => c.Requisition.Employee.Designation)
+                    .Where(c => c.StatusType == "New" || c.StatusType == "Assigned").ToList();
         }
 
         public ICollection<RequisitionStatus> GetAllCheckOutCheckIn()

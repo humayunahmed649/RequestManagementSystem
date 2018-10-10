@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
+using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
@@ -25,10 +28,18 @@ namespace RMS.App.Controllers
             return View();
         }
 
-        public JsonResult GetAssignRequisition()
+        public JsonResult GetAllRequisition()
         {
-            var requisitions = _requisitionStatusManager.GetAllAssignRequisitions();
+            var requisitions = _requisitionStatusManager.GetAllRequisitions();
             return new JsonResult() {Data = requisitions,JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+        }
+
+        // assign Request create by json 
+
+        public RedirectToRouteResult Create(int requistionId)
+        {
+            //return Json(new {redirect="Create", p = new {requistionId=requistionId} },JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Create", "AssignRequisitions", new { requistionId = requistionId });
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RMS.BLL.Contracts
         ICollection<RequisitionStatus> SearchByRequisitionId(string searchText);
         ICollection<RequisitionStatus> GetAllById(int id);
         RequisitionStatus FindByRequisitionId(int id);
-        IQueryable GetAllAssignRequisitions();
+        ICollection<RequisitionStatus> GetAllRequisitions();
         ICollection<RequisitionStatus> GetAllCheckOutCheckIn();
     }
 }

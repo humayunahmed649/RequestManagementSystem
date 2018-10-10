@@ -108,7 +108,7 @@ namespace RMS.App.Controllers
 
                 //Dash Board Area
                 ViewBag.RequisitionStatusCount = _requisitionStatusManager.GetAllStatusNew().Count;
-                ViewBag.AssignedRequisition = _requisitionStatusManager.GetAllAssignRequisitions().Count();
+                ViewBag.AssignedRequisition = _requisitionStatusManager.GetAll().Where(c=>c.StatusType=="Assigned").Count();
                 ViewBag.AllRequisitionCount = _requisitionManager.GetAll().Count;
                 ViewBag.OnProcessRequest = _requisitionStatusManager.GetAllStatusExecute().Count;
                 ViewBag.CompleteRequisition = _requisitionStatusManager.GetAll().Count(c => c.StatusType == "Completed");

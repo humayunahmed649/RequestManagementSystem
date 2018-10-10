@@ -48,9 +48,9 @@ namespace RMS.BLL
             return _requisitionStatusRepository.FindByRequisitionId(id);
         }
 
-        public IQueryable GetAllAssignRequisitions()
+        public ICollection<RequisitionStatus> GetAllRequisitions()
         {
-            return _requisitionStatusRepository.GetAllAssignRequisitions();
+            return _requisitionStatusRepository.GetAllRequisitions();
         }
 
         public ICollection<RequisitionStatus> GetAllCheckOutCheckIn()
