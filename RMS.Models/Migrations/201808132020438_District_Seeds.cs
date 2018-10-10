@@ -7,8 +7,6 @@
     {
         public override void Up()
         {
-            Sql(@"DELETE FROM Districts;
-                   DBCC CHECKIDENT ('Districts', RESEED, 0)");
 
             Sql(@"SET IDENTITY_INSERT [dbo].[Districts] ON 
 

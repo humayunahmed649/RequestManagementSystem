@@ -263,6 +263,19 @@
     <script src="~/Scripts/RequiredFieldsAsteriskJs/RequiredFieldAsterisk.js"></script>
 
     @RenderSection("scripts", required: false)
+
+<script>
     
+    //Controller Notification Load......
+    var url = '@Url.Action("ControllerNotify", "Notifications")';
+    var notifications = $("#loadNotification");
+    setInterval(function () {
+        notifications.load(url);
+    }, 5000);
+
+    //Employee Notification Load......
+
+
+</script>
 </body>
 </html>
