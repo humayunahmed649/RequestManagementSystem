@@ -107,23 +107,11 @@ $(document).ready(function () {
     }
 
     $('#btnAssign').click(function() {
-        if (selectedRequisition != null && confirm('Are you sure?')) {
-            var json = { requistionId: selectedRequisition.reqId };
-
-
-            $.ajax({
-                type: "GET",
-                url: "/Schedule/Create",
-                data: json,
-                success: function (data) {
-                    alert("response Success");
-                    window.location.href = data.redirect;
-                },
-                error: function() {
-                    alert('Failed');
-                }
-            });
+        if (selectedRequisition != null) {
+            var url = "/AssignRequisitions/Create?requisitionId=";
+            window.location = url + selectedRequisition.reqId;
         }
+           
     });
 
 });

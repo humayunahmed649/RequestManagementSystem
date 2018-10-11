@@ -7,6 +7,7 @@ using RMS.App.ViewModels.Report;
 using RMS.BLL.Base;
 using RMS.BLL.Contracts;
 using RMS.Models.EntityModels;
+using RMS.Models.EntityViewModel;
 using RMS.Repositories.Contracts;
 
 namespace RMS.BLL
@@ -29,12 +30,12 @@ namespace RMS.BLL
             return _assignRequisitionRepository.SearchByText(searchByText);
         }
 
-        public string GetVehicleStatus(int vehicleId)
+        public AssignRequisition GetVehicleStatus(int vehicleId)
         {
             return _assignRequisitionRepository.GetVehicleStatus(vehicleId);
         }
 
-        public string GetDriverStatus(int driverId)
+        public AssignRequisition GetDriverStatus(int driverId)
         {
             return _assignRequisitionRepository.GetDriverStatus(driverId);
         }

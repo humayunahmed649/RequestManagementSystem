@@ -112,6 +112,7 @@
     <Compile Include="EntityModels\Upazila.cs" />
     <Compile Include="EntityModels\Vehicle.cs" />
     <Compile Include="EntityModels\VehicleType.cs" />
+    <Compile Include="EntityViewModel\VehicleStatusViewModel.cs" />
     <Compile Include="Identity\IdentityConfig\AppRoleManager.cs" />
     <Compile Include="Identity\IdentityConfig\AppSignInManager.cs" />
     <Compile Include="Identity\IdentityConfig\AppUserManager.cs" />

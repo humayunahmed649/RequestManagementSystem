@@ -54,73 +54,84 @@ namespace RMS.Repositories
         }
 
         //Get Vehicle Status
-        public string GetVehicleStatus(int vehicleId)
+        public AssignRequisition GetVehicleStatus(int vehicleId)
         {
-            var vehicleStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
-
-                join assignRequisition in db.Set<AssignRequisition>()
-
-                    on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
+            try
+            {
+                var statusInformation=new AssignRequisition();
+                var vehicleStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
+                join assignRequisition in db.Set<AssignRequisition>()     
+                on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
                 orderby requisitionStatus.Requisition.EndDateTime descending
                 where assignRequisition.VehicleId == vehicleId
-
                 select new
                 {
-                    RequisitionNumber = assignRequisition.RequisitionNumber,
-                    VehicleId = assignRequisition.VehicleId,
-                    DriverId = assignRequisition.Employee.FullName,
-                    Status = requisitionStatus.StatusType
-                }
-                ).FirstOrDefault();
-            if (vehicleStatus != null)
-            {
-                if (vehicleStatus.Status == "Completed")
-                {
+                    requisitionId=assignRequisition.RequisitionId,
+                    vehicleId=assignRequisition.VehicleId,
+                    vehicle=assignRequisition.Vehicle.RegNo,
+                    driverId=assignRequisition.Employee.Id,
+                    status=requisitionStatus.StatusType
+                }).FirstOrDefault();
 
-                    return "This Vehicle Is  Available";
-                }
-                else
+                if (vehicleStatus != null && vehicleStatus.status != "Completed")
                 {
-                    string status = vehicleStatus.RequisitionNumber + "," + vehicleStatus.Status + "," + vehicleStatus.DriverId;
-                    return status;
+                    
+                      statusInformation =  db.Set<AssignRequisition>()
+                                            .Where(c => c.RequisitionId == vehicleStatus.requisitionId)
+                                            .Include(c => c.Requisition.Employee.Designation)
+                                            .Include(c => c.Vehicle)
+                                            .Include(c => c.Employee)
+                                            .Include(c => c.RequisitionStatus)
+                                            .FirstOrDefault();
+                    return statusInformation;
                 }
+                return statusInformation;
             }
-            return "Available";
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
+            
         }
+        
         //Get Driver Status
-
-        public string GetDriverStatus(int driverId)
+        public AssignRequisition GetDriverStatus(int driverId)
         {
-            var driverStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
-
-                                 join assignRequisition in db.Set<AssignRequisition>()
-
-                                     on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
-                                 orderby requisitionStatus.Requisition.EndDateTime descending
-                                 where assignRequisition.EmployeeId == driverId
-
-                                 select new
-                                 {
-                                     RequisitionNumber = assignRequisition.RequisitionNumber,
-                                     DriverId = assignRequisition.EmployeeId,
-                                     DriverName = assignRequisition.Employee.FullName,
-                                     Status = requisitionStatus.StatusType
-                                 }
-                ).FirstOrDefault();
-            if (driverStatus != null)
+            try
             {
-                if (driverStatus.Status == "Completed")
+                var statusInformation = new AssignRequisition();
+                var driverStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
+                    join assignRequisition in db.Set<AssignRequisition>()
+                        on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
+                     orderby requisitionStatus.Requisition.EndDateTime descending
+                    where assignRequisition.EmployeeId == driverId
+                    select new
+                    {
+                        requisitionId = assignRequisition.RequisitionId,
+                        vehicleId = assignRequisition.VehicleId,
+                        vehicle = assignRequisition.Vehicle.RegNo,
+                        driverId = assignRequisition.Employee.Id,
+                        status = requisitionStatus.StatusType
+                    }).FirstOrDefault();
+
+                if (driverStatus != null && driverStatus.status != "Completed")
                 {
 
-                    return "This Driver Is  Available";
+                    statusInformation = db.Set<AssignRequisition>()
+                        .Where(c => c.RequisitionId == driverStatus.requisitionId)
+                        .Include(c => c.Requisition.Employee.Designation)
+                        .Include(c => c.Vehicle)
+                        .Include(c => c.Employee)
+                        .Include(c => c.RequisitionStatus)
+                        .FirstOrDefault();
+                    return statusInformation;
                 }
-                else
-                {
-                    string status = driverStatus.DriverName+"," +driverStatus.RequisitionNumber + "," + driverStatus.Status;
-                    return status;
-                }
+                return statusInformation;
             }
-            return "Available";
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
         }
 
 
