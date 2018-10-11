@@ -1,4 +1,4 @@
-﻿var url = $("#RedirectTo").val();
+﻿//var url = $("#RedirectTo").val();
 
 $(document).ready(function () {
     var events = [];
@@ -96,6 +96,13 @@ $(document).ready(function () {
                 if (calEvent.status == "OnExecute") {
                     $("#myModal #btnCheckOut").show();
                     $("#btnAssign").hide();
+                    $("#btnCheckIn").hide();
+                    $("#btnCancel").hide();
+
+                }
+                if (calEvent.status == "Hold") {
+                    $("#myModal #btnAssign").show();
+                    $("#btnCheckOut").hide();
                     $("#btnCheckIn").hide();
                     $("#btnCancel").hide();
 

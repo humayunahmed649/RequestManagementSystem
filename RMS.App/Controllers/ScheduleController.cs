@@ -33,13 +33,6 @@ namespace RMS.App.Controllers
             var requisitions = _requisitionStatusManager.GetAllRequisitions();
             return new JsonResult() {Data = requisitions,JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
-
-        // assign Request create by json 
-
-        public RedirectToRouteResult Create(int requistionId)
-        {
-            //return Json(new {redirect="Create", p = new {requistionId=requistionId} },JsonRequestBehavior.AllowGet);
-            return RedirectToAction("Create", "AssignRequisitions", new { requistionId = requistionId });
-        }
+        
     }
 }

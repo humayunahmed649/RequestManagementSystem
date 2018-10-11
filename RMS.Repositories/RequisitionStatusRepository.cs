@@ -80,7 +80,7 @@ namespace RMS.Repositories
             return
                 db.Set<RequisitionStatus>()
                     .Include(c => c.Requisition.Employee.Designation)
-                    .Where(c => c.StatusType == "New" || c.StatusType == "Assigned").ToList();
+                    .Where(c => c.StatusType == "New" || c.StatusType == "Assigned" || c.StatusType=="Hold").ToList();
         }
 
         public ICollection<RequisitionStatus> GetAllCheckOutCheckIn()

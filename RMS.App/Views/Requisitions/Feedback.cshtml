@@ -84,8 +84,8 @@
 <br/>
 <div class="container border">
     <br/>
-    <div class="row"  style="margin: 10px 10px;">
-        
+    <div class="row" style="margin: 10px 10px;">
+
         <div class="col-md-5">
             @using (Html.BeginForm())
             {
@@ -104,11 +104,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <input type="submit" value="Post" class="btn btn-success" /> &nbsp;
-                    @Html.ActionLink("Back to List", "Create","Requisitions", null, new { @class = "btn btn-info" })
+                    <input type="submit" value="Post" class="btn btn-success"/> &nbsp;
+                    @Html.ActionLink("Back to List", "Create", "Requisitions", null, new {@class = "btn btn-info"})
                 </div>
             }
-            
+
         </div>
         <div class="col-md-7">
             @{
@@ -144,8 +144,8 @@
                                     {
 
                                         @*<td><a href="@Url.Action("Reply", "Requisitions", new { feedbackId = @comment.Id})" class="btn btn-primary" data-toggle="modal" data-target="#replyModal">Reply</a></td>*@
-
-                                        <td style="width: 10%">@Html.ActionLink("Reply", "Reply", new { feedbackId = @comment.Id})</td>
+                                        <td><button id="btnReply" class="btn btn-success pull-right" value="@comment.Id">Reply</button></td>
+                                        @*<td style="width: 10%">@Html.ActionLink("Reply","Reply","Requisitions", new { feedbackId = @comment.Id},new {@id="btnReply"})</td>*@
 
                                     }
 
@@ -158,12 +158,12 @@
                     </div>
                 </div>
 
-                  <!--------------Comment Reply Section Start-->
+                <!--------------Comment Reply Section Start-->
                 <div class="modal fade" id="replyModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header table-info">
-                                <h3 class="modal-title">@Html.EditorFor(model => model.Requisition.RequisitionNumber, new { htmlAttributes = new { @class = "form-control", @readOnly = "readonly" } })</h3>
+                                <h3 class="modal-title">@Html.EditorFor(model => model.Requisition.RequisitionNumber, new {htmlAttributes = new {@class = "form-control", @readOnly = "readonly"}})</h3>
                                 <a href="#" class="close" data-dismiss="modal">&times;</a>
                             </div>
                             <div class="modal-body table-light">
@@ -177,21 +177,34 @@
                 </div>
 
 
-                            <!-------------Comment Reply Section End-->
+                <!-------------Comment Reply Section End-->
             }
 
-            
+
         </div>
     </div>
     <br/>
 </div>
-<div class=""><p></p></div>
+   
+
+
+
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/chosenDD/chosen_DD.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnReply").click(function () {
+                var me = $(this);
+                // do whatever with me
+                alert(me.val());
+                $("#replyModal").modal();
 
 
-   
-      
+            });
+        })
 
+    </script>
+    
 }

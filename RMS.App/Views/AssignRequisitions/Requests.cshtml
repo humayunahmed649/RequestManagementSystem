@@ -76,7 +76,7 @@
         @{
             var sl = 0;
 
-            if (Model.Count() != 0)
+           if (Model.Count() != 0)
             {
                 foreach (var item in Model)
                 {
@@ -88,9 +88,10 @@
                             @sl
                         </td>
                         <td>
-                            @Html.ActionLink("Assign Requisition", "Create", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-primary btn-sm" }) &nbsp;
+                            @Html.ActionLink("Assign", "Create", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-primary btn-sm" }) &nbsp;
                             @Html.ActionLink("View", "ViewDetails", new { id = item.RequisitionId }, new { @class = "btn btn-info btn-sm" }) &nbsp;
-                            @Html.ActionLink("Cancel Requisition", "Create", "CancelRequisition", new { statusId = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
+                            @Html.ActionLink("Cancel", "Create", "CancelRequisition", new { statusId = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })&nbsp;
+                            @Html.ActionLink("Hold", "Hold", "AssignRequisitions", new { statusId = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
 
                         </td>
                         <td>

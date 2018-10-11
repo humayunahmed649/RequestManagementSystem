@@ -1082,6 +1082,7 @@
     <Content Include="Views\Language\Index.cshtml" />
     <Content Include="Views\Shared\_ControllerNotification.cshtml" />
     <Content Include="Views\Shared\_EmployeeNotification.cshtml" />
+    <Content Include="Views\AssignRequisitions\Hold.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

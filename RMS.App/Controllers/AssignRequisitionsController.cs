@@ -571,6 +571,43 @@ namespace RMS.App.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Hold(int statusId)
+        {
+            try
+            {
+                if (statusId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                RequisitionStatus requisition = _requisitionStatusManager.FindById(statusId);
+
+                if (requisition == null)
+                {
+                    return HttpNotFound();
+                }
+                RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
+                return View(requisitionStatusViewModel);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "CancelRequisition", "Create"));
+            }
+        }
+
+        public ActionResult Hold(RequisitionStatusViewModel statusViewModel)
+        {
+            RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(statusViewModel);
+            //var status =_requisitionStatusManager.FindByRequisitionId(statusViewModel.RequisitionId);
+            //requisitionStatus.Id = statusViewModel.Id;
+            //requisitionStatus.RequisitionId = statusViewModel.RequisitionId;
+            //requisitionStatus.RequisitionNumber = statusViewModel.RequisitionNumber;
+            requisitionStatus.StatusType = "Hold";
+            bool IsUpdate = _requisitionStatusManager.Update(requisitionStatus);
+            return View();
+        }
+
         //Get Vehicle Status By Json Result
         public JsonResult GetVehicleStatusByVehicleId(int? vehicleId)
         {
