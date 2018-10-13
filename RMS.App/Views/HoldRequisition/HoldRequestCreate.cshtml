@@ -1,0 +1,157 @@
+﻿@model RMS.App.ViewModels.AssignRequisitionViewModel
+
+@{
+    ViewBag.Title = "Hold Request Assign";
+}
+
+
+<div class="container">
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-danger">
+            @Html.Raw(TempData["msg"])
+        </div>
+    }
+
+   
+       
+    
+    
+  
+
+        <div class="col-md-5">
+            <div class="row">
+                <h4>Assign Requisition</h4>
+                <br/>
+                @using (Html.BeginForm("Create", "AssignRequisitions", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    var data = ViewBag.Requisition;
+                    <div class="form-horizontal">
+
+                        @if (TempData["StatusMsg"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @Html.Raw(TempData["StatusMsg"])
+                            </div>
+                        }
+                        <br/>
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                        
+
+
+                        <div class="form-group row">
+
+                            @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model=>model.RequisitionNumber, null, htmlAttributes: new {@class = "form-control", @readonly = "readonly"})
+                                @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.Label("Vehicle Type", htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                @if (Model != null)
+                                {
+                                    @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleTypeDD"})
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.VehicleId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+
+                                @Html.DropDownList("VehicleId", null, htmlAttributes: new {@class = "dropdown form-control", @id = "vehicleDD"})
+
+                                @Html.ValidationMessageFor(model => model.VehicleId, "", new {@class = "text-danger"})
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-9">
+                                @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new {@class = "form-control", @id ="driverDD" @*"searchableDD3"*@})
+                                @Html.ValidationMessageFor(model => model.EmployeeId, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                                <input type="submit" value="Assign" class="btn btn-success"/> &nbsp;
+                                @Html.ActionLink("Back to List", "Requests", null, new {@class = "btn btn-info"})
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@*Popup Modal For Driver Status*@
+<div id="driverStatusdiv" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+
+                <h4 class="modal-title"> Driver Availability </h4>
+                <a href="#" class="close" title="Close" data-dismiss="modal"> &times; </a>
+            </div>
+
+            <div class="modal-body">
+                <p id="driverDetails"></p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*Popup Modal For Vehicle Status*@
+<div id="vehicleStatusdiv" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+
+                <h4 class="modal-title"> Vehicle Availability </h4>
+                <a href="#" class="close" title="Close" data-dismiss="modal"> &times; </a>
+            </div>
+
+            <div class="modal-body">
+                <p id="vehicleDetails"></p>
+                @*<p id="vehicleAvailable"></p>*@
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+     @Scripts.Render("~/bundles/jqueryval")
+     <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
+    <script src="~/Scripts/chosenDD/chosen_DD.js"></script>
+    }
+
+

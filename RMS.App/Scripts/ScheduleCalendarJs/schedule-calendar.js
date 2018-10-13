@@ -27,8 +27,6 @@ $(document).ready(function () {
                         start: value.Requisition.StartDateTime,
                         end: value.Requisition.EndDateTime,
                         endTime: value.Requisition.EndDateTime != null ? value.Requisition.EndDateTime : null,
-
-                        color: "purpel",
                         textColor: "white"
 
                     });
@@ -57,7 +55,9 @@ $(document).ready(function () {
             },
 
             eventLimit: true,
-            eventColor: '#378006',
+            eventColor: "green",
+
+
             events: events,
             eventClick: function(calEvent, jsEvent, view) {
                 selectedRequisition = calEvent;
@@ -66,21 +66,30 @@ $(document).ready(function () {
                 $("#status").append($('<p>').html('<b>Status : </b>' + calEvent.status));
                 var $description = $('<div/>');
 
-                $description.append($('<p>').html('<b>Employee Name : </b>' + calEvent.employee));
-                $description.append($('<p>').html('<b>Designation : </b>' + calEvent.employeeDesignation));
-                $description.append($('<p>').html('<b>Requestor Email : </b>' + calEvent.employeeEmail));
-                $description.append($('<p>').html('<b>Contact No : </b>' + calEvent.employeeContact));
-                $description.append($('<p>').html('<b>Description : </b>' + calEvent.description));
-                $description.append($('<p>').html('<b>From Place : </b>' + calEvent.fromPlace));
-                $description.append($('<p>').html('<b>Destination Place : </b>' + calEvent.destinationPlace));
+                $description.append($('<span class="form-control">').html('<b>Employee Name : </b>' + calEvent.employee));
+                $description.append($('<span class="form-control">').html('<b>Designation : </b>' + calEvent.employeeDesignation));
+                $description.append($('<span class="form-control">').html('<b>Requestor Email : </b>' + calEvent.employeeEmail));
+                $description.append($('<span class="form-control">').html('<b>Contact No : </b>' + calEvent.employeeContact));
+                $description.append($('<span class="form-control">').html('<b>Description : </b>' + calEvent.description));
+                $description.append($('<span class="form-control">').html('<b>From Place : </b>' + calEvent.fromPlace));
+                $description.append($('<span class="form-control">').html('<b>Destination Place : </b>' + calEvent.destinationPlace));
+                $description.append($('<span class="form-control text-danger">').html('<b>Status : </b>' + calEvent.status));
 
-                $description.append($('<p>').html('<b>Start Date Time : </b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                $description.append($('<span class="form-control">').html('<b>Start Date Time : </b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
                 if (calEvent.end != null) {
-                    $description.append($('<p>').html('<b>EndDateTime : </b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                    $description.append($('<span class="form-control">').html('<b>EndDateTime : </b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                 }
 
                 $('#myModal #description').empty().html($description);
                 if (calEvent.status == "New") {
+                    $("#btnAssign").show();
+                    $("#btnCancel").show();
+                    $("#btnHold").show();
+                    $("#btnCheckIn").hide();
+                    $("#btnCheckOut").hide();
+
+                }
+                if (calEvent.status == "Hold") {
                     $("#btnAssign").show();
                     $("#btnCancel").show();
                     $("#btnCheckIn").hide();
@@ -92,19 +101,29 @@ $(document).ready(function () {
                     $("#btnAssign").hide();
                     $("#btnCheckOut").hide();
                     $("#btnCancel").hide();
+                    $("#btnHold").hide();
                 }
                 if (calEvent.status == "OnExecute") {
-                    $("#myModal #btnCheckOut").show();
+                    $("#btnCheckOut").show();
                     $("#btnAssign").hide();
                     $("#btnCheckIn").hide();
                     $("#btnCancel").hide();
-
+                    $("#btnHold").hide();
                 }
-                if (calEvent.status == "Hold") {
-                    $("#myModal #btnAssign").show();
+                if (calEvent.status == "Completed") {
                     $("#btnCheckOut").hide();
+                    $("#btnAssign").hide();
                     $("#btnCheckIn").hide();
                     $("#btnCancel").hide();
+                    $("#btnHold").hide();
+
+                }
+                if (calEvent.status == "Cancelled") {
+                    $("#btnCheckOut").hide();
+                    $("#btnAssign").hide();
+                    $("#btnCheckIn").hide();
+                    $("#btnCancel").hide();
+                    $("#btnHold").hide();
 
                 }
                 $('#myModal').modal();
@@ -120,6 +139,27 @@ $(document).ready(function () {
         }
            
     });
+    $('#btnCheckIn').click(function () {
+        if (selectedRequisition != null) {
+            var url = "/GatePass/CheckIn/";
+            window.location = url + selectedRequisition.reqId;
+        }
+
+    });
+    $('#btnCheckOut').click(function () {
+        if (selectedRequisition != null) {
+            var url = "/GatePass/CheckOut/";
+            window.location = url + selectedRequisition.reqId;
+        }
+
+    });
+
+    $("#btnCancel").click(function() {
+        if (selectedRequisition != null) {
+            var url = "/CancelRequisition/Create?statusId=";
+            window.location = url + selectedRequisition.reqId;
+        }
+    })
 
 });
 

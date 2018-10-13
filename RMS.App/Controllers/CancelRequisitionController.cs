@@ -21,11 +21,13 @@ namespace RMS.App.Controllers
         private ICancelRequisitionManager _cancelRequisitionManager;
         private IRequisitionStatusManager _requisitionStatusManager;
         private INotificationManager _notificationManager;
-        public CancelRequisitionController(ICancelRequisitionManager cancelRequisitionManager,IRequisitionStatusManager requisitionStatusManager, INotificationManager notificationManager)
+        private IRequisitionManager _requisitionManager;
+        public CancelRequisitionController(ICancelRequisitionManager cancelRequisitionManager,IRequisitionStatusManager requisitionStatusManager, INotificationManager notificationManager,IRequisitionManager requisitionManager)
         {
             this._cancelRequisitionManager = cancelRequisitionManager;
             this._requisitionStatusManager = requisitionStatusManager;
             this._notificationManager = notificationManager;
+            this._requisitionManager = requisitionManager;
         }
 
         // GET: CancelRequisitionViewModels
@@ -75,22 +77,23 @@ namespace RMS.App.Controllers
 
         // GET: CancelRequisitionViewModels/Create
         [HttpGet]
-        public ActionResult Create(int statusId)
+        public ActionResult Create(int requisitionId)
         {
             try
             {
-                if (statusId == 0)
+                if (requisitionId == 0)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                RequisitionStatus requisition = _requisitionStatusManager.FindById(statusId);
+                RequisitionStatus requisition = _requisitionStatusManager.FindById(requisitionId);
 
                 if (requisition == null)
                 {
                     return HttpNotFound();
                 }
-                RequisitionStatusViewModel requisitionStatusViewModel = Mapper.Map<RequisitionStatusViewModel>(requisition);
-                return View(requisitionStatusViewModel);
+                CancelRequisitionViewModel cancelRequisitionViewModel=new CancelRequisitionViewModel();
+                cancelRequisitionViewModel.RequisitionStatus=Mapper.Map<RequisitionStatus>(requisition);
+                return View(cancelRequisitionViewModel);
             }
             catch (Exception ex)
             {
@@ -104,7 +107,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,Reason")]RequisitionStatusViewModel model)
+        public ActionResult Create([Bind(Include = "Id,RequisitionId,Reason")]CancelRequisitionViewModel model)
         {
             try
             {
@@ -113,22 +116,21 @@ namespace RMS.App.Controllers
 
                     if (model.Reason != null)
                     {
-                        RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(model);
-                        requisitionStatus.Id = requisitionStatus.Id;
-                        requisitionStatus.RequisitionId = requisitionStatus.RequisitionId;
-                        requisitionStatus.StatusType = "Cancelled";
-                        bool IsSaved = _requisitionStatusManager.Update(requisitionStatus);
+
+                        
+                        var status = _requisitionStatusManager.FindByRequisitionId((int)model.RequisitionId);
+                        model.RequisitionStatusId = status.Id;
+                        model.RequisitionNumber = status.RequisitionNumber;
+
+                        status.StatusType = "Cancelled";
+                        bool IsSaved = _requisitionStatusManager.Update(status);
                         if (IsSaved)
                         {
-                            CancelRequisitionViewModel cancelRequisitionViewModel = new CancelRequisitionViewModel();
-                            cancelRequisitionViewModel.RequisitionStatusId = requisitionStatus.Id;
-                            cancelRequisitionViewModel.RequisitionId = requisitionStatus.RequisitionId;
-                            cancelRequisitionViewModel.Reason = model.Reason;
-                            CancelRequisition cancelRequisition = Mapper.Map<CancelRequisition>(cancelRequisitionViewModel);
+                            CancelRequisition cancelRequisition = Mapper.Map<CancelRequisition>(model);
                             _cancelRequisitionManager.Add(cancelRequisition);
                         }
                         //Notifaication status change after assign requisition
-                        Notification notificationUpdate = _notificationManager.FindByRequisitionId(requisitionStatus.RequisitionId);
+                        Notification notificationUpdate = _notificationManager.FindByRequisitionId(status.RequisitionId);
                         if (notificationUpdate != null)
                         {
                             notificationUpdate.ControllerViewStatus = "Seen";

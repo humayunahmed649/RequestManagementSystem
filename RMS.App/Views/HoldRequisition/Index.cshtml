@@ -1,0 +1,159 @@
+﻿@model IEnumerable<RMS.App.ViewModels.RequisitionStatusViewModel>
+
+@{
+    ViewBag.Title = "Hold Requisitions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+}
+
+
+    <table id="example" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">
+        <thead>
+            <tr class="bg-info">
+                <th>
+                    SL
+                </th>
+                <th>
+                    Action
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.FromPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+                </th>
+
+
+            </tr>
+
+        </thead>
+        <tbody>
+            @{
+                var sl = 0;
+                if (Model.Count() != 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        sl++;
+                        <tr>
+                            <td>
+                                @sl
+
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details","AssignRequisitions", new { id = item.Id }, new { @class = "btn btn-outline-info btn-sm" })
+                                @Html.ActionLink("Assign", "HoldRequestCreate", new { statusId = item.Id }, new { @class = "btn btn-outline-primary btn-sm" })
+                                @Html.ActionLink("Cancel", "Create", "CancelRequisition", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-sm btn-outline-success" })
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequisitionNumber)
+                            </td>
+                            <td class="text-success">
+                                @Html.DisplayFor(modelItem => item.StatusType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Requisition.Employee.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Requisition.FromPlace)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Requisition.DestinationPlace)
+                            </td>
+                            <td>
+                                @item.Requisition.StartDateTime.ToString("dd MMM yyyy hh:mm tt")
+                            </td>
+                            <td>
+                                @item.Requisition.EndDateTime.ToString("dd MMM yyyy hh:mm tt")
+                            </td>
+                            <td>
+                                @item.Requisition.SubmitDateTime.ToString("dd MMM yyyy hh:mm tt")
+                            </td>
+
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr class="bg-secondary text-white">
+                <th>
+                    SL
+                </th>
+                <th>
+                    Action
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequisitionNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.Employee.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.FromPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.DestinationPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.StartDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.EndDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisition.SubmitDateTime)
+                </th>
+
+
+            </tr>
+        </tfoot>
+    </table>
+
+
+@section scripts
+{
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+}

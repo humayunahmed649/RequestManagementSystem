@@ -1,4 +1,4 @@
-﻿@model RMS.App.ViewModels.RequisitionStatusViewModel
+﻿@model RMS.App.ViewModels.CancelRequisitionViewModel
 
 @{
     ViewBag.Title = "Cancel";
@@ -16,84 +16,95 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RequisitionStatusId);
+        @Html.HiddenFor(model => model.RequisitionId);
 
         <div class="form-group row">
             
-            @Html.LabelFor(model => model.StatusType, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatus.StatusType, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.StatusType, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.StatusType, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatus.StatusType, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.StatusType, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group row">
             
-            @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatus.RequisitionNumber, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.RequisitionNumber, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatus.RequisitionNumber, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.RequisitionNumber, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group row">
             
-            @Html.LabelFor(model => model.Requisition.Employee.FullName, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatus.Requisition.Employee.FullName, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Requisition.Employee.FullName, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.Requisition.Employee.FullName, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatus.Requisition.Employee.FullName, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.Requisition.Employee.FullName, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group row">
             
-            @Html.LabelFor(model => model.Requisition.Employee.Designation, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatus.Requisition.Employee.Designation, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Requisition.Employee.Designation.Title, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.Requisition.Employee.Designation.Title, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatus.Requisition.Employee.Designation.Title, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.Requisition.Employee.Designation.Title, "", new {@class = "text-danger"})
             </div>
         </div>
         <div class="form-group row">
             
-            @Html.LabelFor(model => model.Requisition.FromPlace, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatus.Requisition.FromPlace, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Requisition.FromPlace, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.Requisition.FromPlace, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group row">
-            
-            @Html.LabelFor(model => model.Requisition.DestinationPlace, htmlAttributes: new {@class = "control-label col-md-3"})
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.Requisition.DestinationPlace, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.Requisition.DestinationPlace, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatus.Requisition.FromPlace, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.Requisition.FromPlace, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group row">
             
-            @Html.LabelFor(model => model.Requisition.RequisitionType, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatus.Requisition.DestinationPlace, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Requisition.RequisitionType, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.Requisition.RequisitionType, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatus.Requisition.DestinationPlace, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.Requisition.DestinationPlace, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group row">
             
-            @Html.LabelFor(model => model.Requisition.Description, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatus.Requisition.RequisitionType, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Requisition.Description, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
-                @Html.ValidationMessageFor(model => model.Requisition.Description, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatus.Requisition.RequisitionType, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.Requisition.RequisitionType, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group row">
+            
+            @Html.LabelFor(model => model.RequisitionStatus.Requisition.Description, htmlAttributes: new {@class = "control-label col-md-3"})
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.RequisitionStatus.Requisition.Description, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatus.Requisition.Description, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group row" hidden="hidden">
 
-            @Html.LabelFor(model => model.RequisitionId, htmlAttributes: new {@class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.RequisitionStatusId, htmlAttributes: new {@class = "control-label col-md-3"})
             <div class="col-md-9">
-                @Html.EditorFor(model => model.RequisitionId, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.RequisitionId, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.RequisitionStatusId, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.RequisitionStatusId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        
+        <div class="form-group row" hidden="hidden">
+
+            @Html.LabelFor(model => model.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.RequisitionNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RequisitionNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 

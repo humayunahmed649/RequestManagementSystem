@@ -257,6 +257,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EmployeeTypesController.cs" />
     <Compile Include="Controllers\GatePassController.cs" />
+    <Compile Include="Controllers\HoldRequisitionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\MailServicesController.cs" />
@@ -1082,7 +1083,9 @@
     <Content Include="Views\Language\Index.cshtml" />
     <Content Include="Views\Shared\_ControllerNotification.cshtml" />
     <Content Include="Views\Shared\_EmployeeNotification.cshtml" />
-    <Content Include="Views\AssignRequisitions\Hold.cshtml" />
+    <Content Include="Views\HoldRequisition\Hold.cshtml" />
+    <Content Include="Views\HoldRequisition\Index.cshtml" />
+    <Content Include="Views\HoldRequisition\HoldRequestCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
