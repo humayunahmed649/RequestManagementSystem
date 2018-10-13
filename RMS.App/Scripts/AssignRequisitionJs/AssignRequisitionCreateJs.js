@@ -55,9 +55,10 @@ $(document).ready(function() {
                     $('#vehicleStatusdiv #vehicleDetails').empty().html($vehicleDetails);
                 }
                 if (response.Id == 0) {
-                    $("#vehicleDetails").empty().html($vehicleDetails);
                     $('#vehicleStatusdiv').modal();
                     $vehicleDetails.append($('<span class="form-control text-justify font-weight-bold">').html('<span class="text-success">This Vehicle Is Available </span>'));
+                    
+                    $("#vehicleDetails").empty().html($vehicleDetails);
 
                 }
                 
@@ -92,7 +93,7 @@ $(document).ready(function() {
                     $driverDetails.append($('<span class="form-control text-danger font-weight-bold">').html('<span class="text-success">Status : </span>' + response.RequisitionStatus.StatusType));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Requisition Number : </span>' + response.RequisitionNumber));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Start Date Time : </span>' + response.Requisition.StartDateTime));
-                    $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">End Date Time : </span>' + response.Requisition.EndDateTime));
+                    $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">End Date Time : </span>' + response.Requisition.EndDateTime.dateTime));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Requestor Name : </span>' + response.Requisition.Employee.FullName));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Contact No : </span>' + response.Requisition.Employee.ContactNo));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">From Place : </span>' + response.Requisition.FromPlace));
@@ -103,10 +104,10 @@ $(document).ready(function() {
                     $('#driverStatusdiv #driverDetails').empty().html($driverDetails);
                 }
                 if (response.Id == 0) {
-                    $("#driverDetails").empty().html($driverDetails);
                     $('#driverStatusdiv').modal();
                     $driverDetails.append($('<span class="form-control text-justify font-weight-bold">').html('<span class="text-success">This Driver Is Available </span>'));
-
+                    
+                    $("#driverDetails").empty().html($driverDetails);
                 }
 
             },

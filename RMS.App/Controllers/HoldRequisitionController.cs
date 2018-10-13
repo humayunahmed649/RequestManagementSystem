@@ -59,16 +59,16 @@ namespace RMS.App.Controllers
         }
 
         [HttpGet]
-        public ActionResult Hold(int statusId)
+        public ActionResult Create(int requisitionId)
         {
             try
             {
 
-                if (statusId == 0)
+                if (requisitionId == 0)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                RequisitionStatus requisition = _requisitionStatusManager.FindById(statusId);
+                RequisitionStatus requisition = _requisitionStatusManager.FindById(requisitionId);
 
                 if (requisition == null)
                 {
@@ -80,20 +80,29 @@ namespace RMS.App.Controllers
             catch (Exception ex)
             {
                 ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "CancelRequisition", "Create"));
+                return View("Error", new HandleErrorInfo(ex, "HoldRequisition", "Create"));
             }
         }
 
-        public ActionResult Hold(RequisitionStatusViewModel statusViewModel)
+        public ActionResult Create(RequisitionStatusViewModel statusViewModel)
         {
-            RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(statusViewModel);
-            requisitionStatus.StatusType = "Hold";
-            bool IsUpdate = _requisitionStatusManager.Update(requisitionStatus);
-            if (IsUpdate)
+            try
             {
-                return RedirectToAction("Index", "AssignRequisitions");
+                var requisitionStatus= _requisitionStatusManager.FindByRequisitionId(statusViewModel.Id); ;
+                requisitionStatus.StatusType = "Hold";
+                bool IsUpdate = _requisitionStatusManager.Update(requisitionStatus);
+                if (IsUpdate)
+                {
+                    return RedirectToAction("Index", "AssignRequisitions");
+                }
+                return View(statusViewModel);
             }
-            return View(statusViewModel);
+            catch (Exception ex)
+            {
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "HoldRequisition", "Create"));
+            }
+            
         }
 
 

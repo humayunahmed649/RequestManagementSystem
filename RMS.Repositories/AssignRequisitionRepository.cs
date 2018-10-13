@@ -62,7 +62,7 @@ namespace RMS.Repositories
                 var vehicleStatus = (from requisitionStatus in db.Set<RequisitionStatus>()
                 join assignRequisition in db.Set<AssignRequisition>()     
                 on requisitionStatus.RequisitionId equals assignRequisition.RequisitionId
-                orderby requisitionStatus.Requisition.EndDateTime descending
+                orderby requisitionStatus.Requisition.EndDateTime descending 
                 where assignRequisition.VehicleId == vehicleId
                 select new
                 {

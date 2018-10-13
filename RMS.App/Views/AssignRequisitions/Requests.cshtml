@@ -91,7 +91,7 @@
                             @Html.ActionLink("Assign", "Create", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-primary btn-sm" }) &nbsp;
                             @Html.ActionLink("View", "ViewDetails", new { id = item.RequisitionId }, new { @class = "btn btn-info btn-sm" }) &nbsp;
                             @Html.ActionLink("Cancel", "Create", "CancelRequisition", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-outline-danger btn-sm" })&nbsp;
-                            @Html.ActionLink("Hold", "Hold", "HoldRequisition", new { statusId = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
+                            @Html.ActionLink("Hold", "Create", "HoldRequisition", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-outline-danger btn-sm" })
 
                         </td>
                         <td>
