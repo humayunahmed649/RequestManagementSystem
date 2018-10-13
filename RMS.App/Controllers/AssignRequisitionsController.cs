@@ -163,6 +163,7 @@ namespace RMS.App.Controllers
                     }
                     if (vehicleStatus.Id <= 0)
                     {
+                        assignRequisitionViewModel.RequisitionStatusId = requestStatus.Id;
                         SaveRequisition(assignRequisitionViewModel);
                         return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisitionViewModel.RequisitionId });
                     }

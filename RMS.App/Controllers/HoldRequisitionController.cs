@@ -87,10 +87,6 @@ namespace RMS.App.Controllers
         public ActionResult Hold(RequisitionStatusViewModel statusViewModel)
         {
             RequisitionStatus requisitionStatus = Mapper.Map<RequisitionStatus>(statusViewModel);
-            //var status =_requisitionStatusManager.FindByRequisitionId(statusViewModel.RequisitionId);
-            //requisitionStatus.Id = statusViewModel.Id;
-            //requisitionStatus.RequisitionId = statusViewModel.RequisitionId;
-            //requisitionStatus.RequisitionNumber = statusViewModel.RequisitionNumber;
             requisitionStatus.StatusType = "Hold";
             bool IsUpdate = _requisitionStatusManager.Update(requisitionStatus);
             if (IsUpdate)
@@ -100,37 +96,6 @@ namespace RMS.App.Controllers
             return View(statusViewModel);
         }
 
-        public ActionResult HoldRequestCreate(int statusId)
-        {
-            try
-            {
-                if (statusId == 0)
-                {
-                    return View("Error");
-                }
-                RequisitionStatus requisition = _requisitionStatusManager.FindById(statusId);
-                if (requisition == null)
-                {
-                    return HttpNotFound();
-                }
-
-                ViewBag.Requisition = requisition;
-
-                AssignRequisitionViewModel assignRequisitionViewModel = new AssignRequisitionViewModel();
-                assignRequisitionViewModel.RequisitionId = requisition.RequisitionId;
-                assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
-                assignRequisitionViewModel.RequisitionNumber = requisition.RequisitionNumber;
-
-                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-                ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select Vehicle" } };
-                return View(assignRequisitionViewModel);
-            }
-            catch (Exception ex)
-            {
-                ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Create"));
-            }
-        }
 
         private void ExceptionMessage(Exception ex)
         {

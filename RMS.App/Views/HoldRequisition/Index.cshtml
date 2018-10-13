@@ -68,7 +68,7 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details","AssignRequisitions", new { id = item.Id }, new { @class = "btn btn-outline-info btn-sm" })
-                                @Html.ActionLink("Assign", "HoldRequestCreate", new { statusId = item.Id }, new { @class = "btn btn-outline-primary btn-sm" })
+                                @Html.ActionLink("Assign", "Create","AssignRequisitions", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-outline-primary btn-sm" })
                                 @Html.ActionLink("Cancel", "Create", "CancelRequisition", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-sm btn-outline-success" })
 
                             </td>

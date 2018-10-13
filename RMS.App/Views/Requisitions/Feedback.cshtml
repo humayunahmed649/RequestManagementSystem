@@ -144,7 +144,7 @@
                                     {
 
                                         @*<td><a href="@Url.Action("Reply", "Requisitions", new { feedbackId = @comment.Id})" class="btn btn-primary" data-toggle="modal" data-target="#replyModal">Reply</a></td>*@
-                                        <td><button id="btnReply" class="btn btn-success pull-right" value="@comment.Id">Reply</button></td>
+                                        <td><button class="btn btn-success pull-right btnReply" value="@comment.Id">Reply</button></td>
                                         @*<td style="width: 10%">@Html.ActionLink("Reply","Reply","Requisitions", new { feedbackId = @comment.Id},new {@id="btnReply"})</td>*@
 
                                     }
@@ -195,7 +195,7 @@
     <script src="~/Scripts/chosenDD/chosen_DD.js"></script>
     <script>
         $(document).ready(function () {
-            $("#btnReply").click(function () {
+            $(".btnReply").click(function () {
                 var me = $(this);
                 // do whatever with me
                 alert(me.val());
