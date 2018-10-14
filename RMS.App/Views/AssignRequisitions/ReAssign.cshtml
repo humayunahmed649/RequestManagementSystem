@@ -145,6 +145,11 @@
                 @Html.HiddenFor(model => model.AssignRequisitionViewModel.RequisitionStatusId)
                 @Html.HiddenFor(model => model.AssignRequisitionViewModel.RequisitionNumber)
 
+
+                <div class="form-group row">
+                    <p class="text-center font-weight-bold text-primary">Please Select Same Vehicle and Driver for Re-assign</p>
+                </div>
+
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AssignRequisitionViewModel.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">

@@ -361,11 +361,10 @@ namespace RMS.App.Controllers
                 if (ModelState.IsValid)
                 {
                     var assignRequisition = _assignRequisitionManager.FindById(reAssignRequisitionViewModel.Id);
+                    
                     assignRequisition.VehicleId = reAssignRequisitionViewModel.VehicleId;
                     assignRequisition.EmployeeId = reAssignRequisitionViewModel.EmployeeId;
-
-                    AssignRequisition requisition = Mapper.Map<AssignRequisition>(assignRequisition);
-                    bool IsSaved=_assignRequisitionManager.Update(requisition);
+                    bool IsSaved=_assignRequisitionManager.Update(assignRequisition);
                     if (IsSaved)
                     {
                         var requisitionUpdate = _requisitionManager.FindById(assignRequisition.RequisitionId);
