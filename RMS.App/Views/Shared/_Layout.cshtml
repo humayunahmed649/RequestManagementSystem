@@ -38,7 +38,7 @@
 
 <!-- Start service Area -->
 <section class="service-area" style="height: 100vh; min-height: 100vh; overflow: hidden; clear: both; height: auto;">
-    <div class="container" style="height: 175px; background-color: #FFF"></div>
+    <div class="container" style="height: 190px; background-color: #FFF"></div>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12 bgnewcolor" style="padding: 20px 20px;">
@@ -55,15 +55,14 @@
                                     </h3>
                                     <hr/>
                                 </div>
-                               
 
                                 <br/><br/>
                                 <div class="col-md-12">
-                                    <a class="dropdown-item" href="@Url.Action("Index", "Schedule")"><i class="fa fa-calendar"></i>@Resources.HomeText.Schedule</a>
+                                    <a class="dropdown-item" href="@Url.Action("Index", "Schedule")"><i class="fa fa-calendar"></i> @Resources.HomeText.Schedule</a>
                                 </div>
                                 <br /><br />
                                 <div class="col-md-12">
-                                    <a class="dropdown-item" href="@Url.Action("Requests", "AssignRequisitions")"><i class="fa fa-car"></i>@Resources.HomeText.NewRequisition </a>
+                                    <a class="dropdown-item" href="@Url.Action("Requests", "AssignRequisitions")"><i class="fa fa-car"></i> @Resources.HomeText.NewRequisition </a>
                                 </div>
                                 <br/><br/>
                                 <div class="col-md-12">
@@ -208,7 +207,6 @@
     <script src="~/Scripts/chosenDD/chosen.jquery.min.js"></script>
     <script src="~/Content/js/main.js"></script>
     <script src="~/Scripts/RequiredFieldsAsteriskJs/RequiredFieldAsterisk.js"></script>
-    <script src="~/Scripts/NotificationJs/load-notification.js"></script>
     
     @RenderSection("scripts", required: false)
 

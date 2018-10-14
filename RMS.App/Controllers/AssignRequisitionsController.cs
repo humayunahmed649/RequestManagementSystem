@@ -438,8 +438,6 @@ namespace RMS.App.Controllers
             }
         }
 
-       
-
         public ActionResult Requests(string searchText)
         {
             try
@@ -525,8 +523,6 @@ namespace RMS.App.Controllers
             }
         }
 
-       
-
         public ActionResult ReportIndex()
         {
             try
@@ -555,7 +551,6 @@ namespace RMS.App.Controllers
                 ExceptionMessage(ex);
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ReportIndex"));
             }
-            
 
         }
         public ActionResult PrintDetails(int? id)
@@ -584,8 +579,6 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "PrintDetails"));
             }
         }
-
-        
         
         //Get Vehicle Status By Json Result
         public JsonResult GetVehicleStatusByVehicleId(int? vehicleId)
@@ -614,9 +607,6 @@ namespace RMS.App.Controllers
             return Json(drivers, JsonRequestBehavior.AllowGet);
 
         }
-        
-
-
 
         private void ExceptionMessage(Exception ex)
         {

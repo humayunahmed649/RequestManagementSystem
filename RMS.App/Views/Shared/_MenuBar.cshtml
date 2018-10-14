@@ -56,7 +56,16 @@
     </div>
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
-            <nav id="nav-menu-container" class="col-md-9 col-9 col-lg-9">
+            
+            <nav id="nav-menu-container" @if (User.IsInRole("Administrator"))
+                                         {
+                                             var foo = new {htmlAttributes = new {@class = "col-md-12 col-12 col-lg-12"}};
+                                         }
+                                          @if (User.IsInRole("Controller") ||User.IsInRole("User"))
+                                          {
+                                              var foo = new {htmlAttributes = new {@class = "col-md-9 col-9 col-lg-9"}};
+                                          }
+                                          >
                 <ul class="nav-menu">
                     <li class="menu-active">@Html.ActionLink(@Resources.HomeText.Home, "Index", "Home")</li>
                     <li>@Html.ActionLink(@Resources.HomeText.About, "About", "Home")</li>
@@ -70,10 +79,9 @@
                         <li>@Html.ActionLink(@Resources.HomeText.RequisitionQueue, "RequisitionQueue", "Queue")</li>
                         <li>@Html.ActionLink(@Resources.HomeText.SendRequisition, "Create", "Requisitions")</li>
                         <li>@Html.ActionLink(@Resources.HomeText.GatePass, "Index", "GatePass")</li>
-                        <li>@Html.ActionLink(@Resources.HomeText.Feedback, "Index", "Requisitions" )<i class="fa fa-comment"></i></li>
+                        <li>@Html.ActionLink(@Resources.HomeText.Feedback, "Index", "Requisitions")<i class="fa fa-comment"></i></li>
 
                     }
-                   
 
                     @if (User.IsInRole("User"))
                     {
@@ -102,7 +110,5 @@
             }
         </div>
     </div>
-
-    
 
 </header><!-- End header -->

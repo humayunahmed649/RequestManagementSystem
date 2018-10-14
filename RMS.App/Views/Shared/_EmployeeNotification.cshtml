@@ -7,11 +7,11 @@
     <li class="dropdown">
         @if (@ViewBag.count > 0)
         {
-            <a title="Unread notifications!" class="btn-outline-info" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">@ViewBag.count</span></a>
+            <a title="Unread notifications!" class="btn-outline-info" data-toggle="dropdown"><i class="fa fa-bell text-black"></i><span class="text-danger font-weight-bold" style="font-size: 16px;">@ViewBag.count</span></a>
         }
         else
         {
-            <a title="You have no unread notifications!" class="btn-outline-info" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="font-weight-bold" style="font-size: 16px;"></span></a>
+            <a title="You have no unread notifications!" class="btn-outline-info" data-toggle="dropdown"><i class="fa fa-bell text-black"></i><span class="font-weight-bold" style="font-size: 16px;"></span></a>
         }
 
         <ul class="dropdown-menu">
@@ -28,7 +28,7 @@
                 }
 
             }
-            <li class="text-center"><a href="@Url.Action("Index","Notifications")">See All</a></li>
+            <li class="text-center"><a href="@Url.Action("Index","Notifications")" class="text-black">See All</a></li>
         </ul>
     </li>
 </ul>
