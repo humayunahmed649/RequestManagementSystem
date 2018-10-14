@@ -86,7 +86,7 @@
                             @Html.ActionLink("Details", "Details", new { id = item.Requisition.Id }, new { @class = "btn btn-outline-info btn-sm" })
                             @Html.ActionLink("Print & Preview", "PrintDetails", new { id = item.RequisitionId }, new { @class = "btn btn-outline-primary btn-sm" })
                             @Html.ActionLink("CheckIn", "CheckIn", "GatePass", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-success" })
-
+                            @Html.ActionLink("Re-Assign", "ReAssign", "AssignRequisitions", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-success" })
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.RequisitionNumber)

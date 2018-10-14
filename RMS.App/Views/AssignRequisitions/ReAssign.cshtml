@@ -1,0 +1,253 @@
+﻿@model RMS.App.ViewModels.ReAssignRequisitionViewModel
+
+@{
+    ViewBag.Title = "Re-Assign";
+}
+
+<h3>Re-Assigned Requisition</h3>
+<hr/>
+@if (Model != null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Assigned Requisition Information :</h4>
+                <br />
+                <table class="table table-light table-primary dt-responsive nowrap">
+
+                    <tr>
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.RequisitionNumber)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayName("Requestor Name")</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.FullName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayName("Designation")</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.Designation.Title)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.ContactNo)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.ContactNo)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.Email)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.Email)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.RequestFor)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.RequestFor)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <h4>Journey Information :</h4>
+                <br />
+                <table class="table table-light table-active table-primary dt-responsive nowrap">
+                    <tr>
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.StartDateTime)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.StartDateTime)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.EndDateTime)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.EndDateTime)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.FromPlace)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.FromPlace)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.DestinationPlace)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.DestinationPlace)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.PassengerQty)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.PassengerQty)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Description)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Description)</td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4>Vehicle Information :</h4>
+                <br />
+                <table class="table table-light table-active table-primary dt-responsive nowrap">
+                    <tr>
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Vehicle.BrandName)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Vehicle.BrandName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Vehicle.RegNo)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Vehicle.RegNo)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Vehicle.ModelName)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Vehicle.ModelName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Vehicle.SeatCapacity)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Vehicle.SeatCapacity)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Vehicle.VehicleType.Name)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Vehicle.VehicleType.Name)</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <h4>Driver Information :</h4>
+                <br />
+                <table class="table table-danger table-active table-primary dt-responsive nowrap">
+                    <tr>
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.FullName)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.FullName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.Designation.Title)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.Designation.Title)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.ContactNo)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.ContactNo)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.NID)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.NID)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.RequisitionStatus.StatusType)</td>
+                        <td class="text-danger">@Html.DisplayFor(model => model.AssignRequisitionViewModel.RequisitionStatus.StatusType)</td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+}
+<br/>
+<div class="container">
+    @using (Html.BeginForm("ReAssign", "AssignRequisitions", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-horizontal">
+
+                <h4>Re-Assign Requisition</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.AssignRequisitionViewModel.RequisitionId)
+                @Html.HiddenFor(model => model.AssignRequisitionViewModel.RequisitionStatusId)
+                @Html.HiddenFor(model => model.AssignRequisitionViewModel.RequisitionNumber)
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.AssignRequisitionViewModel.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.AssignRequisitionViewModel.RequisitionNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.AssignRequisitionViewModel.RequisitionNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group row">
+                    @Html.Label("Vehicle Type", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @if (Model != null)
+                        {
+                            @Html.DropDownList("VehicleType", new SelectList(Model.AssignRequisitionViewModel.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleTypeDD" })
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.AssignRequisitionViewModel.VehicleId, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+
+                        @Html.DropDownList("VehicleId", null, htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleDD" })
+
+                        @Html.ValidationMessageFor(model => model.AssignRequisitionViewModel.VehicleId, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.AssignRequisitionViewModel.EmployeeId, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new
+                           {
+                               @class = "form-control",
+                               @id = "driverDD" @*"searchableDD3"*@})
+                        @Html.ValidationMessageFor(model => model.AssignRequisitionViewModel.EmployeeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control datePicker" } })
+                        @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control timePicker" } })
+                        @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control datePicker" } })
+                        @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control timePicker" } })
+                        @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+            </div>
+           
+             <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <input type="submit" value="Update" class="btn btn-success" /> &nbsp;
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+
+   @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<script src="~/Scripts/RequisitionJs/RequisitionDataTime.js"></script>
+<script src="~/Scripts/chosenDD/chosen_DD.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+<script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
+}

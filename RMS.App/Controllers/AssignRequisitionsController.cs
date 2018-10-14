@@ -208,11 +208,6 @@ namespace RMS.App.Controllers
 
         //Hold Request Assign info get by requisitionId //Get
        
-
-
-
-
-
         private void SaveRequisition(AssignRequisitionViewModel assignRequisitionViewModel)
         {
             AssignRequisition assignRequisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
@@ -323,7 +318,7 @@ namespace RMS.App.Controllers
         }
 
         // GET: AssignRequisitions/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult ReAssign(int id)
         {
             try
             {
@@ -336,12 +331,16 @@ namespace RMS.App.Controllers
                 {
                     return HttpNotFound();
                 }
-                AssignRequisitionViewModel assignRequisitionViewModel =
-                    Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+                AssignRequisitionViewModel assignRequisitionViewModel =Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+                ReAssignRequisitionViewModel requisitionViewModel=new ReAssignRequisitionViewModel();
+                requisitionViewModel.AssignRequisitionViewModel = assignRequisitionViewModel;
+
+
+                assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
-                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo");
-                ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAll(), "Id", "StatusType");
-                return View(assignRequisitionViewModel);
+                ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select Vehicle" } };
+                ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
+                return View(requisitionViewModel);
             }
             catch (Exception ex)
             {
@@ -355,16 +354,22 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,VehicleId,DriverId,EmployeeId")] AssignRequisitionViewModel assignRequisitionViewModel)
+        public ActionResult ReAssign([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,VehicleId,EmployeeId")] ReAssignRequisitionViewModel reAssignRequisitionViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    AssignRequisition requisition = Mapper.Map<AssignRequisition>(assignRequisitionViewModel);
+                    var assignRequisition = _assignRequisitionManager.FindById(reAssignRequisitionViewModel.Id);
+                    assignRequisition.VehicleId = reAssignRequisitionViewModel.VehicleId;
+                    assignRequisition.EmployeeId = reAssignRequisitionViewModel.EmployeeId;
+
+                    AssignRequisition requisition = Mapper.Map<AssignRequisition>(assignRequisition);
                     bool IsSaved=_assignRequisitionManager.Update(requisition);
                     if (IsSaved)
                     {
+
+
                         var historyId = _requisitionHistoryManager.FindByRequisitionId(requisition.Id);
 
                         historyId.Id = historyId.Id;
@@ -375,10 +380,16 @@ namespace RMS.App.Controllers
                     }
                     return RedirectToAction("Index");
                 }
-                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName", assignRequisitionViewModel.EmployeeId);
-                ViewBag.RequisitionId = new SelectList(_requisitionManager.GetAll(), "Id", "DestinationPlace", assignRequisitionViewModel.RequisitionId);
-                ViewBag.VehicleId = new SelectList(_vehicleManager.GetAll(), "Id", "RegNo", assignRequisitionViewModel.VehicleId);
-                return View(assignRequisitionViewModel);
+                AssignRequisitionViewModel assignRequisitionViewModel = Mapper.Map<AssignRequisitionViewModel>(reAssignRequisitionViewModel);
+                ReAssignRequisitionViewModel requisitionViewModel = new ReAssignRequisitionViewModel();
+                requisitionViewModel.AssignRequisitionViewModel = assignRequisitionViewModel;
+
+
+                assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
+                ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
+                ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select Vehicle" } };
+                ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
+                return View(requisitionViewModel);
             }
             catch (Exception ex)
             {

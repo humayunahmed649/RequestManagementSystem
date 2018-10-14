@@ -294,6 +294,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\ReAssignRequisitionViewModel.cs" />
     <Compile Include="ViewModels\AssignRequisitionViewModel.cs" />
     <Compile Include="ViewModels\CancelRequisitionViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
@@ -1027,7 +1028,7 @@
     <Content Include="Views\AssignRequisitions\Requests.cshtml" />
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
     <Content Include="Views\Requisitions\Feedback.cshtml" />
-    <Content Include="Views\AssignRequisitions\Edit.cshtml" />
+    <Content Include="Views\AssignRequisitions\ReAssign.cshtml" />
     <Content Include="Views\Requisitions\Reply.cshtml" />
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
     <Content Include="Views\Home\AboutDeveloper.cshtml" />
