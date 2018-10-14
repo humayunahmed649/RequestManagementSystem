@@ -143,8 +143,8 @@
                                     @if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
                                     {
 
-                                        @*<td><a href="@Url.Action("Reply", "Requisitions", new { feedbackId = @comment.Id})" class="btn btn-primary" data-toggle="modal" data-target="#replyModal">Reply</a></td>*@
-                                        <td><button class="btn btn-success pull-right btnReply" value="@comment.Id">Reply</button></td>
+                                        <td><a href="@Url.Action("Reply", "Requisitions", new { feedbackId = @comment.Id})" class="btn btn-primary" data-toggle="modal" data-target="#replyModal" >Reply</a></td>
+                                        @*<td><button class="btn btn-success pull-right btnReply" data-toggle="modal" data-target="#replyModal" value="@comment.Id">Reply</button></td>*@
                                         @*<td style="width: 10%">@Html.ActionLink("Reply","Reply","Requisitions", new { feedbackId = @comment.Id},new {@id="btnReply"})</td>*@
 
                                     }
@@ -167,7 +167,11 @@
                                 <a href="#" class="close" data-dismiss="modal">&times;</a>
                             </div>
                             <div class="modal-body table-light">
+                                <div>
+                                    <p id="feedbackId"></p>
+                                </div>
                                 @Html.Partial("Reply")
+
                             </div>
                             <div class="modal-footer">
                                 <a href="#" class="btn btn-warning" title="Close" data-dismiss="modal"> Close </a>
@@ -196,12 +200,10 @@
     <script>
         $(document).ready(function () {
             $(".btnReply").click(function () {
-                var me = $(this);
-                // do whatever with me
-                alert(me.val());
-                $("#replyModal").modal();
+                var commentId = $(this);
+                $("#commetnId").val = commentId;
 
-
+                $("#feedbackId").val(commentId);
             });
         })
 

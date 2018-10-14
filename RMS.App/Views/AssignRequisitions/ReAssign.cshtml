@@ -45,7 +45,7 @@
             <div class="col-md-6">
                 <h4>Journey Information :</h4>
                 <br />
-                <table class="table table-light table-active table-primary dt-responsive nowrap">
+                <table class="table table-light table-primary dt-responsive nowrap">
                     <tr>
                         <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.StartDateTime)</td>
                         <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.StartDateTime)</td>
@@ -76,7 +76,7 @@
             <div class="col-md-6">
                 <h4>Vehicle Information :</h4>
                 <br />
-                <table class="table table-light table-active table-primary dt-responsive nowrap">
+                <table class="table table-light table-primary dt-responsive nowrap">
                     <tr>
                         <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Vehicle.BrandName)</td>
                         <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Vehicle.BrandName)</td>
@@ -104,22 +104,19 @@
             <div class="col-md-6">
                 <h4>Driver Information :</h4>
                 <br />
-                <table class="table table-danger table-active table-primary dt-responsive nowrap">
+                <table class="table table-light table-primary dt-responsive nowrap">
                     <tr>
-                        <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.FullName)</td>
-                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.FullName)</td>
+                        <td style="width: 25%">@Html.DisplayName("Driver Name")</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Employee.FullName)</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Employee.ContactNo)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Employee.ContactNo)</td>
                     </tr>
                     <tr>
-                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.Designation.Title)</td>
-                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.Designation.Title)</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.ContactNo)</td>
-                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.ContactNo)</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.Employee.NID)</td>
-                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.Employee.NID)</td>
+                        <td>@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Employee.NID)</td>
+                        <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Employee.NID)</td>
                     </tr>
                     <tr>
                         <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.RequisitionStatus.StatusType)</td>
@@ -150,7 +147,7 @@
 
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AssignRequisitionViewModel.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.AssignRequisitionViewModel.RequisitionNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                         @Html.ValidationMessageFor(model => model.AssignRequisitionViewModel.RequisitionNumber, "", new { @class = "text-danger" })
                     </div>
@@ -162,7 +159,7 @@
 
                 <div class="form-group row">
                     @Html.Label("Vehicle Type", htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         @if (Model != null)
                         {
                             @Html.DropDownList("VehicleType", new SelectList(Model.AssignRequisitionViewModel.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleTypeDD" })
@@ -172,7 +169,7 @@
 
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AssignRequisitionViewModel.VehicleId, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-6">
+                    <div class="col-md-8">
 
                         @Html.DropDownList("VehicleId", null, htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleDD" })
 
@@ -184,7 +181,7 @@
 
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AssignRequisitionViewModel.EmployeeId, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         @Html.DropDownList("EmployeeId", null, "Select", htmlAttributes: new
                            {
                                @class = "form-control",
@@ -194,42 +191,32 @@
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control datePicker" } })
+                    @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
                     </div>
 
-                    @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-3">
-                        @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control timePicker" } })
-                        @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-                    </div>
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control datePicker" } })
+                    @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
                     </div>
 
-                    @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-3">
-                        @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control timePicker" } })
-                        @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <input type="submit" value="Re-Assign" class="btn btn-success" /> &nbsp;
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
                     </div>
                 </div>
-                
             </div>
            
-             <div class="form-group row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <input type="submit" value="Update" class="btn btn-success" /> &nbsp;
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
-                </div>
-            </div>
         </div>
     }
 </div>
@@ -247,7 +234,5 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
 
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
 }

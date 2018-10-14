@@ -616,24 +616,6 @@ namespace RMS.App.Controllers
             }
 
         }
-        //public JsonResult GetReplyInformation(int feedbackId)
-        //{
-        //    Feedback feedback = _feedbackManager.FindById((int)feedbackId);
-        //    if (feedback == null)
-        //    {
-        //        return null;
-        //    }
-
-        //    //Get employee Id by user login id
-        //    var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-        //    var empId = _employeeManager.FindByLoginId(loginUserId);
-
-        //    FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
-
-        //    feedbackViewModel.EmployeeId = Convert.ToInt32(empId.Id);
-        //    return Json(feedbackViewModel, JsonRequestBehavior.AllowGet);
-
-        //}
 
 
         //Post: Requisition Reply
@@ -642,21 +624,21 @@ namespace RMS.App.Controllers
         {
             try
             {
-                    if (ModelState.IsValid)
-                    {
+                if (ModelState.IsValid)
+                {
                     //Get employee Id by user login id
-                        var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-                        var empId = _employeeManager.FindByLoginId(loginUserId);
-                        feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
-                        Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
+                    var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+                    var empId = _employeeManager.FindByLoginId(loginUserId);
+                    feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
+                    Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
 
-                       bool IsSave= _feedbackManager.Add(feedback);
-                        if (IsSave)
-                        {
-                            ViewBag.Msg = "Reply Has been saved successfully";
-                            return RedirectToAction("Feedback",new { requisitionId =feedback.RequisitionId});
-                        }
+                    bool IsSave = _feedbackManager.Add(feedback);
+                    if (IsSave)
+                    {
+                        ViewBag.Msg = "Reply Has been saved successfully";
+                        return RedirectToAction("Feedback", new { requisitionId = feedback.RequisitionId });
                     }
+                }
 
                 return View();
             }

@@ -40,22 +40,18 @@ namespace RMS.App.ViewModels
         
         public AssignRequisitionViewModel AssignRequisitionViewModel { get; set; }
         
-        [Required(ErrorMessage = "Please provide a journey start date and time!")]
+        //[Required(ErrorMessage = "Please provide a journey start date and time!")]
         [Display(Name = "Journey Date")]
-        public DateTime StartDateTime { get; set; }
 
-        [Display(Name = "Journey Time")]
-        [Required(ErrorMessage = "Please set a journey time!")]
-        public string StartTime { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime StartDateTime { get; set; }
+        
         
         [Required(ErrorMessage = "Please provide a journey end date and time!")]
         [Display(Name = "Return Date")]
-
+        [DataType(DataType.DateTime)]
         public DateTime EndDateTime { get; set; }
-
-        [Display(Name = "Return Time")]
-        [Required(ErrorMessage = "Please set a return time!")]
-        public string EndTime { get; set; }
+        
 
     }
 }

@@ -1029,7 +1029,6 @@
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
     <Content Include="Views\Requisitions\Feedback.cshtml" />
     <Content Include="Views\AssignRequisitions\ReAssign.cshtml" />
-    <Content Include="Views\Requisitions\Reply.cshtml" />
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
     <Content Include="Views\Home\AboutDeveloper.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
@@ -1086,6 +1085,7 @@
     <Content Include="Views\Shared\_EmployeeNotification.cshtml" />
     <Content Include="Views\HoldRequisition\Create.cshtml" />
     <Content Include="Views\HoldRequisition\Index.cshtml" />
+    <Content Include="Views\Requisitions\Reply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

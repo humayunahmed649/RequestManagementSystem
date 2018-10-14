@@ -354,7 +354,7 @@ namespace RMS.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ReAssign([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,VehicleId,EmployeeId")] ReAssignRequisitionViewModel reAssignRequisitionViewModel)
+        public ActionResult ReAssign([Bind(Include = "Id,RequisitionId,RequisitionStatusId,RequisitionNumber,VehicleId,EmployeeId,StartDateTime,EndDateTime")] ReAssignRequisitionViewModel reAssignRequisitionViewModel)
         {
             try
             {
@@ -368,15 +368,10 @@ namespace RMS.App.Controllers
                     bool IsSaved=_assignRequisitionManager.Update(requisition);
                     if (IsSaved)
                     {
-
-
-                        var historyId = _requisitionHistoryManager.FindByRequisitionId(requisition.Id);
-
-                        historyId.Id = historyId.Id;
-                        historyId.Status = "Assigned";
-                        historyId.RequisitionId = requisition.Id;
-                        historyId.UpdateDateTime = DateTime.Now;
-                        _requisitionHistoryManager.Update(historyId);
+                        var requisitionUpdate = _requisitionManager.FindById(assignRequisition.RequisitionId);
+                        requisitionUpdate.StartDateTime = reAssignRequisitionViewModel.StartDateTime;
+                        requisitionUpdate.EndDateTime = reAssignRequisitionViewModel.EndDateTime;
+                        _requisitionManager.Update(requisitionUpdate);
                     }
                     return RedirectToAction("Index");
                 }
