@@ -19,6 +19,9 @@ using RMS.Repositories.Contracts;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Reporting.WebForms;
 using WebGrease.Css.Extensions;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace RMS.App.Controllers
 {
@@ -271,6 +274,22 @@ namespace RMS.App.Controllers
                                           " and Reg No : " + vehicle.RegNo + Environment.NewLine +
                                           "Regards, " + Environment.NewLine + controller.FullName;
 
+
+                            //SmS to the driver and user
+
+                            const string accountSid = "AC092d5f38c0ba5e8b384528c662c3209e";
+                            const string authToken = "a6bdd845a5552a4df57cc59c097223d1";
+                            TwilioClient.Init(accountSid, authToken);
+                            var to = new PhoneNumber("+88" + driver.ContactNo);
+                            var driverMsg = "Dear" + driver.FullName + "," + "You are assigned by the Requisition No" +
+                                            req.RequisitionNumber + ", and Employee Contact Number is" +
+                                            req.Employee.ContactNo;
+                            var message = MessageResource.Create(
+                                to,
+                                from: new PhoneNumber("+18504035959"), //  From number, must be an SMS-enabled Twilio number ( This will send sms from ur "To" numbers ).
+                                body: driverMsg );
+
+
                             MailService mailService = new MailService();
                             mailService.To = req.Employee.Email;
                             mailService.From = "demowork9999@gmail.com";
@@ -296,6 +315,9 @@ namespace RMS.App.Controllers
                                 mailMessage.Subject = mailService.Subject;
                                 mailMessage.Body = mailService.Body;
                                 smtpClient.Send(mailMessage);
+
+                               
+
 
                                 TempData["msg"] = "Vehicle assigned and mail send successfully";
 
@@ -345,7 +367,7 @@ namespace RMS.App.Controllers
             catch (Exception ex)
             {
                 ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Edit"));
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ReAssign"));
             }
         }
 
@@ -388,7 +410,7 @@ namespace RMS.App.Controllers
             catch (Exception ex)
             {
                 ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "Edit"));
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ReAssign"));
             }
         }
 
