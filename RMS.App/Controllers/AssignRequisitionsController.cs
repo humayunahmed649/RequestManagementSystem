@@ -281,7 +281,7 @@ namespace RMS.App.Controllers
                             const string authToken = "a6bdd845a5552a4df57cc59c097223d1";
                             TwilioClient.Init(accountSid, authToken);
                             var to = new PhoneNumber("+88" + driver.ContactNo);
-                            var driverMsg = "Dear" + driver.FullName + "," + "You are assigned by the Requisition No" +
+                            var driverMsg = "Dear " + driver.FullName + "," + "You are assigned by the Requisition No" +
                                             req.RequisitionNumber + ", and Employee Contact Number is" +
                                             req.Employee.ContactNo;
                             var message = MessageResource.Create(
