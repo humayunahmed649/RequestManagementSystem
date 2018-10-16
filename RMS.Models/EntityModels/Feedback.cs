@@ -18,10 +18,9 @@ namespace RMS.Models.EntityModels
         [Required]
         public int RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
-
-        public int? FeedBackId { get; set; }
-
-        public int? EmployeeId { get; set; }
+        [Required]
+        public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }

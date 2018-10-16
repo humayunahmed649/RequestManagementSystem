@@ -16,6 +16,16 @@ namespace RMS.Repositories
         {
         }
 
+        public override Feedback FindById(int id)
+        {
+            return
+                db.Set<Feedback>()
+                    .Include(c => c.Requisition.Employee.Designation)
+                    .Where(c => c.Id == id)
+                    .AsNoTracking()
+                    .FirstOrDefault();
+        }
+
         public override ICollection<Feedback> GetAll()
         {
             return db.Set<Feedback>().Include(c => c.Employee).Include(d=>d.Requisition.Employee.Designation).ToList();

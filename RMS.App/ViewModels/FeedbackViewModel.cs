@@ -10,22 +10,18 @@ namespace RMS.App.ViewModels
 {
     public class FeedbackViewModel
     {
-        public int  Id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-        [Required (ErrorMessage = "Please give a feedback message!")]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Write your comment")]
+        [Required]
+        [StringLength(250)]
         public string CommentText { get; set; }
-
-        [Display(Name = "Requiest Details")]
+        [Required]
         public int RequisitionId { get; set; }
         public Requisition Requisition { get; set; }
-
-        [Display(Name = "Feedback")]
-        public int FeedbackId { get; set; }
-
-        public int? EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+        public DateTime CreatedOn { get; set; }
 
 
     }

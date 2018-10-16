@@ -272,6 +272,7 @@
     <Compile Include="Controllers\EmployeeImagesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EmployeeTypesController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\GatePassController.cs" />
     <Compile Include="Controllers\HoldRequisitionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1043,7 +1044,6 @@
     <Content Include="Views\EmployeeTypes\Index.cshtml" />
     <Content Include="Views\AssignRequisitions\Requests.cshtml" />
     <Content Include="Views\Requisitions\RequisitionList.cshtml" />
-    <Content Include="Views\Requisitions\Feedback.cshtml" />
     <Content Include="Views\AssignRequisitions\ReAssign.cshtml" />
     <Content Include="Views\RequisitionQueue\Queue.cshtml" />
     <Content Include="Views\Home\AboutDeveloper.cshtml" />
@@ -1102,6 +1102,8 @@
     <Content Include="Views\HoldRequisition\Create.cshtml" />
     <Content Include="Views\HoldRequisition\Index.cshtml" />
     <Content Include="Views\Requisitions\Reply.cshtml" />
+    <Content Include="Views\Feedback\Create.cshtml" />
+    <Content Include="Views\Feedback\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

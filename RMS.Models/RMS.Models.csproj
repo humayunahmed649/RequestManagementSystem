@@ -296,6 +296,10 @@
     <Compile Include="Migrations\201810071252106_RequisitionHistoryModelAdded.Designer.cs">
       <DependentUpon>201810071252106_RequisitionHistoryModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810160138553_feedbackModel added datetime.cs" />
+    <Compile Include="Migrations\201810160138553_feedbackModel added datetime.Designer.cs">
+      <DependentUpon>201810160138553_feedbackModel added datetime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\AssignRequisitionReportVM.cs" />
@@ -435,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810071252106_RequisitionHistoryModelAdded.resx">
       <DependentUpon>201810071252106_RequisitionHistoryModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810160138553_feedbackModel added datetime.resx">
+      <DependentUpon>201810160138553_feedbackModel added datetime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

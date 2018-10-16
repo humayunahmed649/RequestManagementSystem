@@ -546,8 +546,11 @@ namespace RMS.App.Controllers
                     return HttpNotFound();
                 }
                 //RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
+                
+
                 FeedbackViewModel feedbackViewModel = new FeedbackViewModel();
                 feedbackViewModel.Requisition = requisition;
+
                 ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == requisitionId);
                 return View(feedbackViewModel);
             }
@@ -566,7 +569,11 @@ namespace RMS.App.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var requisitionByEmployee = _requisitionManager.FindById(feedbackViewModel.RequisitionId);
+                    var empId = requisitionByEmployee.EmployeeId;
                     Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
+                    feedback.EmployeeId = empId;
+                    feedback.CreatedOn=DateTime.Now;
                     _feedbackManager.Add(feedback);
                     ViewBag.Msg = "Comment Save successfully";
 

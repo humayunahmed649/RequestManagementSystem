@@ -96,7 +96,7 @@
 
                             @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}, new {@class = "btn btn-success btn-sm"}) <span> </span>
 
-                            @Html.ActionLink("Feedback", "Feedback", new {requisitionId = item.Id}, new {@class = "btn btn-info btn-sm"})
+                            @Html.ActionLink("Feedback", "Create","Feedback", new { requisitionId = item.RequisitionId}, new {@class = "btn btn-info btn-sm"})
 
                         </td>
                         <td>
