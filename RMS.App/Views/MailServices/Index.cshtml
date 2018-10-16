@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<RMS.App.ViewModels.MailServiceViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Mail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section styles
@@ -26,119 +26,120 @@
         @Html.Raw(TempData["msg1"])
     </div>
 }
-<div class="container">
-    <p>
-        @Html.ActionLink("New Mail", "Create", null, new { @class = "btn btn-success" })
-    </p>
-    <table id="example" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">
-        <thead>
-            <tr class="bg-info">
-                <th>
-                    SL
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.To)
-                </th>
+<p>
+    @Html.ActionLink("New Mail", "Create", null, new {@class = "btn btn-success"})
+</p>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Subject)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.From)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MailSendingDateTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Body)
-                </th>
-                
-                <th>
-                    @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
-                </th>
-                <th>
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                var sl = 0;
-                if (Model.Count() != 0)
-                {
+<table id="example" class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width: 100%">
+    
+    <thead>
+    <tr class="bg-info">
+        <th>
+            SL
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To)
+        </th>
 
-                    foreach (var item in Model)
-                    {
-                        sl++;
-                        <tr>
-                            <td>
-                                @sl
-                            </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MailSendingDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.To)
-                            </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var sl = 0;
+        if (Model.Count() != 0)
+        {
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Subject)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.From)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MailSendingDateTime)
-                            </td>
-                            <td>
-                                <span style="white-space: pre-line">@Html.DisplayFor(modelItem => item.Body)</span>
+            foreach (var item in Model)
+            {
+                sl++;
+                <tr>
+                    <td>
+                        @sl
+                    </td>
 
-                            </td>
-                            
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Requisition.RequisitionNumber)
-                            </td>
-                            <td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
 
-                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MailSendingDateTime)
+                    </td>
+                    <td>
+                        <span style="white-space: pre-line">@Html.DisplayFor(modelItem => item.Body)</span>
 
-                            </td>
-                        </tr>
-                    }
-                }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requisition.RequisitionNumber)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-info"})
+
+                    </td>
+                </tr>
             }
-        </tbody>
-        <tfoot>
-            <tr class="bg-secondary text-white">
-                <th>
-                    SL
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.To)
-                </th>
+        }
+    }
+    </tbody>
+    <tfoot>
+    <tr class="bg-secondary text-white">
+        <th>
+            SL
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To)
+        </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Subject)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.From)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MailSendingDateTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Body)
-                 </th>
-                
-                <th>
-                    @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
-                </th>
-                <th>
-                    Action
-                </th>
-            </tr>
-        </tfoot>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MailSendingDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
 
-    </table>
-</div>
+        <th>
+            @Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    </tfoot>
+
+</table>
+
 
 
 @section scripts

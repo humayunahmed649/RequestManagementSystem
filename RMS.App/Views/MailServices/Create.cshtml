@@ -1,11 +1,11 @@
 ﻿@model RMS.App.ViewModels.MailServiceViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Send Mail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Send Mail</h2>
+<h3>Send Mail</h3>
 <hr />
 @using (Html.BeginForm("Create","MailServices",FormMethod.Post,new { enctype = "multipart/form-data" }))
 {
