@@ -55,6 +55,7 @@
     <Compile Include="IManager.cs" />
     <Compile Include="INotificationManager.cs" />
     <Compile Include="IOrganizationManager.cs" />
+    <Compile Include="IReplyManager.cs" />
     <Compile Include="IRequisitionHistoryManager.cs" />
     <Compile Include="IRequisitionManager.cs" />
     <Compile Include="IRequisitionStatusManager.cs" />

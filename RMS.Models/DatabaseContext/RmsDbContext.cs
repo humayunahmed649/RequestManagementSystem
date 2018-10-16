@@ -46,8 +46,9 @@ namespace RMS.Models.DatabaseContext
         public System.Data.Entity.DbSet<RMS.Models.EntityModels.EmployeeImage> EmployeeImages { get; set; }
         public DbSet<ContactModel> Contacts { get; set; }
         public DbSet<CancelRequisition> CancelRequisitions { get; set; }
-        public DbSet<RequisitionHistory> RequisitionHistories { get; set; } 
+        public DbSet<RequisitionHistory> RequisitionHistories { get; set; }
 
+        public DbSet<Reply> Replies { get; set; }
 
         public ICollection<AssignRequisitionReportVM> GetAssignRequisitionSummaryReport()
         {
@@ -64,6 +65,6 @@ namespace RMS.Models.DatabaseContext
             modelBuilder.Entity<AppUserLogin>().ToTable("UserLogin");
             modelBuilder.Entity<AppUserClaim>().ToTable("UserClaim");
         }
-        
+
     }
 }

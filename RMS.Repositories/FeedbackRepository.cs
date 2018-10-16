@@ -16,19 +16,25 @@ namespace RMS.Repositories
         {
         }
 
+     
+
+        public override ICollection<Feedback> GetAll()
+        {
+            return db.Set<Feedback>().Include(c => c.Employee).Include(d=>d.Requisition.Employee.Designation).ToList();
+        }
+
         public override Feedback FindById(int id)
         {
             return
                 db.Set<Feedback>()
                     .Include(c => c.Requisition.Employee.Designation)
-                    .Where(c => c.Id == id)
-                    .AsNoTracking()
+                    .Where(c => c.Id == id).AsNoTracking()
                     .FirstOrDefault();
         }
 
-        public override ICollection<Feedback> GetAll()
+        public ICollection<Feedback> GetAllByRequisitionId(int requisitionId)
         {
-            return db.Set<Feedback>().Include(c => c.Employee).Include(d=>d.Requisition.Employee.Designation).ToList();
+            return db.Set<Feedback>().Include(c=>c.Employee.Designation).Where(c => c.RequisitionId == requisitionId).ToList();
         }
     }
 }

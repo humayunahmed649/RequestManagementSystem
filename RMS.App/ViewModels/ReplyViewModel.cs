@@ -1,29 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Security.Permissions;
 using System.Web;
 using RMS.Models.EntityModels;
 
 namespace RMS.App.ViewModels
 {
-    public class FeedbackViewModel
+    public class ReplyViewModel
     {
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Comment must be needed")]
+        [Required(ErrorMessage = "Please fill reply text box")]
         [StringLength(250)]
         [DataType(DataType.MultilineText)]
-        public string CommentText { get; set; }
+        [Display(Name = "Put your Reply")]
+        public string ReplyText { get; set; }
+        [NotMapped]
+        public int FeedbackId { get; set; }
+        [NotMapped]
+        public Feedback Feedback { get; set; }
+
         [Required]
-        public int RequisitionId { get; set; }
-        public Requisition Requisition { get; set; }
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
         public DateTime CreatedOn { get; set; }
-
-
     }
 }

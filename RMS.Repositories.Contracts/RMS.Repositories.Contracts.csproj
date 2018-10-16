@@ -54,6 +54,7 @@
     <Compile Include="IMailServiceRepository.cs" />
     <Compile Include="INotificationRepository.cs" />
     <Compile Include="IOrganizationRepository.cs" />
+    <Compile Include="IReplyRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRequisitionHistoryRepository.cs" />
     <Compile Include="IRequisitionRepository.cs" />

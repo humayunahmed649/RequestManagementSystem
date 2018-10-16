@@ -96,6 +96,9 @@ namespace RMS.App
             container.RegisterType<IFeedbackManager, FeedbackManager>();
             container.RegisterType<IFeedbackRepository, FeedbackRepository>();
 
+            container.RegisterType<IReplyManager, ReplyManager>();
+            container.RegisterType<IReplyRepository, ReplyRepository>();
+
             container.RegisterType<INotificationManager, NotificationManager>();
             container.RegisterType<INotificationRepository, NotificationRepository>();
 

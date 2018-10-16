@@ -84,7 +84,7 @@
                                 @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
                                 @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
                                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })*@
-                                @Html.ActionLink("Feedback", "Feedback", new { requisitionId = item.Id }, new { @class = "btn btn-outline-success btn-sm" })
+                                @Html.ActionLink("Feedback", "Create","Feedback", new { requisitionId = item.Id }, new { @class = "btn btn-outline-success btn-sm" })
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.RequisitionNumber)

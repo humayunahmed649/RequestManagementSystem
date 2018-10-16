@@ -65,6 +65,9 @@ namespace RMS.App
 
                 cfg.CreateMap<RequisitionHistory, RequisitionHistoryViewModel>();
                 cfg.CreateMap<RequisitionHistoryViewModel, RequisitionHistory>();
+
+                cfg.CreateMap<Reply, ReplyViewModel>();
+                cfg.CreateMap<ReplyViewModel, Reply>();
             });
             
         }

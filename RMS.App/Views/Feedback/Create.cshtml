@@ -10,12 +10,7 @@
 <div class="container border">
     <br />
 
-    <div class="col-md-6">
-        @if (ViewBag.Msg != null)
-        {
-            <div>@ViewBag.Msg</div>
-        }
-    </div>
+    
 
 
     <div class="row">
@@ -94,6 +89,13 @@
                 @Html.HiddenFor(model => model.Requisition.Id)
                 @Html.HiddenFor(model => model.Requisition.EmployeeId)
 
+
+                <div class="col-md-6">
+                    @if (TempData["Msg"] != null)
+                    {
+                        <div>@ViewBag.Msg</div>
+                    }
+                </div>
                 <div class="form-horizontal row">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
@@ -115,7 +117,7 @@
         </div>
         <div class="col-md-7">
             @{
-                var data = ViewBag.Feedback;
+                var data = ViewBag.FeedbackWithReplies;
             }
             @if (data != null)
             {
@@ -129,36 +131,41 @@
                         <table class="table table-bordered">
                             @Html.Hidden("returnUrl", this.Request.RawUrl)
 
+
                             @foreach (var comment in data)
                             {
-
                                 <tr>
-                                    @if (comment.Requisition.EmployeeId != null)
-                                    {
-                                        <td style="width: 30%" class="bold">
-                                            Mr. <b class="highlighted">@comment.Requisition.Employee.FullName</b> Says That
-                                            <br />
-                                            <span class="label label-success">@comment.CreatedOn</span>
 
-                                        </td>
-                                    }@*@if (comment.EmployeeId != null)
-                                        {
-                                            <td style="width: 30%">Mr. <b class="highlighted">@comment.Employee.FullName</b> Replyed That</td>
+                                    <td style="width: 30%" class="bold">
+                                        Mr. <b class="highlighted">@comment.Employee.FullName</b> Says That
+                                        <br/>
+                                        <br />
+                                        <span class="label label-success">@comment.Employee.Designation.Title</span>
 
-                                        }*@
-                                    <td style="width: 55%">@comment.CommentText
-                                    &nbsp; &nbsp;@Html.ActionLink("Update", "Edit","Feedback", new { id = @comment.Id },null)
                                     </td>
-                                    @if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
-                                    {
 
-                                        <td><a href="@Url.Action("Reply", "Requisitions", new { feedbackId = @comment.Id})" class="btn btn-primary" data-toggle="modal" data-target="#replyModal">Reply</a></td>
+                                    <td style="width: 60%" class="bold">
+                                        <b class="highlighted">@comment.CommentText</b>
+                                        <br /><br />
+                                        <span class="label label-success">@comment.CreatedOn</span>
+
+
+                                        @if (User.IsInRole("User"))
+                                        {
+                                            @Html.ActionLink("Update", "Edit", "Feedback", new { id = @comment.Id }, null)
+                                        }
+
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Controller"))
+                                        {
+
+                                        <td><a href="@Url.Action("Create", "Reply", new {commentId = @comment.Id})" class="btn btn-primary">Reply</a></td>
                                         @*<td><button class="btn btn-success pull-right btnReply" data-toggle="modal" data-target="#replyModal" value="@comment.Id">Reply</button></td>*@
-                                        @*<td style="width: 10%">@Html.ActionLink("Reply","Reply","Requisitions", new { feedbackId = @comment.Id},new {@id="btnReply"})</td>*@
+                                            @*<td style="width: 10%">@Html.ActionLink("Reply","Reply","Requisitions", new { feedbackId = @comment.Id},new {@id="btnReply"})</td>*@
 
-                                    }
 
-                                </tr>
+                                        }
+
+                                    </tr>
                             }
 
 

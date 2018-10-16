@@ -7,8 +7,8 @@ using RMS.Models.EntityModels;
 
 namespace RMS.BLL.Contracts
 {
-    public interface IFeedbackManager:IManager<Feedback>
+    public interface IReplyManager:IManager<Reply>
     {
-        ICollection<Feedback> GetAllByRequisitionId(int requisitionId);
+        Reply GetAllByFeedbackId(int feedbackId);
     }
 }

@@ -17,12 +17,14 @@ namespace RMS.App.Controllers
     {
         private IRequisitionManager _requisitionManager;
         private IFeedbackManager _feedbackManager;
+        private IReplyManager _replyManager;
 
-        public FeedbackController(IRequisitionManager requisitionManager, IEmployeeManager employeeManager, IFeedbackManager feedbackManager,
+        public FeedbackController(IRequisitionManager requisitionManager, IReplyManager replyManager, IFeedbackManager feedbackManager,
             IAssignRequisitionManager assignRequisitionManager, INotificationManager notificationManager, IRequisitionHistoryManager requisitionHistoryManager)
         {
             this._requisitionManager = requisitionManager;
             this._feedbackManager = feedbackManager;
+            this._replyManager = replyManager;
         }
 
         // GET: Feedback
@@ -63,13 +65,17 @@ namespace RMS.App.Controllers
                 FeedbackViewModel feedbackViewModel = new FeedbackViewModel();
                 feedbackViewModel.Requisition = requisition;
 
-                ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == requisitionId);
+                ViewBag.FeedbackWithReplies = _feedbackManager.GetAllByRequisitionId(requisitionId);
+                //if (feedback != null)
+                //{
+                //    ViewBag.FeedbackWithReplies = _replyManager.GetAllByFeedbackId(feedback.Contains("Id"));
+                //}
                 return View(feedbackViewModel);
             }
             catch (Exception ex)
             {
                 ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
+                return View("Error", new HandleErrorInfo(ex, "Feedback", "Create"));
             }
         }
 
@@ -90,13 +96,13 @@ namespace RMS.App.Controllers
                     feedback.EmployeeId = empId;
                     feedback.CreatedOn = DateTime.Now;
                     _feedbackManager.Add(feedback);
-                    ViewBag.Msg = "Comment Save successfully";
+                    TempData["Msg"] = "Comment Save successfully";
 
 
                     Requisition requisition = _requisitionManager.FindById(feedbackViewModel.RequisitionId);
                     RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
                     feedbackViewModel.Requisition = requisition;
-                    ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == feedbackViewModel.RequisitionId);
+                    ViewBag.FeedbackWithReplies = _feedbackManager.GetAllByRequisitionId(requisition.Id);
 
                 }
                 return View(feedbackViewModel);
@@ -138,7 +144,7 @@ namespace RMS.App.Controllers
                 Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
                 feedback.EmployeeId = updateFeedback.EmployeeId;
                 feedback.RequisitionId = updateFeedback.RequisitionId;
-                feedback.CreatedOn=DateTime.Now;
+                feedback.CreatedOn=updateFeedback.CreatedOn;
                 feedback.CommentText = feedbackViewModel.CommentText;
                 bool IsUpdate = _feedbackManager.Update(feedback);
                 if (IsUpdate)

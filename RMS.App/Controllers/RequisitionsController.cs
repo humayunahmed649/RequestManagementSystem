@@ -534,65 +534,7 @@ namespace RMS.App.Controllers
             }
         }
 
-        //Get: Requisitin Feedback
-        [HttpGet]
-        public ActionResult Feedback(int? requisitionId)
-        {
-            try
-            {
-                Requisition requisition = _requisitionManager.FindById((int)requisitionId);
-                if (requisition == null)
-                {
-                    return HttpNotFound();
-                }
-                //RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-                
-
-                FeedbackViewModel feedbackViewModel = new FeedbackViewModel();
-                feedbackViewModel.Requisition = requisition;
-
-                ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == requisitionId);
-                return View(feedbackViewModel);
-            }
-            catch (Exception ex)
-            {
-                ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
-            }
-        }
-
-        //Post: Requisitin Feedback
-        [HttpPost]
-        public ActionResult Feedback([Bind(Include = "Id,RequisitionId,CommentText")]FeedbackViewModel feedbackViewModel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var requisitionByEmployee = _requisitionManager.FindById(feedbackViewModel.RequisitionId);
-                    var empId = requisitionByEmployee.EmployeeId;
-                    Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
-                    feedback.EmployeeId = empId;
-                    feedback.CreatedOn=DateTime.Now;
-                    _feedbackManager.Add(feedback);
-                    ViewBag.Msg = "Comment Save successfully";
-
-
-                    Requisition requisition = _requisitionManager.FindById(feedbackViewModel.RequisitionId);
-                    RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-                    feedbackViewModel.Requisition = requisition;
-                    ViewBag.Feedback = _feedbackManager.GetAll().Where(c => c.RequisitionId == feedbackViewModel.RequisitionId);
-
-                }
-                return View(feedbackViewModel);
-            }
-            catch (Exception ex)
-            {
-                ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
-
-            }
-        }
+        
 
         [Authorize(Roles = "Controller,Admin")]
         //Get: Requisitin Reply

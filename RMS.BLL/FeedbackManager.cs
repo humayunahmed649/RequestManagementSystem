@@ -17,5 +17,10 @@ namespace RMS.BLL
         {
             this._feedbackRepository = repository;
         }
+
+        public ICollection<Feedback> GetAllByRequisitionId(int requisitionId)
+        {
+            return _feedbackRepository.GetAllByRequisitionId(requisitionId);
+        }
     }
 }

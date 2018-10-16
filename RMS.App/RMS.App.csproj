@@ -280,6 +280,7 @@
     <Compile Include="Controllers\MailServicesController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\ReplyController.cs" />
     <Compile Include="Controllers\RequisitionQueueController.cs" />
     <Compile Include="Controllers\RequisitionsController.cs" />
     <Compile Include="Controllers\RequisitionStatusController.cs" />
@@ -326,6 +327,7 @@
     <Compile Include="ViewModels\MailServiceViewModel.cs" />
     <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
+    <Compile Include="ViewModels\ReplyViewModel.cs" />
     <Compile Include="ViewModels\Report\AssignRequisitionReportVM.cs" />
     <Compile Include="ViewModels\RequisitionHistoryViewModel.cs" />
     <Compile Include="ViewModels\ValidationModels\GreaterThanZeroAttribute.cs" />
@@ -1104,6 +1106,7 @@
     <Content Include="Views\Requisitions\Reply.cshtml" />
     <Content Include="Views\Feedback\Create.cshtml" />
     <Content Include="Views\Feedback\Edit.cshtml" />
+    <Content Include="Views\Reply\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

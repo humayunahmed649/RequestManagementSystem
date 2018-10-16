@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using RMS.Models.EntityModels;
 
-namespace RMS.BLL.Contracts
+namespace RMS.Repositories.Contracts
 {
-    public interface IFeedbackManager:IManager<Feedback>
+    public interface IReplyRepository:IRepository<Reply>
     {
-        ICollection<Feedback> GetAllByRequisitionId(int requisitionId);
+        Reply GetAllByFeedbackId(int feedbackId);
     }
 }
