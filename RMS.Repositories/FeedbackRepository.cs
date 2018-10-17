@@ -36,5 +36,21 @@ namespace RMS.Repositories
         {
             return db.Set<Feedback>().Include(c=>c.Employee.Designation).Where(c => c.RequisitionId == requisitionId).ToList();
         }
+
+        public ICollection<Reply> GetAllFeedbackWithReply(int requistionId)
+        {
+            var FeedbackWithReply = (from r in db.Set<Reply>()
+                join f in db.Set<Feedback>() on r.FeedbackId equals f.Id
+                where f.RequisitionId == requistionId
+                select new Reply()
+                {
+                  Employee  = r.Employee,
+                  Feedback = r.Feedback,
+                  CreatedOn = r.CreatedOn,
+                  ReplyText= r.ReplyText
+                }
+                ).ToList();;
+            return FeedbackWithReply.ToList();
+        } 
     }
 }

@@ -16,7 +16,7 @@
                 <table class="table table-light table-primary dt-responsive nowrap">
 
                     <tr>
-                        <td style="width: 25%">@Html.DisplayNameFor(model => model.Requisition.RequisitionNumber)</td>
+                        <td style="width: 25%">@Html.DisplayNameFor(model => model.AssignRequisitionViewModel.Requisition.RequisitionNumber)</td>
                         <td>@Html.DisplayFor(model => model.AssignRequisitionViewModel.Requisition.RequisitionNumber)</td>
                     </tr>
                     <tr>
@@ -167,18 +167,18 @@
                     <div class="col-md-8">
                         @if (Model != null)
                         {
-                            @Html.DropDownList("VehicleType", new SelectList(Model.AssignRequisitionViewModel.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleTypeDD" })
+                            @Html.DropDownList("VehicleType", new SelectList(Model.VehicleTypes, "Id", "Name"), "Select Veicle Type", htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleTypeDD" })
                         }
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.AssignRequisitionViewModel.VehicleId, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.LabelFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
 
                         @Html.DropDownList("VehicleId", null, htmlAttributes: new { @class = "dropdown form-control", @id = "vehicleDD" })
 
-                        @Html.ValidationMessageFor(model => model.AssignRequisitionViewModel.VehicleId, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.VehicleId, "", new { @class = "text-danger" })
 
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                            {
                                @class = "form-control",
                                @id = "driverDD" @*"searchableDD3"*@})
-                        @Html.ValidationMessageFor(model => model.AssignRequisitionViewModel.EmployeeId, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

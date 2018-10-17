@@ -12,14 +12,7 @@ namespace RMS.App.ViewModels
     public class ReAssignRequisitionViewModel
     {
         public int Id { get; set; }
-
-        [Display(Name = "Requisition No")]
-        public string RequisitionNumber { get; set; }
-
-        [Display(Name = "Requisition Id")]
-        public int RequisitionId { get; set; }
-        public Requisition Requisition { get; set; }
-
+        
         [Required(ErrorMessage = "Please Enter valid Vehicle Information")]
         [Display(Name = "Vehicle Reg No")]
         public int VehicleId { get; set; }
@@ -33,8 +26,7 @@ namespace RMS.App.ViewModels
         [Display(Name = "Requisition Status")]
         public int RequisitionStatusId { get; set; }
         public RequisitionStatus RequisitionStatus { get; set; }
-
-        [NotMapped]
+        
         public List<VehicleType> VehicleTypes { get; set; }
         
         

@@ -353,15 +353,14 @@ namespace RMS.App.Controllers
                 {
                     return HttpNotFound();
                 }
-                AssignRequisitionViewModel assignRequisitionViewModel =Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
+                //AssignRequisitionViewModel assignRequisitionViewModel =Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
                 ReAssignRequisitionViewModel requisitionViewModel=new ReAssignRequisitionViewModel();
-                requisitionViewModel.AssignRequisitionViewModel = assignRequisitionViewModel;
+                requisitionViewModel.AssignRequisitionViewModel = Mapper.Map<AssignRequisitionViewModel>(assignRequisition);
 
 
-                assignRequisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
+                requisitionViewModel.VehicleTypes = _vehicleTypeManager.GetAll().ToList();
                 ViewBag.EmployeeId = new SelectList(_employeeManager.GetAllDriver(), "Id", "FullName");
                 ViewBag.VehicleId = new SelectListItem[] { new SelectListItem() { Value = "", Text = "Select Vehicle" } };
-                ViewBag.RequisitionStatusId = new SelectList(_requisitionStatusManager.GetAllStatusNew(), "Id", "StatusType");
                 return View(requisitionViewModel);
             }
             catch (Exception ex)
@@ -382,12 +381,15 @@ namespace RMS.App.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                   
                     var assignRequisition = _assignRequisitionManager.FindById(reAssignRequisitionViewModel.Id);
                     
+
                     assignRequisition.VehicleId = reAssignRequisitionViewModel.VehicleId;
                     assignRequisition.EmployeeId = reAssignRequisitionViewModel.EmployeeId;
-                    bool IsSaved=_assignRequisitionManager.Update(assignRequisition);
-                    if (IsSaved)
+
+                    bool IsUpdated=_assignRequisitionManager.Update(assignRequisition);
+                    if (IsUpdated)
                     {
                         var requisitionUpdate = _requisitionManager.FindById(assignRequisition.RequisitionId);
                         requisitionUpdate.StartDateTime = reAssignRequisitionViewModel.StartDateTime;
