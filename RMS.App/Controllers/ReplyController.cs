@@ -95,7 +95,7 @@ namespace RMS.App.Controllers
                 bool IsSave = _replyManager.Add(reply);
                 if (IsSave)
                 {
-                    return RedirectToAction("Create",new { commentId =replyViewModel.Id});
+                    TempData["msg"] = "reply save successfully";
                 }
             }
             return View(replyViewModel);

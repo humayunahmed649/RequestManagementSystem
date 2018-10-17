@@ -43,8 +43,8 @@ $(document).ready(function() {
                     //$("#vehicleDetails").append($('<p>').html('<b>Status : </b>' + response.StatusType));
                     $vehicleDetails.append($('<span class="form-control text-danger font-weight-bold">').html('<span class="text-success">Status : </span>' + response.RequisitionStatus.StatusType));
                     $vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Requisition Number : </span>' + response.RequisitionNumber));
-                    $vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Start Date Time : </span>' + response.Requisition.StartDateTime));
-                    $vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">End Date Time : </span>' + response.Requisition.EndDateTime));
+                    //$vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Start Date Time : </span>' + response.Requisition.StartDateTime.format("DD-MMM-YYYY HH:mm a")));
+                    //$vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">End Date Time : </span>' + response.Requisition.EndDateTime.format("DD-MMM-YYYY HH:mm a")));
                     $vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Requestor Name : </span>' + response.Requisition.Employee.FullName));
                     $vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Contact No : </span>' + response.Requisition.Employee.ContactNo));
                     $vehicleDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">From Place : </span>' + response.Requisition.FromPlace));
@@ -92,8 +92,8 @@ $(document).ready(function() {
                     //$("#vehicleDetails").append($('<p>').html('<b>Status : </b>' + response.StatusType));
                     $driverDetails.append($('<span class="form-control text-danger font-weight-bold">').html('<span class="text-success">Status : </span>' + response.RequisitionStatus.StatusType));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Requisition Number : </span>' + response.RequisitionNumber));
-                    $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Start Date Time : </span>' + response.Requisition.StartDateTime));
-                    $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">End Date Time : </span>' + response.Requisition.EndDateTime.dateTime));
+                    //$driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Start Date Time : </span>' + response.Requisition.StartDateTime));
+                    //$driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">End Date Time : </span>' + response.Requisition.EndDateTime.dateTime));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Requestor Name : </span>' + response.Requisition.Employee.FullName));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">Contact No : </span>' + response.Requisition.Employee.ContactNo));
                     $driverDetails.append($('<span class="form-control text-primary bold">').html('<span class="text-success">From Place : </span>' + response.Requisition.FromPlace));

@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-2-custom">
-                        @Html.DisplayName("Requiest By")
+                        @Html.DisplayName("Request By")
                     </td>
                     <td >
                         @Html.DisplayFor(model => model.Requisition.Employee.FullName)
@@ -109,6 +109,10 @@
                 @if (@Model.StatusType == "Completed")
                 {
                     <td class="text-success">@Model.StatusType</td>
+                }
+                @if (@Model.StatusType == "Assigned")
+                {
+                    <td class="text-success font-weight-bold">@Model.StatusType</td>
                 }
                 @if (@Model.StatusType == "OnExecute")
                 {
