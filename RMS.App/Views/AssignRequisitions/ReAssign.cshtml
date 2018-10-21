@@ -4,6 +4,18 @@
     ViewBag.Title = "Re-Assign";
 }
 
+
+@section styles{
+
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+}
+
 <h3>Re-Assigned Requisition</h3>
 <hr/>
 @if (Model != null)
@@ -146,9 +158,6 @@
                 @Html.HiddenFor(model => model.AssignRequisitionViewModel.RequisitionNumber)
 
 
-                <div class="form-group row">
-                    <p class="text-center font-weight-bold text-primary">Please Select Same Vehicle and Driver for Re-assign</p>
-                </div>
 
                 <div class="form-group row">
                     @Html.LabelFor(model => model.AssignRequisitionViewModel.RequisitionNumber, htmlAttributes: new { @class = "control-label col-md-4" })
@@ -195,29 +204,29 @@
                     </div>
                 </div>
 
+
                 <div class="form-group row">
                     @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control datePicker" } })
                         @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
                     </div>
-
                 </div>
 
                 <div class="form-group row">
                     @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control datePicker" } })
                         @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
                     </div>
-
+                    
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
                         <input type="submit" value="Re-Assign" class="btn btn-success" /> &nbsp;
-                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+                        <a href="#" class="btn btn-warning" data-dismiss="modal">Cancel</a>
                     </div>
                 </div>
             </div>
@@ -229,15 +238,19 @@
 
 @section Scripts {
 
-   @Scripts.Render("~/bundles/jqueryval")
-<script src="~/Scripts/moment.js"></script>
-<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
-<script src="~/Scripts/RequisitionJs/RequisitionDataTime.js"></script>
-<script src="~/Scripts/chosenDD/chosen_DD.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
 
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/RequisitionJs/RequisitionDataTime.js"></script>
+    <script src="~/Scripts/chosenDD/chosen_DD.js"></script>
 
-<script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    <script src="~/Scripts/AssignRequisitionJs/AssignRequisitionCreateJs.js"></script>
+    
 }

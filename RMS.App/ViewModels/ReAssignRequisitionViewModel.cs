@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using RMS.App.ViewModels.ValidationModels;
 using RMS.Models.EntityModels;
 
@@ -32,18 +33,16 @@ namespace RMS.App.ViewModels
         
         public AssignRequisitionViewModel AssignRequisitionViewModel { get; set; }
         
-        //[Required(ErrorMessage = "Please provide a journey start date and time!")]
+        [Required(ErrorMessage = "Please provide a journey start date and time!")]
         [Display(Name = "Journey Date")]
-
-        [DataType(DataType.DateTime)]
         public DateTime StartDateTime { get; set; }
         
         
         [Required(ErrorMessage = "Please provide a journey end date and time!")]
         [Display(Name = "Return Date")]
-        [DataType(DataType.DateTime)]
         public DateTime EndDateTime { get; set; }
-        
+
+
 
     }
 }

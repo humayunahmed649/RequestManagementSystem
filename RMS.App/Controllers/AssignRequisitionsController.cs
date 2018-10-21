@@ -281,7 +281,7 @@ namespace RMS.App.Controllers
                             const string authToken = "a6bdd845a5552a4df57cc59c097223d1";
                             TwilioClient.Init(accountSid, authToken);
                             var to = new PhoneNumber("+88" + driver.ContactNo);
-                            var driverMsg = "Dear " + driver.FullName + "," + "You are assigned by the Requisition No" +
+                            var driverMsg = "Dear " + driver.FullName + "," + " You are assigned by the Requisition No " +
                                             req.RequisitionNumber + ", and Employee Contact Number is" +
                                             req.Employee.ContactNo;
                             var message = MessageResource.Create(
@@ -387,11 +387,14 @@ namespace RMS.App.Controllers
 
                     assignRequisition.VehicleId = reAssignRequisitionViewModel.VehicleId;
                     assignRequisition.EmployeeId = reAssignRequisitionViewModel.EmployeeId;
-
+                    assignRequisition.Employee = null;
+                    assignRequisition.Vehicle = null;
                     bool IsUpdated=_assignRequisitionManager.Update(assignRequisition);
                     if (IsUpdated)
                     {
                         var requisitionUpdate = _requisitionManager.FindById(assignRequisition.RequisitionId);
+
+
                         requisitionUpdate.StartDateTime = reAssignRequisitionViewModel.StartDateTime;
                         requisitionUpdate.EndDateTime = reAssignRequisitionViewModel.EndDateTime;
                         _requisitionManager.Update(requisitionUpdate);
