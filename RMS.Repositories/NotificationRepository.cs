@@ -24,7 +24,7 @@ namespace RMS.Repositories
 
         public ICollection<Notification> GetNotificationsForController(string controllerViewStatus)
         {
-            return db.Set<Notification>().Where(s=>s.ControllerViewStatus==controllerViewStatus).Include(c => c.Employee).Include(c => c.Requisition).OrderByDescending(c => c.Id).AsNoTracking().ToList();
+           return db.Set<Notification>().Where(s=>s.ControllerViewStatus==controllerViewStatus).Include(c => c.Employee).Include(c => c.Requisition).OrderByDescending(c => c.Id).AsNoTracking().ToList();
         }
 
         public ICollection<Notification> GetNotificationsForSender(string senderViewstatus,int id)

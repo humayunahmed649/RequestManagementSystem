@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using RMS.App.ViewModels.Report;
 using RMS.Models.EntityModels;
 using RMS.Models.EntityModels.Identity;
+using RMS.Models.Report;
 
 namespace RMS.Models.DatabaseContext
 {
@@ -53,6 +54,12 @@ namespace RMS.Models.DatabaseContext
         public ICollection<AssignRequisitionReportVM> GetAssignRequisitionSummaryReport()
         {
             var report=Database.SqlQuery<AssignRequisitionReportVM>("Select * From AssignRequisitionReport");
+            return report.ToList();
+        }
+
+        public List<AssignReportVM> GetAssignRequisition()
+        {
+            var report = Database.SqlQuery<AssignReportVM>("Select * From AssignReport where id=2");
             return report.ToList();
         }
 

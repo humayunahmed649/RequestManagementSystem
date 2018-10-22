@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using RMS.App.ViewModels.Report;
 using RMS.Models.DatabaseContext;
 using RMS.Models.EntityModels;
+using RMS.Models.Report;
 using RMS.Repositories.Base;
 using RMS.Repositories.Contracts;
 
@@ -139,6 +140,11 @@ namespace RMS.Repositories
         {
             var report = _db.GetAssignRequisitionSummaryReport();
             return report;
+        }
+        public List<AssignReportVM> GetAssignRequisition()
+        {
+            var report = _db.GetAssignRequisition();
+            return report.ToList();
         }
     }
     

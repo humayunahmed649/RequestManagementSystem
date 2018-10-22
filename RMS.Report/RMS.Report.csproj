@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\RMS.App.ViewModels.Report.AssignRequisitionReportVM.datasource" />
+    <None Include="Properties\DataSources\RMS.Models.EntityModels.AssignRequisition.datasource" />
+    <None Include="Properties\DataSources\RMS.Models.Report.AssignReportVM.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

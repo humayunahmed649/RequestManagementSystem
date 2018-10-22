@@ -39,18 +39,20 @@ namespace RMS.Repositories
 
         public ICollection<Reply> GetAllFeedbackWithReply(int requistionId)
         {
-            var FeedbackWithReply = (from r in db.Set<Reply>()
+            var feedbackReply = (from r in db.Set<Reply>()
                 join f in db.Set<Feedback>() on r.FeedbackId equals f.Id
-                where f.RequisitionId == requistionId
+                where f.RequisitionId==requistionId
                 select new Reply()
                 {
-                  Employee  = r.Employee,
-                  Feedback = r.Feedback,
-                  CreatedOn = r.CreatedOn,
-                  ReplyText= r.ReplyText
+                    Employee = r.Employee,
+                    ReplyText = r.ReplyText,
+                    FeedbackId = f.Id,
+                    CreatedOn = f.CreatedOn,
+                   
                 }
-                ).ToList();;
-            return FeedbackWithReply.ToList();
+
+                ).ToList();
+            return feedbackReply.ToList();
         } 
     }
 }

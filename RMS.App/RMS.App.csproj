@@ -328,6 +328,7 @@
     <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
     <Compile Include="ViewModels\ReplyViewModel.cs" />
+    <Compile Include="ViewModels\Report\AssignReportVM.cs" />
     <Compile Include="ViewModels\Report\AssignRequisitionReportVM.cs" />
     <Compile Include="ViewModels\RequisitionHistoryViewModel.cs" />
     <Compile Include="ViewModels\ValidationModels\GreaterThanZeroAttribute.cs" />
@@ -1107,6 +1108,7 @@
     <Content Include="Views\Feedback\Create.cshtml" />
     <Content Include="Views\Feedback\Edit.cshtml" />
     <Content Include="Views\Reply\Create.cshtml" />
+    <Content Include="Views\AssignRequisitions\PrintAssignRequisition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1147,6 +1149,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\AssignRequisition\AssignReportRdlc.rdlc" />
     <EmbeddedResource Include="Report\AssignRequisition\AssignRequisitionReportRdlc.rdlc" />
     <EmbeddedResource Include="Resources\HomeText.bn.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

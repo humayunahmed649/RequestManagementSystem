@@ -1,0 +1,22 @@
+USE RMSDb;
+GO
+create view AssignReport
+as
+select assignReq.RequisitionNumber,
+r.RequisitionType,
+r.StartDateTime,
+r.EndDateTime,
+r.FromPlace,
+r.DestinationPlace,
+r.description,
+v.BrandName,
+v.RegNo,
+e.FullName,
+e.ContactNo,
+rs.StatusType
+
+from assignrequisitions assignReq
+left outer join requisitions r on assignReq.RequisitionId=r.Id
+left outer join Vehicles v on assignReq.vehicleId=v.Id
+left outer join Employees e on assignReq.EmployeeId=e.Id
+left outer join requisitionStatus rs on assignReq.RequisitionStatusId=rs.Id

@@ -579,6 +579,36 @@ namespace RMS.App.Controllers
             }
 
         }
+
+        public ActionResult PrintAssignRequisition()
+        {
+            try
+            {
+                var reportData = _assignRequisitionManager.GetAssignRequisition();
+                var reportPath = Request.MapPath(Request.ApplicationPath) + @"\Report\AssignRequisition\AssignReportRdlc.rdlc";
+                ReportViewer reportViewer = new ReportViewer()
+                {
+                    KeepSessionAlive = true,
+                    SizeToReportContent = true,
+                    Width = Unit.Percentage(100),
+                    ProcessingMode = ProcessingMode.Local
+                };
+
+                reportViewer.LocalReport.ReportPath = reportPath;
+
+                ReportDataSource rds = new ReportDataSource("DS_AssignReport", reportData);
+
+                reportViewer.LocalReport.DataSources.Add(rds);
+                ViewBag.ReportViewer = reportViewer;
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ReportIndex"));
+            }
+        }
         public ActionResult PrintDetails(int? id)
         {
             try

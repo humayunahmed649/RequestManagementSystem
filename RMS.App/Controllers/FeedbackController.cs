@@ -65,11 +65,10 @@ namespace RMS.App.Controllers
                 FeedbackViewModel feedbackViewModel = new FeedbackViewModel();
                 feedbackViewModel.Requisition = requisition;
 
-                ViewBag.FeedbackWithReplies = _feedbackManager.GetAllByRequisitionId(requisitionId);
-                //if (feedback != null)
-                //{
-                //    ViewBag.FeedbackWithReplies = _replyManager.GetAllByFeedbackId(feedback.Contains("Id"));
-                //}
+                ViewBag.Feedback = _feedbackManager.GetAllByRequisitionId(requisitionId);
+                
+                //ViewBag.FeedbackWithReplies = _feedbackManager.GetAllFeedbackWithReply(requisitionId);
+                
                 return View(feedbackViewModel);
             }
             catch (Exception ex)
@@ -102,7 +101,7 @@ namespace RMS.App.Controllers
                     Requisition requisition = _requisitionManager.FindById(feedbackViewModel.RequisitionId);
                     RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
                     feedbackViewModel.Requisition = requisition;
-                    ViewBag.FeedbackWithReplies = _feedbackManager.GetAllByRequisitionId(requisition.Id);
+                    ViewBag.Feedback = _feedbackManager.GetAllByRequisitionId(feedbackViewModel.RequisitionId);
 
                 }
                 return View(feedbackViewModel);

@@ -10,5 +10,6 @@ namespace RMS.BLL.Contracts
     public interface IFeedbackManager:IManager<Feedback>
     {
         ICollection<Feedback> GetAllByRequisitionId(int requisitionId);
+        ICollection<Reply> GetAllFeedbackWithReply(int requistionId);
     }
 }

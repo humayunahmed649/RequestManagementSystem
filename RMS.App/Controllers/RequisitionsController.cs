@@ -536,69 +536,69 @@ namespace RMS.App.Controllers
 
         
 
-        [Authorize(Roles = "Controller,Admin")]
-        //Get: Requisitin Reply
-        [HttpGet]
-        public ActionResult Reply(int feedbackId)
-        {
-            try
-            {
-                Feedback feedback = _feedbackManager.FindById((int)feedbackId);
-                if (feedback == null)
-                {
-                    return HttpNotFound();
-                }
+        //[Authorize(Roles = "Controller,Admin")]
+        ////Get: Requisitin Reply
+        //[HttpGet]
+        //public ActionResult Reply(int feedbackId)
+        //{
+        //    try
+        //    {
+        //        Feedback feedback = _feedbackManager.FindById((int)feedbackId);
+        //        if (feedback == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
 
-                //Get employee Id by user login id
-                var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-                var empId = _employeeManager.FindByLoginId(loginUserId);
+        //        //Get employee Id by user login id
+        //        var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+        //        var empId = _employeeManager.FindByLoginId(loginUserId);
 
-                FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
+        //        FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
 
-                feedbackViewModel.EmployeeId = Convert.ToInt32(empId.Id);
+        //        feedbackViewModel.EmployeeId = Convert.ToInt32(empId.Id);
 
-                return View(feedbackViewModel);
-            }
-            catch (Exception ex)
-            {
-                ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Reply"));
-            }
+        //        return View(feedbackViewModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionMessage(ex);
+        //        return View("Error", new HandleErrorInfo(ex, "Requisitions", "Reply"));
+        //    }
 
-        }
+        //}
 
 
-        //Post: Requisition Reply
-        [HttpPost]
-        public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId,EmployeeId")]FeedbackViewModel feedbackViewModel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    //Get employee Id by user login id
-                    var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-                    var empId = _employeeManager.FindByLoginId(loginUserId);
-                    feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
-                    Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
+        ////Post: Requisition Reply
+        //[HttpPost]
+        //public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId,EmployeeId")]FeedbackViewModel feedbackViewModel)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            //Get employee Id by user login id
+        //            var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
+        //            var empId = _employeeManager.FindByLoginId(loginUserId);
+        //            feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
+        //            Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
 
-                    bool IsSave = _feedbackManager.Add(feedback);
-                    if (IsSave)
-                    {
-                        ViewBag.Msg = "Reply Has been saved successfully";
-                        return RedirectToAction("Feedback", new { requisitionId = feedback.RequisitionId });
-                    }
-                }
+        //            bool IsSave = _feedbackManager.Add(feedback);
+        //            if (IsSave)
+        //            {
+        //                ViewBag.Msg = "Reply Has been saved successfully";
+        //                return RedirectToAction("Feedback", new { requisitionId = feedback.RequisitionId });
+        //            }
+        //        }
 
-                return View();
-            }
-            catch (Exception ex)
-            {
-                ExceptionMessage(ex);
-                return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
+        //        return View();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionMessage(ex);
+        //        return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
 
-            }
-        }
+        //    }
+        //}
         private void ExceptionMessage(Exception ex)
         {
             ViewBag.ErrorMsg = ex.Message;

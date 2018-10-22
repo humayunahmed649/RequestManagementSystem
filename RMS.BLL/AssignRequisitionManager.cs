@@ -8,6 +8,7 @@ using RMS.BLL.Base;
 using RMS.BLL.Contracts;
 using RMS.Models.EntityModels;
 using RMS.Models.EntityViewModel;
+using RMS.Models.Report;
 using RMS.Repositories.Contracts;
 
 namespace RMS.BLL
@@ -44,5 +45,10 @@ namespace RMS.BLL
         {
             return _assignRequisitionRepository.GetRequisitionSummaryReport();
         }
+        public List<AssignReportVM> GetAssignRequisition()
+        {
+            return _assignRequisitionRepository.GetAssignRequisition();
+        }
+
     }
 }
