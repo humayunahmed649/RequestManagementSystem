@@ -12,7 +12,7 @@ namespace RMS.Models.Migrations
             AddColumn("dbo.Feedbacks", "CreatedOn", c => c.DateTime(nullable: false));
             AlterColumn("dbo.Feedbacks", "EmployeeId", c => c.Int(nullable: false));
             CreateIndex("dbo.Feedbacks", "EmployeeId");
-            AddForeignKey("dbo.Feedbacks", "EmployeeId", "dbo.Employees", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Feedbacks", "EmployeeId", "dbo.Employees", "Id", cascadeDelete: false);
             DropColumn("dbo.Feedbacks", "FeedBackId");
         }
         

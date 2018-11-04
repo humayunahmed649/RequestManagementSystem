@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -232,12 +233,21 @@ namespace RMS.App.Controllers
                 status.RequisitionId = assignRequisition.RequisitionId;
                 status.RequisitionNumber = assignRequisition.RequisitionNumber;
                 status.StatusType = "Assigned";
+
                 bool Saved = _requisitionStatusManager.Update(status);
+
                 if (Saved)
                 {
                     //Notifaication status change after assign requisition
                     Notification notificationUpdate =
                         _notificationManager.FindByRequisitionId(assignRequisition.RequisitionId);
+
+                    //Get Driver by id
+                    var driver = _employeeManager.FindById(assignRequisition.EmployeeId);
+
+                    //Get employee by requisition Id
+                    var req = _requisitionManager.FindById(assignRequisition.RequisitionId);
+
                     if (notificationUpdate != null)
                     {
                         notificationUpdate.ControllerViewStatus = "Seen";
@@ -249,11 +259,6 @@ namespace RMS.App.Controllers
                         //Sending mail to employee for assigned vehicle
                         if (updateResult)
                         {
-                            //Get employee by requisition Id
-                            var req = _requisitionManager.FindById(assignRequisition.RequisitionId);
-
-                            //Get Driver by id
-                            var driver = _employeeManager.FindById(assignRequisition.EmployeeId);
 
                             //Get Vehicle Type by id
                             var vehicle = _vehicleManager.FindById(assignRequisition.VehicleId);
@@ -273,21 +278,6 @@ namespace RMS.App.Controllers
                                           Environment.NewLine + "Vehicle :" + vehicle.VehicleType.Name +
                                           " and Reg No : " + vehicle.RegNo + Environment.NewLine +
                                           "Regards, " + Environment.NewLine + controller.FullName;
-
-
-                            //SmS to the driver and user
-
-                            const string accountSid = "AC092d5f38c0ba5e8b384528c662c3209e";
-                            const string authToken = "a6bdd845a5552a4df57cc59c097223d1";
-                            TwilioClient.Init(accountSid, authToken);
-                            var to = new PhoneNumber("+88" + driver.ContactNo);
-                            var driverMsg = "Dear " + driver.FullName + "," + " You are assigned by the Requisition No " +
-                                            req.RequisitionNumber + ", and Employee Contact Number is" +
-                                            req.Employee.ContactNo;
-                            var message = MessageResource.Create(
-                                to,
-                                from: new PhoneNumber("+18504035959"), //  From number, must be an SMS-enabled Twilio number ( This will send sms from ur "To" numbers ).
-                                body: driverMsg );
 
 
                             MailService mailService = new MailService();
@@ -316,9 +306,6 @@ namespace RMS.App.Controllers
                                 mailMessage.Body = mailService.Body;
                                 smtpClient.Send(mailMessage);
 
-                               
-
-
                                 TempData["msg"] = "Vehicle assigned and mail send successfully";
 
 
@@ -332,10 +319,36 @@ namespace RMS.App.Controllers
                                 //}
 
                             }
+
+                            
+
                         }
                     }
+                    try
+                    {
+                        //SmS to the driver and user
 
+                        const string accountSid = "AC092d5f38c0ba5e8b384528c662c3209e";
+                        const string authToken = "a6bdd845a5552a4df57cc59c097223d1";
+                        TwilioClient.Init(accountSid, authToken);
+                        var to = new PhoneNumber("+88" + driver.ContactNo);
+                        var driverMsg = "Dear " + driver.FullName + "," + " You are assigned by the Requisition No " +
+                                        req.RequisitionNumber + ", and Employee Contact Number is" +
+                                        req.Employee.ContactNo;
+                        var message = MessageResource.Create(
+                            to,
+                            from: new PhoneNumber("+18504035959"), //  From number, must be an SMS-enabled Twilio number ( This will send sms from ur "To" numbers ).
+                            body: driverMsg);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        var failMessage = ex.ToString();
+                        TempData["msg"] = "Vehicle assigned and mail send successfully but fail to send message for invalid mobile number";
+                    }
+                    
                 }
+                
             }
         }
 

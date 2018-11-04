@@ -19,7 +19,7 @@ namespace RMS.Models.Migrations
                         RequisitionId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Requisitions", t => t.RequisitionId, cascadeDelete: true)
+                .ForeignKey("dbo.Requisitions", t => t.RequisitionId, cascadeDelete: false)
                 .Index(t => t.RequisitionId);
             
         }
