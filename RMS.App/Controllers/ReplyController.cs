@@ -71,8 +71,7 @@ namespace RMS.App.Controllers
             ReplyViewModel replyViewModel = new ReplyViewModel();
             replyViewModel.FeedbackId = feedback.Id;
             
-            //ReplyViewModel replyViewModel = new ReplyViewModel();
-            //replyViewModel.Feedback = Mapper.Map<Feedback>(feedback);
+            
             return View(replyViewModel);
         }
 
@@ -91,7 +90,6 @@ namespace RMS.App.Controllers
                 var empId = _employeeManager.FindByLoginId(loginUserId);
                 reply.EmployeeId = empId.Id;
                 reply.CreatedOn=DateTime.Now;
-
                 bool IsSave = _replyManager.Add(reply);
                 if (IsSave)
                 {

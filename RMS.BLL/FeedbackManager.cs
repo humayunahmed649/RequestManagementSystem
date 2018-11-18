@@ -23,9 +23,9 @@ namespace RMS.BLL
             return _feedbackRepository.GetAllByRequisitionId(requisitionId);
         }
 
-        public ICollection<Reply> GetAllFeedbackWithReply(int requistionId)
+        public ICollection<Reply> GetAllFeedbackWithReply(int requisitionId)
         {
-            return _feedbackRepository.GetAllFeedbackWithReply(requistionId);
+            return _feedbackRepository.GetAllFeedbackWithReply(requisitionId);
         }
     }
 }

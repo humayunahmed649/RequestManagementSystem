@@ -65,6 +65,8 @@ namespace RMS.App.Controllers
                 FeedbackViewModel feedbackViewModel = new FeedbackViewModel();
                 feedbackViewModel.Requisition = requisition;
 
+
+
                 ViewBag.Feedback = _feedbackManager.GetAllByRequisitionId(requisitionId);
                 
                 //ViewBag.FeedbackWithReplies = _feedbackManager.GetAllFeedbackWithReply(requisitionId);

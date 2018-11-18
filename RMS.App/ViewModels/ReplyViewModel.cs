@@ -22,7 +22,6 @@ namespace RMS.App.ViewModels
         public int FeedbackId { get; set; }
         [NotMapped]
         public Feedback Feedback { get; set; }
-
         [Required]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
