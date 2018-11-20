@@ -69,8 +69,6 @@ namespace RMS.App.Controllers
 
                 ViewBag.Feedback = _feedbackManager.GetAllByRequisitionId(requisitionId);
                 
-                //ViewBag.FeedbackWithReplies = _feedbackManager.GetAllFeedbackWithReply(requisitionId);
-                
                 return View(feedbackViewModel);
             }
             catch (Exception ex)

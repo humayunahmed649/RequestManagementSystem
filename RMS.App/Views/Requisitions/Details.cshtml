@@ -199,7 +199,7 @@
             @if (Model.StatusType == "New")
             {
                 <br/>
-                <h4>Rquiest status: </h4>
+                <h4>Request Status: </h4>
                 <hr/>
                 <div class="col-md-10">
                     <span class="font-weight-normal">This is new Request. Which is not assigned.</span>
@@ -217,5 +217,7 @@
     }
      &nbsp;
     @Html.ActionLink("Back to List", "Create", null, new {@class = "btn btn-info"}) &nbsp;
+    @Html.ActionLink(" Feedback ", "Create", "Feedback", new {requisitionId = Model.Id}, new {@class = "btn btn-warning"})&nbsp;
+    @Html.ActionLink(" Print ", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
     @*@Html.ActionLink("Delete", "Delete", new {id = Model.Id}, new {@class = "btn btn-danger"})*@
 </p>

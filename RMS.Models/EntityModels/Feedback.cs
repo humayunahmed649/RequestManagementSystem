@@ -22,5 +22,6 @@ namespace RMS.Models.EntityModels
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
         public DateTime CreatedOn { get; set; }
+        public virtual List<Reply> Replies { get; set; }
     }
 }

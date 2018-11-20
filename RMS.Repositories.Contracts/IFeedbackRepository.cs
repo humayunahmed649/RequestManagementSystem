@@ -10,6 +10,6 @@ namespace RMS.Repositories.Contracts
     public interface IFeedbackRepository:IRepository<Feedback>
     {
         ICollection<Feedback> GetAllByRequisitionId(int requisitionId);
-        ICollection<Reply> GetAllFeedbackWithReply(int requisitionId);
+        Reply GetReply(int feedbackId);
     }
 }

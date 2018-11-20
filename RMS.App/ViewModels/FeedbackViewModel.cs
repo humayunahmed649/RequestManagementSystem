@@ -16,6 +16,7 @@ namespace RMS.App.ViewModels
         [Required(ErrorMessage = "Comment must be needed")]
         [StringLength(250)]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Put Your Comment Here")]
         public string CommentText { get; set; }
         [Required]
         public int RequisitionId { get; set; }

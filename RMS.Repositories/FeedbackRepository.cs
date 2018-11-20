@@ -34,12 +34,12 @@ namespace RMS.Repositories
 
         public ICollection<Feedback> GetAllByRequisitionId(int requisitionId)
         {
-            return db.Set<Feedback>().Include(c=>c.Employee.Designation).Where(c => c.RequisitionId == requisitionId).ToList();
+            return db.Set<Feedback>().Include(c=>c.Employee.Designation).Include(c=>c.Replies).Where(c => c.RequisitionId == requisitionId).ToList();
         }
 
-        public ICollection<Reply> GetAllFeedbackWithReply(int requisitionId)
+        public Reply GetReply(int feedbackId)
         {
-            return db.Set<Reply>().Include(c => c.Employee).Include(c => c.Employee.Designation).Include(c => c.Feedback).ToList();
+            return db.Set<Reply>().Include(c => c.Employee).Include(c => c.Employee.Designation).Include(c=>c.Feedback).FirstOrDefault(c => c.FeedbackId==feedbackId);
         }
     }
 }
