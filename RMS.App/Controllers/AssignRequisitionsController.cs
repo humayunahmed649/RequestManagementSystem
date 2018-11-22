@@ -159,7 +159,7 @@ namespace RMS.App.Controllers
                         if (requestStatus.Requisition.StartDateTime > vehicleStatus.Requisition.EndDateTime)
                         {
                             SaveRequisition(assignRequisitionViewModel);
-                            return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisitionViewModel.RequisitionId });
+                            return RedirectToAction("print", "AssignRequisitions", new { id = assignRequisitionViewModel.RequisitionId });
                         }
 
                         TempData["StatusMsg"] = "You Cannot Assigned a vehicle/Driver which is not Available...Select Another Vehicle";
@@ -169,7 +169,7 @@ namespace RMS.App.Controllers
                     {
                         assignRequisitionViewModel.RequisitionStatusId = requestStatus.Id;
                         SaveRequisition(assignRequisitionViewModel);
-                        return RedirectToAction("PrintDetails", "AssignRequisitions", new { id = assignRequisitionViewModel.RequisitionId });
+                        return RedirectToAction("PrintAssignRequisition", "AssignRequisitions", new { assignRequisitionId = assignRequisitionViewModel.RequisitionId });
                     }
                     else
                     {
