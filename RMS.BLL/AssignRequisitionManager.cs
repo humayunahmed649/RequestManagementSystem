@@ -45,9 +45,9 @@ namespace RMS.BLL
         {
             return _assignRequisitionRepository.GetRequisitionSummaryReport();
         }
-        public List<AssignReportVM> GetAssignRequisition()
+        public ICollection<AssignReportVm> GetAssignRequisition(int assignRequisitionId)
         {
-            return _assignRequisitionRepository.GetAssignRequisition();
+            return _assignRequisitionRepository.GetAssignRequisition(assignRequisitionId);
         }
 
     }

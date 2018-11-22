@@ -17,6 +17,6 @@ namespace RMS.BLL.Contracts
         AssignRequisition GetVehicleStatus(int vehicleId);
         AssignRequisition GetDriverStatus(int driverId);
         ICollection<AssignRequisitionReportVM> GetRequisitionSummaryReport();
-        List<AssignReportVM> GetAssignRequisition();
+        ICollection<AssignReportVm> GetAssignRequisition(int assignRequisitionId);
     }
 }

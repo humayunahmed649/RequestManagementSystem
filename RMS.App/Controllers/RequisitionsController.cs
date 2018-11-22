@@ -8,8 +8,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Microsoft.Reporting.WebForms;
 using RMS.App.ViewModels;
 using RMS.BLL.Contracts;
 using RMS.Models.DatabaseContext;
@@ -534,71 +536,36 @@ namespace RMS.App.Controllers
             }
         }
 
-        
 
-        //[Authorize(Roles = "Controller,Admin")]
-        ////Get: Requisitin Reply
-        //[HttpGet]
-        //public ActionResult Reply(int feedbackId)
-        //{
-        //    try
-        //    {
-        //        Feedback feedback = _feedbackManager.FindById((int)feedbackId);
-        //        if (feedback == null)
-        //        {
-        //            return HttpNotFound();
-        //        }
+        public ActionResult PrintAssignRequisition(int assignRequisitionId)
+        {
+            try
+            {
+                var reportData = _assignRequisitionManager.GetAssignRequisition(assignRequisitionId);
+                var reportPath = Request.MapPath(Request.ApplicationPath) + @"\Report\AssignRequisition\AssignReport.rdlc";
+                ReportViewer reportViewer = new ReportViewer()
+                {
+                    KeepSessionAlive = true,
+                    SizeToReportContent = true,
+                    Width = Unit.Percentage(100),
+                    ProcessingMode = ProcessingMode.Local
+                };
 
-        //        //Get employee Id by user login id
-        //        var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-        //        var empId = _employeeManager.FindByLoginId(loginUserId);
+                reportViewer.LocalReport.ReportPath = reportPath;
 
-        //        FeedbackViewModel feedbackViewModel = Mapper.Map<FeedbackViewModel>(feedback);
+                ReportDataSource rds = new ReportDataSource("DS_AssignReport", reportData);
 
-        //        feedbackViewModel.EmployeeId = Convert.ToInt32(empId.Id);
+                reportViewer.LocalReport.DataSources.Add(rds);
+                ViewBag.ReportViewer = reportViewer;
+                return View();
+            }
+            catch (Exception ex)
+            {
 
-        //        return View(feedbackViewModel);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ExceptionMessage(ex);
-        //        return View("Error", new HandleErrorInfo(ex, "Requisitions", "Reply"));
-        //    }
-
-        //}
-
-
-        ////Post: Requisition Reply
-        //[HttpPost]
-        //public ActionResult Reply([Bind(Include = "Id,RequisitionId,CommentText,FeedbackId,EmployeeId")]FeedbackViewModel feedbackViewModel)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            //Get employee Id by user login id
-        //            var loginUserId = Convert.ToInt32(User.Identity.GetUserId());
-        //            var empId = _employeeManager.FindByLoginId(loginUserId);
-        //            feedbackViewModel.EmployeeId = Convert.ToInt32(feedbackViewModel.EmployeeId);
-        //            Feedback feedback = Mapper.Map<Feedback>(feedbackViewModel);
-
-        //            bool IsSave = _feedbackManager.Add(feedback);
-        //            if (IsSave)
-        //            {
-        //                ViewBag.Msg = "Reply Has been saved successfully";
-        //                return RedirectToAction("Feedback", new { requisitionId = feedback.RequisitionId });
-        //            }
-        //        }
-
-        //        return View();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ExceptionMessage(ex);
-        //        return View("Error", new HandleErrorInfo(ex, "Requisitions", "Feedback"));
-
-        //    }
-        //}
+                ExceptionMessage(ex);
+                return View("Error", new HandleErrorInfo(ex, "AssignRequisitions", "ReportIndex"));
+            }
+        }
         private void ExceptionMessage(Exception ex)
         {
             ViewBag.ErrorMsg = ex.Message;

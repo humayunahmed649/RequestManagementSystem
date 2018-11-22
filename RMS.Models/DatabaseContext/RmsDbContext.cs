@@ -57,10 +57,10 @@ namespace RMS.Models.DatabaseContext
             return report.ToList();
         }
 
-        public List<AssignReportVM> GetAssignRequisition()
+        public IQueryable<AssignReportVm> GetAssignRequisition()
         {
-            var report = Database.SqlQuery<AssignReportVM>("Select * From AssignReport where id=2");
-            return report.ToList();
+            var report = Database.SqlQuery<AssignReportVm>("Select * From AssignReport");
+            return report.AsQueryable();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

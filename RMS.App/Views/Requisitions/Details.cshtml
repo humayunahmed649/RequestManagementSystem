@@ -218,6 +218,6 @@
      &nbsp;
     @Html.ActionLink("Back to List", "Create", null, new {@class = "btn btn-info"}) &nbsp;
     @Html.ActionLink(" Feedback ", "Create", "Feedback", new {requisitionId = Model.Id}, new {@class = "btn btn-warning"})&nbsp;
-    @Html.ActionLink(" Print ", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+    @Html.ActionLink(" Print ", "PrintAssignRequisition", new { assignRequisitionId = Model.Id }, new { @class = "btn btn-info" })
     @*@Html.ActionLink("Delete", "Delete", new {id = Model.Id}, new {@class = "btn btn-danger"})*@
 </p>

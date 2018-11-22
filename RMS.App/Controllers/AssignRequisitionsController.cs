@@ -592,12 +592,12 @@ namespace RMS.App.Controllers
             }
 
         }
-
-        public ActionResult PrintAssignRequisition()
+        
+        public ActionResult PrintAssignRequisition(int assignRequisitionId)
         {
             try
             {
-                var reportData = _assignRequisitionManager.GetAssignRequisition();
+                var reportData = _assignRequisitionManager.GetAssignRequisition(assignRequisitionId);
                 var reportPath = Request.MapPath(Request.ApplicationPath) + @"\Report\AssignRequisition\AssignReportRdlc.rdlc";
                 ReportViewer reportViewer = new ReportViewer()
                 {

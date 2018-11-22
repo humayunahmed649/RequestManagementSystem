@@ -43,12 +43,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RMS.App\RMS.App.csproj">
+      <Project>{a5b63db3-6c63-44c2-aa8e-ca137bcde042}</Project>
+      <Name>RMS.App</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RMS.Models\RMS.Models.csproj">
       <Project>{ec92faca-b541-4cbe-8546-767d78b56d5b}</Project>
       <Name>RMS.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\RMS.App.ViewModels.Report.AssignReportVm.datasource" />
     <None Include="Properties\DataSources\RMS.App.ViewModels.Report.AssignRequisitionReportVM.datasource" />
     <None Include="Properties\DataSources\RMS.Models.EntityModels.AssignRequisition.datasource" />
     <None Include="Properties\DataSources\RMS.Models.Report.AssignReportVM.datasource" />

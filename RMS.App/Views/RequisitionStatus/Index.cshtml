@@ -87,6 +87,7 @@
                                 @if (item.StatusType == "Assigned")
                                 {
                                     @Html.ActionLink("CheckIn", "CheckIn", "GatePass", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })
+                                    @Html.ActionLink("Print", "PrintAssignRequisition", "AssignRequisitions", new { assignRequisitionId = item.Id }, new { @class = "btn btn-success btn-sm" })
                                 }
                                 @if (item.StatusType == "OnExecute")
                                 {

@@ -1,0 +1,23 @@
+create view AssignReport
+as
+select
+
+ar.Id,
+ar.RequisitionNumber,
+em.fullname as Requestor,
+d.Title as Designation,
+r.StartDateTime,
+r.EndDateTime,
+r.FromPlace,
+r.DestinationPlace,
+r.Description,
+v.RegNo,
+e.fullname as DriverName,
+e.ContactNo as DriverContactNo
+
+from assignrequisitions ar
+left outer join requisitions r on ar.RequisitionId=r.Id
+left outer join Employees em on r.EmployeeId=em.Id
+left outer join Employees e on ar.EmployeeId=e.Id
+left outer join Designations d on e.designationId=d.Id
+left outer join vehicles v on ar.VehicleId=v.Id

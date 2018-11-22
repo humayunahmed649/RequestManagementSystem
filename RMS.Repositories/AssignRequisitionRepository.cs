@@ -141,9 +141,14 @@ namespace RMS.Repositories
             var report = _db.GetAssignRequisitionSummaryReport();
             return report;
         }
-        public List<AssignReportVM> GetAssignRequisition()
+        public ICollection<AssignReportVm> GetAssignRequisition(int assignRequisitionId)
         {
             var report = _db.GetAssignRequisition();
+            if (assignRequisitionId != null)
+            {
+                report = report.Where(c => c.Id == assignRequisitionId);
+                
+            }
             return report.ToList();
         }
     }
