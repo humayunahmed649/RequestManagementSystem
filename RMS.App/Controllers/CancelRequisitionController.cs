@@ -15,7 +15,7 @@ using RMS.Models.EntityModels;
 
 namespace RMS.App.Controllers
 {
-    [Authorize(Roles = "Controller,Administrator")]
+ 
     public class CancelRequisitionController : Controller
     {
         private ICancelRequisitionManager _cancelRequisitionManager;
@@ -29,8 +29,9 @@ namespace RMS.App.Controllers
             this._notificationManager = notificationManager;
             this._requisitionManager = requisitionManager;
         }
-
         // GET: CancelRequisitionViewModels
+        [Authorize(Roles = "Controller,Administrator")]
+
         public ActionResult Index()
         {
             try
@@ -46,6 +47,7 @@ namespace RMS.App.Controllers
                 return View("Error", new HandleErrorInfo(ex, "CancelRequisition", "Index"));
             }
         }
+        [Authorize(Roles = "Controller,Administrator")]
 
         // GET: CancelRequisitionViewModels/Details/5
         public ActionResult Details(int? id)
@@ -74,6 +76,7 @@ namespace RMS.App.Controllers
             }
             
         }
+        [Authorize(Roles = "Controller,Administrator,User")]
 
         // GET: CancelRequisitionViewModels/Create
         [HttpGet]
@@ -105,6 +108,7 @@ namespace RMS.App.Controllers
         // POST: CancelRequisitionViewModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Controller,Administrator,User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,RequisitionId,Reason")]CancelRequisitionViewModel model)

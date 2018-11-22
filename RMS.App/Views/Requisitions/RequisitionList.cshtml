@@ -92,6 +92,7 @@
                             @if (item.StatusType == "New")
                             {
                                 @Html.ActionLink("Edit", "Edit", new {id = item.RequisitionId}, new {@class = "btn btn-warning btn-sm"})<span> </span>
+                                @Html.ActionLink("Cancel", "Create","CancelRequisition", new { requisitionId = item.RequisitionId }, new { @class = "btn btn-warning btn-sm" })<span> </span>
                             }
 
                             @Html.ActionLink("Details", "Details", new {id = item.Requisition.Id}, new {@class = "btn btn-success btn-sm"}) <span> </span>
